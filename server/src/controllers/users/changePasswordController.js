@@ -2,6 +2,25 @@
 
 //Autenticar al usuario mediante JWT
 
+//Array de usuarios para probar antes de tener la DB
+const users = [
+    {
+        id: 1,
+        email: 'usuario1@example.com',
+        password: 'contraseña1',
+    },
+    {
+        id: 2,
+        email: 'usuario2@example.com',
+        password: 'contraseña2',
+    },
+    {
+        id: 3,
+        email: 'usuario3@example.com',
+        password: 'contraseña3',
+    },
+];
+
 //Función para cambiar contraseña
 const changePasswordController = async (req, res) => {
     const { userId, currentPassword, newPassword } = req.body;
@@ -15,10 +34,18 @@ const changePasswordController = async (req, res) => {
     }
 
     //Buscar al usuario en la base de datos y verificar la contraseña (a esperas de que se termine la DB)
-    const isCurrentPasswordValid = true;
+    const user = users.find((u) => u.id === userId);
 
-    if (!isCurrentPasswordValid) {
-        return res.status(401).send({
+    if (!user) {
+        return res.status(404).send({
+            status: 'error',
+            message: 'Usuario no encontrado',
+        });
+    }
+
+    // Verificar contraseña actual
+    if (user.password !== currentPassword) {
+        return res.status(404).send({
             status: 'error',
             message: 'Contraseña actual incorrecta',
         });
