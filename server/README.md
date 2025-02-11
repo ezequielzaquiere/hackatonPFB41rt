@@ -1,6 +1,4 @@
-# Hackatoes
-
-
+# Hackatones
 
 📌 **Tipos de usuarios:**
 
