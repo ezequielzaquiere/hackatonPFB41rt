@@ -5,9 +5,11 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
+import bodyParser from 'body-parser';
 import morgan from 'morgan';
 
 // Importamos las rutas.
+import userRoutes from './src/routes/userRoutes.js';
 
 // Obtenemos las variables de entorno necesarias.
 const { PORT, UPLOADS_DIR } = process.env;
@@ -20,6 +22,9 @@ const app = express();
 // Middleware que evita problemas de conexión entre cliente y servidor.
 app.use(cors());
 
+//Middleware para parsear JSON
+app.use(bodyParser.json());
+
 // Middleware que permite leer un body en formato JSON.
 app.use(express.json());
 
@@ -30,6 +35,7 @@ app.use(fileUpload());
 app.use(express.static(UPLOADS_DIR));
 
 // Middleware que indica a Express dónde están las rutas.
+app.use('/users', userRoutes);
 
 // Middleware de manejo de errores.
 // eslint-disable-next-line no-unused-vars
@@ -42,7 +48,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Middelware de ruta no encontrada.
+// Middleware de ruta no encontrada.
 app.use((req, res) => {
     res.status(404).send({
         status: 'error',
