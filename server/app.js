@@ -35,7 +35,7 @@ app.use(fileUpload());
 app.use(express.static(UPLOADS_DIR));
 
 // Middleware que indica a Express dónde están las rutas.
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 
 // Middleware de manejo de errores.
 // eslint-disable-next-line no-unused-vars

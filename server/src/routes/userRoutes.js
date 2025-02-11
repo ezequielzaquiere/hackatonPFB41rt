@@ -2,7 +2,6 @@
 import express from 'express';
 
 //Importar middlewares
-import {} from '../middlewares/example.js';
 
 //Importar funciones controladoras
 import {
