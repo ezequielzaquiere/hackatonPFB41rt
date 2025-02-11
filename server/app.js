@@ -8,6 +8,7 @@ import fileUpload from 'express-fileupload';
 import morgan from 'morgan';
 
 // Importamos las rutas.
+import userRoutes from './src/routes/userRoutes.js';
 
 // Obtenemos las variables de entorno necesarias.
 const { PORT, UPLOADS_DIR } = process.env;
@@ -29,6 +30,7 @@ app.use(fileUpload());
 app.use(express.static(UPLOADS_DIR));
 
 // Middleware que indica a Express dónde están las rutas.
+app.use('/users', userRoutes);
 
 // Middleware de manejo de errores.
 // eslint-disable-next-line no-unused-vars
@@ -41,7 +43,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Middelware de ruta no encontrada.
+// Middleware de ruta no encontrada.
 app.use((req, res) => {
     res.status(404).send({
         status: 'error',
