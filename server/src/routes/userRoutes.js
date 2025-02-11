@@ -2,8 +2,7 @@
 import express from 'express';
 
 //Importar middlewares
-import {} from '../middlewares/example.js';
-
+import { isUserAuthMiddleware } from '../middlewares/index.js';
 //Importar funciones controladoras
 import {
     registerUserController,
