@@ -26,6 +26,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Middleware que permite leer un body en formato JSON.
+app.use(express.json());
 
 // Middleware que permite leer un body en formato form-data.
 app.use(fileUpload());
