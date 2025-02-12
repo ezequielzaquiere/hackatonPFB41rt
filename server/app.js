@@ -39,6 +39,7 @@ app.use(express.static(UPLOADS_DIR));
 app.use('/api/users', userRoutes);
 app.use('/api/hack', hackRoutes);
 
+
 // Middleware de manejo de errores.
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
