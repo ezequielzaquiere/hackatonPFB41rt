@@ -10,6 +10,7 @@ import morgan from 'morgan';
 
 // Importamos las rutas.
 import userRoutes from './src/routes/userRoutes.js';
+import hackatonRoutes from './src/routes/hackathonRoutes.js';
 
 // Obtenemos las variables de entorno necesarias.
 const { PORT, UPLOADS_DIR } = process.env;
@@ -18,6 +19,7 @@ const { PORT, UPLOADS_DIR } = process.env;
 const app = express();
 
 // Middleware que muestra por consola información acerca de la petición entrante.
+app.use(morgan('dev'));
 
 // Middleware que evita problemas de conexión entre cliente y servidor.
 app.use(cors());
@@ -35,7 +37,8 @@ app.use(fileUpload());
 app.use(express.static(UPLOADS_DIR));
 
 // Middleware que indica a Express dónde están las rutas.
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/hack', hackatonRoutes);
 
 // Middleware de manejo de errores.
 // eslint-disable-next-line no-unused-vars

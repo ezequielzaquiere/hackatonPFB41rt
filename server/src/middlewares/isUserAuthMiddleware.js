@@ -1,5 +1,4 @@
 //Imports
-
 import jwt from 'jsonwebtoken';
 import generateErrorUtil from '../utils/generateErrorUtil.js';
 
