@@ -15,7 +15,7 @@ import {
 const router = express.Router();
 
 //Endpoint crear nuevo hackathon
-router.post('/new', isUserAuthMiddleware, newHackathonController);
+router.post('/new', newHackathonController);
 
 //Endpoint lista hackatones
 router.get('/hackathones', listHackathonController);
