@@ -7,10 +7,10 @@ import getPool from '../../db/getPool.js';
 //Función controladora que lista las temáticas de los Hackatones
 const themesListController = async (req, res) => {
     try {
-        const [themesHackatones] = await getPool.query(
-            'SELECT themes FROM HACKATONES'
+        const [themesHackathones] = await getPool.query(
+            'SELECT themes FROM hackathones'
         );
-        res.status(200).json(themesHackatones);
+        res.status(200).json(themesHackathones);
     } catch (error) {
         generateErrorUtil(
             500,

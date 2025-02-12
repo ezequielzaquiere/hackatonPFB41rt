@@ -8,8 +8,8 @@ import { isUserAuthMiddleware } from '../middlewares/index.js';
 import {
     newHackathonController,
     themesListController,
-} from '../controllers/hackatones/index.js';
-
+    listHackathonController,
+} from '../controllers/hackathones/index.js';
 
 //Crear router
 const router = express.Router();
@@ -17,6 +17,8 @@ const router = express.Router();
 //Endpoint crear nuevo hackathon
 router.post('/new', isUserAuthMiddleware, newHackathonController);
 
+//Endpoint lista hackatones
+router.get('/hackathones', isUserAuthMiddleware, listHackathonController);
 //Endpoint lista temáticas hackatones
 router.get('/themesList', isUserAuthMiddleware, themesListController);
 
