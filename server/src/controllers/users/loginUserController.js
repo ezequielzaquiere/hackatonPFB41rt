@@ -24,15 +24,18 @@ const loginUserController = async (req, res, next) => {
         if (!user || !validPass) {
             generateErrorUtil(403, 'Credenciales invalidas');
         }
+
         //Si el usuario no esta activo, lanzamos un error
         if (!user.active) {
             generateErrorUtil(403, 'Usuario pendiente de activar');
         }
+
         //Almacenamos la informacion que queremos agregar al token
         const tokenData = {
             id: user.id,
             role: user.role,
         };
+
         //Creamos el token
         const token = jwt.sign(tokenData, process.env.SECRET, {
             expiresIn: '7d',

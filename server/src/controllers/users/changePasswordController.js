@@ -1,5 +1,8 @@
 //Importar modelos necesarios
 
+//Importar función que genera errores
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
+
 //Autenticar al usuario mediante JWT
 
 //Array de usuarios para probar antes de tener la DB
@@ -27,28 +30,19 @@ const changePasswordController = async (req, res) => {
 
     //Validar datos
     if (!userId || !currentPassword || !newPassword) {
-        return res.status(400).send({
-            status: 'error',
-            message: 'Faltan datos obligatorios',
-        });
+        generateErrorUtil(400, 'Faltan datos obligatorios');
     }
 
     //Buscar al usuario en la base de datos y verificar la contraseña (a esperas de que se termine la DB)
     const user = users.find((u) => u.id === userId);
 
     if (!user) {
-        return res.status(404).send({
-            status: 'error',
-            message: 'Usuario no encontrado',
-        });
+        generateErrorUtil(404, 'Usuario no encontrado');
     }
 
     // Verificar contraseña actual
     if (user.password !== currentPassword) {
-        return res.status(404).send({
-            status: 'error',
-            message: 'Contraseña actual incorrecta',
-        });
+        generateErrorUtil(404, 'Contraseña actual incorrecta');
     }
 
     //Guardar nueva contraseña en la DB
