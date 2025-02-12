@@ -18,7 +18,8 @@ const router = express.Router();
 router.post('/new', isUserAuthMiddleware, newHackathonController);
 
 //Endpoint lista hackatones
-router.get('/hackathones', isUserAuthMiddleware, listHackathonController);
+router.get('/hackathones', listHackathonController);
+
 //Endpoint lista temáticas hackatones
 router.get('/themesList', isUserAuthMiddleware, themesListController);
 
