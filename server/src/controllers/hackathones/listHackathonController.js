@@ -12,7 +12,7 @@ const listHackathonController = async (req, res) => {
     } catch (error) {
         generateErrorUtil(
             500,
-            'Error al obtener las temáticas de los hackatones',
+            'Error al obtener las temáticas de los hackathones',
             error
         );
     }
