@@ -14,16 +14,16 @@ const saveDocUtil = async (document) => {
         }
 
         const pathUploadDoc = path.join(
-            process.cwd,
+            process.cwd(),
             process.env.UPLOADS_DIR,
             'documents'
         );
 
         //Comprobamos si existe la ruta, si no la creamos
         try {
-            fs.access(pathUploadDoc);
+            await fs.access(pathUploadDoc);
         } catch {
-            fs.mkdir(pathUploadDoc, { recursive: true });
+            await fs.mkdir(pathUploadDoc, { recursive: true });
         }
 
         //Le damos un nombre aleatorio al documento
