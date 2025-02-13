@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import selectUserByEmailModel from '../../models/selectUserByEmailModel.js';
+import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 

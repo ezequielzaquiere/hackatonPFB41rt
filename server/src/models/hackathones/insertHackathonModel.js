@@ -1,8 +1,7 @@
 //TODO:REVISAR LOS NOMBRES DE LOS INSERTS DE LA TABLA
 
 //Imports
-import getPool from '../db/getPool.js';
-
+import getPool from '../../db/getPool.js';
 //Funcion inserta un evento Hackathon a la base de datos
 const insertHackathonModel = async ({
     adminId,

@@ -1,6 +1,6 @@
-import getPool from '../db/getPool.js';
+import getPool from '../../db/getPool.js';
 
-import generateErrorUtil from '../utils/generateErrorUtil.js';
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //Funcion que se conecta a la Base de datos para retornar un usuario con un Id dado
 
 const selectUserByIdModel = async (userId) => {

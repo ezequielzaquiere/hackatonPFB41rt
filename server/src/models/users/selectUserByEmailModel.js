@@ -1,4 +1,4 @@
-import getPool from '../db/getPool.js';
+import getPool from '../../db/getPool.js';
 
 //Funcion que se conecta a la Base de datos para retornar un usuario con un email dado
 
