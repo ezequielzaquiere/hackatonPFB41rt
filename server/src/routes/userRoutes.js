@@ -1,11 +1,12 @@
 //Importar dependencias
 import express from 'express';
 
-//Importar middlewares
-import { isUserAuthMiddleware } from '../middlewares/index.js';
+// Importamos los middlewares.
+import isUserAuthMiddleware from '../middlewares/isUserAuthMiddleware.js';
 
 //Importar funciones controladoras
 import {
+    privateUserProfileController,
     registerUserController,
     changePasswordController,
     loginUserController,
@@ -22,5 +23,8 @@ router.post('/login', loginUserController);
 
 //Cambiar contraseña
 router.post('/changePassword', changePasswordController);
+
+// Información privada del usuario.
+router.get('/:id', isUserAuthMiddleware, privateUserProfileController);
 
 export default router;
