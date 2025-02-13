@@ -5,7 +5,6 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
-import bodyParser from 'body-parser';
 import morgan from 'morgan';
 
 // Importamos las rutas.
@@ -23,10 +22,6 @@ app.use(morgan('dev'));
 
 // Middleware que evita problemas de conexión entre cliente y servidor.
 app.use(cors());
-
-//TODO:HAY DOS QUE SE ENCARGAN DEL JSON,CUAL DEJAMOS?
-//Middleware para parsear JSON
-app.use(bodyParser.json());
 
 // Middleware que permite leer un body en formato JSON.
 app.use(express.json());
