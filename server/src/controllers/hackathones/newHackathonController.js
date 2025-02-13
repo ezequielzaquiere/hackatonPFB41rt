@@ -1,5 +1,5 @@
 //Import models
-import insertHackathonModel from '../../models/TODO:insertHackathonModel.js';
+import insertHackathonModel from '../../models/insertHackathonModel.js';
 
 //Importar utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
