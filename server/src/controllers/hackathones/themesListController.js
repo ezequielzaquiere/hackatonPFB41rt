@@ -8,7 +8,7 @@ import getPool from '../../db/getPool.js';
 const themesListController = async (req, res) => {
     try {
         const [themesHackathones] = await getPool.query(
-            'SELECT themes FROM hackathones'
+            'SELECT themes FROM hackathonList'
         );
         res.status(200).json(themesHackathones);
     } catch (error) {
