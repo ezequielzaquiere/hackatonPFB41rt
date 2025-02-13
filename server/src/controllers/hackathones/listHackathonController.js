@@ -1,14 +1,24 @@
 //Importar función que genera errores
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-//Conexión con la DB
-import getPool from '../../db/getPool.js';
+//Importar modelos necesarios
+import listHackathonModel from '../../models/listHackathonModel.js';
 
 //Función controladora que lista los hackatones
-const listHackathonController = async (req, res) => {
+const listHackathonController = async (req, res, next) => {
     try {
-        const [hackathones] = await getPool.query('SELECT * FROM hackathones');
-        res.status(200).json(hackathones);
+        //Obtener los filtros (query params)
+        const { title, creator } = req.query;
+
+        //Obtener los hackathones
+        const hackathones = await listHackathonModel(title, creator);
+
+        res.status(200).sned({
+            status: 'ok',
+            data: {
+                hackathones,
+            },
+        });
     } catch (error) {
         generateErrorUtil(
             500,
