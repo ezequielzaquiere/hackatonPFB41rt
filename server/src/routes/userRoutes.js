@@ -10,6 +10,7 @@ import {
     registerUserController,
     changePasswordController,
     loginUserController,
+    activateUserController,
 } from '../controllers/users/index.js';
 
 //Crear router
@@ -26,5 +27,8 @@ router.post('/changePassword', changePasswordController);
 
 // Información privada del usuario.
 router.get('/:id', isUserAuthMiddleware, privateUserProfileController);
+
+//Activar un usuario
+router.put('/validate/:regCode', activateUserController);
 
 export default router;
