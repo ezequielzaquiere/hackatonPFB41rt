@@ -15,7 +15,7 @@ const newHackathonController = async (req, res, next) => {
 
         const adminId = req.user.id;
 
-        if (req.body.data) {
+        if (!req.body.data) {
             generateErrorUtil(400, 'Faltan los datos del Hackathon');
         }
         //Dado que enviamos un json y otros archivos, necesitamos parsear el objeto data(dodne mandamos el json)
@@ -36,12 +36,8 @@ const newHackathonController = async (req, res, next) => {
         const banner = req.files?.banner;
         const document = req.files?.document;
 
-        //El banner es oligatorio //TODO: SI NO LO ES, PODEMOS INDICAR LA IMAGEN PREDETERMINADA?
-        if (!banner) {
-            generateErrorUtil(400, 'El banner es obligatorio');
-        }
         //Si es presencial es obligatoria la localizacion
-        if (type === 'presencial' && location === '') {
+        if (type === 'presencial' && location === null) {
             generateErrorUtil(400, 'Faltan campo de localizacion');
         }
 
@@ -54,16 +50,16 @@ const newHackathonController = async (req, res, next) => {
             !type ||
             !location ||
             !startingDate ||
-            !finishingDate ||
-            !banner
+            !finishingDate
         ) {
             generateErrorUtil(400, 'Faltan datos');
         }
 
-        //Guardamos la imagen del banner  //TODO<=================
-        const imgName = await saveImgUtil(
-            banner /*TODO:FALTA WIDTH DE LOS BANNERS*/
-        );
+        let imgName = '';
+        //Si hay banner guardamos la imagen del banner  //TODO<=================ALGUN TAMAÑO ESPECIFICO?
+        if (banner) {
+            imgName = await saveImgUtil(banner);
+        }
 
         let docName = '';
         //Si hay un documento (solo pdf) lo guardamos

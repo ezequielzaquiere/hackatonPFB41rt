@@ -18,11 +18,15 @@ const router = express.Router();
 //Endpoint crear nuevo hackathon
 router.post('/new', isUserAuthMiddleware, newHackathonController);
 
-//Endpoint que une a un hackathon
-router.post('/join', joinHackathonController);
+//Endpoint que registra a un usuario en un hackathon
+router.post(
+    '/:hackathonId/join',
+    isUserAuthMiddleware,
+    joinHackathonController
+);
 
-//Endpoint que confirma que un usuario participara
-router.put('/join/:confirmCode');
+//Endpoint que confirma que un usuario participara en un hackathon //TODO:COMPROBAR SI YA HA CONFIRMADO(MIDDLEWARE?)
+router.put('/:hackathonId/join/:confirmationCode');
 
 //Endpoint lista hackatones
 router.get('/hackathones', listHackathonController);

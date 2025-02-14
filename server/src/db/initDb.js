@@ -96,10 +96,12 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS registrations (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                user INT UNSIGNED NOT NULL,
-                FOREIGN KEY(user) REFERENCES users(id),
-                hackathon INT UNSIGNED NOT NULL,
-                FOREIGN KEY(hackathon) REFERENCES hackathonList(id),
+                userId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(userId) REFERENCES users(id),
+                hackathonId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
+                confirmationCode CHAR(30),
+                status ENUM ("pendiente", "confirmada","cancelada") DEFAULT "pendiente",
                 createdAt DATETIME
             )	
         `);
