@@ -61,18 +61,18 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS hackathonList (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                creator INT UNSIGNED NOT NULL,
-                FOREIGN KEY(creator) REFERENCES USERS(id),
+                userId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(userId) REFERENCES users(id),
                 title VARCHAR(100) NOT NULL,
                 summary VARCHAR(140) NOT NULL,
                 startingDate TIMESTAMP NOT NULL,
                 deadline TIMESTAMP NOT NULL,
                 type ENUM ("online", "presencial") NOT NULL,
                 location VARCHAR(200),
-                theme INT UNSIGNED NOT NULL,
-                FOREIGN KEY(theme) REFERENCES themes(id),
-                programmingLangs INT UNSIGNED NOT NULL,
-                FOREIGN KEY(programmingLangs) REFERENCES hackathonLangs(id),
+                themeId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(themeId) REFERENCES themes(id),
+                programmingLangId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(programmingLangId) REFERENCES programmingLangs(id),
                 details VARCHAR(1000),
                 attachedFile VARCHAR(500),
                 image VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
@@ -84,10 +84,10 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS hackathonLangs (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                programmingLang INT UNSIGNED NOT NULL,
-                FOREIGN KEY(programmingLang) REFERENCES programmingLangs(id),
-                hackathon INT UNSIGNED NOT NULL,
-                FOREIGN KEY(hackathon) REFERENCES hackathonList(id),
+                programmingLangId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(programmingLangId) REFERENCES programmingLangs(id),
+                hackathonId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
                 createdAt DATETIME
             )	
         `);
@@ -108,9 +108,9 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS podium (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                registration INT UNSIGNED NOT NULL,
-                FOREIGN KEY(registration) REFERENCES registrations(id),
-                position TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 3),
+                registrationId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(registrationId) REFERENCES registrations(id),
+                position TINYINT NOT NULL CHECK (position BETWEEN 1 AND 3),
                 createdAt DATETIME
             )	
         `);
@@ -119,11 +119,11 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS ratings (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                user INT UNSIGNED NOT NULL,
-                FOREIGN KEY(user) REFERENCES users(id),
-                hackathon INT UNSIGNED NOT NULL,
-                FOREIGN KEY(hackathon) REFERENCES hackathonList(id),
-                CONSTRAINT uniqueRating UNIQUE (user, hackathon),
+                userId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(userId) REFERENCES users(id),
+                hackathonId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
+                CONSTRAINT uniqueRating UNIQUE (userId, hackathonId),
                 rating TINYINT UNSIGNED CHECK (rating BETWEEN 1 AND 5),
                 createdAt DATETIME
             )	
@@ -137,10 +137,10 @@ const main = async () => {
         // Insertamos el usuario administrador.
         await pool.query(
             `
-                INSERT INTO users (username, email, password, role)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO users (username, firstName, lastName, email, password, role)
+                VALUES (?, ?, ?, ?, ?, ?)
             `,
-            ['admin', 'admin@example.com', hashedPass, 'admin']
+            ['admin', 'Pep', 'Garcia', 'admin@example.com', hashedPass, 'admin']
         );
 
         console.log('¡Usuario administrador insertado!');
