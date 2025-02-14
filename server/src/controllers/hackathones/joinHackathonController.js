@@ -1,5 +1,5 @@
 //Import models
-import insertRegistrationModel from '../../models/hackathones/insertRegistrationModel.js';
+import insertRegistrationModel from '../../models/registrations/insertRegistrationModel.js';
 //Import utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 

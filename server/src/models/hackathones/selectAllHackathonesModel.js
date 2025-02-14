@@ -9,21 +9,7 @@ const listHackathonController = async (title = '', creator = '') => {
     // Listado de entradas.
     const [hackathones] = await pool.query(
         `
-            SELECT
-                h.id,
-                h.creator,
-                h.title,
-                h.summary,
-                h.startingDate,
-                h.deadline,
-                h.location,
-                h.theme,
-                h.programmingLang,
-                h.details,
-                h.image,
-                h.createdAt,
-            FROM hackathonlist hl
-            GROUP BY h.id
+            SELECT * FROM hackathonlist hl GROUP BY id
         `,
         [`%${title}%`, `%${creator}%`]
     );
