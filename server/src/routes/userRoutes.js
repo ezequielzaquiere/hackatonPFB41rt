@@ -10,7 +10,7 @@ import {
     registerUserController,
     changePasswordController,
     loginUserController,
-    activateUserController,
+    updateActivateUserController,
 } from '../controllers/users/index.js';
 
 //Crear router
@@ -29,6 +29,6 @@ router.post('/changePassword', changePasswordController);
 router.get('/:id', isUserAuthMiddleware, privateUserProfileController);
 
 //Activar un usuario
-router.put('/validate/:regCode', activateUserController);
+router.put('/validate/:regCode', updateActivateUserController);
 
 export default router;
