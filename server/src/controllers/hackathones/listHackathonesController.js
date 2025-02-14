@@ -1,8 +1,8 @@
-//Importar función que genera errores
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
-
 //Importar modelos necesarios
 import listHackathonesModel from '../../models/hackathones/listHackathonesModel.js';
+
+//Importar función que genera errores
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //Función controladora que lista los hackatones
 const listHackathonesController = async (req, res, next) => {
@@ -20,7 +20,11 @@ const listHackathonesController = async (req, res, next) => {
             },
         });
     } catch (error) {
-        generateErrorUtil(500, 'Error al obtener la lista de hackathones');
+        generateErrorUtil(
+            500,
+            'Error al obtener la lista de hackathones',
+            error
+        );
     }
 };
 
