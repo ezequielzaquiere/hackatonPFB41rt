@@ -61,18 +61,18 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS hackathonList (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                creator INT UNSIGNED NOT NULL,
-                FOREIGN KEY(creator) REFERENCES USERS(id),
+                creatorId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(creatorId) REFERENCES USERS(id),
                 title VARCHAR(100) NOT NULL,
                 summary VARCHAR(140) NOT NULL,
                 startingDate TIMESTAMP NOT NULL,
                 deadline TIMESTAMP NOT NULL,
                 type ENUM ("online", "presencial") NOT NULL,
                 location VARCHAR(200),
-                theme INT UNSIGNED NOT NULL,
-                FOREIGN KEY(theme) REFERENCES themes(id),
-                programmingLangs INT UNSIGNED NOT NULL,
-                FOREIGN KEY(programmingLangs) REFERENCES hackathonLangs(id),
+                themeId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(themeId) REFERENCES themes(id),
+                programmingLangsId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(programmingLangsId) REFERENCES hackathonLangs(id),
                 details VARCHAR(1000),
                 attachedFile VARCHAR(500),
                 image VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
@@ -84,10 +84,10 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS hackathonLangs (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                programmingLang INT UNSIGNED NOT NULL,
-                FOREIGN KEY(programmingLang) REFERENCES programmingLangs(id),
-                hackathon INT UNSIGNED NOT NULL,
-                FOREIGN KEY(hackathon) REFERENCES hackathonList(id),
+                programmingLangId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(programmingLangId) REFERENCES programmingLangs(id),
+                hackathonId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
                 createdAt DATETIME
             )	
         `);
@@ -96,10 +96,12 @@ const main = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS registrations (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                user INT UNSIGNED NOT NULL,
-                FOREIGN KEY(user) REFERENCES users(id),
-                hackathon INT UNSIGNED NOT NULL,
-                FOREIGN KEY(hackathon) REFERENCES hackathonList(id),
+                userId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(userId) REFERENCES users(id),
+                hackathonId INT UNSIGNED NOT NULL,
+                FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
+                confirmationCode CHAR(30),
+                status ENUM ("pendiente", "confirmada","cancelada") DEFAULT "pendiente",
                 createdAt DATETIME
             )	
         `);

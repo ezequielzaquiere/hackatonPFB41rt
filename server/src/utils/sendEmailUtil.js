@@ -19,8 +19,8 @@ const transporter = nodemailer.createTransport({
         pass: SMTP_PASS,
     },
 });
-const sendEmailUtil = async (destinatario, asunto, contenidoEmail) => {
-    if (!destinatario || !asunto || !contenidoEmail) {
+const sendEmailUtil = async (destinatario, asunto, htmlContenido) => {
+    if (!destinatario || !asunto || !htmlContenido) {
         generateErrorUtil(400, 'Faltan datos al enviar el email');
     }
     try {
@@ -29,7 +29,7 @@ const sendEmailUtil = async (destinatario, asunto, contenidoEmail) => {
             from: SMTP_USER,
             to: destinatario,
             subject: asunto,
-            texto: contenidoEmail,
+            html: htmlContenido,
         };
 
         //Enviamos el email
