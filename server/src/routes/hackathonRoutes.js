@@ -7,8 +7,8 @@ import { isUserAuthMiddleware } from '../middlewares/index.js';
 //Importar funciones controladoras
 import {
     newHackathonController,
-    themesListController,
-    listHackathonController,
+    listHackathonesController,
+    listHackathonesThemesController,
     joinHackathonController,
 } from '../controllers/hackathones/index.js';
 
@@ -29,9 +29,9 @@ router.post(
 router.put('/:hackathonId/join/:confirmationCode');
 
 //Endpoint lista hackatones
-router.get('/hackathones', listHackathonController);
+router.get('/hackathones', listHackathonesController);
 
 //Endpoint lista temáticas hackatones
-router.get('/themesList', isUserAuthMiddleware, themesListController);
+router.get('/hackathones/themes', listHackathonesThemesController);
 
 export default router;

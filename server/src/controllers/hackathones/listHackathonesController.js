@@ -2,30 +2,26 @@
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //Importar modelos necesarios
-import listHackathonModel from '../../models/listHackathonModel.js';
+import listHackathonesModel from '../../models/hackathones/listHackathonesModel.js';
 
 //Función controladora que lista los hackatones
-const listHackathonController = async (req, res, next) => {
+const listHackathonesController = async (req, res, next) => {
     try {
         //Obtener los filtros (query params)
         const { title, creator } = req.query;
 
         //Obtener los hackathones
-        const hackathones = await listHackathonModel(title, creator);
+        const hackathones = await listHackathonesModel(title, creator);
 
-        res.status(200).sned({
+        res.send({
             status: 'ok',
             data: {
                 hackathones,
             },
         });
     } catch (error) {
-        generateErrorUtil(
-            500,
-            'Error al obtener las temáticas de los hackathones',
-            error
-        );
+        generateErrorUtil(500, 'Error al obtener la lista de hackathones');
     }
 };
 
-export default listHackathonController;
+export default listHackathonesController;

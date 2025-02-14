@@ -1,5 +1,5 @@
 // Importamos los modelos.
-import updateActiveUserModel from '../../models/users/updateActiveUserModel.js';
+import updateActivateUserModel from '../../models/users/updateActivateUserModel.js';
 
 // Función controladora que registra un nuevo usuario.
 const activateUserController = async (req, res, next) => {
@@ -8,7 +8,7 @@ const activateUserController = async (req, res, next) => {
         const { regCode } = req.params;
 
         // Registramos al usuario.
-        await updateActiveUserModel(regCode);
+        await updateActivateUserModel(regCode);
 
         res.send({
             status: 'ok',
