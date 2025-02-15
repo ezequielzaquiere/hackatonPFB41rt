@@ -3,13 +3,14 @@
 
 //Imports
 import getPool from '../../db/getPool.js';
+
 //Funcion inserta un evento Hackathon a la base de datos
 const insertHackathonModel = async ({
     adminId,
     title,
     summary,
-    parseStartingDate,
-    parseDeadline,
+    formatedStartingDate,
+    formatedDeadline,
     type,
     location,
     themeId,
@@ -30,8 +31,8 @@ const insertHackathonModel = async ({
             adminId,
             title,
             summary,
-            parseStartingDate,
-            parseDeadline,
+            formatedStartingDate,
+            formatedDeadline,
             type,
             location,
             themeId,

@@ -13,6 +13,12 @@ const isHackathonAvaliableMiddleware = async (req, res, next) => {
         //Obtenemos los datos del hackathon (nos interesa fecha de finalizacion)
         const hackathon = await selectHackathoByIdModel(hackathonId);
 
+        //Lanzamos error si no existe
+        if (!hackathon.length) {
+            generateErrorUtil(400, 'El hackathon no existe');
+        }
+
+        //Fechas
         const now = new Date();
         const dateDeadline = parseISO(hackathon.deadline);
 

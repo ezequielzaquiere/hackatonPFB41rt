@@ -2,31 +2,32 @@
 import sharp from 'sharp';
 import fs from 'fs/promises';
 import path from 'path';
+import crypto from 'crypto';
 
 //Importar middlewares
 import generateErrorUtil from './generateErrorUtil.js';
 
-const saveImgUtil = async (img, width) => {
+const saveImgUtil = async (img, width, type) => {
     try {
-        const pathUpload = path.join(process.cwd(), process.env.UPLOADS_DIR);
-
-        //Path upload avatar
-        const pathUploadAvatar = path.join(pathUpload, 'avatar');
-
-        //Path upload banner
-        const pathUploadBanner = path.join(pathUpload, 'banner');
-
-        //Comprobamos si existen las carpetas, si no las creamos
-        try {
-            await fs.access(pathUploadAvatar);
-        } catch {
-            await fs.mkdir(pathUploadAvatar, { recursive: true });
+        //Lanzamos error si no hay tipo o si no es valido
+        if (!['avatar', 'imgHack'].includes(type)) {
+            generateErrorUtil(400, 'Tipo de imagen no valido');
         }
 
+        const pathUpload = path.join(process.cwd(), process.env.UPLOADS_DIR);
+
+        //Indicamos la ruta de las carpetas
+        const folders = {
+            avatar: path.join(pathUpload, 'avatar'),
+            imgHack: path.join(pathUpload, 'imgHack'),
+        };
+
+        //Comprobamos si existen las carpetas, si no las creamos
+
         try {
-            await fs.access(pathUploadBanner);
+            await fs.access(folders[type]);
         } catch {
-            await fs.mkdir(pathUploadBanner, { recursive: true });
+            await fs.mkdir(folders[type], { recursive: true });
         }
 
         //Le damos un nombre aleatorio a las imagen
@@ -35,18 +36,14 @@ const saveImgUtil = async (img, width) => {
         //Creamos un objeto tipo sharp con la imagen
         const sharpImg = sharp(img.data);
 
-        //Cambiamos el tamaño de la imagen avatar
-        sharpImg.resize(width);
-
-        if (width === 400) {
-            const imgPathAvatar = path.join(pathUploadAvatar, imgName);
-            //Guardamos la imagen
-            await sharpImg.toFile(imgPathAvatar);
-        } else {
-            const imgPathBanner = path.join(pathUploadBanner, imgName);
-
-            await sharpImg.toFile(imgPathBanner);
+        //Cambiamos el tamaño de la imagen
+        if (width) {
+            sharpImg.resize(width);
         }
+
+        const imgPath = path.join(folders[type], imgName);
+
+        await sharpImg.toFile(imgPath);
 
         return imgName;
     } catch (err) {

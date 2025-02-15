@@ -5,7 +5,7 @@ import path from 'path';
 //Import utils
 import generateErrorUtil from './generateErrorUtil.js';
 
-//Funcion que gestiona los documentos
+//Funcion que guarda los documentos
 const saveDocUtil = async (document) => {
     try {
         //Comprobamos si es un formato valido
