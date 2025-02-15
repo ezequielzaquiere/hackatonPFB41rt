@@ -117,9 +117,10 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
 - **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
 - **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
+- **PUT** - [`/api/hackathones/:hackathonId`] - Permite modificar los datos de un hackathon.
 
 ## Endpoints de los registros/participaciones
 
-- **POST** - [`/api/register/:hackathonId/join`] - Registra a un usuario en un hackathon.
+- **POST** - [`/api/register/:hackathonId`] - Registra a un usuario en un hackathon.
 - **PUT** - [`/api/register/:hackathonId/:confirmationCode`] - Confirma que un usuario participará en un hackathon.
-- **PUT** - [`/api/register/:hackathonId/`] - Elimina la participación de un usuario en un hackathon.
+- **PUT** - [`/api/register/:hackathonId`] - Elimina la participación de un usuario en un hackathon.

@@ -37,7 +37,7 @@ router.put(
 
 //Endpoint que permite cancelar la participacion de un usuario
 router.put(
-    '/:hackathonId/',
+    '/:hackathonId',
     isUserAuthMiddleware,
     isHackathonAvaliableMiddleware,
     hackathonRegistrationStatusMiddleware,
