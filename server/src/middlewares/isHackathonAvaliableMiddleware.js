@@ -13,9 +13,10 @@ const isHackathonAvaliableMiddleware = async (req, res, next) => {
         //Obtenemos los datos del hackathon (nos interesa fecha de finalizacion)
         const hackathon = await selectHackathoByIdModel(hackathonId);
 
-        //Comparamos las fechas para saber si el hackathon a finalizado
         const now = new Date();
         const dateDeadline = parseISO(hackathon.deadline);
+
+        //Comparamos las fechas para saber si el hackathon a finalizado
         if (isAfter(now, dateDeadline) || isEqual(now, dateDeadline)) {
             generateErrorUtil(400, 'El hackathon a terminado');
         }

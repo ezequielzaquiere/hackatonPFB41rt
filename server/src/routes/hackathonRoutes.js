@@ -23,7 +23,4 @@ router.get('/hackathones', listHackathonesController);
 //Endpoint lista temáticas hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
 
-//Endpoint que confirma que un usuario participara en un hackathon //TODO:COMPROBAR SI YA HA CONFIRMADO(MIDDLEWARE?)
-router.put('/:hackathonId/join/:confirmationCode');
-
 export default router;
