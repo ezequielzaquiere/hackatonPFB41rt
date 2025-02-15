@@ -2,14 +2,13 @@
 import express from 'express';
 
 //Importar middlewares
-import { isUserAuthMiddleware } from '../middlewares/index.js';
+import isUserAuthMiddleware from '../middlewares/isUserAuthMiddleware.js';
 
-//Importar funciones controladoras
+//Importar funciones controladoras de hackathones
 import {
     newHackathonController,
     listHackathonesController,
     listHackathonesThemesController,
-    joinHackathonController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -23,13 +22,6 @@ router.get('/hackathones', listHackathonesController);
 
 //Endpoint lista temáticas hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
-
-//Endpoint que registra a un usuario en un hackathon
-router.post(
-    '/:hackathonId/join',
-    isUserAuthMiddleware,
-    joinHackathonController
-);
 
 //Endpoint que confirma que un usuario participara en un hackathon //TODO:COMPROBAR SI YA HA CONFIRMADO(MIDDLEWARE?)
 router.put('/:hackathonId/join/:confirmationCode');

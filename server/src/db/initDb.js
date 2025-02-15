@@ -76,7 +76,8 @@ const main = async () => {
                 details VARCHAR(1000),
                 attachedFile VARCHAR(500),
                 image VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
-                createdAt DATETIME
+                createdAt DATETIME,
+                modifiedAt TIMESTAMP
             )	
         `);
 
@@ -102,7 +103,8 @@ const main = async () => {
                 FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
                 confirmationCode CHAR(30),
                 status ENUM ("pendiente", "confirmada","cancelada") DEFAULT "pendiente",
-                createdAt DATETIME
+                createdAt DATETIME,
+                modifiedAt TIMESTAMP
             )	
         `);
 

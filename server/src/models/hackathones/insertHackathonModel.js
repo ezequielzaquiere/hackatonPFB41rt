@@ -1,4 +1,5 @@
 //TODO:REVISAR LOS NOMBRES DE LOS INSERTS DE LA TABLA
+//TODO:REVISAR PORQUE CREO QUE VA A HACER FALTA UN MODEL PARA LOS HACKATHONLANG
 
 //Imports
 import getPool from '../../db/getPool.js';
@@ -7,23 +8,21 @@ const insertHackathonModel = async ({
     adminId,
     title,
     summary,
-    description,
-    theme,
-    technologies,
+    parseStartingDate,
+    parseDeadline,
     type,
     location,
-    startingDate,
-    finishingDate,
+    themeId,
+    programmingLangId,
+    details,
+    attachedFile,
     imgName,
-    docName,
 }) => {
     const pool = await getPool();
 
-    const now = new Date();
-
     const [newHackathon] = await pool.query(
         `
-        INSERT INTO /*NOMBRE TABLA*/  (createdBy ,title,summary, description, theme, technologies,type,location,startingDate,finishingDate,imgName,docName, createdAt)
+        INSERT INTO hackathonList  (userId, title, summary, startingDate, deadline, type, location, themeId, programmingLangId, details, attachedFile, image, createdAt)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
         `,
@@ -31,16 +30,16 @@ const insertHackathonModel = async ({
             adminId,
             title,
             summary,
-            description,
-            theme,
-            technologies,
+            parseStartingDate,
+            parseDeadline,
             type,
             location,
-            startingDate,
-            finishingDate,
+            themeId,
+            programmingLangId,
+            details,
+            attachedFile,
             imgName,
-            docName,
-            now,
+            new Date(),
         ]
     );
 
