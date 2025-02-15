@@ -8,15 +8,30 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 const registerUserController = async (req, res, next) => {
     try {
         // Obtenemos los datos necesarios del body.
-        const { username, email, password } = req.body;
+        const { username, firstName, lastName, email, password, role } =
+            req.body;
 
         // Lanzamos un error si falta algún campo.
-        if (!username || !email || !password) {
+        if (
+            !username ||
+            !firstName ||
+            !lastName ||
+            !email ||
+            !password ||
+            !role
+        ) {
             generateErrorUtil('Faltan campos', 400);
         }
 
         // Insertamos el usuario.
-        await insertUserModel(username, email, password);
+        await insertUserModel(
+            username,
+            firstName,
+            lastName,
+            email,
+            password,
+            role
+        );
 
         res.status(201).send({
             status: 'ok',
