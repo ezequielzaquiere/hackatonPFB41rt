@@ -1,128 +1,121 @@
-# Hackatones
+# Web - Hackathones (`Insertar nombre del proyecto`)
 
-📌 **Tipos de usuarios:**
+Se trata de una web donde los usuarios se podrán apuntar a hackathones. Cada hackathon tiene creador, título, resumen, fecha de inicio,
+deadline, tipo "online/presencial", localización, tema, lenguajes de programación, detalles y archivo + imagen adjunto.
+Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
-- **Familias** → Pueden registrar a sus hijos como jugadores y proporcionar información detallada sobre sus habilidades.
-- **Ojeadores** → Pueden ver la lista de jugadores y realizar **solicitudes de contratación** si están interesados en un jugador.
+## Instalar
 
----
+1. Instalar las dependencias mediante el comando `npm install` o `npm i`.
 
-## 🚀 Instalación
+2. Guardar el archivo `.env.example` como `.env` y cubrir los datos necesarios.
 
-1. **Instalar las dependencias**:
-    ```sh
-    npm install
-    ```
-2. **Configurar las variables de entorno**:
+3. Ejecutar `npm run initDb` para crear las tablas necesarias en la base de datos.
 
-    - Copia el archivo `.env.example`, renómbralo a `.env` y **completa los datos necesarios**.
+4. Ejecutar `npm run dev` para lanzar el servidor.
 
-3. **Inicializar la base de datos**:
+## Base de datos
 
-    ```sh
-    npm run generate-tables
-    ```
+### users
 
-4. **(Opcional) Poblar la base de datos con datos de prueba**:
+| Campo     | Tipo         | Descripción                      |
+| --------- | ------------ | -------------------------------- |
+| id        | VARCHAR(36)  | Identificador único del usuario  |
+| username  | VARCHAR(20)  | Nombre de usuario del usuario    |
+| firstName | VARCHAR(40)  | Nombre del usuario               |
+| lastName  | VARCHAR(70)  | Apellido del usuario             |
+| email     | VARCHAR(70)  | Correo electrónico del usuario   |
+| password  | VARCHAR(200) | Contraseña del usuario (hash)    |
+| regCode   | CHAR(30)     | Código de registro del usuario   |
+| active    | BOOLEAN      | Indica si el usuario está activo |
+| role      | ENUM         | Rol del usuario ("admin", "dev") |
+| createdAt | DATETIME     | Fecha y hora de la creación      |
 
-    ```sh
-    npm run populate-tables
-    ```
+### themes
 
-5. **Iniciar el servidor**:
-    ```sh
-    npm run dev
-    ```
+| Campo     | Tipo        | Descripción                  |
+| --------- | ----------- | ---------------------------- |
+| id        | VARCHAR(36) | Identificador único del tema |
+| theme     | VARCHAR(50) | Tema del hackathon           |
+| createdAt | DATETIME    | Fecha y hora de la creación  |
 
----
+### programmingLangs
 
-## 📄 Base de Datos
+| Campo           | Tipo        | Descripción                      |
+| --------------- | ----------- | -------------------------------- |
+| id              | VARCHAR(36) | Identificador único del lenguaje |
+| programmingLang | VARCHAR(50) | Lenguaje de programación         |
+| createdAt       | DATETIME    | Fecha y hora de la creación      |
 
-### 📌 Tabla: `users`
+### hackathonList
 
-| Campo      | Tipo         | Descripción                          |
-| ---------- | ------------ | ------------------------------------ |
-| id         | INT UNSIGNED | Identificador único del usuario      |
-| username   | VARCHAR(30)  | Nombre de usuario                    |
-| firstName  | VARCHAR(50)  | Nombre del usuario                   |
-| lastName   | VARCHAR(100) | Apellido del usuario                 |
-| email      | VARCHAR(100) | Correo electrónico                   |
-| password   | VARCHAR(100) | Contraseña encriptada                |
-| birthDate  | DATE         | Fecha de nacimiento                  |
-| avatar     | VARCHAR(100) | URL del avatar del usuario           |
-| role       | ENUM         | Rol del usuario (`family` o `scout`) |
-| createdAt  | DATETIME     | Fecha de creación del usuario        |
-| modifiedAt | DATETIME     | Última actualización del usuario     |
+| Campo            | Tipo          | Descripción                                            |
+| ---------------- | ------------- | ------------------------------------------------------ |
+| id               | VARCHAR(36)   | Identificador único del hackathon                      |
+| creator          | VARCHAR(36)   | Creador del hackathon                                  |
+| title            | VARCHAR(100)  | Título del hackathon                                   |
+| summary          | VARCHAR(140)  | Resúmen del hackathon                                  |
+| startingDate     | TIMESTAMP     | Fecha y hora de inicio del hackathon                   |
+| deadline         | TIMESTAMP     | Fecha y hora de deadline del hackathon                 |
+| type             | ENUM          | Tipo de modalidad de hackathon ("online","presencial") |
+| location         | VARCHAR(200)  | Localización del hackathon                             |
+| theme            | VARCHAR(36)   | Tema del hackathon                                     |
+| programmingLangs | VARCHAR(36)   | Lenguaje del hackathon                                 |
+| details          | VARCHAR(1000) | Detalles del hackathon                                 |
+| attachedFile     | VARCHAR(500)  | Documento adjunto al hackathon                         |
+| image            | VARCHAR(500)  | Imagen adjunta al hackathon                            |
+| createdAt        | DATETIME      | Fecha y hora de la creación                            |
 
-### 📌 Tabla: `players`
+### hackathonLangs
 
-| Campo        | Tipo         | Descripción                             |
-| ------------ | ------------ | --------------------------------------- |
-| id           | INT UNSIGNED | Identificador único del jugador         |
-| familyUserId | INT UNSIGNED | ID del usuario que registró al jugador  |
-| firstName    | VARCHAR(50)  | Nombre del jugador                      |
-| lastName     | VARCHAR(100) | Apellido del jugador                    |
-| birthDate    | DATE         | Fecha de nacimiento                     |
-| position     | VARCHAR(50)  | Posición en el campo                    |
-| skills       | VARCHAR(500) | Habilidades destacadas                  |
-| team         | VARCHAR(100) | Equipo actual del jugador               |
-| strongFoot   | ENUM         | Pie dominante (`right`, `left`, `dual`) |
-| createdAt    | DATETIME     | Fecha de creación del jugador           |
-| modifiedAt   | DATETIME     | Última actualización del jugador        |
+| Campo           | Tipo        | Descripción                                          |
+| --------------- | ----------- | ---------------------------------------------------- |
+| id              | VARCHAR(36) | Identificador único de los lenguajes de un hackathon |
+| programmingLang | VARCHAR(36) | Identificador del lenguaje del hackathon             |
+| hackathon       | VARCHAR(36) | Identificador del hackathon                          |
+| createdAt       | DATETIME    | Fecha y hora de la creación                          |
 
-### 📌 Tabla: `playerVideos`
+### registrations
 
-| Campo     | Tipo         | Descripción                   |
-| --------- | ------------ | ----------------------------- |
-| id        | INT UNSIGNED | Identificador único del video |
-| playerId  | INT UNSIGNED | ID del jugador asociado       |
-| youtubeId | VARCHAR(20)  | ID del vídeo de YouTube       |
-| createdAt | DATETIME     | Fecha de subida del video     |
+| Campo     | Tipo        | Descripción                      |
+| --------- | ----------- | -------------------------------- |
+| id        | VARCHAR(36) | Identificador único del registro |
+| user      | VARCHAR(36) | Identificador del usuario        |
+| hackathon | VARCHAR(36) | Identificador del hackathon      |
+| createdAt | DATETIME    | Fecha y hora de la creación      |
 
-### 📌 Tabla: `hiringRequests`
+### podium
 
-| Campo       | Tipo         | Descripción                                   |
-| ----------- | ------------ | --------------------------------------------- |
-| id          | INT UNSIGNED | Identificador único de la solicitud           |
-| scoutUserId | INT UNSIGNED | ID del ojeador que realizó la solicitud       |
-| playerId    | INT UNSIGNED | ID del jugador asociado                       |
-| status      | ENUM         | Estado (`pendiente`, `aceptada`, `rechazada`) |
-| createdAt   | DATETIME     | Fecha de creación de la solicitud             |
-| modifiedAt  | DATETIME     | Última actualización de la solicitud          |
+| Campo        | Tipo        | Descripción                      |
+| ------------ | ----------- | -------------------------------- |
+| id           | VARCHAR(36) | Identificador único del registro |
+| registration | VARCHAR(36) | Identificador del registro       |
+| position     | TINYINT     | Rating/posición entre 1 y 3      |
+| createdAt    | DATETIME    | Fecha y hora de la creación      |
 
----
+### ratings
 
-## 📱 Endpoints
+| Campo        | Tipo        | Descripción                       |
+| ------------ | ----------- | --------------------------------- |
+| id           | VARCHAR(36) | Identificador único del rating    |
+| user         | VARCHAR(36) | Identificador del usuario         |
+| hackathon    | VARCHAR(36) | Identificador del hackathon       |
+| uniqueRating | CONSTRAINT  | Rating único (usuario, hackathon) |
+| rating       | TINYINT     | Rating/posición entre 1 y 3       |
+| createdAt    | DATETIME    | Fecha y hora de la creación       |
 
-### **🔹 Usuarios**
+## Endpoints del usuario
 
-| Método   | Endpoint              | Descripción                                                             |
-| -------- | --------------------- | ----------------------------------------------------------------------- |
-| **POST** | `/api/users/register` | Crear un nuevo usuario (`family` u `scout`). ✅                         |
-| **POST** | `/api/users/login`    | Iniciar sesión. ✅                                                      |
-| **GET**  | `/api/users/private`  | Obtener perfil privado del usuario autenticado. ✅                      |
-| **PUT**  | `/api/users`          | Actualizar **nombre de usuario**, **email** o **avatar**. ✅            |
-| **GET**  | `/api/users/hirings`  | Obtener solicitudes de contratación **relacionadas con el usuario**. ✅ |
+- **POST** - [`/api/users/register`] - Crea un nuevo usuario pendiente de activar.
+- **PUT** - [`/api/users/validate/:regCode`] - Activa un usuario mediante un código de registro.
+- **POST** - [`/api/users/login`] - Logea a un usuario activo retornando un token.
+- **GET** - [`/api/users/:id`] - Retorna información privada del usuario con el id del token.
+- **PUT** - [`/api/users/changePassword`] - Permite crear una nueva contraseña a partir de la actual.
 
----
+## Endpoints de los hackathones
 
-### **🔹 Jugadores (Acciones de familias)**
-
-🔒 **Restringido a usuarios de tipo `family`**  
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| **POST** | `/api/players` | Registrar un nuevo jugador. ✅ |
-| **GET** | `/api/players` | Obtener la lista de jugadores disponibles. ✅ |
-| **POST** | `/api/players/:playerId/videos` | Agregar un video a un jugador. ✅ |
-| **GET** | `/api/players/:playerId` | Obtener detalles de un jugador (incluyendo videos). ✅ |
-| **PUT** | `/api/players/:playerId` | Editar **posición**, **skills**, **equipo** y **pierna dominante**. ✅ |
-| **PUT** | `/api/players/:playerId/hirings/:hiringId` | Aceptar o rechazar una solicitud de contratación. ✅ |
-
----
-
-### **🔹 Jugadores (Acciones de ojeadores)**
-
-🔒 **Restringido a usuarios de tipo `scout`**  
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| **POST** | `/api/players/:playerId/hirings` | Enviar una solicitud de contratación para un jugador. ✅ |
+- **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
+- **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
+- **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
+- **POST** - [`/api/hackathones/:hackathonId/join`] - Registra a un usuario en un hackathon.
+- **PUT** - ['/:hackathonId/join/:confirmationCode'] - Confirma que un usuario participará en un hackathon.

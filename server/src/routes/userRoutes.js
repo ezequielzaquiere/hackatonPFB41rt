@@ -19,16 +19,16 @@ const router = express.Router();
 //Endpoint para registrar usuario
 router.post('/register', registerUserController);
 
+//Activar un usuario
+router.put('/validate/:regCode', updateActivateUserController);
+
 //Endpoint para login usuario
 router.post('/login', loginUserController);
-
-//Cambiar contraseña
-router.post('/changePassword', changePasswordController);
 
 // Información privada del usuario.
 router.get('/:id', isUserAuthMiddleware, privateUserProfileController);
 
-//Activar un usuario
-router.put('/validate/:regCode', updateActivateUserController);
+//Cambiar contraseña
+router.post('/changePassword', changePasswordController);
 
 export default router;
