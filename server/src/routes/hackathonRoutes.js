@@ -2,16 +2,19 @@
 import express from 'express';
 
 //Importar middlewares
-import { isUserAuthMiddleware } from '../middlewares/index.js';
+import {
+    isUserAuthMiddleware,
+    isHackathonAvaliableMiddleware,
+} from '../middlewares/index.js';
 
 //Importar funciones controladoras
 import {
     newHackathonController,
     listHackathonesController,
     listHackathonesThemesController,
-    joinHackathonController,
     listHackathonesLangsController,
     hackathonDetailController,
+    editHackathonController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -19,6 +22,15 @@ const router = express.Router();
 
 //Endpoint crear nuevo hackathon
 router.post('/new', isUserAuthMiddleware, newHackathonController);
+
+//TODO:FALTA ALGO MAS?
+//Endpoint que permite modificar la informacion de un hackathon
+router.put(
+    '/:hackathonId',
+    isUserAuthMiddleware,
+    isHackathonAvaliableMiddleware,
+    editHackathonController
+);
 
 //Endpoint lista hackatones
 router.get('/hackathones', listHackathonesController);
@@ -31,15 +43,5 @@ router.get('/hackathones/:id', hackathonDetailController);
 
 // Ruta para obtener la lista de tecnologías de los hackathones
 router.get('/hackathones/Langs', listHackathonesLangsController);
-
-//Endpoint que registra a un usuario en un hackathon
-router.post(
-    '/:hackathonId/join',
-    isUserAuthMiddleware,
-    joinHackathonController
-);
-
-//Endpoint que confirma que un usuario participara en un hackathon //TODO:COMPROBAR SI YA HA CONFIRMADO(MIDDLEWARE?)
-router.put('/:hackathonId/join/:confirmationCode');
 
 export default router;

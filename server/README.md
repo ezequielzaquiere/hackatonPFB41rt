@@ -12,7 +12,9 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 3. Ejecutar `npm run initDb` para crear las tablas necesarias en la base de datos.
 
-4. Ejecutar `npm run dev` para lanzar el servidor.
+4. Ejecutar `npm run populate-tables` para añadir los datos necesarios a las tablas en la base de datos.
+
+5. Ejecutar `npm run dev` para lanzar el servidor.
 
 ## Base de datos
 
@@ -117,6 +119,7 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 ## Endpoints de los hackathones
 
 - **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
+- **PUT** - [`/:hackathonId`] - Permite modificar los detalles de un hackathon.
 - **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
 - **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
 - **POST** - [`/api/hackathones/:hackathonId/join`] - Registra a un usuario en un hackathon.
