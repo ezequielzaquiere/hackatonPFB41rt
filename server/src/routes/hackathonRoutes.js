@@ -10,6 +10,8 @@ import {
     listHackathonesController,
     listHackathonesThemesController,
     joinHackathonController,
+    listHackathonesLangsController,
+    hackathonDetailController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -23,6 +25,12 @@ router.get('/hackathones', listHackathonesController);
 
 //Endpoint lista temáticas hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
+
+// Ruta para obtener los detalles de un hackathon específico por ID
+router.get('/hackathones/:id', hackathonDetailController);
+
+// Ruta para obtener la lista de tecnologías de los hackathones
+router.get('/hackathones/Langs', listHackathonesLangsController);
 
 //Endpoint que registra a un usuario en un hackathon
 router.post(
