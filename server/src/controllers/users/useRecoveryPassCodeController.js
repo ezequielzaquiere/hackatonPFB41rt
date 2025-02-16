@@ -1,11 +1,11 @@
-// Importamos los modelos necesarios.
-import changePasswordModel from '../../models/users/changePasswordModel.js';
+// Importar los modelos.
+import updateUserPassModel from '../../models/users/updateUserPassModel.js';
 
-// Importamos la función que genera un error.
+// Importar la función que genera errores.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Función controladora que envía un código de recuperación de contraseña al email indicado.
-const changePasswordController = async (req, res, next) => {
+const useRecoveryPassCodeController = async (req, res, next) => {
     try {
         // Obtenemos el código de recuperación de contraseña.
         const { recoverPassCode } = req.params;
@@ -15,16 +15,16 @@ const changePasswordController = async (req, res, next) => {
 
         // Lanzamos un error si falta algún campo.
         if (!newPassword || !repeatedNewPassword) {
-            generateErrorUtil('Faltan campos', 400);
+            generateErrorUtil(400, 'Faltan campos');
         }
 
         // Si las contraseñas no coinciden lanzamos un error.
         if (newPassword !== repeatedNewPassword) {
-            generateErrorUtil('Las contraseñas no coinciden', 400);
+            generateErrorUtil(400, 'Las contraseñas no coinciden');
         }
 
         // Actualizar la contraseña del usuario.
-        await changePasswordModel(newPassword, recoverPassCode);
+        await updateUserPassModel(newPassword, recoverPassCode);
 
         res.send({
             status: 'ok',
@@ -35,4 +35,4 @@ const changePasswordController = async (req, res, next) => {
     }
 };
 
-export default changePasswordController;
+export default useRecoveryPassCodeController;
