@@ -111,6 +111,8 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **POST** - [`/api/users/login`] - Logea a un usuario activo retornando un token.
 - **GET** - [`/api/users/:id`] - Retorna información privada del usuario con el id del token.
 - **PUT** - [`/api/users/changePassword`] - Permite crear una nueva contraseña a partir de la actual.
+- **PUT** - [`/api/users/password/reset`] - Enviar código de recuperación de contraseña al email del usuario.
+- **PUT** - [`/api/users/password/reset/:recoverPassCode`] - Actualiza la contraseña de un usuario con un código de recuperación.
 
 ## Endpoints de los hackathones
 
