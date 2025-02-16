@@ -6,7 +6,7 @@ import insertRecoverPassCodeModel from '../../models/users/insertRecoverPassCode
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
 // Importamor la función que envía un mail.
-import sendMailUtil from '../../utils/sendMailUtil.js';
+import sendEmailUtil from '../../utils/sendEmailUtil.js';
 
 // Importar la función generadora de errores.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
@@ -44,7 +44,7 @@ const sendRecoveryPassEmailController = async (req, res, next) => {
             `;
 
             // Enviamos el email.
-            await sendMailUtil(email, emailSubject, emailBody);
+            await sendEmailUtil(email, emailSubject, emailBody);
         }
 
         res.send({
