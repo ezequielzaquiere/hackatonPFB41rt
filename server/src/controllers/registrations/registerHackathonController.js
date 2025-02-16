@@ -4,11 +4,24 @@ import insertRegistrationModel from '../../models/registrations/insertRegistrati
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //Funcion que une un dev con un hackathon
-const joinHackathonController = async (req, res, next) => {
+const registerHackathonController = async (req, res, next) => {
     try {
         //Comprobamos si el usuario es dev
         if (req.user.role !== 'dev') {
             generateErrorUtil(401, 'No tienes los permisos necesarios');
+        }
+
+        if (req.registration) {
+            if (req.registration === 'confirmada') {
+                generateErrorUtil(409, 'La asistencia ya ha sido confirmada');
+            }
+
+            if (req.registration === 'cancelada') {
+                generateErrorUtil(
+                    409,
+                    'No puedes volverte a inscribir si ya has cancelado tu participacion'
+                );
+            }
         }
         //Obtener hackathonId
         const { hackathonId } = req.params;
@@ -20,11 +33,11 @@ const joinHackathonController = async (req, res, next) => {
         res.status(200).send({
             status: 'ok',
             message:
-                'Te has unido al Hackathon! Confirma tu participacion en el correo que se te ha enviado!',
+                'Te has unido! Confirma tu participacion en el correo que se te ha enviado!',
         });
     } catch (err) {
         next(err);
     }
 };
 
-export default joinHackathonController;
+export default registerHackathonController;

@@ -4,7 +4,7 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //Funcion que se conecta a la Base de datos para retornar un usuario con un Id dado
 
 const selectUserByIdModel = async (userId) => {
-    const pool = await getPool;
+    const pool = await getPool();
 
     const [users] = await pool.query(
         'SELECT id, username, firstName, lastName, password, email, avatar FROM users WHERE id = ?',
