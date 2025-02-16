@@ -1,10 +1,13 @@
-//Import models
+//TODO:COMPROBAR SI UNA IMAGEN ES UNA IMAGEN? LO MISMO CON DOCS?
+//Importar models
 import insertHackathonModel from '../../models/hackathones/insertHackathonModel.js';
+import insertNewHackathonLangs from '../../models/hackathones/insertNewHackathonLangs.js';
 
 //Importar utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 import saveImgUtil from '../../utils/saveImgUtil.js';
 import saveDocUtil from '../../utils/saveDocUtil.js';
+import validateDatesUtil from '../../utils/validateDatesUtil.js';
 
 //Funcion controlladora que crea un nuevo hackathon (solo admin)
 const newHackathonController = async (req, res, next) => {
@@ -18,69 +21,91 @@ const newHackathonController = async (req, res, next) => {
         if (!req.body.data) {
             generateErrorUtil(400, 'Faltan los datos del Hackathon');
         }
+
         //Dado que enviamos un json y otros archivos, necesitamos parsear el objeto data(dodne mandamos el json)
-        const hackathonData = JSON.parse(req.body.data);
+        let hackathonData;
+        try {
+            hackathonData = JSON.parse(req.body.data);
+        } catch {
+            generateErrorUtil(400, 'Hay un error en el JSON');
+        }
 
         const {
             title,
             summary,
-            description,
-            theme,
-            technologies,
+            startingDate,
+            deadline,
             type,
             location = 'En todas partes',
-            startingDate,
-            finishingDate,
+            themeId,
+            programmingLangId,
+            details,
         } = hackathonData;
 
-        const banner = req.files?.banner;
-        const document = req.files?.document;
+        const image = req.files?.image;
+        const attachedFile = req.files?.document;
 
-        //Si es presencial es obligatoria la localizacion
-        if (type === 'presencial' && location === null) {
-            generateErrorUtil(400, 'Faltan campo de localizacion');
-        }
-
+        //Comprobamos si estan los datos imprescindibles
         if (
+            !adminId ||
             !title ||
             !summary ||
-            !description ||
-            !theme ||
-            !technologies ||
-            !type ||
-            !location ||
             !startingDate ||
-            !finishingDate
+            !deadline ||
+            !type ||
+            !themeId ||
+            !programmingLangId
         ) {
             generateErrorUtil(400, 'Faltan datos');
         }
 
-        let imgName = '';
-        //Si hay banner guardamos la imagen del banner  //TODO<=================ALGUN TAMAÑO ESPECIFICO?
-        if (banner) {
-            imgName = await saveImgUtil(banner);
+        if (programmingLangId.length === 0) {
+            generateErrorUtil(
+                400,
+                'Faltan los lenguajes de programacion (array)'
+            );
+        }
+        //Comprobamos si las fechas son correctas
+        const { formatedStartingDate, formatedDeadline } = validateDatesUtil(
+            startingDate,
+            deadline
+        );
+
+        //Si es presencial es obligatoria la localizacion
+        if (
+            type === 'presencial' &&
+            (location === null || location === 'En todas partes')
+        ) {
+            generateErrorUtil(400, 'Faltan campo de localizacion');
         }
 
+        //Manejo de archivos (imagenes y pdf)
         let docName = '';
+        let imgName = '';
+        //Si hay imagen guardamos la imagen (necesario poner el tipo)
+        if (image) {
+            imgName = await saveImgUtil(image, null, 'imgHack');
+        }
         //Si hay un documento (solo pdf) lo guardamos
-        if (document) {
-            docName = await saveDocUtil(document);
+        if (attachedFile) {
+            docName = await saveDocUtil(attachedFile);
         }
 
-        await insertHackathonModel({
+        const hackathonId = await insertHackathonModel({
             adminId,
             title,
             summary,
-            description,
-            theme,
-            technologies,
+            formatedStartingDate,
+            formatedDeadline,
             type,
+            themeId,
             location,
-            startingDate,
-            finishingDate,
-            imgName,
+            details,
             docName,
+            imgName,
         });
+
+        await insertNewHackathonLangs(hackathonId, programmingLangId);
 
         res.status(201).send({
             status: 'ok',

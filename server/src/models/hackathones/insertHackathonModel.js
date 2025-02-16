@@ -2,45 +2,42 @@
 
 //Imports
 import getPool from '../../db/getPool.js';
+
 //Funcion inserta un evento Hackathon a la base de datos
 const insertHackathonModel = async ({
     adminId,
     title,
     summary,
-    description,
-    theme,
-    technologies,
+    formatedStartingDate,
+    formatedDeadline,
     type,
     location,
-    startingDate,
-    finishingDate,
-    imgName,
+    themeId,
+    details,
     docName,
+    imgName,
 }) => {
     const pool = await getPool();
 
-    const now = new Date();
-
     const [newHackathon] = await pool.query(
         `
-        INSERT INTO /*NOMBRE TABLA*/  (createdBy ,title,summary, description, theme, technologies,type,location,startingDate,finishingDate,imgName,docName, createdAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO hackathonList  (userId, title, summary, startingDate, deadline, type, location, themeId, details, attachedFile, image, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
         `,
         [
             adminId,
             title,
             summary,
-            description,
-            theme,
-            technologies,
+            formatedStartingDate,
+            formatedDeadline,
             type,
             location,
-            startingDate,
-            finishingDate,
-            imgName,
+            themeId,
+            details,
             docName,
-            now,
+            imgName,
+            new Date(),
         ]
     );
 

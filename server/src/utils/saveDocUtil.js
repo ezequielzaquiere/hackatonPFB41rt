@@ -1,5 +1,5 @@
 //Import dependencias
-import fs from 'fs/promises';
+import fs from 'fs-extra';
 import path from 'path';
 
 //Import utils
@@ -32,7 +32,7 @@ const saveDocUtil = async (document) => {
         const docPath = path.join(pathUploadDoc, docName);
 
         //Guardamos el archivo
-        await fs.mv(docPath);
+        await document.mv(docPath);
 
         return docName;
     } catch (error) {

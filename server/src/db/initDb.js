@@ -71,8 +71,6 @@ const main = async () => {
                 location VARCHAR(200),
                 themeId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(themeId) REFERENCES themes(id),
-                programmingLangId INT UNSIGNED NOT NULL,
-                FOREIGN KEY(programmingLangId) REFERENCES programmingLangs(id),
                 details VARCHAR(1000),
                 attachedFile VARCHAR(500),
                 image VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
