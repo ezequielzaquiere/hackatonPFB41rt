@@ -1,4 +1,3 @@
-//Import dependencias
 //Import models
 import cancelRegistrationHackathonModel from '../../models/registrations/cancelRegistrationHackathonModel.js';
 //Import utils
