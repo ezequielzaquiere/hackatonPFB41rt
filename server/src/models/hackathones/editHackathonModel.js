@@ -1,12 +1,8 @@
-//TODO:PREGUNTAR SI ALGUIEN SABE ALGUNA FORMA MAS OPTIMA DE HACERLO
-//TODO:MIRAR SI QUEREMOS AÑADIR MODIFIED BY
-
 //Importamos la pool
 import getPool from '../../db/getPool.js';
 
 //Funcion que conecta con la DB y modifica la info de un hackathon
 const editHackathonModel = async ({
-    adminId, //TODO: SE VA A QUERER USAR? TIPO MODIFIED BY
     title,
     summary,
     formatedStartingDate,

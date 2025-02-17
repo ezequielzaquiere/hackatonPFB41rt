@@ -115,15 +115,26 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **PUT** - [`/api/users/changePassword`] - Permite crear una nueva contraseña a partir de la actual.
 - **PUT** - [`/api/users/password/reset`] - Enviar código de recuperación de contraseña al email del usuario.
 - **PUT** - [`/api/users/password/reset/:recoverPassCode`] - Actualiza la contraseña de un usuario con un código de recuperación.
+- **GET** - [`/api/users/profile`] - Retorna información del usuario.
 
 ## Endpoints de los hackathones
 
 - **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
-- **PUT** - [`/:hackathonId`] - Permite modificar los detalles de un hackathon.
+- **PUT** - [`/api/hackathones/:hackathonId`] - Permite modificar los detalles de un hackathon.
 - **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
 - **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
+
 - **POST** - [`/api/hackathones/:hackathonId/join`] - Registra a un usuario en un hackathon.
 - **PUT** - ['/:hackathonId/join/:confirmationCode'] - Confirma que un usuario participará en un hackathon.
 - **GET** - [`/api/hackathones/hackathones/details`] - Devuelve todos los detalles de los hackathones.
 - **GET** - [`/api/hackathones/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
 - **GET** - [`/api/hackathones/hackathones/langs`] - Devuelve todos los lenguajes de programación.
+
+- **DELETE** - [`/api/hackathones/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
+
+## Endpoints de los registros/participaciones
+
+- **POST** - [`/api/register/:hackathonId`] - Registra a un usuario en un hackathon.
+- **PUT** - [`/api/register/:hackathonId/:confirmationCode`] - Confirma que un usuario participará en un hackathon.
+- **PUT** - [`/api/register/:hackathonId`] - Elimina la participación de un usuario en un hackathon.
+

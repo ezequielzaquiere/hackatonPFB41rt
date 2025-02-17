@@ -1,7 +1,7 @@
 //Imports
 import getPool from '../../db/getPool.js';
 
-//Funcion que introdice una reliacion entre el hackathonid y el programminglangid
+//Funcion que introdice una relacion entre el hackathonid y el programminglangid
 const insertNewHackathonLangs = async (hackathonId, programmingLangId) => {
     const pool = await getPool();
 

@@ -1,7 +1,12 @@
 //Importamos dependencias
 import crypto from 'crypto';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
 //Importamos models
 import selectUserByIdModel from '../users/selectUserByIdModel.js';
+import selectHackathonDetailsByIdModel from '../hackathones/selectHackathonDetailsByIdModel.js';
+
 //Importamos los utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 import sendEmailUtil from '../../utils/sendEmailUtil.js';
@@ -10,19 +15,22 @@ import sendEmailUtil from '../../utils/sendEmailUtil.js';
 import getPool from '../../db/getPool.js';
 
 const insertRegistrationModel = async (userId, hackathonId) => {
-    const pool = getPool();
+    const pool = await getPool();
 
     //Obtenemos los datos del usuario
     const user = await selectUserByIdModel(userId);
 
+    //Obtenemos los datos del hackathon
+    const hackathon = await selectHackathonDetailsByIdModel(hackathonId);
+
     //Comprobamos si esta inscrito
     const [registration] = await pool.query(
-        `'SELECT id FROM registrations WHERE userId = ? AND hackathonId = ? '`,
+        `SELECT id FROM registrations WHERE userId = ? AND hackathonId = ? `,
         [userId, hackathonId]
     );
 
     //Si ya lo esta lanzamos un error
-    if (registration.lenth > 0) {
+    if (registration.length > 0) {
         generateErrorUtil(409, 'Ya te has registrado en el hackathon');
     }
 
@@ -38,9 +46,20 @@ const insertRegistrationModel = async (userId, hackathonId) => {
         [userId, hackathonId, confirmationCode, new Date()]
     );
 
-    //TODO:personalizar mas el email(secundario) como obtener datos del hackathon,...
     //Asunto del email
-    const subject = `${user.firstName},confirma tu participacion`;
+    const subject = `${user.firstName}, confirma tu asistencia`;
+
+    //Formateamos las fechas para hacerlas más visuales
+    const formattedStartingDate = format(
+        new Date(hackathon.startingDate),
+        "EEEE, d 'de' MMMM 'de' yyyy 'a las' hh:mm a",
+        { locale: es }
+    );
+    const formattedDeadLine = format(
+        new Date(hackathon.deadline),
+        "EEEE, d 'de' MMMM 'de' yyyy 'a las' hh:mm a",
+        { locale: es }
+    );
 
     //Plantilla del email de confirmacion
     const htmlEmail = `<!DOCTYPE html>
@@ -74,17 +93,6 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     line-height: 1.6;
                                     color: #4a148c;
                                 }
-                                .btn {
-                                    display: inline-block;
-                                    margin-top: 20px;
-                                    padding: 12px 24px;
-                                    font-size: 18px;
-                                    color: #fff;
-                                    background-color: #8e24aa;
-                                    text-decoration: none;
-                                    border-radius: 5px;
-                                    transition: background 0.3s ease-in-out;
-                                }
                                 .btn:hover {
                                     background-color: #6a1b9a;
                                 }
@@ -93,13 +101,63 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     font-size: 14px;
                                     color: #7b1fa2;
                                 }
+                                ul {
+                                    list-style: none;
+                                    padding: 0;
+                                    margin: 20px 0;
+                                    text-align: left;
+                                }
+                                li {
+                                    background: #f3e5f5;
+                                    padding: 10px;
+                                    margin: 5px 0;
+                                    border-radius: 5px;
+                                    color: #4a148c;
+                                    font-size: 16px;
+                                    line-height: 1.5;
+                                }
+                                li::before {
+                                    content: "◉";
+                                    color: #8e24aa;
+                                    font-weight: bold;
+                                    display: inline-block;
+                                    width: 20px;
+                                }
+                                li.date::before {
+                                content: "📅";
+                                font-size: 18px;
+                                width: 20px;
+                            }
                             </style>
                         </head>
                         <body>
                             <div class="container">
-                                <h1>¡Confirmación de Participación!</h1>
-                                <p>Gracias por registrarte en nuestro evento. Para confirmar tu participación, por favor haz clic en el botón de abajo.</p>
-                                <a href="${process.env.CLIENT_URL}/api/hackathon/${hackathonId}/join/${confirmationCode}" class="btn">Confirmar Asistencia</a>
+                                <h1>Confirmación de participación</h1>
+                                <p>Gracias por registrarte en ${hackathon.title}. Para confirmar tu participación, por favor, haz clic en el botón de abajo.</p>
+                                <ul>
+                                    <li>
+                                        ◉ <strong>Hackathon:</strong> ${hackathon.title}
+                                    </li>
+                                    <li>
+                                        ◉ <strong>Descripción:</strong> ${hackathon.summary}
+                                    </li>
+                                    <li class="date">
+                                        📅 <strong>Fecha de inicio:</strong> ${formattedStartingDate}
+                                    </li>
+                                    <li class="date">
+                                        📅 <strong>Fecha de finalización:</strong> ${formattedDeadLine}
+                                    </li>
+                                    <li>
+                                        ◉ <strong>Tipo:</strong> ${hackathon.type}
+                                    </li>
+                                    <li>
+                                        📍 <strong>Localización:</strong> ${hackathon.location}
+                                    </li>
+                                </ul>
+                                <a href="${process.env.CLIENT_URL}/api/register/${hackathonId}/${confirmationCode}" 
+                                    style="display: inline-block; margin-top: 20px; padding: 12px 24px; font-size: 18px; color: #ffffff !important; background-color: #8e24aa; text-decoration: none; border-radius: 5px; transition: background 0.3s ease-in-out;">
+                                        ¡Confirma tu asistencia!
+                                </a>
                                 <p class="footer">Si no solicitaste este registro, puedes ignorar este correo.</p>
                             </div>
                         </body>

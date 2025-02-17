@@ -6,6 +6,7 @@ import privateUserProfileController from './privateUserProfileController.js';
 import updateActivateUserController from './updateActivateUserController.js';
 import sendRecoveryPassEmailController from './sendRecoveryPassEmailController.js';
 import useRecoveryPassCodeController from './useRecoveryPassCodeController.js';
+import updateUserProfileController from './updateUserProfileController.js';
 
 //Exportar las funciones en un solo objeto
 export {
@@ -16,4 +17,5 @@ export {
     updateActivateUserController,
     sendRecoveryPassEmailController,
     useRecoveryPassCodeController,
+    updateUserProfileController,
 };

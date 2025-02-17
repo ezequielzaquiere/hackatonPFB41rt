@@ -20,8 +20,6 @@ const editHackathonController = async (req, res, next) => {
 
         const { hackathonId } = req.params;
 
-        const adminId = req.user.id;
-
         //Hay que definirlo fuera porque si no da error
         let hackathonData = {};
 
@@ -102,7 +100,6 @@ const editHackathonController = async (req, res, next) => {
         }
 
         await editHackathonModel({
-            adminId,
             title,
             summary,
             formatedStartingDate,

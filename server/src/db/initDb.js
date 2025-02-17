@@ -140,10 +140,10 @@ const main = async () => {
         // Insertamos el usuario administrador.
         await pool.query(
             `
-                INSERT INTO users (username, firstName, lastName, email, password, role)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO users (username, firstName, lastName, email, password, role, active)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             `,
-            ['admin', 'Pep', 'Garcia', 'admin@example.com', hashedPass, 'admin']
+            ['admin', 'Pep', 'Garcia', 'admin@example.com', hashedPass, 'admin', 1]
         );
 
         console.log('¡Usuario administrador insertado!');
