@@ -5,6 +5,7 @@ import listHackathonesThemesController from './listHackathonesThemesController.j
 import listHackathonesLangsController from './listHackathonesLangsController.js';
 import hackathonDetailController from './hackathonDetailController.js';
 import editHackathonController from './editHackathonController.js';
+import deleteHackathonController from './deleteHackathonController.js';
 //Exportar funciones en un solo objeto
 export {
     newHackathonController,
@@ -13,4 +14,5 @@ export {
     listHackathonesLangsController,
     hackathonDetailController,
     editHackathonController,
+    deleteHackathonController,
 };

@@ -1,4 +1,3 @@
-//TODO:COMPROBAR SI UNA IMAGEN ES UNA IMAGEN? LO MISMO CON DOCS?
 //Importar models
 import insertHackathonModel from '../../models/hackathones/insertHackathonModel.js';
 import insertNewHackathonLangs from '../../models/hackathones/insertNewHackathonLangs.js';

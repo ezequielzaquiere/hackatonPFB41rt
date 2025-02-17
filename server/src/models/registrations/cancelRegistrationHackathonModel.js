@@ -4,7 +4,6 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 import getPool from '../../db/getPool.js';
 
 //Funcion que cambia el estado de la participacion en un hackathon (cancelada)
-//Funcion que conecta con la base de datos y cambia el estado de participacion
 const cancelRegistrationHackathonModel = async (hackathonId, userId) => {
     const pool = await getPool();
 
