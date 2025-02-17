@@ -15,6 +15,7 @@ import {
     listHackathonesLangsController,
     hackathonDetailController,
     editHackathonController,
+    deleteHackathonController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -30,6 +31,9 @@ router.put(
     isHackathonAvaliableMiddleware,
     editHackathonController
 );
+
+//Endpoint que permite eliminar un hackathon y todo lo relacionado con el
+router.delete('/:hackathonId', isUserAuthMiddleware, deleteHackathonController);
 
 //Endpoint lista hackatones
 router.get('/hackathones', listHackathonesController);
