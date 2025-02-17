@@ -31,7 +31,7 @@ const isHackathonAvaliableMiddleware = async (req, res, next) => {
         if (differenceInHours(dateDeadline, now) < 24) {
             generateErrorUtil(
                 400,
-                'Se ha pasado el plazo de modificacion de inscripcion.'
+                'Se ha pasado el plazo de modificacion de la inscripcion.'
             );
         }
 

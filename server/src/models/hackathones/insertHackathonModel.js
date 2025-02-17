@@ -1,5 +1,3 @@
-//TODO:REVISAR LOS NOMBRES DE LOS INSERTS DE LA TABLA
-
 //Imports
 import getPool from '../../db/getPool.js';
 

@@ -1,8 +1,8 @@
-//TODO:COMPROBAR LA HORA PARA QUE ESTE EN EL FORMATO CORRECTO
-//TODO QUITAR MI EMAIL PARA PROBAR
-//TODO:PROBABLEMENTE TENGA QUE FORMATEAR LA FECHA A UN FORMATO UTIL PARA USAR EN EL EMAIL
 //Importamos dependencias
 import crypto from 'crypto';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
 //Importamos models
 import selectUserByIdModel from '../users/selectUserByIdModel.js';
 import selectHackathonDetailsByIdModel from '../hackathones/selectHackathonDetailsByIdModel.js';
@@ -46,12 +46,20 @@ const insertRegistrationModel = async (userId, hackathonId) => {
         [userId, hackathonId, confirmationCode, new Date()]
     );
 
-    //TODO:QUITAR LAS FECHAS
-    console.log(hackathon.startingDate);
-    console.log(hackathon.deadline);
-
     //Asunto del email
-    const subject = `${user.firstName},confirma tu asistencia`;
+    const subject = `${user.firstName}, confirma tu asistencia`;
+
+    //Formateamos las fechas para hacerlas más visuales
+    const formattedStartingDate = format(
+        new Date(hackathon.startingDate),
+        "EEEE, d 'de' MMMM 'de' yyyy 'a las' hh:mm a",
+        { locale: es }
+    );
+    const formattedDeadLine = format(
+        new Date(hackathon.deadline),
+        "EEEE, d 'de' MMMM 'de' yyyy 'a las' hh:mm a",
+        { locale: es }
+    );
 
     //Plantilla del email de confirmacion
     const htmlEmail = `<!DOCTYPE html>
@@ -84,17 +92,6 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     font-size: 16px;
                                     line-height: 1.6;
                                     color: #4a148c;
-                                }
-                                .btn {
-                                    display: inline-block;
-                                    margin-top: 20px;
-                                    padding: 12px 24px;
-                                    font-size: 18px;
-                                    color: #fffff;
-                                    background-color: #8e24aa;
-                                    text-decoration: none;
-                                    border-radius: 5px;
-                                    transition: background 0.3s ease-in-out;
                                 }
                                 .btn:hover {
                                     background-color: #6a1b9a;
@@ -139,25 +136,28 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                 <p>Gracias por registrarte en ${hackathon.title}. Para confirmar tu participación, por favor, haz clic en el botón de abajo.</p>
                                 <ul>
                                     <li>
-                                        <strong>Hackathon:</strong> ${hackathon.title}
+                                        ◉ <strong>Hackathon:</strong> ${hackathon.title}
                                     </li>
                                     <li>
-                                        <strong>Descripción:</strong> ${hackathon.summary}
+                                        ◉ <strong>Descripción:</strong> ${hackathon.summary}
                                     </li>
                                     <li class="date">
-                                        <strong>Fecha de inicio:</strong> ${hackathon.startingDate}
+                                        📅 <strong>Fecha de inicio:</strong> ${formattedStartingDate}
                                     </li>
                                     <li class="date">
-                                        <strong>Fecha de finalización:</strong> ${hackathon.deadline}
+                                        📅 <strong>Fecha de finalización:</strong> ${formattedDeadLine}
                                     </li>
                                     <li>
-                                        <strong>Tipo:</strong> ${hackathon.type}
+                                        ◉ <strong>Tipo:</strong> ${hackathon.type}
                                     </li>
                                     <li>
-                                        <strong>Localización:</strong> ${hackathon.location}
+                                        📍 <strong>Localización:</strong> ${hackathon.location}
                                     </li>
                                 </ul>
-                                <a href="${process.env.CLIENT_URL}/api/register/${hackathonId}/${confirmationCode}" class="btn">¡Confirma tu asistencia!</a>
+                                <a href="${process.env.CLIENT_URL}/api/register/${hackathonId}/${confirmationCode}" 
+                                    style="display: inline-block; margin-top: 20px; padding: 12px 24px; font-size: 18px; color: #ffffff !important; background-color: #8e24aa; text-decoration: none; border-radius: 5px; transition: background 0.3s ease-in-out;">
+                                        ¡Confirma tu asistencia!
+                                </a>
                                 <p class="footer">Si no solicitaste este registro, puedes ignorar este correo.</p>
                             </div>
                         </body>
@@ -165,7 +165,6 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                         `;
 
     //Enviamos el correo de confirmacion
-    //TODO:QUITAR MI EMAIL POR USER.EMAIL
     await sendEmailUtil(user.email, subject, htmlEmail);
 };
 
