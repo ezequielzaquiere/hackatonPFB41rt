@@ -124,3 +124,6 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
 - **POST** - [`/api/hackathones/:hackathonId/join`] - Registra a un usuario en un hackathon.
 - **PUT** - ['/:hackathonId/join/:confirmationCode'] - Confirma que un usuario participará en un hackathon.
+- **GET** - [`/api/hackathones/hackathones/details`] - Devuelve todos los detalles de los hackathones.
+- **GET** - [`/api/hackathones/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
+- **GET** - [`/api/hackathones/hackathones/langs`] - Devuelve todos los lenguajes de programación.

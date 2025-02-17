@@ -39,9 +39,9 @@ router.get('/hackathones', listHackathonesController);
 router.get('/hackathones/themes', listHackathonesThemesController);
 
 // Ruta para obtener los detalles de un hackathon específico por ID
-router.get('/hackathones/:id', hackathonDetailController);
+router.get('/hackathones/details', hackathonDetailController);
 
 // Ruta para obtener la lista de tecnologías de los hackathones
-router.get('/hackathones/Langs', listHackathonesLangsController);
+router.get('/hackathones/langs', listHackathonesLangsController);
 
 export default router;

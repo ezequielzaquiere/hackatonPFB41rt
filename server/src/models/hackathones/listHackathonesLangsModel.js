@@ -15,7 +15,7 @@ const listHackathonesLangsModel = async (
         SELECT * FROM programmingLangs
         WHERE (? = '' OR programmingLang LIKE ?)
         `,
-        [hackathon, `%${programmingLang}%`]
+        [hackathon, `%${hackathon}%`, programmingLang, `%${programmingLang}%`]
     );
 
     return hackathonesLangs;

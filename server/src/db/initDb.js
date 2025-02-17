@@ -148,12 +148,9 @@ const main = async () => {
 
         console.log('¡Usuario administrador insertado!');
 
-        // Cerramos el proceso con código 0.
         process.exit(0);
     } catch (err) {
         console.error(err);
-
-        // Cerramos el proceso con código 1.
         process.exit(1);
     }
 };
