@@ -115,6 +115,7 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **PUT** - [`/api/users/changePassword`] - Permite crear una nueva contraseña a partir de la actual.
 - **PUT** - [`/api/users/password/reset`] - Enviar código de recuperación de contraseña al email del usuario.
 - **PUT** - [`/api/users/password/reset/:recoverPassCode`] - Actualiza la contraseña de un usuario con un código de recuperación.
+- **GET** - [`/api/users/profile`] - Retorna información del usuario.
 
 ## Endpoints de los hackathones
 
