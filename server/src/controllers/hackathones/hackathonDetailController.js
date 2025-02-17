@@ -1,19 +1,29 @@
-import selectHackathonByIdModel from '../../models/hackathones/selectHackathonByIdModel.js';
+//función que genera errores
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
+
+// Importar el modelo
+import selectHackathonDetailsByIdModel from '../../models/hackathones/selectDetailHackathonByIdModel.js';
 
 const hackathonDetailController = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        // Llamamos al modelo para obtener los detalles del hackathon
-        const hackathon = await selectHackathonByIdModel(id);
+        //Obtener los hackathones por el Id
+        const detallesHackathones = await selectHackathonDetailsByIdModel(id);
 
-        if (!hackathon) {
-            return res.status(404).json({ message: 'Hackathon no encontrado' });
-        }
-
-        res.status(200).json(hackathon);
+        res.send({
+            status: 'funciona pero está vacío',
+            data: {
+                detallesHackathones,
+            },
+        });
     } catch (error) {
-        next(error);
+        const customError = generateErrorUtil(
+            500,
+            'Error al obtener los detalles de los hackathones',
+            error
+        );
+        res.status(customError.status).send(customError);
     }
 };
 

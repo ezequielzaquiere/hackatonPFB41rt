@@ -123,6 +123,13 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **PUT** - [`/api/hackathones/:hackathonId`] - Permite modificar los detalles de un hackathon.
 - **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
 - **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
+
+- **POST** - [`/api/hackathones/:hackathonId/join`] - Registra a un usuario en un hackathon.
+- **PUT** - ['/:hackathonId/join/:confirmationCode'] - Confirma que un usuario participará en un hackathon.
+- **GET** - [`/api/hackathones/hackathones/details`] - Devuelve todos los detalles de los hackathones.
+- **GET** - [`/api/hackathones/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
+- **GET** - [`/api/hackathones/hackathones/langs`] - Devuelve todos los lenguajes de programación.
+
 - **DELETE** - [`/api/hackathones/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
 
 ## Endpoints de los registros/participaciones
@@ -130,3 +137,4 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **POST** - [`/api/register/:hackathonId`] - Registra a un usuario en un hackathon.
 - **PUT** - [`/api/register/:hackathonId/:confirmationCode`] - Confirma que un usuario participará en un hackathon.
 - **PUT** - [`/api/register/:hackathonId`] - Elimina la participación de un usuario en un hackathon.
+

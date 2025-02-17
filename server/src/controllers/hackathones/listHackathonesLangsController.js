@@ -5,20 +5,20 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 import listHackathonesLangModel from '../../models/hackathones/listHackathonesLangsModel.js';
 
 // Función controladora que lista las temáticas de los Hackatones
-const listHackathonesLangsController = async (req, res) => {
+const listHackathonesLangsController = async (req, res, next) => {
     try {
         // Obtener los filtros (query params)
         const { hackathon, programmingLangs } = req.query;
 
-        // Obtener los temas de los hackathones
+        // Obtenemos los lenguajes de los hackathones
         const hackathonesLang = await listHackathonesLangModel(
             hackathon,
             programmingLangs
         );
 
         res.send({
-            status: 'ok',
-            data: hackathonesLang, // Corregido: se envían los datos obtenidos del modelo
+            status: 'funciona pero está vacío_',
+            data: { hackathonesLang }, // se envían los datos obtenidos del modelo
         });
     } catch (error) {
         const customError = generateErrorUtil(
