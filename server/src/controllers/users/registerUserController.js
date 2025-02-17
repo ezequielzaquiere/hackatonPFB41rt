@@ -20,7 +20,7 @@ const registerUserController = async (req, res, next) => {
             !password ||
             !role
         ) {
-            generateErrorUtil('Faltan campos', 400);
+            throw generateErrorUtil(400, 'Faltan campos');
         }
 
         // Insertamos el usuario.

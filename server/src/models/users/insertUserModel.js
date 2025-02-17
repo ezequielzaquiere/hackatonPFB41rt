@@ -58,15 +58,15 @@ const insertUserModel = async (
     );
 
     // Asunto del email de verificación.
-    const emailSubject = 'Activa tu usuario en Hackathon';
+    const emailSubject = 'Activa tu usuario en Hackverse';
 
     // Cuerpo del email de verificación.
     const emailBody = `
         ¡Bienvenid@ ${username}!
 
-        Gracias por registrarte en Hackathon. Para activar tu cuenta, haz click en el siguiente enlace:
+        Gracias por registrarte en Hackverse. Para activar tu cuenta, haz click en el siguiente enlace:
 
-        <a href="${process.env.CLIENT_URL}/api/users/validate/${regCode}">¡Activa tu usuario!</a>
+        <a href="http://localhost:8000/api/users/validate/${regCode}">¡Activa tu usuario!</a>
     `;
 
     // Enviamos el email.
