@@ -16,7 +16,7 @@ const updateActiveUserModel = async (regCode) => {
 
     // Si no hay ningún usuario con ese código de registro lanzamos un error.
     if (users.length < 1) {
-        generateErrorUtil('Código de registro inválido', 404);
+        generateErrorUtil(404, 'Código de registro inválido');
     }
 
     // Actualizamos el estado del usuario.
