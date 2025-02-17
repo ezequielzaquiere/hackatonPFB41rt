@@ -90,7 +90,7 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     margin-top: 20px;
                                     padding: 12px 24px;
                                     font-size: 18px;
-                                    color: #fff;
+                                    color: #fffff;
                                     background-color: #8e24aa;
                                     text-decoration: none;
                                     border-radius: 5px;
@@ -166,7 +166,7 @@ const insertRegistrationModel = async (userId, hackathonId) => {
 
     //Enviamos el correo de confirmacion
     //TODO:QUITAR MI EMAIL POR USER.EMAIL
-    await sendEmailUtil('jesboom2@gmail.com', subject, htmlEmail);
+    await sendEmailUtil(user.email, subject, htmlEmail);
 };
 
 export default insertRegistrationModel;

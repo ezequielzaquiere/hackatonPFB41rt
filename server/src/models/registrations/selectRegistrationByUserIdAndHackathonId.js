@@ -13,7 +13,6 @@ const selectRegistrationByUserIdAndHackathonId = async (
         'SELECT id, confirmationCode, status FROM registrations WHERE userId = ? AND hackathonId= ?',
         [userId, hackathonId]
     );
-    console.log(registration);
 
     return registration.length > 0 ? registration[0] : null;
 };
