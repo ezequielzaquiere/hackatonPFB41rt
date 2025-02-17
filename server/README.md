@@ -120,7 +120,7 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 ## Endpoints de los hackathones
 
 - **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
-- **PUT** - [`/:hackathonId`] - Permite modificar los detalles de un hackathon.
+- **PUT** - [`/api/hackathones/:hackathonId`] - Permite modificar los detalles de un hackathon.
 - **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
 - **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
 
