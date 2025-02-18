@@ -8,12 +8,12 @@ import isUserAuthMiddleware from '../middlewares/isUserAuthMiddleware.js';
 import {
     privateUserProfileController,
     registerUserController,
-    changePasswordController,
     loginUserController,
     updateActivateUserController,
     sendRecoveryPassEmailController,
     useRecoveryPassCodeController,
     updateUserProfileController,
+    updateUserPassController,
 } from '../controllers/users/index.js';
 
 //Crear router
@@ -31,8 +31,8 @@ router.post('/login', loginUserController);
 // Información privada del usuario.
 router.get('/:id', isUserAuthMiddleware, privateUserProfileController);
 
-//Cambiar contraseña
-router.post('/changePassword', changePasswordController);
+//Endpoint para cambiar la contraseña dada la actual.
+router.put('/password/change', updateUserPassController);
 
 // Enviar código de recuperación de contraseña al email del usuario.
 router.put('/password/reset', sendRecoveryPassEmailController);
@@ -42,9 +42,6 @@ router.put('/password/reset/:recoverPassCode', useRecoveryPassCodeController);
 
 //Endpoint que muestra los datos del usuario.
 router.put('/profile', updateUserProfileController);
-
-//Endpoint que muestra los datos del usuario.
-router.get('/profile', updateUserProfileController);
 
 //Endpoint que edita los datos del usuario.
 router.put(
