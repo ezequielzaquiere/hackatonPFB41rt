@@ -143,7 +143,15 @@ const main = async () => {
                 INSERT INTO users (username, firstName, lastName, email, password, role, active)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             `,
-            ['admin', 'Pep', 'Garcia', 'admin@example.com', hashedPass, 'admin', 1]
+            [
+                'admin',
+                'Pep',
+                'Garcia',
+                'admin@example.com',
+                hashedPass,
+                'admin',
+                1,
+            ]
         );
 
         console.log('¡Usuario administrador insertado!');
