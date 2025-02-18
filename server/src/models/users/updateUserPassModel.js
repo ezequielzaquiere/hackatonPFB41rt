@@ -1,36 +1,44 @@
-// Importar las dependencias.
+//Importar dependencias.
 import bcrypt from 'bcrypt';
 
-// Importar la función que establece conexión con la base de datos.
+//Importar función que establece conexión con la DB.
 import getPool from '../../db/getPool.js';
 
-// Importar la función que genera errores.
+//Importar función generadora de errores.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-// Función que se conecta a la base de datos y actualiza la contraseña con un código de recuperación.
-const updateUserPassModel = async (password, recoverPassCode) => {
-    // Obtenemos el pool.
+// Funcion que actualiza la contraseña de un usuario autenticado.
+const updateUserPassModel = async (userId, currentPassword, newPassword) => {
     const pool = await getPool();
 
-    // Obtenemos a todos los usuarios con el código de recuperación de contraseña dado.
+    //Obtenemos la contraseña actual del usuario.
     const [users] = await pool.query(
-        `SELECT id FROM users WHERE recoverPassCode = ?`,
-        [recoverPassCode]
+        `SELECT password FROM users WHERE id = ?`,
+        [userId]
     );
 
-    // Si no existe ningún usuario lanzamos un error.
+    //Si no existe, generamos error.
     if (users.length < 1) {
-        generateErrorUtil('Código de recuperación incorrecto', 404);
+        generateErrorUtil(404, 'Usuario no encontrado');
     }
 
-    // Encriptamos la contraseña.
-    const hashedPass = await bcrypt.hash(password, 10);
+    const password = users[0].password;
+
+    //Comparar la contraseña actual con la de la DB.
+    const passwordMatch = await bcrypt.compare(currentPassword, password);
+
+    if (!passwordMatch) {
+        generateErrorUtil(401, 'La contraseña actual es incorrecta');
+    }
+
+    //Hashear la nueva contraseña.
+    const hashedPass = await bcrypt.hash(newPassword, 10);
 
     // Actualizamos la contraseña del usuario.
-    await pool.query(
-        `UPDATE users SET password = ?, recoverPassCode = null WHERE recoverPassCode = ?`,
-        [hashedPass, recoverPassCode]
-    );
+    await pool.query(`UPDATE users SET password = ? WHERE id = ?`, [
+        hashedPass,
+        userId,
+    ]);
 };
 
 export default updateUserPassModel;
