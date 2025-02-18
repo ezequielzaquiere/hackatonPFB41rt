@@ -1,0 +1,650 @@
+{
+	"info": {
+		"_postman_id": "f4d43888-73bd-491f-8de2-b1d0a63c7727",
+		"name": "HackVerse -PFB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40582917",
+		"_collection_link": "https://hackverse-pfb-hackaboss-8491.postman.co/workspace/ba2f5f45-d5e0-488a-8e30-68f7213fae6a/collection/40582917-f4d43888-73bd-491f-8de2-b1d0a63c7727?action=share&source=collection_link&creator=40582917"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ezequielzaquiere\",\r\n    \"firstName\":\"ezequiel\",\r\n    \"lastName\":\"zaquiere\",\r\n    \"email\":\"ezequiel.zaquiere@gmail.com\",\r\n    \"password\":\"123456789\",\r\n    \"role\":\"dev\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUser",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/validate/9ae2385fe3315970fdeea626a708ce",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"validate",
+								"9ae2385fe3315970fdeea626a708ce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ezequiel.zaquiere@gmail.com\",\r\n    \"password\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "privateInfo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMDg4NCwiZXhwIjoxNzQwNTA1Njg0fQ.pgw8DV-WT956ownCmRDWufYYp2o67TpbJC0yxPUYhtk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMDg4NCwiZXhwIjoxNzQwNTA1Njg0fQ.pgw8DV-WT956ownCmRDWufYYp2o67TpbJC0yxPUYhtk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"ezequieloncho\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/profile/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMTc0NSwiZXhwIjoxNzQwNTA2NTQ1fQ.44r5Iia05b-AjXxbPdpNgvNfbA-9GWzwH-HN-4iyiF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"123456789\",\r\n    \"newPassword\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/password/change",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"change"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recoverPass",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMDg4NCwiZXhwIjoxNzQwNTA1Njg0fQ.pgw8DV-WT956ownCmRDWufYYp2o67TpbJC0yxPUYhtk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ezequiel.zaquiere@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/password/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userRecoverPass",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMjg5NywiZXhwIjoxNzQwNTA3Njk3fQ.hSUXFBuckxYJuCWBjqFYOCnAENbSn32IrX3xoBdEqd0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"12345\",\r\n    \"repeatedNewPassword\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/password/reset/c7380b3c38658a254eda424725b3ac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"reset",
+								"c7380b3c38658a254eda424725b3ac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publicUserInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/profile/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hackathones",
+			"item": [
+				{
+					"name": "newHackathon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM5OTA0MjcyLCJleHAiOjE3NDA1MDkwNzJ9.gr2_1JIoLCpKHy99AQiSYQIRVTscByz2qHmMkOfDILY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n  \"title\": \"Nuevo título del Hackathon\",\n  \"summary\": \"Resumen actualizado del evento\",\n  \"startingDate\": \"2025-04-10 09:00:00\",\n  \"deadline\": \"2025-04-12 18:00:00\",\n  \"type\": \"presencial\",\n  \"themeId\": 3,\n  \"location\": \"Madrid\",\n   \"programmingLangId\":[1],\n  \"details\": \"Este hackathon incluirá talleres y premios especiales.\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/- Ezequiel -/Desktop/1686234978550.jpg"
+								},
+								{
+									"key": "document",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editHackathon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM5OTA0Njg0LCJleHAiOjE3NDA1MDk0ODR9.3qqbxWx3qrHaJtFdhGDcYgJsRxLLjbUZoWzi-tmouUs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n  \"title\": \"Nuevo título del Hackathon\",\n  \"summary\": \"Resumen actualizado del evento\",\n  \"formatedStartingDate\": \"2025-04-10 09:00:00\",\n  \"formatedDeadline\": \"2025-04-12 23:00:00\",\n  \"type\": \"presencial\",\n  \"themeId\": 3,\n  \"location\": \"Madrid, España\",\n  \"details\": \"Este hackathon incluirá talleres y premios especiales.\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/- Ezequiel -/Desktop/150.jpg"
+								},
+								{
+									"key": "document",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHackathon",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM5OTA0Njg0LCJleHAiOjE3NDA1MDk0ODR9.3qqbxWx3qrHaJtFdhGDcYgJsRxLLjbUZoWzi-tmouUs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listHackathones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/hackathones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listThemesHackathones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/hackathones/themes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"themes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detailsHackathon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/hackathones/details/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"details",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "languagesHackathones",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registrations",
+			"item": [
+				{
+					"name": "registerHackathon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/register/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateRegisterHackathon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/register/3/deea8a71634090f1ad3b7d800d31f4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register",
+								"3",
+								"deea8a71634090f1ad3b7d800d31f4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelRegistrationHackathon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/register/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Authorization\n",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
