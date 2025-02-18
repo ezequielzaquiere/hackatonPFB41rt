@@ -14,6 +14,7 @@ import {
     useRecoveryPassCodeController,
     updateUserProfileController,
     updateUserPassController,
+    showUserInfoController,
 } from '../controllers/users/index.js';
 
 //Crear router
@@ -49,7 +50,7 @@ router.put(
 );
 
 //Endpoint que muestra los datos del usuario.
-router.get('/profile');
+router.get('/profile/:id', showUserInfoController);
 
 //Endpoint que edita los datos del usuario.
 router.put('/profile/edit', isUserAuthMiddleware, updateUserProfileController);

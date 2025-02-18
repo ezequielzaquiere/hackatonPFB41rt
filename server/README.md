@@ -109,13 +109,14 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 ## Endpoints del usuario
 
 - **POST** - [`/api/users/register`] - Crea un nuevo usuario pendiente de activar.
-- **PUT** - [`/api/users/validate/:regCode`] - Activa un usuario mediante un código de registro.
+- **PATCH** - [`/api/users/validate/:regCode`] - Activa un usuario mediante un código de registro.
 - **POST** - [`/api/users/login`] - Logea a un usuario activo retornando un token.
-- **GET** - [`/api/users/:id`] - Retorna información privada del usuario con el id del token.
+- **GET** - [`/api/users`] - Retorna información privada del usuario con el id del token.
 - **PUT** - [`/api/users/changePassword`] - Permite crear una nueva contraseña a partir de la actual.
 - **PUT** - [`/api/users/password/reset`] - Enviar código de recuperación de contraseña al email del usuario.
 - **PUT** - [`/api/users/password/reset/:recoverPassCode`] - Actualiza la contraseña de un usuario con un código de recuperación.
-- **GET** - [`/api/users/profile`] - Retorna información del usuario.
+- **PUT** - [`/api/users/profile/edit`] - Editar información del usuario.
+- **GET** - [`/api/users/profile/:id`] - Enseña información no sensible del usuario.
 
 ## Endpoints de los hackathones
 
