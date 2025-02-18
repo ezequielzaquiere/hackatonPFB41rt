@@ -17,7 +17,7 @@ const listHackathonesLangsController = async (req, res, next) => {
         );
 
         res.send({
-            status: 'funciona pero está vacío_',
+            status: 'ok',
             data: { hackathonesLang }, // se envían los datos obtenidos del modelo
         });
     } catch (error) {
