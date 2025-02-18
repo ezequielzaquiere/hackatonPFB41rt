@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import getPool from '../../db/getPool.js';
 
 // Importamos la función que envía un email.
-import sendMailUtil from '../../utils/sendMailUtil.js';
+import sendEmailUtil from '../../utils/sendEmailUtil.js';
 
 // Importamos la función que genera un error.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
@@ -63,7 +63,7 @@ const insertUserModel = async (username, email, password) => {
     `;
 
     // Enviamos el email.
-    await sendMailUtil(email, emailSubject, emailBody);
+    await sendEmailUtil(email, emailSubject, emailBody);
 };
 
 export default insertUserModel;
