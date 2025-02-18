@@ -23,31 +23,35 @@ const router = express.Router();
 router.post('/register', registerUserController);
 
 //Activar un usuario
-router.put('/validate/:regCode', updateActivateUserController);
+router.patch('/validate/:regCode', updateActivateUserController);
 
 //Endpoint para login usuario
 router.post('/login', loginUserController);
 
 // Información privada del usuario.
-router.get('/:id', isUserAuthMiddleware, privateUserProfileController);
+router.get('', isUserAuthMiddleware, privateUserProfileController);
 
 //Endpoint para cambiar la contraseña dada la actual.
-router.put('/password/change', updateUserPassController);
+router.put('/password/change', isUserAuthMiddleware, updateUserPassController);
 
 // Enviar código de recuperación de contraseña al email del usuario.
-router.put('/password/reset', sendRecoveryPassEmailController);
+router.put(
+    '/password/reset',
+    isUserAuthMiddleware,
+    sendRecoveryPassEmailController
+);
 
 // Actualiza la contraseña de un usuario con un código de recuperación.
-router.put('/password/reset/:recoverPassCode', useRecoveryPassCodeController);
+router.put(
+    '/password/reset/:recoverPassCode',
+    isUserAuthMiddleware,
+    useRecoveryPassCodeController
+);
 
 //Endpoint que muestra los datos del usuario.
-router.put('/profile', updateUserProfileController);
+router.get('/profile');
 
 //Endpoint que edita los datos del usuario.
-router.put(
-    '/profile/edit/:id',
-    isUserAuthMiddleware,
-    updateUserProfileController
-);
+router.put('/profile/edit', isUserAuthMiddleware, updateUserProfileController);
 
 export default router;

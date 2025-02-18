@@ -15,7 +15,7 @@ export {
     privateUserProfileController,
     updateActivateUserController,
     sendRecoveryPassEmailController,
-    useRecoveryPassCodeController,
     updateUserProfileController,
     updateUserPassController,
+    useRecoveryPassCodeController,
 };

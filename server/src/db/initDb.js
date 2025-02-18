@@ -32,6 +32,7 @@ const main = async () => {
                 email VARCHAR(70) UNIQUE NOT NULL,
                 password VARCHAR(200) NOT NULL,
                 regCode CHAR(30),
+                recoverPassCode CHAR(30),
                 active BOOLEAN,
                 avatar VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
                 role ENUM ("dev", "admin") NOT NULL,
@@ -143,7 +144,15 @@ const main = async () => {
                 INSERT INTO users (username, firstName, lastName, email, password, role, active)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             `,
-            ['admin', 'Pep', 'Garcia', 'admin@example.com', hashedPass, 'admin', 1]
+            [
+                'admin',
+                'Pep',
+                'Garcia',
+                'admin@example.com',
+                hashedPass,
+                'admin',
+                1,
+            ]
         );
 
         console.log('¡Usuario administrador insertado!');
