@@ -1,3 +1,5 @@
+//TODO: QUITAR EL API DEL CORREO
+
 //Importamos dependencias
 import crypto from 'crypto';
 import { format } from 'date-fns';
@@ -116,18 +118,6 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     font-size: 16px;
                                     line-height: 1.5;
                                 }
-                                li::before {
-                                    content: "◉";
-                                    color: #8e24aa;
-                                    font-weight: bold;
-                                    display: inline-block;
-                                    width: 20px;
-                                }
-                                li.date::before {
-                                content: "📅";
-                                font-size: 18px;
-                                width: 20px;
-                            }
                             </style>
                         </head>
                         <body>

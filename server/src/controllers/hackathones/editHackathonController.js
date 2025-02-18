@@ -14,10 +14,6 @@ import validateDatesUtil from '../../utils/validateDatesUtil.js';
 //Funcion que permite actualizar la informacion de un hackathon
 const editHackathonController = async (req, res, next) => {
     try {
-        if (req.user.role !== 'admin') {
-            generateErrorUtil(401, 'No tienes los permisos necesarios');
-        }
-
         const { hackathonId } = req.params;
 
         //Hay que definirlo fuera porque si no da error

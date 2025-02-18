@@ -6,6 +6,7 @@ import {
     isUserAuthMiddleware,
     hackathonRegistrationStatusMiddleware,
     isHackathonAvaliableMiddleware,
+    isDevMiddleware,
 } from '../middlewares/index.js';
 
 //Importar funciones controladoras
@@ -21,24 +22,27 @@ const router = express.Router();
 router.post(
     '/:hackathonId',
     isUserAuthMiddleware,
+    isDevMiddleware,
     isHackathonAvaliableMiddleware,
     hackathonRegistrationStatusMiddleware,
     registerHackathonController
 );
 
 //Endpoint que confirma que un usuario participara en un hackathon
-router.put(
+router.patch(
     '/:hackathonId/:confirmationCode',
     isUserAuthMiddleware,
+    isDevMiddleware,
     isHackathonAvaliableMiddleware,
     hackathonRegistrationStatusMiddleware,
     confirmRegistrationHackathonController
 );
 
 //Endpoint que cancela la inscripcion de usuario (No puede volver a inscribirse)
-router.put(
+router.patch(
     '/:hackathonId',
     isUserAuthMiddleware,
+    isDevMiddleware,
     isHackathonAvaliableMiddleware,
     hackathonRegistrationStatusMiddleware,
     cancelRegistrationController
