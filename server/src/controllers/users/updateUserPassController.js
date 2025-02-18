@@ -8,7 +8,7 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 const updateUserPassController = async (req, res, next) => {
     try {
         //Obtenemos el id del usuario autenticado.
-        const userId = req.user?.userId;
+        const userId = req.user.id;
 
         const { currentPassword, newPassword } = req.body;
 
