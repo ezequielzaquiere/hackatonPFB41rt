@@ -12,7 +12,7 @@ const hackathonDetailController = async (req, res, next) => {
         const detallesHackathones = await selectHackathonDetailsByIdModel(id);
 
         res.send({
-            status: 'funciona pero está vacío',
+            status: 'ok',
             data: {
                 detallesHackathones,
             },
