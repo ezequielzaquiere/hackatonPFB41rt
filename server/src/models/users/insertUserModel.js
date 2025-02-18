@@ -12,7 +12,14 @@ import sendEmailUtil from '../../utils/sendEmailUtil.js';
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Función que se conecta a la base de datos para crear un nuevo usuario.
-const insertUserModel = async (username, email, password) => {
+const insertUserModel = async (
+    username,
+    firstName,
+    lastName,
+    email,
+    password,
+    role
+) => {
     // Obtenemos el pool.
     const pool = await getPool();
 
@@ -24,7 +31,7 @@ const insertUserModel = async (username, email, password) => {
 
     // Lanzamos un error si ya existe un usuario con ese nombre.
     if (users.length > 0) {
-        generateErrorUtil(409, 'Nombre de usuario no disponible');
+        generateErrorUtil('Nombre de usuario no disponible', 409);
     }
 
     // Obtenemos el listado de usuarios que tengan el email que recibimos por body.
@@ -32,10 +39,10 @@ const insertUserModel = async (username, email, password) => {
 
     // Lanzamos un error si ya existe un usuario con ese email.
     if (users.length > 0) {
-        generateErrorUtil(409, 'Email no disponible');
+        generateErrorUtil('Email no disponible', 409);
     }
 
-    // Generamos un código de registro de 30 caracteres.
+    // Generamos un código de registr.
     const regCode = crypto.randomBytes(15).toString('hex');
 
     // Encriptamos la contraseña.
@@ -44,22 +51,22 @@ const insertUserModel = async (username, email, password) => {
     // Insertamos el usuario en la tabla correspondiente.
     await pool.query(
         `
-            INSERT INTO users (username, email, password, regCode)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO users (username, firstName, lastName, email, password, role, regCode)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         `,
-        [username, email, hashedPass, regCode]
+        [username, firstName, lastName, email, hashedPass, role, regCode]
     );
 
     // Asunto del email de verificación.
-    const emailSubject = 'Activa tu usuario en Diario de Viajes :)';
+    const emailSubject = 'Activa tu usuario en Hackverse';
 
     // Cuerpo del email de verificación.
     const emailBody = `
         ¡Bienvenid@ ${username}!
 
-        Gracias por registrarte en "nombre web". Para activar tu cuenta, haz click en el siguiente enlace:
+        Gracias por registrarte en Hackverse. Para activar tu cuenta, haz click en el siguiente enlace:
 
-        <a href="${process.env.CLIENT_URL}/api/users/validate/${regCode}">¡Activa tu usuario!</a>
+        <a href="http://localhost:8000/api/users/validate/${regCode}">¡Activa tu usuario!</a>
     `;
 
     // Enviamos el email.

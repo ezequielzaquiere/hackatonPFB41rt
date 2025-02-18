@@ -43,9 +43,6 @@ router.put('/password/reset/:recoverPassCode', useRecoveryPassCodeController);
 //Endpoint que muestra los datos del usuario.
 router.put('/profile', updateUserProfileController);
 
-//Endpoint que muestra los datos del usuario.
-router.get('/profile', updateUserProfileController);
-
 //Endpoint que edita los datos del usuario.
 router.put(
     '/profile/edit/:id',
