@@ -2,7 +2,8 @@
 import insertUserModel from '../../models/users/insertUserModel.js';
 
 // Importamos la función que genera un error.
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import validateSchemaUtil from '../../utils/validateSchema.js';
+import registerUserSchema from '../../schemas/registerUserSchema.js';
 
 // Función controladora que registra un nuevo usuario.
 const registerUserController = async (req, res, next) => {
@@ -11,19 +12,10 @@ const registerUserController = async (req, res, next) => {
         const { username, firstName, lastName, email, password, role } =
             req.body;
 
-        // Lanzamos un error si falta algún campo.
-        if (
-            !username ||
-            !firstName ||
-            !lastName ||
-            !email ||
-            !password ||
-            !role
-        ) {
-            throw generateErrorUtil(400, 'Faltan campos');
-        }
+        // Validación con joi.
+        await validateSchemaUtil(registerUserSchema, req.body);
 
-        // Insertamos el usuario.
+        // Insertamos al usuario en la bd.
         await insertUserModel(
             username,
             firstName,
