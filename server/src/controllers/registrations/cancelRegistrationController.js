@@ -6,11 +6,6 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //Funcion que permite cancelar la participacion en un hackathon
 const cancelRegistrationController = async (req, res, next) => {
     try {
-        //Comprobamos si el usuario es dev
-        if (req.user.role !== 'dev') {
-            generateErrorUtil(401, 'No tienes los permisos necesarios');
-        }
-
         //Comprobamos el estado del registro
         if (req.registration) {
             if (req.registration === 'pendiente') {

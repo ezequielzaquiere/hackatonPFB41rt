@@ -5,6 +5,7 @@ import express from 'express';
 import {
     isUserAuthMiddleware,
     isHackathonAvaliableMiddleware,
+    isAdminMiddleware,
 } from '../middlewares/index.js';
 
 //Importar funciones controladoras
@@ -22,18 +23,29 @@ import {
 const router = express.Router();
 
 //Endpoint crear nuevo hackathon
-router.post('/new', isUserAuthMiddleware, newHackathonController);
+router.post(
+    '/new',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
+    newHackathonController
+);
 
 //Endpoint que permite modificar la informacion de un hackathon
-router.put(
+router.patch(
     '/:hackathonId',
     isUserAuthMiddleware,
+    isAdminMiddleware,
     isHackathonAvaliableMiddleware,
     editHackathonController
 );
 
 //Endpoint que permite eliminar un hackathon y todo lo relacionado con el
-router.delete('/:hackathonId', isUserAuthMiddleware, deleteHackathonController);
+router.delete(
+    '/:hackathonId',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
+    deleteHackathonController
+);
 
 //Endpoint lista hackatones
 router.get('/hackathones', listHackathonesController);

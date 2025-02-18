@@ -11,10 +11,6 @@ import validateDatesUtil from '../../utils/validateDatesUtil.js';
 //Funcion controlladora que crea un nuevo hackathon (solo admin)
 const newHackathonController = async (req, res, next) => {
     try {
-        if (req.user.role !== 'admin') {
-            generateErrorUtil(401, 'No tienes los permisos necesarios');
-        }
-
         const adminId = req.user.id;
 
         if (!req.body.data) {
