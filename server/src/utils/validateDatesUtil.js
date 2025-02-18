@@ -1,4 +1,3 @@
-//TODO:REVISAR LAS FECHAS PORQUE AL UPDATE HACE ALGO RARO
 //Importamos las dependencias
 import {
     differenceInHours,

@@ -6,11 +6,6 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //Funcion que une un dev con un hackathon
 const registerHackathonController = async (req, res, next) => {
     try {
-        //Comprobamos si el usuario es dev
-        if (req.user.role !== 'dev') {
-            generateErrorUtil(401, 'No tienes los permisos necesarios');
-        }
-
         if (req.registration) {
             if (req.registration === 'confirmada') {
                 generateErrorUtil(409, 'La asistencia ya ha sido confirmada');
