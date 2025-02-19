@@ -68,7 +68,7 @@ const main = async () => {
                 summary VARCHAR(140) NOT NULL,
                 startingDate TIMESTAMP NOT NULL,
                 deadline TIMESTAMP NOT NULL,
-                type ENUM ("online", "presencial") NOT NULL,
+                type ENUM ("online", "presencial"),
                 location VARCHAR(200),
                 themeId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(themeId) REFERENCES themes(id),
@@ -141,8 +141,8 @@ const main = async () => {
         // Insertamos el usuario administrador.
         await pool.query(
             `
-                INSERT INTO users (username, firstName, lastName, email, password, role, active)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO users (username, firstName, lastName, email, password, role, active, createdAt)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             `,
             [
                 'admin',
@@ -152,6 +152,7 @@ const main = async () => {
                 hashedPass,
                 'admin',
                 1,
+                new Date(),
             ]
         );
 

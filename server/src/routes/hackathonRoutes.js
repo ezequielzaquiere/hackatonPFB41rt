@@ -17,6 +17,7 @@ import {
     hackathonDetailController,
     editHackathonController,
     deleteHackathonController,
+    ratingHackathonController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -58,5 +59,12 @@ router.get('/hackathones/details/:id', hackathonDetailController);
 
 // Ruta para obtener la lista de tecnologías de los hackathones
 router.get('/hackathones/langs', listHackathonesLangsController);
+
+//Ruta rating de un hackathon
+router.post(
+    '/:hackathonId/ratings',
+    isUserAuthMiddleware,
+    ratingHackathonController
+);
 
 export default router;

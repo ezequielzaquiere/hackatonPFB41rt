@@ -6,9 +6,7 @@ import bcrypt from 'bcrypt';
 import getPool from '../../db/getPool.js';
 
 // Importamos la función que envía un email.
-
 import sendEmailUtil from '../../utils/sendEmailUtil.js';
-
 
 // Importamos la función que genera un error.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
