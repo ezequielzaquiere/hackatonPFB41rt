@@ -1,5 +1,5 @@
 // Importamos los modelos necesarios.
-import insertRatingModel from '../../models/hackathones/insertRatingModel.js';
+import insertRatingModel from '../../models/ratings/insertRatingModel.js';
 import selectHackathonDetailsByIdModel from '../../models/hackathones/selectHackathonDetailsByIdModel.js';
 import checkUserParticipationModel from '../../models/users/checkUserParticipationModel.js';
 

@@ -103,7 +103,7 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 | user         | VARCHAR(36) | Identificador del usuario         |
 | hackathon    | VARCHAR(36) | Identificador del hackathon       |
 | uniqueRating | CONSTRAINT  | Rating único (usuario, hackathon) |
-| rating       | TINYINT     | Rating/posición entre 1 y 3       |
+| rating       | TINYINT     | Rating entre 1 y 5                |
 | createdAt    | DATETIME    | Fecha y hora de la creación       |
 
 ## Endpoints del usuario
@@ -120,15 +120,15 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 ## Endpoints de los hackathones
 
-- **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
-- **PATCH** - [`/api/hackathones/:hackathonId`] - Permite modificar los detalles de un hackathon.
-- **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
-- **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
-- **GET** - [`/api/hackathones/hackathones/details`] - Devuelve todos los detalles de los hackathones.
-- **GET** - [`/api/hackathones/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
-- **GET** - [`/api/hackathones/hackathones/langs`] - Devuelve todos los lenguajes de programación.
-
-- **DELETE** - [`/api/hackathones/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
+- **POST** - [`/api/hackathon/new`] - Crea un nuevo hackathon.
+- **PATCH** - [`/api/hackathon/:hackathonId`] - Permite modificar los detalles de un hackathon.
+- **GET** - [`/api/hackathon/hackathones`] - Retorna el listado de entradas.
+- **GET** - [`/api/hackathon/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
+- **GET** - [`/api/hackathon/hackathones/details`] - Devuelve todos los detalles de los hackathones.
+- **GET** - [`/api/hackathon/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
+- **GET** - [`/api/hackathon/hackathones/langs`] - Devuelve todos los lenguajes de programación.
+- **POST** - [`/api/hackathon/:hackathonId/ratings`] - Permite valorar un hackathon (1-5) despues de la fecha de realizacion.
+- **DELETE** - [`/api/hackathon/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
 
 ## Endpoints de los registros/participaciones
 
