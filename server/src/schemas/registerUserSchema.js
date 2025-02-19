@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import joiErrorMessages from './joiMessageErrors';
+import joiErrorMessages from './joiMessageErrors.js';
 
 // Expresión regular para solo letras (mayúsculas y minúsculas, con espacios opcionales)
 const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/;
