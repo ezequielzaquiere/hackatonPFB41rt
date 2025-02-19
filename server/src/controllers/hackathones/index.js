@@ -7,6 +7,7 @@ import hackathonDetailController from './hackathonDetailController.js';
 import editHackathonController from './editHackathonController.js';
 import deleteHackathonController from './deleteHackathonController.js';
 import ratingHackathonController from './ratingHackathonController.js';
+import filterHackathonesController from './filterHackathonesController.js';
 //Exportar funciones en un solo objeto
 export {
     newHackathonController,
@@ -17,4 +18,5 @@ export {
     editHackathonController,
     deleteHackathonController,
     ratingHackathonController,
+    filterHackathonesController,
 };
