@@ -8,14 +8,39 @@ import getPool from '../../db/getPool.js';
 const selectHackathonDetailsByIdModel = async (hackathonId) => {
     const pool = await getPool();
 
-    const [hackathon] = await pool.query(
-        'SELECT title, summary, startingDate, deadline, type, location, themeId, details, attachedFile, image FROM hackathonList WHERE id = ?',
+    const [hackathonList] = await pool.query(
+        `SELECT 
+            h.id, 
+            h.userId, 
+            u.username, 
+            h.title, 
+            h.summary, 
+            h.startingDate, 
+            h.deadline, 
+            h.type, 
+            h.location, 
+            h.themeId,
+            h.details,
+            h.attachedFile, 
+            AVG(r.rating) AS avgRating, 
+            h.image 
+        FROM hackathonList h
+        INNER JOIN users u ON u.id = h.userId
+        LEFT JOIN ratings r ON r.hackathonId = h.id 
+        WHERE h.id = ?
+        GROUP BY h.id
+        `,
         [hackathonId]
     );
-    if (!hackathon.length) {
+
+    if (!hackathonList.length) {
         generateErrorUtil(404, 'Hackathon no encontrado');
     }
-    return hackathon[0];
+
+    //Convertimos a tipo Number la media de ratings
+    hackathonList[0].avgRating = Number(hackathonList[0].avgRating);
+
+    return hackathonList[0];
 };
 
 export default selectHackathonDetailsByIdModel;

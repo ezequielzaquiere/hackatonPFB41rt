@@ -10,7 +10,7 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 2. Guardar el archivo `.env.example` como `.env` y cubrir los datos necesarios.
 
-3. Ejecutar `npm run initDb` para crear las tablas necesarias en la base de datos.
+3. Ejecutar `npm run initdb` para crear las tablas necesarias en la base de datos.
 
 4. Ejecutar `npm run populate-tables` para añadir los datos necesarios a las tablas en la base de datos.
 
