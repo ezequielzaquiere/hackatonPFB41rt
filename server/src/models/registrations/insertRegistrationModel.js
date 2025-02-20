@@ -1,4 +1,4 @@
-//TODO: QUITAR EL API DEL CORREO
+//TODO: Intentar poner efecto hover al boton?
 
 //Importamos dependencias
 import crypto from 'crypto';
@@ -62,6 +62,12 @@ const insertRegistrationModel = async (userId, hackathonId) => {
         "EEEE, d 'de' MMMM 'de' yyyy 'a las' hh:mm a",
         { locale: es }
     );
+
+    //En caso de que no haya localizacio la cambiamos
+    let hackathonLocation = hackathon.location;
+    if (hackathonLocation === null) {
+        hackathonLocation = 'En todas partes';
+    }
 
     //Plantilla del email de confirmacion
     const htmlEmail = `<!DOCTYPE html>
@@ -141,10 +147,10 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                         ◉ <strong>Tipo:</strong> ${hackathon.type}
                                     </li>
                                     <li>
-                                        📍 <strong>Localización:</strong> ${hackathon.location}
+                                        📍 <strong>Localización:</strong> ${hackathonLocation}
                                     </li>
                                 </ul>
-                                <a href="${process.env.CLIENT_URL}/api/register/${hackathonId}/${confirmationCode}" 
+                                <a href="${process.env.CLIENT_URL}/register/${hackathonId}/${confirmationCode}" 
                                     style="display: inline-block; margin-top: 20px; padding: 12px 24px; font-size: 18px; color: #ffffff !important; background-color: #8e24aa; text-decoration: none; border-radius: 5px; transition: background 0.3s ease-in-out;">
                                         ¡Confirma tu asistencia!
                                 </a>

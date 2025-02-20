@@ -13,16 +13,8 @@ const newHackathonController = async (req, res, next) => {
     try {
         const adminId = req.user.id;
 
-        if (!req.body.data) {
+        if (!req.body) {
             generateErrorUtil(400, 'Faltan los datos del Hackathon');
-        }
-
-        //Dado que enviamos un json y otros archivos, necesitamos parsear el objeto data(dodne mandamos el json)
-        let hackathonData;
-        try {
-            hackathonData = JSON.parse(req.body.data);
-        } catch {
-            generateErrorUtil(400, 'Hay un error en el JSON');
         }
 
         const {
@@ -35,7 +27,7 @@ const newHackathonController = async (req, res, next) => {
             themeId,
             programmingLangId,
             details,
-        } = hackathonData;
+        } = req.body;
 
         const image = req.files?.image;
         const attachedFile = req.files?.document;
@@ -54,7 +46,10 @@ const newHackathonController = async (req, res, next) => {
             generateErrorUtil(400, 'Faltan datos');
         }
 
-        if (programmingLangId.length === 0) {
+        //Convertimos el array de lenguajes a numero (recibimos los numeros en string)
+        let programmingLangIdArray = programmingLangId.map(Number);
+
+        if (programmingLangIdArray.length === 0) {
             generateErrorUtil(
                 400,
                 'Faltan los lenguajes de programacion (array)'
