@@ -14,6 +14,8 @@ import {
     registerHackathonController,
     confirmRegistrationHackathonController,
     cancelRegistrationController,
+    listHackathonParticipantsController,
+    listUserRegistrationsController,
 } from '../controllers/registrations/index.js';
 //Crear router
 const router = express.Router();
@@ -26,6 +28,15 @@ router.post(
     isHackathonAvaliableMiddleware,
     hackathonRegistrationStatusMiddleware,
     registerHackathonController
+);
+
+//Endpoint para enseñar hackathones en los que un usuario está registrado
+router.get('/:userId/participations', listUserRegistrationsController);
+
+//Endpoint para enseñar lista de usuarios registrados en un hackathon
+router.get(
+    '/:hackathonId/participants',
+    listHackathonParticipantsController,
 );
 
 //Endpoint que confirma que un usuario participara en un hackathon
