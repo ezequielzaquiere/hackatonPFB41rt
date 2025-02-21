@@ -29,7 +29,6 @@ const registerUserSchema = joi
             .string()
             .min(8)
             .max(100)
-            .regex(nameRegex)
             .regex(
                 /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~={}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~={}:";'<>¿?,.]{8,}$/
             )

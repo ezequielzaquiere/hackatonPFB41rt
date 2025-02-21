@@ -18,6 +18,7 @@ import {
     editHackathonController,
     deleteHackathonController,
     ratingHackathonController,
+    filterHackathonesController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -66,5 +67,8 @@ router.post(
     isUserAuthMiddleware,
     ratingHackathonController
 );
+
+//Endpoint que filtra hackathones.
+router.get('/hackathones/filter', filterHackathonesController);
 
 export default router;
