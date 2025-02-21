@@ -2,7 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
-
+import validateSchemaUtil from '../../utils/validateSchema.js';
+import loginUserSchema from '../../schemas/user/loginUserSchema.js';
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //Funcion controladora
@@ -10,9 +11,9 @@ const loginUserController = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            generateErrorUtil(400, 'Faltan campos');
-        }
+        // Validación con joi.
+        await validateSchemaUtil(loginUserSchema, req.body);
+
         const user = await selectUserByEmailModel(email);
 
         //Creamos una variable que nos indicara si la contrasena es valida
