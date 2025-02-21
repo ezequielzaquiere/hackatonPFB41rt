@@ -14,16 +14,11 @@ const useRecoveryPassCodeController = async (req, res, next) => {
         const userId = req.user.id;
 
         // Obtenemos los datos necesarios.
-        const { newPassword, repeatedNewPassword } = req.body;
+        const { newPassword } = req.body;
 
         // Lanzamos un error si falta algún campo.
-        if (!newPassword || !repeatedNewPassword) {
-            generateErrorUtil(400, 'Faltan campos');
-        }
-
-        // Si las contraseñas no coinciden lanzamos un error.
-        if (newPassword !== repeatedNewPassword) {
-            generateErrorUtil(400, 'Las contraseñas no coinciden');
+        if (!newPassword) {
+            generateErrorUtil(400, 'Falta la nueva contraseña');
         }
 
         // Actualizar la contraseña del usuario.
