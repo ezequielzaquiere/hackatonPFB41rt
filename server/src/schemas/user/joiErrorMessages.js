@@ -22,6 +22,7 @@ const joiErrorMessages = {
     'object.min': 'Debe proporcionar al menos un campo para actualizar.',
 
     // Errores de fechas.
+    'date.base': 'El valor debe ser una fecha válida.',
 };
 
 export default joiErrorMessages;

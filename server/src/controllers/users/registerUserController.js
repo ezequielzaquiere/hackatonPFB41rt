@@ -3,7 +3,7 @@ import insertUserModel from '../../models/users/insertUserModel.js';
 
 // Importamos la función que genera un error.
 import validateSchemaUtil from '../../utils/validateSchema.js';
-import registerUserSchema from '../../schemas/registerUserSchema.js';
+import registerUserSchema from '../../schemas/user/registerUserSchema.js';
 
 // Función controladora que registra un nuevo usuario.
 const registerUserController = async (req, res, next) => {

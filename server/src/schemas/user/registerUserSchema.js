@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import joiErrorMessages from './joiMessageErrors';
+import joiErrorMessages from './joiErrorMessages.js';
 
 // Expresión regular para solo letras (mayúsculas y minúsculas, con espacios opcionales)
 const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/;
@@ -29,7 +29,6 @@ const registerUserSchema = joi
             .string()
             .min(8)
             .max(100)
-            .regex(nameRegex)
             .regex(
                 /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~={}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~={}:";'<>¿?,.]{8,}$/
             )

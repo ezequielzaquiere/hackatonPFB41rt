@@ -7,6 +7,8 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 import saveImgUtil from '../../utils/saveImgUtil.js';
 import saveDocUtil from '../../utils/saveDocUtil.js';
 import validateDatesUtil from '../../utils/validateDatesUtil.js';
+import validateSchemaUtil from '../../utils/validateSchema.js';
+import newHackathonSchema from '../../schemas/entries/newHackathonSchema.js';
 
 //Funcion controlladora que crea un nuevo hackathon (solo admin)
 const newHackathonController = async (req, res, next) => {
@@ -44,20 +46,9 @@ const newHackathonController = async (req, res, next) => {
         const image = req.files?.image;
         const attachedFile = req.files?.document;
 
-        //Comprobamos si estan los datos imprescindibles
-        if (
-            !adminId ||
-            !title ||
-            !summary ||
-            !startingDate ||
-            !deadline ||
-            !type ||
-            !themeId ||
-            !programmingLangId
-        ) {
-            generateErrorUtil(400, 'Faltan datos');
-        }
-
+        //Validamos con joi
+        await validateSchemaUtil(newHackathonSchema, req.body);
+        console.log(req.body);
         if (programmingLangId.length === 0) {
             generateErrorUtil(
                 400,
