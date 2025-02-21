@@ -34,31 +34,17 @@ const newHackathonController = async (req, res, next) => {
         const image = req.files?.image;
         const attachedFile = req.files?.document;
 
-<<<<<<< HEAD
         //Validamos con joi
         await validateSchemaUtil(newHackathonSchema, req.body);
-        console.log(req.body);
+
         if (programmingLangId.length === 0) {
-=======
-        //Comprobamos si estan los datos imprescindibles
-        if (
-            !adminId ||
-            !title ||
-            !summary ||
-            !startingDate ||
-            !deadline ||
-            !type ||
-            !themeId ||
-            !programmingLangId
-        ) {
-            generateErrorUtil(400, 'Faltan datos');
+            generateErrorUtil(400, 'Falta el ID del lenguaje de programación');
         }
 
         //Convertimos el array de lenguajes a numero (recibimos los numeros en string)
         let programmingLangIdArray = programmingLangId.map(Number);
 
         if (programmingLangIdArray.length === 0) {
->>>>>>> 5f2acb7be67df81840441523e4b262e14bbbe76c
             generateErrorUtil(
                 400,
                 'Faltan los lenguajes de programacion (array)'
