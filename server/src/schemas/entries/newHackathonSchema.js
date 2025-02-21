@@ -8,7 +8,7 @@ import joiErrorMessages from '../user/joiErrorMessages.js';
 const newHackathonSchema = joi
     .object({
         title: joi.string().min(5).max(200).required(),
-        sumary: joi.string().min(3).max(30).required(),
+        summary: joi.string().min(3).max(30).required(),
         startingDate: joi.date().required(),
         deadline: joi.date().required(),
         type: joi.string().valid('online', 'presencial').required().messages({
@@ -16,6 +16,8 @@ const newHackathonSchema = joi
         }),
         location: joi.string().min(2).max(200),
         details: joi.string().max(1000),
+        themeId: joi.number().required(),
+        programmingLangId: joi.array().items(joi.number()).required(),
     })
     .messages(joiErrorMessages);
 export default newHackathonSchema;
