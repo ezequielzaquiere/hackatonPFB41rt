@@ -5,6 +5,7 @@ import express from 'express';
 import {
     isUserAuthMiddleware,
     isHackathonAvaliableMiddleware,
+    isAdminMiddleware,
 } from '../middlewares/index.js';
 
 //Importar funciones controladoras
@@ -16,24 +17,37 @@ import {
     hackathonDetailController,
     editHackathonController,
     deleteHackathonController,
+    ratingHackathonController,
+    filterHackathonesController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
 const router = express.Router();
 
 //Endpoint crear nuevo hackathon
-router.post('/new', isUserAuthMiddleware, newHackathonController);
+router.post(
+    '/new',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
+    newHackathonController
+);
 
 //Endpoint que permite modificar la informacion de un hackathon
-router.put(
+router.patch(
     '/:hackathonId',
     isUserAuthMiddleware,
+    isAdminMiddleware,
     isHackathonAvaliableMiddleware,
     editHackathonController
 );
 
 //Endpoint que permite eliminar un hackathon y todo lo relacionado con el
-router.delete('/:hackathonId', isUserAuthMiddleware, deleteHackathonController);
+router.delete(
+    '/:hackathonId',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
+    deleteHackathonController
+);
 
 //Endpoint lista hackatones
 router.get('/hackathones', listHackathonesController);
@@ -42,9 +56,19 @@ router.get('/hackathones', listHackathonesController);
 router.get('/hackathones/themes', listHackathonesThemesController);
 
 // Ruta para obtener los detalles de un hackathon específico por ID
-router.get('/hackathones/details', hackathonDetailController);
+router.get('/hackathones/details/:id', hackathonDetailController);
 
 // Ruta para obtener la lista de tecnologías de los hackathones
 router.get('/hackathones/langs', listHackathonesLangsController);
+
+//Ruta rating de un hackathon
+router.post(
+    '/:hackathonId/ratings',
+    isUserAuthMiddleware,
+    ratingHackathonController
+);
+
+//Endpoint que filtra hackathones.
+router.get('/hackathones/filter', filterHackathonesController);
 
 export default router;

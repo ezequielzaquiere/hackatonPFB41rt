@@ -2,20 +2,16 @@
 import getPool from '../../db/getPool.js';
 
 // Función que se conecta a la base de datos y retorna los lenguajes de los hackathones.
-const listHackathonesLangsModel = async (
-    hackathon = '',
-    programmingLang = ''
-) => {
+const listHackathonesLangsModel = async (programmingLang = '') => {
     // Obtenemos el pool de conexión a la base de datos.
     const pool = await getPool();
 
     // Listado de lenguajes de programación con filtros opcionales.
     const [hackathonesLangs] = await pool.query(
         `
-        SELECT * FROM programmingLangs
-        WHERE (? = '' OR programmingLang LIKE ?)
+        SELECT programmingLang FROM programmingLangs
         `,
-        [hackathon, `%${hackathon}%`, programmingLang, `%${programmingLang}%`]
+        [programmingLang, `%${programmingLang}%`]
     );
 
     return hackathonesLangs;

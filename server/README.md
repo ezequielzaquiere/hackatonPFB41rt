@@ -10,7 +10,7 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 2. Guardar el archivo `.env.example` como `.env` y cubrir los datos necesarios.
 
-3. Ejecutar `npm run initDb` para crear las tablas necesarias en la base de datos.
+3. Ejecutar `npm run initdb` para crear las tablas necesarias en la base de datos.
 
 4. Ejecutar `npm run populate-tables` para añadir los datos necesarios a las tablas en la base de datos.
 
@@ -103,38 +103,35 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 | user         | VARCHAR(36) | Identificador del usuario         |
 | hackathon    | VARCHAR(36) | Identificador del hackathon       |
 | uniqueRating | CONSTRAINT  | Rating único (usuario, hackathon) |
-| rating       | TINYINT     | Rating/posición entre 1 y 3       |
+| rating       | TINYINT     | Rating entre 1 y 5                |
 | createdAt    | DATETIME    | Fecha y hora de la creación       |
 
 ## Endpoints del usuario
 
 - **POST** - [`/api/users/register`] - Crea un nuevo usuario pendiente de activar.
-- **PUT** - [`/api/users/validate/:regCode`] - Activa un usuario mediante un código de registro.
+- **PATCH** - [`/api/users/validate/:regCode`] - Activa un usuario mediante un código de registro.
 - **POST** - [`/api/users/login`] - Logea a un usuario activo retornando un token.
-- **GET** - [`/api/users/:id`] - Retorna información privada del usuario con el id del token.
+- **GET** - [`/api/users`] - Retorna información privada del usuario con el id del token.
 - **PUT** - [`/api/users/changePassword`] - Permite crear una nueva contraseña a partir de la actual.
 - **PUT** - [`/api/users/password/reset`] - Enviar código de recuperación de contraseña al email del usuario.
 - **PUT** - [`/api/users/password/reset/:recoverPassCode`] - Actualiza la contraseña de un usuario con un código de recuperación.
-- **GET** - [`/api/users/profile`] - Retorna información del usuario.
+- **PUT** - [`/api/users/profile/edit`] - Editar información del usuario.
+- **GET** - [`/api/users/profile/:id`] - Enseña información no sensible del usuario.
 
 ## Endpoints de los hackathones
 
-- **POST** - [`/api/hackathones/new`] - Crea un nuevo hackathon.
-- **PUT** - [`/api/hackathones/:hackathonId`] - Permite modificar los detalles de un hackathon.
-- **GET** - [`/api/hackathones/hackathones`] - Retorna el listado de entradas.
-- **GET** - [`/api/hackathones/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
-
-- **POST** - [`/api/hackathones/:hackathonId/join`] - Registra a un usuario en un hackathon.
-- **PUT** - ['/:hackathonId/join/:confirmationCode'] - Confirma que un usuario participará en un hackathon.
-- **GET** - [`/api/hackathones/hackathones/details`] - Devuelve todos los detalles de los hackathones.
-- **GET** - [`/api/hackathones/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
-- **GET** - [`/api/hackathones/hackathones/langs`] - Devuelve todos los lenguajes de programación.
-
-- **DELETE** - [`/api/hackathones/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
+- **POST** - [`/api/hackathon/new`] - Crea un nuevo hackathon.
+- **PATCH** - [`/api/hackathon/:hackathonId`] - Permite modificar los detalles de un hackathon.
+- **GET** - [`/api/hackathon/hackathones`] - Retorna el listado de entradas.
+- **GET** - [`/api/hackathon/hackathones/themes`] - Retorna el listado de temáticas de hackathones.
+- **GET** - [`/api/hackathon/hackathones/details`] - Devuelve todos los detalles de los hackathones.
+- **GET** - [`/api/hackathon/hackathones/details?hackathon= &programmingLang= `] - Devuelve todos los detalles de los hackathones filtrados por cierto lenguaje o filtrados por nombre, o ambas.
+- **GET** - [`/api/hackathon/hackathones/langs`] - Devuelve todos los lenguajes de programación.
+- **POST** - [`/api/hackathon/:hackathonId/ratings`] - Permite valorar un hackathon (1-5) despues de la fecha de realizacion.
+- **DELETE** - [`/api/hackathon/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
 
 ## Endpoints de los registros/participaciones
 
 - **POST** - [`/api/register/:hackathonId`] - Registra a un usuario en un hackathon.
-- **PUT** - [`/api/register/:hackathonId/:confirmationCode`] - Confirma que un usuario participará en un hackathon.
-- **PUT** - [`/api/register/:hackathonId`] - Elimina la participación de un usuario en un hackathon.
-
+- **PATCH** - [`/api/register/:hackathonId/:confirmationCode`] - Confirma que un usuario participará en un hackathon.
+- **PATCH** - [`/api/register/:hackathonId`] - Elimina la participación de un usuario en un hackathon.

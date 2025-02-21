@@ -1,7 +1,11 @@
 //TODO:QUEDA POR PROBAR CON MAS DETALLES PERO UN HACKATHON LO BORRA
+//TODO:QUEDA AÑADR REMOVEIMG Y REMOVEDOC
 
 //Import utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import removeDocUtil from '../../utils/removeDocUtil.js';
+import removeImgUtil from '../../utils/removeImgUtil.js';
+
 //Import models
 import selectHackathonDetailsByIdModel from '../../models/hackathones/selectHackathonDetailsByIdModel.js';
 import deleteRegistrationsByHackathonId from '../../models/registrations/deleteRegistrationsByHackathonId.js';
@@ -16,11 +20,6 @@ import deleteHackathonById from '../../models/hackathones/deleteHackathonById.js
 //Funcion que permite eliminar un hackathon y todo lo relacionado con el
 const deleteHackathonController = async (req, res, next) => {
     try {
-        //Comprobamos si el usuario es admin
-        if (req.user.role !== 'admin') {
-            generateErrorUtil(401, 'No tienes los permisos necesarios');
-        }
-
         //Obtenemos el id del hackathon
         const { hackathonId } = req.params;
 
@@ -61,6 +60,15 @@ const deleteHackathonController = async (req, res, next) => {
             await deleteRatingsByHackathonId(hackathonId);
         }
 
+        //Comprobamos si hay una imagen en el hackathon y si la hay la eliminamos
+        if (hackathon.image) {
+            await removeImgUtil(hackathon.image, 'imgHack');
+        }
+
+        //Comprobamos is hay un documento y si lo hay lo borramos
+        if (hackathon.attachedFile) {
+            await removeDocUtil(hackathon.attachedFile);
+        }
         //Eliminamos la relacion entre el hackathon y el lenguaje de programacion
         await deleteRelationHackathonLang(hackathonId);
 

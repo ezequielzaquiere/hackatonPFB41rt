@@ -1,3 +1,5 @@
+//TODO: Intentar poner efecto hover al boton?
+
 //Importamos dependencias
 import crypto from 'crypto';
 import { format } from 'date-fns';
@@ -61,6 +63,12 @@ const insertRegistrationModel = async (userId, hackathonId) => {
         { locale: es }
     );
 
+    //En caso de que no haya localizacio la cambiamos
+    let hackathonLocation = hackathon.location;
+    if (hackathonLocation === null) {
+        hackathonLocation = 'En todas partes';
+    }
+
     //Plantilla del email de confirmacion
     const htmlEmail = `<!DOCTYPE html>
                         <html lang="es">
@@ -116,18 +124,6 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     font-size: 16px;
                                     line-height: 1.5;
                                 }
-                                li::before {
-                                    content: "◉";
-                                    color: #8e24aa;
-                                    font-weight: bold;
-                                    display: inline-block;
-                                    width: 20px;
-                                }
-                                li.date::before {
-                                content: "📅";
-                                font-size: 18px;
-                                width: 20px;
-                            }
                             </style>
                         </head>
                         <body>
@@ -151,10 +147,10 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                         ◉ <strong>Tipo:</strong> ${hackathon.type}
                                     </li>
                                     <li>
-                                        📍 <strong>Localización:</strong> ${hackathon.location}
+                                        📍 <strong>Localización:</strong> ${hackathonLocation}
                                     </li>
                                 </ul>
-                                <a href="${process.env.CLIENT_URL}/api/register/${hackathonId}/${confirmationCode}" 
+                                <a href="${process.env.CLIENT_URL}/register/${hackathonId}/${confirmationCode}" 
                                     style="display: inline-block; margin-top: 20px; padding: 12px 24px; font-size: 18px; color: #ffffff !important; background-color: #8e24aa; text-decoration: none; border-radius: 5px; transition: background 0.3s ease-in-out;">
                                         ¡Confirma tu asistencia!
                                 </a>

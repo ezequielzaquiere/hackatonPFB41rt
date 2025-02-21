@@ -32,6 +32,7 @@ const main = async () => {
                 email VARCHAR(70) UNIQUE NOT NULL,
                 password VARCHAR(200) NOT NULL,
                 regCode CHAR(30),
+                recoverPassCode CHAR(30),
                 active BOOLEAN,
                 avatar VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
                 role ENUM ("dev", "admin") NOT NULL,
@@ -67,7 +68,7 @@ const main = async () => {
                 summary VARCHAR(140) NOT NULL,
                 startingDate TIMESTAMP NOT NULL,
                 deadline TIMESTAMP NOT NULL,
-                type ENUM ("online", "presencial") NOT NULL,
+                type ENUM ("online", "presencial"),
                 location VARCHAR(200),
                 themeId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(themeId) REFERENCES themes(id),
@@ -140,10 +141,19 @@ const main = async () => {
         // Insertamos el usuario administrador.
         await pool.query(
             `
-                INSERT INTO users (username, firstName, lastName, email, password, role, active)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO users (username, firstName, lastName, email, password, role, active, createdAt)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             `,
-            ['admin', 'Pep', 'Garcia', 'admin@example.com', hashedPass, 'admin', 1]
+            [
+                'admin',
+                'Pep',
+                'Garcia',
+                'admin@example.com',
+                hashedPass,
+                'admin',
+                1,
+                new Date(),
+            ]
         );
 
         console.log('¡Usuario administrador insertado!');

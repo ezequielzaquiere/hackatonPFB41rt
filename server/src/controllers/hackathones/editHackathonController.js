@@ -14,22 +14,7 @@ import validateDatesUtil from '../../utils/validateDatesUtil.js';
 //Funcion que permite actualizar la informacion de un hackathon
 const editHackathonController = async (req, res, next) => {
     try {
-        if (req.user.role !== 'admin') {
-            generateErrorUtil(401, 'No tienes los permisos necesarios');
-        }
-
         const { hackathonId } = req.params;
-
-        //Hay que definirlo fuera porque si no da error
-        let hackathonData = {};
-
-        if (req.body.data) {
-            try {
-                hackathonData = JSON.parse(req.body.data);
-            } catch {
-                generateErrorUtil(400, 'Hay un error en el JSON');
-            }
-        }
 
         //Obtenemos los balores del body
         const {
@@ -42,7 +27,7 @@ const editHackathonController = async (req, res, next) => {
             themeId,
             programmingLangId,
             details,
-        } = hackathonData;
+        } = req.body;
 
         const image = req.files?.image;
         const attachedFile = req.files?.document;
@@ -77,7 +62,7 @@ const editHackathonController = async (req, res, next) => {
         if (startingDate && deadline) {
             ({ formatedStartingDate, formatedDeadline } = validateDatesUtil(
                 startingDate,
-                formatedDeadline
+                deadline
             ));
         } else if (deadline) {
             ({ formatedStartingDate, formatedDeadline } = validateDatesUtil(
@@ -113,8 +98,11 @@ const editHackathonController = async (req, res, next) => {
             hackathonId,
         });
 
+        //Convertimos el array de lenguajes a numero (recibimos los numeros en string)
         if (programmingLangId && programmingLangId.length > 0) {
-            await editHackathonLangsModel(hackathonId, programmingLangId);
+            let programmingLangIdArray = programmingLangId.map(Number);
+
+            await editHackathonLangsModel(hackathonId, programmingLangIdArray);
         }
 
         res.status(200).send({
