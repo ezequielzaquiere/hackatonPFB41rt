@@ -8,6 +8,7 @@ import useRecoveryPassCodeController from './useRecoveryPassCodeController.js';
 import updateUserProfileController from './updateUserProfileController.js';
 import updateUserPassController from './updateUserPassController.js';
 import showUserInfoController from './showUserInfoController.js';
+import listUserRegistrationsController from './listUserRegistrationsController.js';
 //Exportar las funciones en un solo objeto
 export {
     registerUserController,
@@ -19,4 +20,5 @@ export {
     updateUserPassController,
     useRecoveryPassCodeController,
     showUserInfoController,
+    listUserRegistrationsController,
 };

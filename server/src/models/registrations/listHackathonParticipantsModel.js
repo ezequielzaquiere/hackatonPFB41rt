@@ -1,22 +1,23 @@
 
 import getPool from '../../db/getPool.js';
 
-const listHackathonParticipants = async (hackathon = '') => {
+const listHackathonParticipants = async (hackathonId) => {
 
     const pool = await getPool();
 
-    const [listHackathonParticipants] = await pool.query(
+    const [hackathonParticipants] = await pool.query(
         `
-        SELECT userId
+        SELECT u.username, u.avatar, p.position, reg.status
         FROM registrations reg
+        INNER JOIN users u ON u.id = reg.userId
+        INNER JOIN podium p ON p.registrationId = reg.id
         WHERE reg.hackathonId = ? AND reg.status = 'confirmada'
-        GROUP BY reg.id
-        
+        ORDER BY u.username;
         `,
-        [hackathon]
+        [hackathonId]
     );
 
-    return listHackathonParticipants;
+    return hackathonParticipants;
 
 };
 

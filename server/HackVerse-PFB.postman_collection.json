@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f4d43888-73bd-491f-8de2-b1d0a63c7727",
+		"_postman_id": "b6922868-c50d-48db-8a75-7317ef4dcee5",
 		"name": "HackVerse -PFB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "40582917",
-		"_collection_link": "https://hackverse-pfb-hackaboss-8491.postman.co/workspace/ba2f5f45-d5e0-488a-8e30-68f7213fae6a/collection/40582917-f4d43888-73bd-491f-8de2-b1d0a63c7727?action=share&source=collection_link&creator=40582917"
+		"_exporter_id": "42441867"
 	},
 	"item": [
 		{
@@ -327,6 +326,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "listUserRegistrations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/profile/2/participations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"2",
+								"participations"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -503,7 +525,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/hackathon/hackathones/details/3",
+							"raw": "http://localhost:8000/api/hackathon/hackathones/details/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -514,7 +536,7 @@
 								"hackathon",
 								"hackathones",
 								"details",
-								"3"
+								"5"
 							]
 						}
 					},
@@ -524,7 +546,97 @@
 					"name": "languagesHackathones",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/hackathones/langs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"langs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listHackathonParticipants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/3/participants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"3",
+								"participants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "privateHackathonParticipants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/3/participants/private",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"3",
+								"participants",
+								"private"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publishHackathonParticipants",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first\": 12,\r\n    \"second\": 7,\r\n    \"third\": 5\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/hackathon/3/publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathon",
+								"3",
+								"publish"
+							]
+						}
 					},
 					"response": []
 				}
