@@ -73,6 +73,7 @@ const main = async () => {
                 themeId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(themeId) REFERENCES themes(id),
                 details VARCHAR(1000),
+                resultsPublished BOOLEAN DEFAULT FALSE,
                 attachedFile VARCHAR(500),
                 image VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
                 createdAt DATETIME,
@@ -114,6 +115,7 @@ const main = async () => {
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 registrationId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(registrationId) REFERENCES registrations(id),
+                CONSTRAINT uniqueRegistration UNIQUE (registrationId),
                 position TINYINT NOT NULL CHECK (position BETWEEN 1 AND 3),
                 createdAt DATETIME
             )	

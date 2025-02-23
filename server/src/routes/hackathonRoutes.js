@@ -6,6 +6,7 @@ import {
     isUserAuthMiddleware,
     isHackathonAvaliableMiddleware,
     isAdminMiddleware,
+    areHackathonResultsPublishedMiddleware,
 } from '../middlewares/index.js';
 
 //Importar funciones controladoras
@@ -19,6 +20,8 @@ import {
     deleteHackathonController,
     ratingHackathonController,
     filterHackathonesController,
+    listHackathonParticipantsController,
+    registerHackathonPositionsAndPublishController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -66,6 +69,29 @@ router.post(
     '/:hackathonId/ratings',
     isUserAuthMiddleware,
     ratingHackathonController
+);
+
+//Endpoint para enseñar lista pública de usuarios registrados en un hackathon
+router.get(
+    '/:hackathonId/participants',
+    areHackathonResultsPublishedMiddleware,
+    listHackathonParticipantsController
+);
+
+//Endpoint para que admins puedan ver la lista de usuarios registrados en su hackathon
+router.get(
+    '/:hackathonId/participants/private',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
+    listHackathonParticipantsController
+);
+
+//Ruta para postear el podio y hacer pública la lista de participantes
+router.post(
+    '/:hackathonId/publish',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
+    registerHackathonPositionsAndPublishController
 );
 
 //Endpoint que filtra hackathones.

@@ -1,13 +1,14 @@
 // Importamos los modelos necesarios.
-import listUserRegistrationsModel from "../../models/registrations/listUserRegistrationsModel.js";
+import listUserRegistrationsModel from "../../models/users/listUserRegistrationsModel.js";
 
 // Función controladora que devuelve los hackatones a los que un usuario está inscrito
 const listUserRegistrationsController = async (req, res, next) => {
     try {
         // Obtenemos los datos de usuario.
-        const {userId} = req.params;
+        const { id } = req.params;
         
-        const user = await listUserRegistrationsModel(userId);
+        const user = await listUserRegistrationsModel(id);
+        
         res.send({
             status: 'ok',
             data: {

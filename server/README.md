@@ -10,9 +10,9 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 2. Guardar el archivo `.env.example` como `.env` y cubrir los datos necesarios.
 
-3. Ejecutar `npm run initdb` para crear las tablas necesarias en la base de datos.
+3. Tras cambiar a server con `cd server `, ejecutar `npm run initdb` para crear las tablas necesarias en la base de datos.
 
-4. Ejecutar `npm run populate-tables` para añadir los datos necesarios a las tablas en la base de datos.
+4. Ejecutar `npm run populate-tables` para añadir los datos de prueba necesarios a las tablas en la base de datos.
 
 5. Ejecutar `npm run dev` para lanzar el servidor.
 
@@ -20,18 +20,19 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 ### users
 
-| Campo     | Tipo         | Descripción                      |
-| --------- | ------------ | -------------------------------- |
-| id        | VARCHAR(36)  | Identificador único del usuario  |
-| username  | VARCHAR(20)  | Nombre de usuario del usuario    |
-| firstName | VARCHAR(40)  | Nombre del usuario               |
-| lastName  | VARCHAR(70)  | Apellido del usuario             |
-| email     | VARCHAR(70)  | Correo electrónico del usuario   |
-| password  | VARCHAR(200) | Contraseña del usuario (hash)    |
-| regCode   | CHAR(30)     | Código de registro del usuario   |
-| active    | BOOLEAN      | Indica si el usuario está activo |
-| role      | ENUM         | Rol del usuario ("admin", "dev") |
-| createdAt | DATETIME     | Fecha y hora de la creación      |
+| Campo           | Tipo         | Descripción                      |
+| --------------- | ------------ | -------------------------------- |
+| id              | VARCHAR(36)  | Identificador único del usuario  |
+| username        | VARCHAR(20)  | Nombre de usuario del usuario    |
+| firstName       | VARCHAR(40)  | Nombre del usuario               |
+| lastName        | VARCHAR(70)  | Apellido del usuario             |
+| email           | VARCHAR(70)  | Correo electrónico del usuario   |
+| password        | VARCHAR(200) | Contraseña del usuario (hash)    |
+| regCode         | CHAR(30)     | Código de registro del usuario   |
+| recoverPassCode | CHAR(30)     | Código de restaurar contraseña   |
+| active          | BOOLEAN      | Indica si el usuario está activo |
+| role            | ENUM         | Rol del usuario ("admin", "dev") |
+| createdAt       | DATETIME     | Fecha y hora de la creación      |
 
 ### themes
 
@@ -54,19 +55,20 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 | Campo            | Tipo          | Descripción                                            |
 | ---------------- | ------------- | ------------------------------------------------------ |
 | id               | VARCHAR(36)   | Identificador único del hackathon                      |
-| creator          | VARCHAR(36)   | Creador del hackathon                                  |
+| userId           | VARCHAR(36)   | Creador del hackathon                                  |
 | title            | VARCHAR(100)  | Título del hackathon                                   |
 | summary          | VARCHAR(140)  | Resúmen del hackathon                                  |
 | startingDate     | TIMESTAMP     | Fecha y hora de inicio del hackathon                   |
 | deadline         | TIMESTAMP     | Fecha y hora de deadline del hackathon                 |
 | type             | ENUM          | Tipo de modalidad de hackathon ("online","presencial") |
 | location         | VARCHAR(200)  | Localización del hackathon                             |
-| theme            | VARCHAR(36)   | Tema del hackathon                                     |
-| programmingLangs | VARCHAR(36)   | Lenguaje del hackathon                                 |
+| themeId          | VARCHAR(36)   | Tema del hackathon                                     |
 | details          | VARCHAR(1000) | Detalles del hackathon                                 |
+| resultsPublished | BOOLEAN       | Indica si la lista de participantes es pública         |
 | attachedFile     | VARCHAR(500)  | Documento adjunto al hackathon                         |
 | image            | VARCHAR(500)  | Imagen adjunta al hackathon                            |
 | createdAt        | DATETIME      | Fecha y hora de la creación                            |
+| modifiedAt       | DATETIME      | Fecha y hora de la última modificación                 |
 
 ### hackathonLangs
 
@@ -76,15 +78,19 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 | programmingLang | VARCHAR(36) | Identificador del lenguaje del hackathon             |
 | hackathon       | VARCHAR(36) | Identificador del hackathon                          |
 | createdAt       | DATETIME    | Fecha y hora de la creación                          |
+| modifiedAt      | DATETIME    | Fecha y hora de la última modificación               |
 
 ### registrations
 
-| Campo     | Tipo        | Descripción                      |
-| --------- | ----------- | -------------------------------- |
-| id        | VARCHAR(36) | Identificador único del registro |
-| user      | VARCHAR(36) | Identificador del usuario        |
-| hackathon | VARCHAR(36) | Identificador del hackathon      |
-| createdAt | DATETIME    | Fecha y hora de la creación      |
+| Campo            | Tipo        | Descripción                                                  |
+| ---------------- | ----------- | ------------------------------------------------------------ |
+| id               | VARCHAR(36) | Identificador único del registro                             |
+| userId           | VARCHAR(36) | Identificador del usuario                                    |
+| hackathonId      | VARCHAR(36) | Identificador del hackathon                                  |
+| confirmationCode | CHAR(30)    | Código para confirmar el registro                            |
+| status           | ENUM        | Estado del registro ('pendiente', 'confirmada', 'cancelada') |
+| createdAt        | DATETIME    | Fecha y hora de la creación                                  |
+| modifiedAt       | DATETIME    | Fecha y hora de la última modificación                       |
 
 ### podium
 
@@ -100,8 +106,8 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 | Campo        | Tipo        | Descripción                       |
 | ------------ | ----------- | --------------------------------- |
 | id           | VARCHAR(36) | Identificador único del rating    |
-| user         | VARCHAR(36) | Identificador del usuario         |
-| hackathon    | VARCHAR(36) | Identificador del hackathon       |
+| userId       | VARCHAR(36) | Identificador del usuario         |
+| hackathonId  | VARCHAR(36) | Identificador del hackathon       |
 | uniqueRating | CONSTRAINT  | Rating único (usuario, hackathon) |
 | rating       | TINYINT     | Rating entre 1 y 5                |
 | createdAt    | DATETIME    | Fecha y hora de la creación       |
@@ -116,7 +122,8 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **PUT** - [`/api/users/password/reset`] - Enviar código de recuperación de contraseña al email del usuario.
 - **PUT** - [`/api/users/password/reset/:recoverPassCode`] - Actualiza la contraseña de un usuario con un código de recuperación.
 - **PUT** - [`/api/users/profile/edit`] - Editar información del usuario.
-- **GET** - [`/api/users/profile/:id`] - Enseña información no sensible del usuario.
+- **GET** - [`/api/users/profile/:userId`] - Enseña información no sensible del usuario.
+- **GET** - [`/api/users/profile/:userId/participations`] - Devuelve los hackathones en los que el usuario está registrado.
 
 ## Endpoints de los hackathones
 
@@ -129,6 +136,9 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 - **GET** - [`/api/hackathon/hackathones/langs`] - Devuelve todos los lenguajes de programación.
 - **POST** - [`/api/hackathon/:hackathonId/ratings`] - Permite valorar un hackathon (1-5) despues de la fecha de realizacion.
 - **DELETE** - [`/api/hackathon/:hackathonId`] - Permite eliminar los datos de un hackathon y todo lo relacionado con el.
+- **GET** - [`/api/hackathon/:hackathonId/participants`] - Ruta pública para ver los usuarios registrados a un hackathon acabado.
+- **GET** - [`api/hackathon/:hackathonId/participants/private`] - Ruta para admins para ver los usuarios registrados a un hackathon.
+- **POST** - [`api/hackathon/:hackathonId/publish`] - Permite a un admin clasificar a usuarios en el podio y hacer pública la ruta pública de usuarios registrados.
 
 ## Endpoints de los registros/participaciones
 

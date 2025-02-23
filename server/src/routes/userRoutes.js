@@ -15,6 +15,7 @@ import {
     updateUserProfileController,
     updateUserPassController,
     showUserInfoController,
+    listUserRegistrationsController,
 } from '../controllers/users/index.js';
 
 //Crear router
@@ -51,6 +52,9 @@ router.put(
 
 //Endpoint que muestra los datos del usuario.
 router.get('/profile/:id', showUserInfoController);
+
+//Endpoint para enseñar hackathones en los que un usuario está registrado
+router.get('/profile/:id/participations', listUserRegistrationsController);
 
 //Endpoint que edita los datos del usuario.
 router.put('/profile/edit', isUserAuthMiddleware, updateUserProfileController);
