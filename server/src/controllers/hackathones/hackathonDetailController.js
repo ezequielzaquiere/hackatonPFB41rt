@@ -2,7 +2,7 @@
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Importar el modelo
-import selectHackathonDetailsByIdModel from '../../models/hackathones/selectDetailHackathonByIdModel.js';
+import selectHackathonDetailsByIdModel from '../../models/hackathones/selectHackathonDetailsByIdModel.js';
 
 const hackathonDetailController = async (req, res, next) => {
     try {
