@@ -9,7 +9,12 @@ const listHackathonesLangsModel = async (programmingLang = '') => {
     // Listado de lenguajes de programación con filtros opcionales.
     const [hackathonesLangs] = await pool.query(
         `
-        SELECT programmingLang FROM programmingLangs
+        SELECT pl.programmingLang, h.id AS hackathonId 
+FROM hackathonList h
+JOIN hackathonLangs hl ON h.id = hl.hackathonId
+JOIN programmingLangs pl ON hl.programmingLangId = pl.id;
+
+
         `,
         [programmingLang, `%${programmingLang}%`]
     );

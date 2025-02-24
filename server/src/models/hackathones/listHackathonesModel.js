@@ -9,9 +9,9 @@ const listHackathonesModel = async (title = '', creator = '') => {
     // Listado de entradas.
     const [hackathones] = await pool.query(
         `
-            SELECT *
-            FROM hackathonList hl
-            GROUP BY hl.id
+           SELECT id, title 
+FROM hackathonList;
+
         `,
         [`%${title}%`, `%${creator}%`]
     );

@@ -4,14 +4,18 @@ const filterHackathonesModel = async ({
     title,
     programmingLang,
     startingDate,
+    location,
 }) => {
     const pool = await getPool();
+
     let query = `
-        SELECT h.* FROM hackathonList h
+        SELECT h.id, h.title, h.startingDate, h.location, pl.programmingLang
+        FROM hackathonList h
         LEFT JOIN hackathonLangs hl ON h.id = hl.hackathonId
         LEFT JOIN programmingLangs pl ON hl.programmingLangId = pl.id
         WHERE 1=1
     `;
+
     const params = [];
 
     if (title) {
@@ -27,6 +31,11 @@ const filterHackathonesModel = async ({
     if (startingDate) {
         query += ` AND h.startingDate >= ?`;
         params.push(startingDate);
+    }
+
+    if (location) {
+        query += ` AND LOWER(h.location) LIKE LOWER(?)`;
+        params.push(`%${location.toLowerCase()}%`);
     }
 
     console.log('SQL Query:', query);
