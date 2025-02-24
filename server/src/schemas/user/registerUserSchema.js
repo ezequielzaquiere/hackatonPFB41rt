@@ -29,13 +29,7 @@ const registerUserSchema = joi
             .string()
             .min(8)
             .max(100)
-            .regex(
-                /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~={}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~={}:";'<>¿?,.]{8,}$/
-            )
-            .messages({
-                'string.pattern.base':
-                    'La contraseña debe contener al menos una mayúscula, una minúscula, un número y un símbolo de puntuación para "{#key}".',
-            })
+
             .required(),
         role: joi.string().valid('admin', 'dev').required().messages({
             'any.only': 'El valor de "{#key}" debe ser "admin" o "dev".',
