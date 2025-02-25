@@ -1,4 +1,4 @@
-import imageExample from '../assets/imageExample.jpg';
+import imageExample from '/imageExample.jpg';
 import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
 
