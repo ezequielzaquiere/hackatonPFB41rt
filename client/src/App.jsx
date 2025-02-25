@@ -1,10 +1,13 @@
-import HomePage from './pages/HomePage';
-
+import { Routes, Route } from 'react-router-dom';
+import NotFound from './pages/NotFound';
 function App() {
     return (
         <>
             <h1 className="text-red-500">Vite + React</h1>
-            <HomePage />
+
+            <Routes>
+                <Route path="*" element={<NotFound />} />
+            </Routes>
         </>
     );
 }
