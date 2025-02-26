@@ -31,9 +31,6 @@ const registerUserSchema = joi
             .max(100)
 
             .required(),
-        role: joi.string().valid('admin', 'dev').required().messages({
-            'any.only': 'El valor de "{#key}" debe ser "admin" o "dev".',
-        }),
     })
     .messages(joiErrorMessages);
 
