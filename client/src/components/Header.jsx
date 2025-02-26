@@ -14,6 +14,9 @@ const Header = () => {
                     <li>
                         <Link to="/hackathon/new">Nuevo Hackathon</Link>
                     </li>
+                    <li>
+                        <Link to="/details">Detalles de los hackathones</Link>
+                    </li>
                 </ul>
             </nav>
         </header>

@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import HomePage from './pages/HomePage';
 import NewHackathonPage from './pages/NewHackathonPage';
 import NotFound from './pages/NotFound';
+import DetailHackathonPage from './pages/DetailHackathonPage';
 
 //Definimos el componente principal
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
+                <Route path="/details" element={<DetailHackathonPage />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>
