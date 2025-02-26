@@ -2,6 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 //Importamos las páginas
 import HomePage from './pages/HomePage';
@@ -15,6 +16,12 @@ const App = () => {
             <Header />
 
             {/* Aquí va el Toaster */}
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    duration: 5000,
+                }}
+            />
 
             {/* Aquí irán los endpoints dentro del componente Routes */}
             <Routes>
