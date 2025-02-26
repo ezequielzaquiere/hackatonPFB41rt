@@ -1,24 +1,32 @@
+//Importamos los componentes
 import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-
-//Importacion de paginas 
+//Importamos las páginas
+import HomePage from './pages/HomePage';
 import NewHackathonPage from './pages/NewHackathonPage';
 import NotFound from './pages/NotFound';
 
-function App() {
+//Definimos el componente principal
+const App = () => {
     return (
         <>
-            <h1 className="text-red-500">Vite + React</h1>
+            <Header />
 
+            {/* Aquí va el Toaster */}
+
+            {/* Aquí irán los endpoints dentro del componente Routes */}
             <Routes>
+                <Route path="/" element={<HomePage />} />
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
 
-
                 <Route path="*" element={<NotFound />} />
-
             </Routes>
+
+            <Footer />
         </>
     );
-}
+};
 
 export default App;
