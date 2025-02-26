@@ -2,18 +2,18 @@
 import getPool from '../../db/getPool.js';
 
 // Función que se conecta a la base de datos y retorna todos los hackathones.
-const listHackathonesModel = async (title = '', creator = '') => {
+const listHackathonesModel = async () => {
     // Obtenemos el pool.
     const pool = await getPool();
 
     // Listado de entradas.
     const [hackathones] = await pool.query(
         `
-           SELECT id, title 
-FROM hackathonList;
+            SELECT *
+            FROM hackathonList hl
+            GROUP BY hl.id;
 
-        `,
-        [`%${title}%`, `%${creator}%`]
+        `
     );
 
     return hackathones;
