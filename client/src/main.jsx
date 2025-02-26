@@ -1,9 +1,13 @@
-import { StrictMode } from 'react';
+//Importamos la función createRoot o etiqueta rai de HTML
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-import App from './App.jsx';
 
+//Importamos los componentes
+import { StrictMode } from 'react';
+import App from './App.jsx';
+import { BrowserRouter } from 'react-router-dom';
+
+//Importamos estilos
+import './index.css';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
