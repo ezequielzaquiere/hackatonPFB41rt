@@ -1,22 +1,25 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
 //TODO:ACORDARSE DEL E.PREVENTDEFAULT
+//TODO:AÑADIR LOS DE VACIAR CAMPOS
 
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addHours } from 'date-fns';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Importar componentes
 import LocatioAutocomplete from '../components/LocationAutocomplete';
+import DetailTextEditor from '../components/DetailsTextEditor';
 
 const NewHackathonPage = () => {
     const now = new Date();
+
     const [formData, setFormData] = useState({
         title: '',
         summary: '',
-        startingDate: '',
-        deadline: '',
+        startingDate: null,
+        deadline: null,
         type: '',
         location: '',
         themeId: '',
@@ -31,13 +34,25 @@ const NewHackathonPage = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+    //Funcion que vacia los campos en general
+    const clearGeneral = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     //Funcion para manejar los cambios de hora
     const handleChangeDate = (field, date) => {
         setFormData({ ...formData, [field]: date });
         console.log(formData);
     };
 
-    //Funcion para manejar los cambios de imagen y documento
+    //Funcion para manejar los cambios de imagen
+    const clearImg = (e) => {
+        setFormData({ ...formData, image: null });
+    };
+
+    //Funcion para vaciar el cmapo de las imagenes y documentos
     const handleChangeFiles = (e) => {
         const { name, files } = e.target;
         console.log(files[0]);
@@ -47,6 +62,11 @@ const NewHackathonPage = () => {
     //Funcion apara manejar los cambios de location (le pasamos place porqur es lo que nos da el onSelect)
     const handleChangeLocation = (place) => {
         setFormData({ ...formData, location: place.display_name });
+    };
+
+    //Funcion para manejar el cambio en los detalles
+    const handleChangeDetails = (html) => {
+        setFormData({ ...formData, details: html });
     };
 
     console.log(formData);
@@ -66,7 +86,9 @@ const NewHackathonPage = () => {
                     onChange={handleChangeGeneral}
                     placeholder="escribe un titulo"
                     required
+                    autoFocus
                 />
+
                 {/* Input textarea del summary */}
                 <label htmlFor="summary">Descripcion del evento</label>
                 <textarea
@@ -99,6 +121,7 @@ const NewHackathonPage = () => {
                         placeholderText="Fecha de inicio"
                         required
                     />
+
                     {/* Input datepicker de la fecha de finalizacion */}
 
                     <DatePicker
@@ -116,8 +139,10 @@ const NewHackathonPage = () => {
                         required
                     />
                 </fieldset>
+
                 <fieldset>
                     <legend>Es online o presencial?</legend>
+
                     {/* Input radio del tipo de hackathon (presencial u online */}
                     <label htmlFor="type">Online</label>
                     <input
@@ -145,6 +170,37 @@ const NewHackathonPage = () => {
                         <LocatioAutocomplete onSelect={handleChangeLocation} />
                     </>
                 )}
+
+                {/* Input hackathon detalis (para futuro html?) */}
+                <label htmlFor="details">Detalles del hackathon</label>
+                <DetailTextEditor onChange={handleChangeDetails} id="details" />
+
+                <fieldset>
+                    <legend>Imagen del banner</legend>
+
+                    {/* Input quer maneja la subida de imagenes */}
+                    <label htmlFor="image"></label>
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        onChange={handleChangeFiles}
+                    />
+                </fieldset>
+
+                {/* Input que maneja la subida de documentos */}
+                <fieldset>
+                    <legend>Documento de reglas</legend>
+
+                    {/* Input quer maneja la subida de imagenes */}
+                    <label htmlFor="image"></label>
+                    <input
+                        type="file"
+                        name="document"
+                        accept="application/pdf"
+                        onChange={handleChangeFiles}
+                    />
+                </fieldset>
             </form>
         </>
     );

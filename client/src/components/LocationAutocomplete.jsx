@@ -52,49 +52,47 @@ const LocatioAutocomplete = ({ onSelect }) => {
 
     return (
         <>
-            {/* Donde se realizara la busqueda */}
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => {
-                    setQuery(e.target.value);
-                }}
-                placeholder="Donde tendra lugar?"
-                className="border border-gray-300 p-2 w-full"
-            />
-            <button
-                type="button"
-                onClick={() => {
-                    handleSearch(query);
-                }}
-                className="bg-blue-500 text-white p-2 mt-2"
-            >
-                Buscar
-            </button>
-            <button
-                type="button"
-                onClick={handleClear}
-                className="bg-blue-500 text-white p-2 mt-2"
-            >
-                Limpiar
-            </button>
+            <div className="relative w-full">
+                {/* Input de búsqueda */}
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="¿Dónde tendrá lugar?"
+                    className="border border-gray-300 p-2 w-full rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <div className="flex gap-2 mt-2">
+                    <button
+                        type="button"
+                        onClick={handleSearch}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition"
+                    >
+                        Buscar
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleClear}
+                        className="bg-gray-400 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-500 transition"
+                    >
+                        Limpiar
+                    </button>
+                </div>
 
-            {/* Sugerencias de la busqueda */}
-            {suggestion.length > 0 && (
-                <ul className="border border-gray-300 list-none p-0">
-                    {suggestion.map((location) => (
-                        <li
-                            key={location.place_id}
-                            onClick={() => {
-                                handleSelect(location);
-                            }}
-                            className="cursor-pointer p-2 hover:bg-gray-200"
-                        >
-                            {location.display_name}
-                        </li>
-                    ))}
-                </ul>
-            )}
+                {/* Sugerencias de búsqueda */}
+                {suggestion.length > 0 && (
+                    <ul className="absolute w-full bg-white border border-gray-300 rounded-lg mt-2 shadow-lg overflow-hidden">
+                        {suggestion.map((location) => (
+                            <li
+                                key={location.place_id}
+                                onClick={() => handleSelect(location)}
+                                className="cursor-pointer p-3 hover:bg-gray-100 transition"
+                            >
+                                {location.display_name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </>
     );
 };
