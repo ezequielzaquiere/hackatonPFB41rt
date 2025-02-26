@@ -9,21 +9,13 @@ import registerUserSchema from '../../schemas/user/registerUserSchema.js';
 const registerUserController = async (req, res, next) => {
     try {
         // Obtenemos los datos necesarios del body.
-        const { username, firstName, lastName, email, password, role } =
-            req.body;
+        const { username, firstName, lastName, email, password } = req.body;
 
         // Validación con joi.
         await validateSchemaUtil(registerUserSchema, req.body);
 
         // Insertamos al usuario en la bd.
-        await insertUserModel(
-            username,
-            firstName,
-            lastName,
-            email,
-            password,
-            role
-        );
+        await insertUserModel(username, firstName, lastName, email, password);
 
         res.status(201).send({
             status: 'ok',
