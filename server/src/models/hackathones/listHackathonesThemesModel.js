@@ -9,9 +9,9 @@ const listHackathonesThemesModel = async (hackathon = '', theme = '') => {
     // Listado de entradas.
     const [hackathonesTheme] = await pool.query(
         `
-            SELECT t.theme, h.id AS hackathonId
-FROM hackathonList h
-JOIN themes t ON h.themeId = t.id;
+            SELECT *
+            FROM themes t
+            GROUP BY t.id
 
         `,
         [`%${hackathon}%`, `%${theme}%`]
