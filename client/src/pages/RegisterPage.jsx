@@ -61,7 +61,7 @@ const RegisterPage=()=>{
 
         //Obtenemos el body.
         const body = await res.json();
-        console.log(body);
+    
         //Si recibimos un error lo mostramos al usuario.
         if (body.status === "error"){
             throw new Error(body.message)
@@ -80,7 +80,7 @@ const RegisterPage=()=>{
                 id:"register",
             });
       } finally {
-        
+
          //Indicamos que se finalizó el fetch.
          setLoading(false);
       }
