@@ -14,16 +14,11 @@ const hackathonDetailController = async (req, res, next) => {
         res.send({
             status: 'ok',
             data: {
-                detallesHackathones,
+                hackathon,
             },
         });
-    } catch (error) {
-        const customError = generateErrorUtil(
-            500,
-            'Error al obtener los detalles de los hackathones',
-            error
-        );
-        res.status(customError.status).send(customError);
+    } catch (err) {
+        next(err);
     }
 };
 
