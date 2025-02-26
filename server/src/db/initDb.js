@@ -35,7 +35,7 @@ const main = async () => {
                 recoverPassCode CHAR(30),
                 active BOOLEAN,
                 avatar VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
-                role ENUM ("dev", "admin") NOT NULL,
+                role ENUM ("dev", "admin") DEFAULT "dev",
                 createdAt DATETIME               
             )	
         `);
