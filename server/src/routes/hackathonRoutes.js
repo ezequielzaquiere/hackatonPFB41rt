@@ -22,6 +22,7 @@ import {
     filterHackathonesController,
     listHackathonParticipantsController,
     registerHackathonPositionsAndPublishController,
+    bestHackathonesController,
 } from '../controllers/hackathones/index.js';
 
 //Crear router
@@ -57,6 +58,9 @@ router.get('/hackathones', listHackathonesController);
 
 //Endpoint lista temáticas hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
+
+//Endpoint tres mejores hackathones por rating
+router.get('/hackathones/bestHackathones', bestHackathonesController);
 
 // Ruta para obtener los detalles de un hackathon específico por ID
 router.get('/hackathones/details/:id', hackathonDetailController);
