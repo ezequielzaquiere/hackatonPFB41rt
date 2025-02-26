@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import NewHackathonPage from './pages/NewHackathonPage';
 import NotFound from './pages/NotFound';
 import DetailHackathonPage from './pages/DetailHackathonPage';
+import RegisterPage from './pages/RegisterPage';
 
 //Definimos el componente principal
 const App = () => {
@@ -27,6 +28,8 @@ const App = () => {
             {/* Aquí irán los endpoints dentro del componente Routes */}
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
                 <Route path="/details" element={<DetailHackathonPage />} />
 
