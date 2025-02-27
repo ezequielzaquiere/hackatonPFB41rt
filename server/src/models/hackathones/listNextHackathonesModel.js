@@ -16,7 +16,12 @@ const listNextHackathonesModel = async () => {
     // Listado de hackathones ordenados por startingDate
     const [hackathones] = await pool.query(
         `
-            SELECT *
+            SELECT *,
+             (
+				SELECT COUNT(*) 
+				FROM registrations reg 
+				WHERE reg.hackathonId = hl.id AND reg.status = 'confirmada'
+			) AS participantCount
             FROM hackathonList hl
             WHERE startingDate >= ?
             GROUP BY hl.id
