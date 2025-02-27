@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
-const useBestHackathonesList = () => {
-    const [data, setData] = useState([]);
+const useHackathonesFromToday = () => {
+    const [data, setData] = useState('');
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await fetch(
-                    'http://localhost:7000/api/hackathon/hackathones/bestHackathones'
+                    'http://localhost:7000/api/hackathon/hackathones/fromToday'
                 );
                 if (!response.ok) {
                     throw new Error(
@@ -26,4 +26,4 @@ const useBestHackathonesList = () => {
     return data;
 };
 
-export default useBestHackathonesList;
+export default useHackathonesFromToday;
