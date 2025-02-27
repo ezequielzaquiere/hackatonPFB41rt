@@ -24,6 +24,7 @@ import {
     registerHackathonPositionsAndPublishController,
     bestHackathonesController,
 } from '../controllers/hackathones/index.js';
+import listNextHackathonesController from '../controllers/hackathones/listNextHackathonesController.js';
 
 //Crear router
 const router = express.Router();
@@ -58,6 +59,9 @@ router.get('/hackathones', listHackathonesController);
 
 //Endpoint lista temáticas hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
+
+//Endpoint devuelve hackathones a partir de la fecha de solicitud
+router.get('/hackathones/fromToday', listNextHackathonesController);
 
 //Endpoint tres mejores hackathones por rating
 router.get('/hackathones/bestHackathones', bestHackathonesController);
