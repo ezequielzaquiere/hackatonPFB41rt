@@ -11,6 +11,8 @@ import filterHackathonesController from './filterHackathonesController.js';
 import registerHackathonPositionsAndPublishController from './registerHackathonPositionsAndPublishController.js';
 import listHackathonParticipantsController from './listHackathonParticipantsController.js';
 import bestHackathonesController from './bestHackathonesController.js';
+import listNextHackathonesController from './listNextHackathonesController.js';
+
 //Exportar funciones en un solo objeto
 export {
     newHackathonController,
