@@ -4,27 +4,20 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 // Importar el modelo
 import listHackathonesLangModel from '../../models/hackathones/listHackathonesLangsModel.js';
 
-// Función controladora que lista las temáticas de los Hackatones
+// Función controladora que lista los lenguajes de programacion de los Hackatones
 const listHackathonesLangsController = async (req, res, next) => {
     try {
-        // Obtener los filtros (query params)
-        const { hackathon, programmingLangs } = req.query;
-
         // Obtenemos los lenguajes de los hackathones
-        const hackathonesLang = await listHackathonesLangModel(
-            hackathon,
-            programmingLangs
-        );
+        const hackathonesLang = await listHackathonesLangModel();
 
         res.send({
             status: 'ok',
-            data: { hackathonesLang }, // se envían los datos obtenidos del modelo
+            data: hackathonesLang,
         });
     } catch (error) {
         const customError = generateErrorUtil(
             500,
-            'Error al obtener los lenguajes de los hackathones',
-            error
+            'Error al obtener los lenguajes de los hackathones'
         );
         res.status(customError.status).send(customError);
     }

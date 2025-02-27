@@ -9,7 +9,7 @@ const listHackathonesThemesModel = async () => {
     // Listado de entradas.
     const [hackathonesTheme] = await pool.query(
         `
-            SELECT *
+            SELECT id,theme
             FROM themes t
             GROUP BY t.id
 
