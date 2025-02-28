@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+const { VITE_API_URL } = import.meta.env;
 
 const useBestHackathonesList = () => {
     const [data, setData] = useState([]);
@@ -7,7 +8,7 @@ const useBestHackathonesList = () => {
         const getData = async () => {
             try {
                 const response = await fetch(
-                    'http://localhost:7000/api/hackathon/hackathones/bestHackathones'
+                    `${VITE_API_URL}/api/hackathon/hackathones/bestHackathones`
                 );
                 if (!response.ok) {
                     throw new Error(
