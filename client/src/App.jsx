@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 import DetailHackathonPage from './pages/DetailHackathonPage';
 import RegisterPage from './pages/RegisterPage';
 import PrivateUserProfilePage from './pages/PrivateUserProfilePage';
+import ChangePassword from './pages/ChangePassword';
 
 //Definimos el componente principal
 const App = () => {
@@ -34,6 +35,10 @@ const App = () => {
                 <Route
                     path="/users/profile"
                     element={<PrivateUserProfilePage />}
+                />
+                <Route
+                    path="/users/password/change"
+                    element={<ChangePassword />}
                 />
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
                 <Route path="/details" element={<DetailHackathonPage />} />
