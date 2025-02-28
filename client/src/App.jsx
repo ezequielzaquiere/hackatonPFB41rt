@@ -29,10 +29,12 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
-                <Route path="/details" element={<DetailHackathonPage />} />
-
+                <Route
+                    path="/details/:hackathonId"
+                    element={<DetailHackathonPage />}
+                />{' '}
+                {/* *** */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
 

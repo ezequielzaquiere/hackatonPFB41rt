@@ -1,6 +1,7 @@
 //Dependencias
 import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 //Hooks
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
@@ -26,6 +27,11 @@ const faqs = [
 ];
 
 const HomePage = () => {
+    const navigate = useNavigate();
+    const handleImageClick = (id) => {
+        navigate(`/details/${id}`); // Redirige a la página de detalles ***
+    };
+
     //Traer del backend los 3 mejores hackathones según rating
     const bestHackathones = useBestHackathonesList();
 
@@ -88,6 +94,9 @@ const HomePage = () => {
                                     src={hackathon.image}
                                     alt={hackathon.name}
                                     className="w-56 h-28 rounded-lg object-cover"
+                                    onClick={() =>
+                                        handleImageClick(hackathon.id)
+                                    } // Pasamos el id ***
                                 />
                                 <p>
                                     Número de participantes:{' '}
