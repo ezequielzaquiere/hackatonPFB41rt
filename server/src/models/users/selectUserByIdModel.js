@@ -11,7 +11,7 @@ const selectUserByIdModel = async (userId) => {
         [userId]
     );
     if (users.length < 1) {
-        generateErrorUtil('Usuario no encontrado', 404);
+        generateErrorUtil(404, 'Usuario no encontrado');
     }
     return users[0];
 };
