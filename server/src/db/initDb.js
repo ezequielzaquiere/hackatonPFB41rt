@@ -72,7 +72,7 @@ const main = async () => {
                 location VARCHAR(200),
                 themeId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(themeId) REFERENCES themes(id),
-                details VARCHAR(1000),
+                details TEXT,
                 resultsPublished BOOLEAN DEFAULT FALSE,
                 attachedFile VARCHAR(500),
                 image VARCHAR(500),

@@ -2,8 +2,13 @@
 //TODO:AÑADIR LOS DE VACIAR CAMPOS
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
 //TODO:UNA VEZ FINALIZADO LO DEVOLVEMOS A LA PRINCIPAL?
+//TODO:HACER IFS POR SI SE HAN CAMBIADO LOS CAMPOS QUE SOLO SE ACTUALICE EN EL APPEND LOS QUE SE HAN CAMBIADO
+//TODO: SI EL HACKATHON NO EXISTE DEVOLVER A LA PRINCIPAL
+//TODO UNA VEX TERMINADO DEVOLVEMOS AL HACKATHON CO  EL MISMO ID
+//TODO MIRAR QUE USA EN EL PARAMS DE DETAISL
 //Importamoslas dependencias
 import toast from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
 
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
@@ -22,6 +27,7 @@ import { AuthContext } from '../contexts/AuthContext';
 //Importamos los hooks
 import useHackathonThemes from '../hooks/useHackathonThemes';
 import useHackathonLangs from '../hooks/useHackathonLang';
+import useHackathon from '../hooks/useHackathon';
 
 // Importar componentes
 import LocatioAutocomplete from '../components/LocationAutocomplete';
@@ -55,6 +61,10 @@ const NewHackathonPage = () => {
 
     //Hook para obtener los lenguajes de programacion
     const hackathonLangs = useHackathonLangs();
+
+    //Obtenemos la info del hackathon a usar
+    const hackathonInfo = useHackathon();
+    console.log(hackathonInfo);
 
     //Funcion para manejar los cambios en general
     const handleChangeGeneral = (e) => {

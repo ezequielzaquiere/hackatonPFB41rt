@@ -52,23 +52,23 @@ Cada hackathon puede ser votado con un rating de 1 a 5 estrellas.
 
 ### hackathonList
 
-| Campo            | Tipo          | Descripción                                            |
-| ---------------- | ------------- | ------------------------------------------------------ |
-| id               | VARCHAR(36)   | Identificador único del hackathon                      |
-| userId           | VARCHAR(36)   | Creador del hackathon                                  |
-| title            | VARCHAR(100)  | Título del hackathon                                   |
-| summary          | VARCHAR(140)  | Resúmen del hackathon                                  |
-| startingDate     | TIMESTAMP     | Fecha y hora de inicio del hackathon                   |
-| deadline         | TIMESTAMP     | Fecha y hora de deadline del hackathon                 |
-| type             | ENUM          | Tipo de modalidad de hackathon ("online","presencial") |
-| location         | VARCHAR(200)  | Localización del hackathon                             |
-| themeId          | VARCHAR(36)   | Tema del hackathon                                     |
-| details          | VARCHAR(1000) | Detalles del hackathon                                 |
-| resultsPublished | BOOLEAN       | Indica si la lista de participantes es pública         |
-| attachedFile     | VARCHAR(500)  | Documento adjunto al hackathon                         |
-| image            | VARCHAR(500)  | Imagen adjunta al hackathon                            |
-| createdAt        | DATETIME      | Fecha y hora de la creación                            |
-| modifiedAt       | DATETIME      | Fecha y hora de la última modificación                 |
+| Campo            | Tipo         | Descripción                                            |
+| ---------------- | ------------ | ------------------------------------------------------ |
+| id               | VARCHAR(36)  | Identificador único del hackathon                      |
+| userId           | VARCHAR(36)  | Creador del hackathon                                  |
+| title            | VARCHAR(100) | Título del hackathon                                   |
+| summary          | VARCHAR(140) | Resúmen del hackathon                                  |
+| startingDate     | TIMESTAMP    | Fecha y hora de inicio del hackathon                   |
+| deadline         | TIMESTAMP    | Fecha y hora de deadline del hackathon                 |
+| type             | ENUM         | Tipo de modalidad de hackathon ("online","presencial") |
+| location         | VARCHAR(200) | Localización del hackathon                             |
+| themeId          | VARCHAR(36)  | Tema del hackathon                                     |
+| details          | TEXT         | Detalles del hackathon                                 |
+| resultsPublished | BOOLEAN      | Indica si la lista de participantes es pública         |
+| attachedFile     | VARCHAR(500) | Documento adjunto al hackathon                         |
+| image            | VARCHAR(500) | Imagen adjunta al hackathon                            |
+| createdAt        | DATETIME     | Fecha y hora de la creación                            |
+| modifiedAt       | DATETIME     | Fecha y hora de la última modificación                 |
 
 ### hackathonLangs
 
