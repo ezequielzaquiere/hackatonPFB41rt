@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
 import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
 
+//FAQ
 const faqs = [
     {
         question: '¿Qué es un hackathon?',
@@ -84,11 +85,13 @@ const HomePage = () => {
                                 <p className="text-pink-500 text-2xl font-bold">
                                     #{index + 1}
                                 </p>
+
                                 <img
                                     src={hackathon.image}
                                     alt={hackathon.name}
                                     className="w-56 h-28 rounded-lg object-cover"
                                 />
+
                                 <p>
                                     Número de participantes:{' '}
                                     {hackathon.participantCount}
