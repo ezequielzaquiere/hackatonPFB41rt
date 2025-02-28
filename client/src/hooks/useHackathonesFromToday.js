@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 const { VITE_API_URL } = import.meta.env;
 
+const { VITE_API_URL } = import.meta.env;
+
 const useHackathonesFromToday = () => {
     const [data, setData] = useState('');
 

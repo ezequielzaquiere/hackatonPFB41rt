@@ -34,8 +34,8 @@ const main = async () => {
                 regCode CHAR(30),
                 recoverPassCode CHAR(30),
                 active BOOLEAN,
-                avatar VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
-                role ENUM ("dev", "admin") DEFAULT "dev",
+                avatar VARCHAR(500),
+                role ENUM ("dev", "admin") NOT NULL,
                 createdAt DATETIME               
             )	
         `);
@@ -75,7 +75,7 @@ const main = async () => {
                 details VARCHAR(1000),
                 resultsPublished BOOLEAN DEFAULT FALSE,
                 attachedFile VARCHAR(500),
-                image VARCHAR(500) DEFAULT "https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg",
+                image VARCHAR(500),
                 createdAt DATETIME,
                 modifiedAt DATETIME
             )	

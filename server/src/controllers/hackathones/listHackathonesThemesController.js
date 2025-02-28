@@ -7,14 +7,8 @@ import listHackathonesThemesModel from '../../models/hackathones/listHackathones
 //Función controladora que lista las temáticas de los Hackatones
 const listHackathonesThemesController = async (req, res) => {
     try {
-        //Obtener los filtros (query params)
-        const { hackathon, theme } = req.query;
-
         //Obtener los temas de los hackathones
-        const hackathonesThemes = await listHackathonesThemesModel(
-            hackathon,
-            theme
-        );
+        const hackathonesThemes = await listHackathonesThemesModel();
 
         res.send({
             status: 'ok',
@@ -25,8 +19,7 @@ const listHackathonesThemesController = async (req, res) => {
     } catch (error) {
         generateErrorUtil(
             500,
-            'Error al obtener las temáticas de los hackathones',
-            error
+            'Error al obtener las temáticas de los hackathones'
         );
     }
 };

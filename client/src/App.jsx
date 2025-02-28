@@ -10,6 +10,7 @@ import NewHackathonPage from './pages/NewHackathonPage';
 import NotFound from './pages/NotFound';
 import DetailHackathonPage from './pages/DetailHackathonPage';
 import RegisterPage from './pages/RegisterPage';
+import PrivateUserProfilePage from './pages/PrivateUserProfilePage';
 
 //Definimos el componente principal
 const App = () => {
@@ -29,6 +30,10 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route
+                    path="/users/profile"
+                    element={<PrivateUserProfilePage />}
+                />
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
                 <Route
                     path="/details/:hackathonId"

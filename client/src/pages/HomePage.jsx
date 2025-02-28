@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
 import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
 
+//FAQ
 const faqs = [
     {
         question: '¿Qué es un hackathon?',
@@ -90,6 +91,7 @@ const HomePage = () => {
                                 <p className="text-pink-500 text-2xl font-bold">
                                     #{index + 1}
                                 </p>
+
                                 <img
                                     src={hackathon.image}
                                     alt={hackathon.name}
@@ -98,6 +100,7 @@ const HomePage = () => {
                                         handleImageClick(hackathon.id)
                                     } // Pasamos el id ***
                                 />
+
                                 <p>
                                     Número de participantes:{' '}
                                     {hackathon.participantCount}
