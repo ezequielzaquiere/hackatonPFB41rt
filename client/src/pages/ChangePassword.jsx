@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 
 //Componentes
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //Autorización
 import { AuthContext } from '../contexts/AuthContext';
@@ -52,7 +52,8 @@ const ChangePassword = () => {
                     method: 'put',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: authUser,
+                        Authorization:
+                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsInJvbGUiOiJkZXYiLCJpYXQiOjE3NDA3NjE5NDIsImV4cCI6MTc0MTM2Njc0Mn0.YYE45g-4QAd8u6d_j0aOei-kaGppkx4Jy6JGbhVY6Xk',
                     },
                     body: JSON.stringify({
                         currentPassword,
@@ -94,13 +95,16 @@ const ChangePassword = () => {
     };
 
     return (
-        <main>
-            <h2>CAMBIO DE CONTRASEÑA</h2>
+        <main className="w-screen bg-black text-white flex flex-col gap-5 text-xl text-center">
+            <h2 className="text-pink-500 py-5 mb-5">CAMBIO DE CONTRASEÑA</h2>
 
-            <form onSubmit={handleChangePassword}>
+            <form
+                onSubmit={handleChangePassword}
+                className="flex gap-5 w-screen"
+            >
                 <label htmlFor="currentPassword">CONTRASEÑA ACTUAL:</label>
                 <input
-                    type="password"
+                    type="text"
                     id="currentPassword"
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
@@ -110,7 +114,7 @@ const ChangePassword = () => {
 
                 <label htmlFor="newPassword">NUEVA CONTRASEÑA:</label>
                 <input
-                    type="password"
+                    type="text"
                     id="newPassword"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
@@ -120,7 +124,7 @@ const ChangePassword = () => {
 
                 <label htmlFor="repeatNewPassword">REPETIR CONTRASEÑA:</label>
                 <input
-                    type="password"
+                    type="text"
                     id="repeatNewPassword"
                     value={repeatNewPassword}
                     onChange={(e) => setRepeatNewPassword(e.target.value)}
