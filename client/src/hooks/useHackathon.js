@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 const { VITE_API_URL } = import.meta.env;
 const useHackathon = (hackathonId) => {
-    const [hackathon, setHackathon] = useState(null);
+    const [hackathon, setHackathon] = useState('');
 
     useEffect(() => {
         const fetchHackathon = async () => {
             try {
                 const response = await fetch(
-                    `${VITE_API_URL}/api/hackathon/hackathones/details/1`
+                    `${VITE_API_URL}/api/hackathon/hackathones/details/${hackathonId}`
                 );
                 const body = await response.json();
 
