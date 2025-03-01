@@ -15,7 +15,8 @@ import ValidateUserPage from './pages/ValidateUserPage';
 import PrivateUserProfilePage from './pages/PrivateUserProfilePage';
 import ChangePassword from './pages/ChangePassword';
 import EditHackathonPage from './pages/EditHackathonInfoPage';
-
+import SendRecoveryPassCode from './pages/SendRecoveryPassCode';
+import UseRecoveryPassCode from './pages/UseRecoveryPassCode';
 //Definimos el componente principal
 const App = () => {
     return (
@@ -35,10 +36,21 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/validate/:regCode" element={<ValidateUserPage />} />
+                <Route
+                    path="/validate/:regCode"
+                    element={<ValidateUserPage />}
+                />
                 <Route
                     path="/users/profile"
                     element={<PrivateUserProfilePage />}
+                />
+                <Route
+                    path="/users/password/reset"
+                    element={<SendRecoveryPassCode />}
+                />
+                <Route
+                    path="/users/password/reset/:recoverPassCode"
+                    element={<UseRecoveryPassCode />}
                 />
                 <Route
                     path="/users/password/change"
