@@ -13,20 +13,16 @@ import toast from 'react-hot-toast';
 // Obtenemos la URL de nuestra API.
 const { VITE_API_URL } = import.meta.env;
 
-// Inicializamos el componente.
+//Componente para cambiar contraseña
 const ChangePassword = () => {
-    // Obtenemos los elementos necesarios del contexto de autorización.
     const { authUser } = useContext(AuthContext);
-
-    // Obtenemos la función navigate.
     const navigate = useNavigate();
 
-    // Declaramos una variable en el State para cada elemento del formulario.
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [repeatNewPassword, setRepeatNewPassword] = useState('');
 
-    // Declaramos una variable en el State para indicar si estamos haciendo fetch.
+    //Variable en el State para indicar si se está haciendo fetch.
     const [loading, setLoading] = useState(false);
 
     // Función que maneja el envío del formulario.
@@ -53,7 +49,7 @@ const ChangePassword = () => {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization:
-                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsInJvbGUiOiJkZXYiLCJpYXQiOjE3NDA3NjE5NDIsImV4cCI6MTc0MTM2Njc0Mn0.YYE45g-4QAd8u6d_j0aOei-kaGppkx4Jy6JGbhVY6Xk',
+                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsInJvbGUiOiJkZXYiLCJpYXQiOjE3NDA3NjU1NjEsImV4cCI6MTc0MTM3MDM2MX0.LO5ykpLbUMPKkgX-_reDt21P93AYGLZmm3SKt2YTjqc',
                     },
                     body: JSON.stringify({
                         currentPassword,
@@ -79,7 +75,7 @@ const ChangePassword = () => {
                 icon: '🔑', // Ícono de llave
             });
 
-            // Redirigimos a la página principal.
+            // Redirigir la página principal.
             navigate('/');
         } catch (err) {
             toast.error(
