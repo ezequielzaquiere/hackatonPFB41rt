@@ -12,6 +12,7 @@ import DetailHackathonPage from './pages/DetailHackathonPage';
 import RegisterPage from './pages/RegisterPage';
 import PrivateUserProfilePage from './pages/PrivateUserProfilePage';
 import ChangePassword from './pages/ChangePassword';
+import EditHackathonPage from './pages/EditHackathonInfoPage';
 
 //Definimos el componente principal
 const App = () => {
@@ -43,8 +44,12 @@ const App = () => {
                 <Route
                     path="/details/:hackathonId"
                     element={<DetailHackathonPage />}
-                />{' '}
-                {/* *** */}
+                />
+                <Route
+                    path="/details/:hackathonId/edit"
+                    element={<EditHackathonPage />}
+                />
+
                 <Route path="*" element={<NotFound />} />
             </Routes>
 

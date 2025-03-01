@@ -53,11 +53,17 @@ const TextEditor = ({ value, onChange }) => {
                 orderedList: false,
             }),
         ],
-        content: value,
+        content: value || '',
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
         },
     });
+
+    useEffect(() => {
+        if (editor && value !== editor.getHTML()) {
+            editor.commands.setContent(value || '', false); // `false` evita que lo marque como cambio del usuario
+        }
+    }, [value, editor]);
 
     useEffect(() => {
         return () => editor?.destroy();

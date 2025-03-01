@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Componente que autocompletara la direccion
@@ -6,9 +6,16 @@ import PropTypes from 'prop-types';
 // Recibe onSlect para que se ejecute cuando se selecciona la ubicacion
 // Recibe isDisabled para que se active o desactive el input
 
-const LocatioAutocomplete = ({ onSelect, isDisabled }) => {
+const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
     // Guarda la consulta del usuario
     const [query, setQuery] = useState('');
+
+    //Si hay una localizacion la cambiamos
+    useEffect(() => {
+        if (location) {
+            setQuery(location);
+        }
+    }, [location]);
 
     // Guarda la lista de resultados al consultar la API
     const [suggestion, setSuggestions] = useState([]);
@@ -105,6 +112,7 @@ const LocatioAutocomplete = ({ onSelect, isDisabled }) => {
 LocatioAutocomplete.propTypes = {
     onSelect: PropTypes.func.isRequired,
     isDisabled: PropTypes.bool.isRequired,
+    location: PropTypes.string,
 };
 
 export default LocatioAutocomplete;
