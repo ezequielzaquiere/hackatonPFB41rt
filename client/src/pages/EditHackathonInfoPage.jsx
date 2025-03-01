@@ -7,8 +7,8 @@ import toast from 'react-hot-toast';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 
 //Dependencia fecha
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+//import DatePicker from 'react-datepicker';
+//import 'react-datepicker/dist/react-datepicker.css';
 import { addHours, format } from 'date-fns';
 
 //Imports de React
@@ -247,7 +247,7 @@ const EditHackathonPage = () => {
                             </legend>
                             {/* Input datepicker de la fecha de inicio */}
 
-                            <DatePicker
+                            {/*<DatePicker
                                 selectsStart
                                 showTimeSelect
                                 isClearable
@@ -261,11 +261,11 @@ const EditHackathonPage = () => {
                                 id="startingDate"
                                 placeholderText="Fecha de inicio"
                                 required
-                            />
+                            />*/}
 
                             {/* Input datepicker de la fecha de finalizacion */}
 
-                            <DatePicker
+                            {/*<DatePicker
                                 selectsEnd
                                 showTimeSelect
                                 isClearable
@@ -278,7 +278,7 @@ const EditHackathonPage = () => {
                                 placeholderText="Fecha de finalizacion"
                                 dateFormat="dd-MM-yyyy HH:mm"
                                 required
-                            />
+                            />*/}
                         </fieldset>
 
                         <fieldset>
