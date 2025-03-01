@@ -1,7 +1,7 @@
 //Importamos los hooks. 
 import { useState,useContext } from "react";
 
-//Importamos los componentes (Navigate)
+//Importamos los componentes y el hook useNavigate.
 import { Navigate, useNavigate } from "react-router-dom";
 
 //Importamos contexto de autorización.
