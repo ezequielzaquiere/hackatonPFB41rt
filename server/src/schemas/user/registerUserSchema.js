@@ -25,12 +25,10 @@ const registerUserSchema = joi
                 'El campo "{#key}" solo puede contener letras y espacios.',
         }),
         email: joi.string().email().max(70).required(),
-        password: joi
-            .string()
-            .min(8)
-            .max(100)
-
-            .required(),
+        password: joi.string().min(8).max(100).required().messages({
+            'string.pattern.base':
+                'El campo "{#key}" debe contener mínimo 8 digitos,una letra,un número y un símbolo.',
+        }),
     })
     .messages(joiErrorMessages);
 
