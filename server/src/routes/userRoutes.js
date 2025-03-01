@@ -37,18 +37,10 @@ router.get('', isUserAuthMiddleware, privateUserProfileController);
 router.put('/password/change', isUserAuthMiddleware, updateUserPassController);
 
 // Enviar código de recuperación de contraseña al email del usuario.
-router.put(
-    '/password/reset',
-    isUserAuthMiddleware,
-    sendRecoveryPassEmailController
-);
+router.put('/password/reset', sendRecoveryPassEmailController);
 
 // Actualiza la contraseña de un usuario con un código de recuperación.
-router.put(
-    '/password/reset/:recoverPassCode',
-    isUserAuthMiddleware,
-    useRecoveryPassCodeController
-);
+router.put('/password/reset/:recoverPassCode', useRecoveryPassCodeController);
 
 //Endpoint que muestra los datos del usuario.
 router.get('/profile/:id', showUserInfoController);
