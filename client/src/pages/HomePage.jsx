@@ -1,26 +1,13 @@
-import imageExample from '/imageExample.jpg';
+//Dependencias
 import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+//Hooks
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
+import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
 
-const events = [
-    {
-        title: 'THE WAVE HACKATHON 2025',
-        date: '18 - 19 Febrero 2025',
-        img: imageExample,
-    },
-    {
-        title: 'MADRID HACKATHON',
-        date: 'Hackathon Web3 más grande de España',
-        img: imageExample,
-    },
-    {
-        title: 'Hackathon Cámara',
-        date: 'Detalles del evento...',
-        img: imageExample,
-    },
-];
-
+//FAQ
 const faqs = [
     {
         question: '¿Qué es un hackathon?',
@@ -41,8 +28,16 @@ const faqs = [
 ];
 
 const HomePage = () => {
+    const navigate = useNavigate();
+    const handleImageClick = (id) => {
+        navigate(`/details/${id}`); // Redirige a la página de detalles ***
+    };
+
     //Traer del backend los 3 mejores hackathones según rating
     const bestHackathones = useBestHackathonesList();
+
+    //Traer del backend los hackathones a partir de la fecha de solicitud
+    const hackathonesFromToday = useHackathonesFromToday();
 
     //Función para imprimir estrellas según avgRating
     const printStars = (avgRating) => {
@@ -87,7 +82,7 @@ const HomePage = () => {
                 </p>
 
                 <div className="space-y-8">
-                    {bestHackathones.data.bestHackathones.map(
+                    {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
@@ -96,11 +91,16 @@ const HomePage = () => {
                                 <p className="text-pink-500 text-2xl font-bold">
                                     #{index + 1}
                                 </p>
+
                                 <img
                                     src={hackathon.image}
                                     alt={hackathon.name}
                                     className="w-56 h-28 rounded-lg object-cover"
+                                    onClick={() =>
+                                        handleImageClick(hackathon.id)
+                                    } // Pasamos el id ***
                                 />
+
                                 <p>
                                     Número de participantes:{' '}
                                     {hackathon.participantCount}
@@ -123,22 +123,29 @@ const HomePage = () => {
                             ref={scrollContainerRef}
                             className="flex flex-center gap-4 overflow-x-auto scrollbar-hide"
                         >
-                            {events.map((event, index) => (
-                                <div
-                                    key={index}
-                                    className="min-w-[225px] bg-white p-4 rounded-lg shadow-md text-black"
-                                >
-                                    <img
-                                        src={event.img}
-                                        alt={event.title}
-                                        className="w-full h-40 object-cover rounded-md"
-                                    />
-                                    <h3 className="mt-3 text-lg font-semibold">
-                                        {event.title}
-                                    </h3>
-                                    <p className="text-sm">{event.date}</p>
-                                </div>
-                            ))}
+                            {hackathonesFromToday.data?.hackathones?.map(
+                                (hackathon, index) => (
+                                    <div
+                                        key={index}
+                                        className="min-w-[225px] bg-white p-4 rounded-lg shadow-md text-black"
+                                    >
+                                        <img
+                                            src={hackathon.image}
+                                            alt=""
+                                            className="w-full h-40 object-cover rounded-md"
+                                        />
+                                        <h3 className="mt-3 text-lg font-semibold">
+                                            {hackathon.title}
+                                        </h3>
+                                        <p className="text-sm">
+                                            {hackathon.startingDate}
+                                        </p>
+                                        <p className="text-sm">
+                                            {hackathon.startingDate}
+                                        </p>
+                                    </div>
+                                )
+                            )}
                         </div>
 
                         {/* Botón Izquierda */}
@@ -160,8 +167,8 @@ const HomePage = () => {
                 </div>
             </section>
 
+            {/* Preguntas Frecuentes */}
             <section className="bg-black text-white px-10 py-10">
-                {/* Preguntas Frecuentes */}
                 <div>
                     <h2 className="text-2xl font-bold">Preguntas Frecuentes</h2>
                     <div className="mt-6">

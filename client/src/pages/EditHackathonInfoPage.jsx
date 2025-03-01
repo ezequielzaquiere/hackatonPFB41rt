@@ -1,10 +1,10 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
 //TODO:AÑADIR LOS DE VACIAR CAMPOS
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
-
+//TODO EVITAR QUE PUEDA EDITAR EL HACKATHON SI YA HA PASADO LA FECHA
 //Importamoslas dependencias
 import toast from 'react-hot-toast';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
@@ -12,7 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { addHours, format } from 'date-fns';
 
 //Imports de React
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 //Importamos la direccion de la api
 const { VITE_API_URL } = import.meta.env;
@@ -23,16 +23,29 @@ import { AuthContext } from '../contexts/AuthContext';
 //Importamos los hooks
 import useHackathonThemes from '../hooks/useHackathonThemes';
 import useHackathonLangs from '../hooks/useHackathonLang';
+import useHackathon from '../hooks/useHackathon';
 
 // Importar componentes
 import LocatioAutocomplete from '../components/LocationAutocomplete';
 import DetailTextEditor from '../components/DetailsTextEditor';
 
-const NewHackathonPage = () => {
+const EditHackathonPage = () => {
     const now = new Date();
+    let navigate = useNavigate();
+
+    //Obtenemos el id del hackathon
+    const { hackathonId } = useParams();
 
     //Obtenemos el token de autorizacion
     const { authToken, authUser } = useContext(AuthContext);
+
+    //Obtenemos la info del hackathon a usar
+    const { hackathon } = useHackathon(hackathonId);
+
+    //Si no existe devolvemos a la pagina principal
+    if (!hackathon) {
+        navigate('/');
+    }
 
     const [formData, setFormData] = useState({
         title: '',
@@ -48,9 +61,24 @@ const NewHackathonPage = () => {
         document: null,
     });
 
-    //Obtenemos la funcion navigate
-    let navigate = useNavigate();
-
+    //Hacemos un useEffect para que se actualce el fomrdat
+    useEffect(() => {
+        if (hackathon) {
+            setFormData({
+                title: hackathon.title || '',
+                summary: hackathon.summary || '',
+                startingDate: hackathon.startingDate || null,
+                deadline: hackathon.deadline || null,
+                type: hackathon.type || '',
+                location: hackathon.location || '',
+                themeId: hackathon.themeId || '',
+                programmingLangId: hackathon.programmingLangIds || [],
+                details: hackathon.details || '',
+                image: hackathon.image || null,
+                document: hackathon.document || null,
+            });
+        }
+    }, [hackathon]);
     //Comprobamos si el boton se va a desactivar
     const isDisabled = formData.type === 'presencial' ? false : true;
 
@@ -71,12 +99,10 @@ const NewHackathonPage = () => {
         setFormData({ ...formData, [field]: date });
         console.log(formData);
     };
-    console.log(formData.startingDate);
 
     //Funcion para manejar los cambios de imagen
     const handleChangeFiles = (e) => {
         const { name, files } = e.target;
-        console.log(files[0]);
         setFormData({ ...formData, [name]: files[0] });
     };
 
@@ -109,7 +135,6 @@ const NewHackathonPage = () => {
     const [loading, setLoading] = useState(false);
 
     const handleCreationHackathon = async (e) => {
-        let body;
         try {
             e.preventDefault();
 
@@ -144,37 +169,41 @@ const NewHackathonPage = () => {
             //Comenzamos con el envio al backend
             setLoading(true);
 
-            const res = await fetch(`${VITE_API_URL}/api/hackathon/new`, {
-                method: 'post',
-                headers: {
-                    Authorization:
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwNjg4MDIwLCJleHAiOjE3NDEyOTI4MjB9.8mIR895iujfH1mCIJRiPxTcp7RwUX08S0FHDAzfrSyE',
-                },
-                body: formDataToSend,
-            });
-            body = await res.json();
+            const res = await fetch(
+                `${VITE_API_URL}/api/hackathon/${hackathonId}`,
+                {
+                    method: 'PATCH',
+                    headers: {
+                        Authorization:
+                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwNjg4MDIwLCJleHAiOjE3NDEyOTI4MjB9.8mIR895iujfH1mCIJRiPxTcp7RwUX08S0FHDAzfrSyE',
+                    },
+                    body: formDataToSend,
+                }
+            );
+            const body = await res.json();
+
+            if (body) {
+                // Mostramos un mensaje al usuario indicando que todo ha ido bien.
+                toast.success(body.message, {
+                    id: 'register',
+                });
+            }
 
             // Si hay algún error lo lanzamos.
             if (body.status === 'error') {
                 throw new Error(body.message);
             }
-
-            // Mostramos un mensaje al usuario indicando que todo ha ido bien.
-            toast.success(body.message, {
-                id: 'register',
-            });
         } catch (err) {
             toast.error(err.message, {
                 id: 'register',
             });
         } finally {
             setLoading(false);
-            navigate(`/details/${body.data.id}`);
+            navigate(`/details/${hackathonId}`);
         }
     };
     console.log(formData);
 
-    //Si no esta logueado vuelve a la main
     /*if (!authUser) {
         return <Navigate to="/" />;
     }*/
@@ -279,6 +308,7 @@ const NewHackathonPage = () => {
                             <LocatioAutocomplete
                                 isDisabled={isDisabled}
                                 onSelect={handleChangeLocation}
+                                location={formData.location}
                             />
                         </fieldset>
                     </div>
@@ -292,6 +322,7 @@ const NewHackathonPage = () => {
                             </label>
                             <DetailTextEditor
                                 onChange={handleChangeDetails}
+                                value={formData.details}
                                 id="details"
                             />
                         </fieldset>
@@ -383,4 +414,4 @@ const NewHackathonPage = () => {
     );
 };
 
-export default NewHackathonPage;
+export default EditHackathonPage;

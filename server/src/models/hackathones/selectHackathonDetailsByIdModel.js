@@ -18,11 +18,17 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
             h.startingDate, 
             h.deadline, 
             h.type,
+            h.themeId,
             h.location,
             t.theme,
             h.details,
             h.attachedFile, 
             AVG(r.rating) AS avgRating,
+            (
+            SELECT JSON_ARRAYAGG(hl.programmingLangId)
+            FROM hackathonLangs hl
+            WHERE hl.hackathonId = h.id
+            ) AS programmingLangIds,
             (
 				SELECT COUNT(*) 
 				FROM registrations reg 

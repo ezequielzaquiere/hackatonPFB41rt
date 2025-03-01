@@ -10,6 +10,7 @@ const updateUserProfileModel = async ({
     firstName,
     lastName,
     email,
+    avatarName,
     userId,
 }) => {
     const pool = await getPool();
@@ -56,6 +57,12 @@ const updateUserProfileModel = async ({
 
         await pool.query(`UPDATE users SET email = ? WHERE id = ?`, [
             email,
+            userId,
+        ]);
+    }
+    if (avatarName) {
+        await pool.query(`UPDATE users SET avatar = ? WHERE id = ?`, [
+            avatarName,
             userId,
         ]);
     }

@@ -89,10 +89,20 @@ const AuthProvider = ({ children }) => {
         cookies.remove(VITE_AUTH_TOKEN);
     };
 
-    // Función que actualiza el avatar del usuario en el State.
-    const authUpdateAvatarState = (avatar) => {
+    // Función que actualiza el perfil del usuario en el State.
+    const authUpdateProfileState = ({
+        username,
+        firstName,
+        lastName,
+        email,
+        avatar,
+    }) => {
         setAuthUser({
             ...authUser,
+            username,
+            firstName,
+            lastName,
+            email,
             avatar,
         });
     };
@@ -104,7 +114,7 @@ const AuthProvider = ({ children }) => {
                 authUser,
                 authLoginState,
                 authLogoutState,
-                authUpdateAvatarState,
+                authUpdateProfileState,
             }}
         >
             {children}

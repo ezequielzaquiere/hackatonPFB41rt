@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-
 const { VITE_API_URL } = import.meta.env;
 
-const useBestHackathonesList = () => {
-    const [data, setData] = useState([]);
+const useHackathonesFromToday = () => {
+    const [data, setData] = useState('');
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await fetch(
-                    `${VITE_API_URL}/api/hackathon/hackathones/bestHackathones`
+                    `${VITE_API_URL}/api/hackathon/hackathones/fromToday`
                 );
                 if (!response.ok) {
                     throw new Error(
@@ -28,4 +27,4 @@ const useBestHackathonesList = () => {
     return data;
 };
 
-export default useBestHackathonesList;
+export default useHackathonesFromToday;

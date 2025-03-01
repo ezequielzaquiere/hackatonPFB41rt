@@ -34,9 +34,12 @@ const newHackathonController = async (req, res, next) => {
         const image = req.files?.image;
         const attachedFile = req.files?.document;
 
-        //Convertimos el array de lenguajes a numero (recibimos los numeros en string)
-        let programmingLangIdArray = programmingLangId.map(Number);
+        //Si solo recibimos uno no es un array asi que no aseguramos de que lo sea
+        let programmingLangIdArray = Array.isArray(req.body.programmingLangId)
+            ? req.body.programmingLangId.map(Number) // Si ya es un array, se convierte a números
+            : [Number(req.body.programmingLangId)]; // Si es un solo valor, se convierte en array
 
+        req.body.programmingLangId = programmingLangIdArray;
         //Validamos con joi
         await validateSchemaUtil(newHackathonSchema, req.body);
 
@@ -90,11 +93,14 @@ const newHackathonController = async (req, res, next) => {
             imgName,
         });
 
-        await insertNewHackathonLangs(hackathonId, programmingLangId);
+        await insertNewHackathonLangs(hackathonId, programmingLangIdArray);
 
         res.status(201).send({
             status: 'ok',
             message: 'Evento hackathon creado',
+            data: {
+                id: hackathonId,
+            },
         });
     } catch (err) {
         next(err);

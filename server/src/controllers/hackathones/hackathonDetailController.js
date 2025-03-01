@@ -14,7 +14,7 @@ const hackathonDetailController = async (req, res, next) => {
         res.send({
             status: 'ok',
             data: {
-                hackathon,
+                hackathon: detallesHackathones,
             },
         });
     } catch (err) {
