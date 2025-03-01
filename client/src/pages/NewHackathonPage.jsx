@@ -1,9 +1,10 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
 //TODO:AÑADIR LOS DE VACIAR CAMPOS
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
-//TODO:UNA VEZ FINALIZADO LO DEVOLVEMOS A LA PRINCIPAL?
+
 //Importamoslas dependencias
 import toast from 'react-hot-toast';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
@@ -46,6 +47,9 @@ const NewHackathonPage = () => {
         image: null,
         document: null,
     });
+
+    //Obtenemos la funcion navigate
+    let navigate = useNavigate();
 
     //Comprobamos si el boton se va a desactivar
     const isDisabled = formData.type === 'presencial' ? false : true;
@@ -105,6 +109,7 @@ const NewHackathonPage = () => {
     const [loading, setLoading] = useState(false);
 
     const handleCreationHackathon = async (e) => {
+        let body;
         try {
             e.preventDefault();
 
@@ -147,7 +152,7 @@ const NewHackathonPage = () => {
                 },
                 body: formDataToSend,
             });
-            const body = await res.json();
+            body = await res.json();
 
             // Si hay algún error lo lanzamos.
             if (body.status === 'error') {
@@ -164,9 +169,15 @@ const NewHackathonPage = () => {
             });
         } finally {
             setLoading(false);
+            navigate(`/details/${body.data.id}`);
         }
     };
     console.log(formData);
+
+    //Si no esta logueado vuelve a la main
+    /*if (!authUser) {
+        return <Navigate to="/" />;
+    }*/
 
     return (
         <>
