@@ -10,8 +10,8 @@ const UseRecoveryPassCode = () => {
     const navigate = useNavigate();
 
     // Obtenemos el código de recuperación de los path params.
-    const { recoverPassCode } = useParams();
-    console.log('Código de recuperación recibido:', recoverPassCode);
+    const { userId, recoverPassCode } = useParams();
+
     const [newPassword, setNewPassword] = useState('');
     const [repeatedNewPass, setRepeatedNewPass] = useState('');
 
@@ -34,7 +34,7 @@ const UseRecoveryPassCode = () => {
 
             // Obtenemos el response.
             const res = await fetch(
-                `${VITE_API_URL}/api/users/password/reset/${recoverPassCode}`,
+                `${VITE_API_URL}/api/users/${userId}/password/recover/${recoverPassCode}`,
                 {
                     method: 'put',
                     headers: {
