@@ -66,7 +66,7 @@ const insertUserModel = async (
 
         Gracias por registrarte en Hackverse. Para activar tu cuenta, haz click en el siguiente enlace:
 
-        <a href="http://localhost:8000/api/users/validate/${regCode}">¡Activa tu usuario!</a>
+        <a href="${process.env.client_URL}/users/validate/${regCode}">¡Activa tu usuario!</a>
     `;
 
     // Enviamos el email.
