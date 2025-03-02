@@ -15,7 +15,7 @@ const { VITE_API_URL } = import.meta.env;
 
 //Componente para cambiar contraseña
 const ChangePassword = () => {
-    const { authUser } = useContext(AuthContext);
+    const { authToken, authUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [currentPassword, setCurrentPassword] = useState('');
@@ -48,8 +48,7 @@ const ChangePassword = () => {
                     method: 'put',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization:
-                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsInJvbGUiOiJkZXYiLCJpYXQiOjE3NDA3NjU1NjEsImV4cCI6MTc0MTM3MDM2MX0.LO5ykpLbUMPKkgX-_reDt21P93AYGLZmm3SKt2YTjqc',
+                        Authorization: authToken,
                     },
                     body: JSON.stringify({
                         currentPassword,
