@@ -7,20 +7,22 @@ import getPool from '../../db/getPool.js';
 //Importar función generadora de errores.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-// Funcion que usa el código de recuperación de contraseña de un usuario autenticado.
-const useRecoveryPassCodeModel = async (userId, newPassword) => {
+// Funcion que actualiza la contraseña de un usuario autenticado.
+const updateUserPassRecoverModel = async (userId, newPassword) => {
     const pool = await getPool();
 
-    console.log(userId);
     //Obtenemos la contraseña actual del usuario.
-    const users = await pool.query(`SELECT password FROM users WHERE id = ?`, [
-        userId,
-    ]);
+    const [users] = await pool.query(
+        `SELECT password FROM users WHERE id = ?`,
+        [userId]
+    );
 
     //Si no existe, generamos error.
     if (users.length < 1) {
         generateErrorUtil(404, 'Usuario no encontrado');
     }
+
+    const password = users[0].password;
 
     //Hashear la nueva contraseña.
     const hashedPass = await bcrypt.hash(newPassword, 10);
@@ -32,4 +34,4 @@ const useRecoveryPassCodeModel = async (userId, newPassword) => {
     ]);
 };
 
-export default useRecoveryPassCodeModel;
+export default updateUserPassRecoverModel;
