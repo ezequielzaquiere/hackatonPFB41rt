@@ -4,6 +4,8 @@ import joiErrorMessages from './joiErrorMessages.js';
 
 // Expresión regular para solo letras (mayúsculas y minúsculas, con espacios opcionales)
 const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/;
+const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 // Creamos el esquema.
 const registerUserSchema = joi
@@ -25,10 +27,16 @@ const registerUserSchema = joi
                 'El campo "{#key}" solo puede contener letras y espacios.',
         }),
         email: joi.string().email().max(70).required(),
-        password: joi.string().min(8).max(100).required().messages({
-            'string.pattern.base':
-                'El campo "{#key}" debe contener mínimo 8 digitos,una letra,un número y un símbolo.',
-        }),
+        password: joi
+            .string()
+            .min(8)
+            .max(100)
+            .regex(passwordRegex)
+            .required()
+            .messages({
+                'string.pattern.base':
+                    'El campo "{#key}" debe contener mínimo 8 digitos,una letra,un número y un símbolo.',
+            }),
     })
     .messages(joiErrorMessages);
 
