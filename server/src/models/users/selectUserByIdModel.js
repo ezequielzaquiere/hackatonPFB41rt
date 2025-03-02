@@ -7,7 +7,7 @@ const selectUserByIdModel = async (userId) => {
     const pool = await getPool();
 
     const [users] = await pool.query(
-        'SELECT id, username, firstName, lastName, password, email, avatar FROM users WHERE id = ?',
+        'SELECT id, username, firstName, lastName, password, email, avatar, role FROM users WHERE id = ?',
         [userId]
     );
     if (users.length < 1) {

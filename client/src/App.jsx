@@ -17,6 +17,8 @@ import ChangePassword from './pages/ChangePassword';
 import EditHackathonPage from './pages/EditHackathonInfoPage';
 import SendRecoveryPassCode from './pages/SendRecoveryPassCode';
 import UseRecoveryPassCode from './pages/UseRecoveryPassCode';
+import UserProfilePage from './pages/UserProfilePage';
+
 //Definimos el componente principal
 const App = () => {
     return (
@@ -55,6 +57,11 @@ const App = () => {
                 <Route
                     path="/users/password/change"
                     element={<ChangePassword />}
+                />
+
+                <Route
+                    path="/users/profile/public"
+                    element={<UserProfilePage />}
                 />
                 <Route path="/hackathon/new" element={<NewHackathonPage />} />
                 <Route
