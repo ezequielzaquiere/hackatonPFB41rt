@@ -11,7 +11,7 @@ const Header = () => {
         <header>
             <h1 className="text-red-500">
                 {' '}
-                <Link to="/">HACKAVERSE</Link>
+                <Link to="/">HACKVERSE</Link>
             </h1>
             {
                 // Si el usuario está autenticado, mostramos su información.
@@ -63,7 +63,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <Link to="/users/profile/public">
-                                    Perfil publico
+                                    Perfil público
                                 </Link>
                             </li>
                             <li>
