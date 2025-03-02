@@ -61,6 +61,9 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/users/profile/public">Perfil publico</Link>
+                    </li>
+                    <li>
                         <Link to="/details">Detalles de los hackathones</Link>
                     </li>
                     <li>

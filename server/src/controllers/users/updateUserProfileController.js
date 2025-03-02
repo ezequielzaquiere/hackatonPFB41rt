@@ -18,9 +18,9 @@ const updateUserProfileController = async (req, res, next) => {
         if (avatar) {
             const user = await selectUserByIdModel(req.user.id);
 
-            user.avatar && (await removeImgUtil(user.avatar, 'avatar'));
+            user.avatar && (await removeImgUtil(user.avatar));
 
-            avatarName = await saveImgUtil(avatar, 400, 'avatar');
+            avatarName = await saveImgUtil(avatar, 400);
         }
 
         await updateUserProfileModel({
