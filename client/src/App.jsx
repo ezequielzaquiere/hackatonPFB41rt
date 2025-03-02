@@ -51,7 +51,7 @@ const App = () => {
                     element={<SendRecoveryPassCode />}
                 />
                 <Route
-                    path="/users/password/reset/:recoverPassCode"
+                    path="/users/:userId/password/:recoverPassCode"
                     element={<UseRecoveryPassCode />}
                 />
                 <Route

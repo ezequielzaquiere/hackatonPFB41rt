@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 
 //Importamos los componentes.
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link } from 'react-router-dom';
 
 //Importamos la función toast.
 import toast from 'react-hot-toast';
@@ -100,20 +100,22 @@ const LoginPage = () => {
                     required
                 />
 
- 
-                <button 
-                    disabled={loading} 
+                <button
+                    disabled={loading}
                     className={`px-4 py-2 text-white font-semibold rounded-lg transition duration-300 ${
-                    loading 
-                        ? "bg-gray-400 cursor-not-allowed" 
-                        : "bg-blue-500 hover:bg-blue-600"
-                }`}
->
-    Loguearse
-</button>
+                        loading
+                            ? 'bg-gray-400 cursor-not-allowed'
+                            : 'bg-blue-500 hover:bg-blue-600'
+                    }`}
+                >
+                    Loguearse
+                </button>
 
-<a><Link to="/user/password/reset">¿Has olvidado tu contraseña?</Link></a>
-
+                <a>
+                    <Link to="/users/password/reset">
+                        ¿Has olvidado tu contraseña?
+                    </Link>
+                </a>
             </form>
         </main>
     );

@@ -44,6 +44,7 @@ const sendRecoveryPassEmailController = async (req, res, next) => {
                 <a href="${process.env.CLIENT_URL}/users/${user.id}/password/${recoverPassCode}">¡Click aquí para actualizar tu contraseña!</a>
             `;
 
+            console.log(emailBody);
             // Enviamos el email.
             await sendEmailUtil(email, emailSubject, emailBody);
         }
