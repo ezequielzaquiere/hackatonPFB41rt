@@ -1,11 +1,11 @@
 // Importamos los modelos necesarios.
-import selectUserByIdModel from '../../models/users/selectUserByIdModel.js';
+import showUserPrivateInfoModel from '../../models/users/showUserPrivateInfoModel.js';
 
 // Función controladora que retorna el perfil privado del usuario.
 const privateUserProfileController = async (req, res, next) => {
     try {
         // Obtenemos los datos de usuario.
-        const user = await selectUserByIdModel(req.user.id);
+        const user = await showUserPrivateInfoModel(req.user.id);
         res.send({
             status: 'ok',
             data: {
