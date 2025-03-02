@@ -32,8 +32,7 @@ const AuthProvider = ({ children }) => {
                 // Obtenemos una respuesta.
                 const res = await fetch(`${VITE_API_URL}/api/users`, {
                     headers: {
-                        Authorization:
-                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwNzczNjIyLCJleHAiOjE3NDEzNzg0MjJ9.GmjbDlCvTeNMj2h3Hm3Kx9HqkX47WPHPGOAMtihFtME',
+                        Authorization: authToken,
                     },
                 });
 
