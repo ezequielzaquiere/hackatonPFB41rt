@@ -2,7 +2,7 @@
 import { useContext, useRef, useState } from 'react';
 
 // Importamos los componentes.
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 // Importamos el contexto de autorización.
 import { AuthContext } from '../contexts/AuthContext';
@@ -183,6 +183,8 @@ const PrivateUserProfilePage = () => {
                     <li>Usuario: {authUser.username}</li>
                     <li>Email: {authUser.email}</li>
                 </ul>
+
+                <Link to="/users/password/change">Cambiar contraseña</Link>
             </>
         </main>
     );
