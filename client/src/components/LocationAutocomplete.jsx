@@ -68,11 +68,12 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="¿Dónde tendrá lugar?"
                     className="mb-6 border text-sm rounded-lg block w-full p-2.5  
-                                focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500
-                                enabled:bg-gray-100 enabled:border-gray-300 enabled:text-gray-900 disabled:cursor-not-allowed 
-                                dark:enabled:bg-gray-700 dark:enabled:border-gray-600 dark:enabled:text-gray-400
-                                disabled:bg-white disabled:border-gray-400 disabled:text-black 
-                                dark:disabled:bg-gray-800 dark:disabled:border-gray-500 dark:disabled:text-white"
+                    focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500
+                    enabled:bg-gray-100 enabled:border-gray-300 enabled:text-gray-900 enabled:cursor-not-allowed
+                    dark:enabled:bg-gray-700 dark:enabled:border-gray-600 dark:enabled:text-gray-400
+                    disabled:bg-white disabled:border-gray-400 disabled:text-black 
+                    dark:disabled:bg-gray-800 dark:disabled:border-gray-500 dark:disabled:text-white 
+                    dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500"
                     disabled={isDisabled}
                     required={isDisabled}
                 />
@@ -81,14 +82,17 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                         type="button"
                         onClick={handleSearch}
                         disabled={isDisabled}
-                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed"
+                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl 
+                        focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 
+                        font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 
+                        disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         Enviar
                     </button>
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed"
+                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 enhover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed"
                         disabled={isDisabled}
                     >
                         Limpiar

@@ -2,6 +2,8 @@
 //TODO:AÑADIR LOS DE VACIAR CAMPOS
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
 //TODO:EDITAR EL CALENDARIO DE LA FECHA Y HORA
+//TODO:MIRARA PORQUE EL BORDE DEL INPUT ES AMARILLO SUPUESTAMENTE AUTOFILL PERO NO SE CAMBIA?
+//TODO NO CONSIGO QUE ME FUNCIONE NINGUN HOVER
 //Importamoslas dependencias
 import toast from 'react-hot-toast';
 import { useNavigate, Navigate } from 'react-router-dom';
@@ -9,7 +11,6 @@ import { useNavigate, Navigate } from 'react-router-dom';
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../styles/datepicker.css';
 import { addHours, format } from 'date-fns';
 
 //Imports de React
@@ -183,233 +184,302 @@ const NewHackathonPage = () => {
         <>
             <main className="container 2xl">
                 <h2>Formulario crear hackathon</h2>
-
-                <form onSubmit={handleCreationHackathon}>
-                    <div className="bg-black text-white flex flex-col gap-2">
-                        {/**************************************
-                         ********* Input text del title *********
-                         ****************************************/}
-                        <div className="mb-6">
-                            <label
-                                htmlFor="title"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Titulo
-                            </label>
-                            <input
-                                type="text"
-                                id="title"
-                                name="title"
-                                value={formData.title}
-                                onChange={handleChangeGeneral}
-                                required
-                                placeholder="Aqui va el título"
-                                autoFocus
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            />
-                        </div>
-
-                        {/**************************************
-                         ****** Input textarea del summary ******
-                         ****************************************/}
-
+                {/*"dark:bg-black"*/}
+                <form onSubmit={handleCreationHackathon} className="bg-white">
+                    {/**************************************
+                     ********* Input text del title *********
+                     ****************************************/}
+                    <div className="mb-6">
                         <label
-                            htmlFor="summary"
+                            htmlFor="title"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Descripcion del evento
+                            Titulo
+                        </label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChangeGeneral}
+                            required
+                            placeholder="Aqui va el título"
+                            autoFocus
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                    </div>
+
+                    {/**************************************
+                     ****** Input textarea del summary ******
+                     ****************************************/}
+
+                    <label
+                        htmlFor="summary"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                        Descripcion del evento
+                    </label>
+
+                    <textarea
+                        id="summary"
+                        name="summary"
+                        value={formData.summary}
+                        onChange={handleChangeGeneral}
+                        placeholder="Una breve descripcion del evento..."
+                        maxLength="140"
+                        rows="4"
+                        required
+                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ></textarea>
+
+                    <fieldset>
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Fecha y hora de inicio y finalizacion
+                        </legend>
+
+                        {/****************************************************
+                         ****** Input datepicker de la fecha de inicio  ******
+                         ****************************************************/}
+
+                        <DatePicker
+                            selectsStart
+                            isClearable
+                            minDate={addHours(now, 24)}
+                            selected={formData.startingDate}
+                            onChange={(date) => {
+                                handleChangeDate('startingDate', date);
+                            }}
+                            startDate={formData.startingDate}
+                            dateFormat="dd-MM-yyyy"
+                            id="startingDate"
+                            placeholderText="Fecha de inicio"
+                            openToDate={now}
+                            required
+                            withPortal
+                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            wrapperClassName="w-full"
+                            popperClassName="responsive-datepicker"
+                            calendarClassName="bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        />
+
+                        {/****************************************************
+                         *** Input datepicker de la fecha de fnalizacion  ****
+                         ****************************************************/}
+
+                        <DatePicker
+                            selectsEnd
+                            isClearable
+                            selected={formData.deadline}
+                            onChange={(date) => {
+                                handleChangeDate('deadline', date);
+                            }}
+                            endDate={formData.deadline}
+                            minDate={formData.startingDate}
+                            placeholderText="Fecha de finalizacion"
+                            dateFormat="dd-MM-yyyy"
+                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            required
+                            openToDate={
+                                formData.startingDate
+                                    ? formData.startingDate
+                                    : now
+                            }
+                            popperClassName="responsive-datepicker"
+                            withPortal
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Es online o presencial?
+                        </legend>
+
+                        {/****************************************************************
+                         *** Input radio del tipo de hackathon (presencial u online)  ****
+                         *****************************************************************/}
+                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            {/* Opción Online */}
+                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                <label
+                                    htmlFor="online"
+                                    className="flex items-center w-full ps-3 cursor-pointer"
+                                >
+                                    <input
+                                        type="radio"
+                                        name="type"
+                                        id="online"
+                                        value="online"
+                                        checked={formData.type === 'online'}
+                                        onChange={handleChangeGeneral}
+                                        required
+                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:focus:ring-0 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500"
+                                    />
+                                    <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        Online
+                                    </span>
+                                </label>
+                            </li>
+
+                            {/* Opción Presencial */}
+                            <li className="w-full dark:border-gray-600">
+                                <label
+                                    htmlFor="presencial"
+                                    className="flex items-center w-full ps-3 cursor-pointer"
+                                >
+                                    <input
+                                        type="radio"
+                                        name="type"
+                                        id="presencial"
+                                        value="presencial"
+                                        checked={formData.type === 'presencial'}
+                                        onChange={handleChangeGeneral}
+                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:focus:ring-0 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500"
+                                    />
+                                    <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        Presencial
+                                    </span>
+                                </label>
+                            </li>
+                        </ul>
+                        {/*************************************
+                         *** Input text de la localizacion ****
+                         **************************************/}
+                        <label
+                            htmlFor="location"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Localizacion
+                        </label>
+                        <LocatioAutocomplete
+                            isDisabled={isDisabled}
+                            onSelect={handleChangeLocation}
+                        />
+                    </fieldset>
+
+                    {/***************************************************
+                     *** Input hackathon detalis (para futuro html?) ****
+                     ****************************************************/}
+                    <fieldset>
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Detalles del Hackathon
+                        </legend>
+                        <label htmlFor="details" hidden>
+                            Detalles del hackathon
+                        </label>
+                        <DetailTextEditor
+                            onChange={handleChangeDetails}
+                            id="details"
+                        />
+                    </fieldset>
+
+                    {/***************************************************
+                     ***** Input quer maneja la subida de imagenes  *****
+                     ****************************************************/}
+                    <fieldset>
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Imagen del banner
+                        </legend>
+
+                        <label
+                            htmlFor="image"
+                            className="group flex items-center justify-center px-4 py-2 text-white 
+                                bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg cursor-pointer 
+                                focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition-all"
+                        >
+                            {formData.image
+                                ? formData.image.name
+                                : 'Elige una imagen'}
                         </label>
 
-                        <textarea
-                            id="summary"
-                            name="summary"
-                            value={formData.summary}
+                        <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            accept="image/*"
+                            onChange={handleChangeFiles}
+                            className="hidden"
+                        />
+                    </fieldset>
+
+                    {/***************************************************
+                     ***** Input que maneja la subida de documentos  ****
+                     ****************************************************/}
+                    <fieldset>
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Documento de reglas
+                        </legend>
+
+                        <label
+                            htmlFor="file"
+                            className="group flex items-center justify-center px-4 py-2 text-white 
+                                bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg cursor-pointer 
+                                focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition-all"
+                        >
+                            {formData.document
+                                ? formData.document.name
+                                : 'Elige un documento'}
+                        </label>
+                        <input
+                            type="file"
+                            id="file"
+                            name="document"
+                            accept=".pdf,application/pdf"
+                            onChange={handleChangeFiles}
+                            className="hidden"
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <legend>Selecciona una tematica</legend>
+                        {/* Input select que permite elegir los temas de un hackathon */}
+                        <label htmlFor="themeId" hidden>
+                            Selecciona una tematica
+                        </label>
+                        <select
+                            value={formData.themeId}
                             onChange={handleChangeGeneral}
-                            placeholder="Una breve descripcion del evento..."
-                            maxLength="140"
-                            rows="4"
+                            name="themeId"
+                            id="themeId"
                             required
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        ></textarea>
-
-                        <fieldset>
-                            <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Fecha y hora de inicio y finalizacion
-                            </legend>
-
-                            {/****************************************************
-                             ****** Input datepicker de la fecha de inicio  ******
-                             ****************************************************/}
-
-                            <DatePicker
-                                selectsStart
-                                showTimeSelect
-                                isClearable
-                                minDate={addHours(now, 24)}
-                                selected={formData.startingDate}
-                                onChange={(date) => {
-                                    handleChangeDate('startingDate', date);
-                                }}
-                                startDate={formData.startingDate}
-                                dateFormat="dd-MM-yyyy HH:mm"
-                                id="startingDate"
-                                placeholderText="Fecha de inicio"
-                                required
-                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                calendarClassName="bg-gray-700 text-white rounded-lg shadow-lg border border-gray-600"
-                                popperClassName="z-50"
-                            />
-
-                            {/****************************************************
-                             *** Input datepicker de la fecha de fnalizacion  ****
-                             ****************************************************/}
-
-                            <DatePicker
-                                selectsEnd
-                                showTimeSelect
-                                isClearable
-                                selected={formData.deadline}
-                                onChange={(date) => {
-                                    handleChangeDate('deadline', date);
-                                }}
-                                endDate={formData.deadline}
-                                minDate={formData.startingDate}
-                                placeholderText="Fecha de finalizacion"
-                                dateFormat="dd-MM-yyyy HH:mm"
-                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required
-                            />
-                        </fieldset>
-
-                        <fieldset>
-                            <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Es online o presencial?
-                            </legend>
-
-                            <div>
-                                {/* Input radio del tipo de hackathon (presencial u online */}
-                                <label htmlFor="type">Online</label>
-                                <input
-                                    type="radio"
-                                    name="type"
-                                    id="type"
-                                    value="online"
-                                    checked={formData.type === 'online'}
-                                    onChange={handleChangeGeneral}
-                                />
-                                <label htmlFor="type">Presencial</label>
-                                <input
-                                    type="radio"
-                                    name="type"
-                                    id="type"
-                                    value="presencial"
-                                    checked={formData.type === 'presencial'}
-                                    onChange={handleChangeGeneral}
-                                />
-                            </div>
-                            {/* Input text de la localizacion */}
-                            <label htmlFor="location">Localizacion</label>
-                            <LocatioAutocomplete
-                                isDisabled={isDisabled}
-                                onSelect={handleChangeLocation}
-                            />
-                        </fieldset>
-                    </div>
-
-                    <div>
-                        <fieldset>
-                            <legend>Detalles del Hackathon</legend>
-                            {/* Input hackathon detalis (para futuro html?) */}
-                            <label htmlFor="details" hidden>
-                                Detalles del hackathon
-                            </label>
-                            <DetailTextEditor
-                                onChange={handleChangeDetails}
-                                id="details"
-                            />
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Imagen del banner</legend>
-
-                            {/* Input quer maneja la subida de imagenes */}
-                            <label htmlFor="image"></label>
-                            <input
-                                type="file"
-                                name="image"
-                                accept="image/*"
-                                onChange={handleChangeFiles}
-                            />
-                        </fieldset>
-
-                        {/* Input que maneja la subida de documentos */}
-                        <fieldset>
-                            <legend>Documento de reglas</legend>
-
-                            {/* Input quer maneja la subida de imagenes */}
-                            <label htmlFor="image"></label>
-                            <input
-                                type="file"
-                                name="document"
-                                accept="application/pdf"
-                                onChange={handleChangeFiles}
-                            />
-                        </fieldset>
-                        <fieldset>
-                            <legend>Selecciona una tematica</legend>
-                            {/* Input select que permite elegir los temas de un hackathon */}
-                            <label htmlFor="themeId" hidden>
-                                Selecciona una tematica
-                            </label>
-                            <select
-                                value={formData.themeId}
-                                onChange={handleChangeGeneral}
-                                name="themeId"
-                                id="themeId"
-                                required
-                            >
-                                <option key="" selected hidden>
-                                    --Selecciona una opcion--
+                        >
+                            <option key="" selected hidden>
+                                --Selecciona una opcion--
+                            </option>
+                            {hackathonThemes.map((theme) => (
+                                <option key={theme.id} value={theme.id}>
+                                    {theme.theme}
                                 </option>
-                                {hackathonThemes.map((theme) => (
-                                    <option key={theme.id} value={theme.id}>
-                                        {theme.theme}
-                                    </option>
-                                ))}
-                            </select>
-                        </fieldset>
+                            ))}
+                        </select>
+                    </fieldset>
 
-                        {/* Input select que permite elegir los lenguajes de un hackathon */}
-                        <fieldset>
-                            <legend>
-                                Selecciona un lenguaje de programacion
-                            </legend>
-                            <label htmlFor="programmingLangId" hidden>
-                                Selecciona los lenguajes
-                            </label>
-                            <select
-                                value={formData.programmingLangId}
-                                onChange={handleChangeProgrammingLangs}
-                                multiple
-                                size={5}
-                                name="programmingLangId"
-                                id="programmingLangId"
-                                required
-                            >
-                                <option key="" hidden>
-                                    --Elige lenguajes--
+                    {/* Input select que permite elegir los lenguajes de un hackathon */}
+                    <fieldset>
+                        <legend>Selecciona un lenguaje de programacion</legend>
+                        <label htmlFor="programmingLangId" hidden>
+                            Selecciona los lenguajes
+                        </label>
+                        <select
+                            value={formData.programmingLangId}
+                            onChange={handleChangeProgrammingLangs}
+                            multiple
+                            size={5}
+                            name="programmingLangId"
+                            id="programmingLangId"
+                            required
+                        >
+                            <option key="" hidden>
+                                --Elige lenguajes--
+                            </option>
+                            {hackathonLangs.map((lang) => (
+                                <option key={lang.id} value={lang.id}>
+                                    {lang.programmingLang}
                                 </option>
-                                {hackathonLangs.map((lang) => (
-                                    <option key={lang.id} value={lang.id}>
-                                        {lang.programmingLang}
-                                    </option>
-                                ))}
-                            </select>
-                        </fieldset>
-                        <button type="submit" disabled={loading}>
-                            Enviar
-                        </button>
-                    </div>
+                            ))}
+                        </select>
+                    </fieldset>
+                    <button type="submit" disabled={loading}>
+                        Enviar
+                    </button>
                 </form>
             </main>
         </>
