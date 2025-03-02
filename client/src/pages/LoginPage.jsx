@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 
 //Importamos los componentes.
-import { Navigate} from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 //Importamos la función toast.
 import toast from "react-hot-toast";
@@ -89,7 +89,18 @@ const LoginPage=()=>{
                 <input type="password" id="password" value={password} onChange={(e)=> setPassword(e.target.value)} autoComplete="current-password" required/> 
 
  
-                <button disabled={loading}>Loguearse</button>
+                <button 
+    disabled={loading} 
+    className={`px-4 py-2 text-white font-semibold rounded-lg transition duration-300 ${
+        loading 
+            ? "bg-gray-400 cursor-not-allowed" 
+            : "bg-blue-500 hover:bg-blue-600"
+    }`}
+>
+    Loguearse
+</button>
+
+<a><Link to="/user/password/reset">¿Has olvidado tu contraseña?</Link></a>
 
             </form>
         </main>

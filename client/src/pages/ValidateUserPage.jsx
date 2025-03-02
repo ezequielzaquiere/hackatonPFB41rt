@@ -32,7 +32,7 @@ const ValidateUserPage=() => {
                     //Obtenemos una respuesta.
                     const res = await fetch(`${VITE_API_URL}/api/users/validate/${regCode}`,
                         {
-                            method: "put",
+                            method: "patch",
                         }
                     );
                     //Obtenemos el body.
@@ -44,7 +44,7 @@ const ValidateUserPage=() => {
                     }
 
                     //Si todo ha ido bien mostramos un mensaje al usuario.
-                    toast.sucess(body.message,{
+                    toast.success(body.message,{
                         id:"activateUser",
                     });
 

@@ -115,7 +115,17 @@ const RegisterPage=()=>{
                 <label htmlFor="repeatedPass">Repetir Contraseña:</label>
                 <input type="password" id="repeatedPass" value={repeatedPass} onChange={(e)=> setRepeatedPass(e.target.value)} autoComplete="new-password" required/> 
 
-                <button disabled={loading}>Registrarse</button>
+                <button
+    type="submit"
+    disabled={loading}
+    className={`px-4 py-2 font-semibold rounded-lg shadow-md transition duration-300 ${
+        loading 
+            ? "bg-gray-400 text-gray-700 cursor-not-allowed" 
+            : "bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+    }`}
+>
+    {loading ? "Registrando..." : "Registrarse"}
+</button>
 
             </form>
         </main>
