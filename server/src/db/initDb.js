@@ -35,7 +35,7 @@ const main = async () => {
                 recoverPassCode CHAR(30),
                 active BOOLEAN,
                 avatar VARCHAR(500),
-                role ENUM ("dev", "admin") NOT NULL,
+                role ENUM ("dev", "admin") DEFAULT "dev",
                 createdAt DATETIME               
             )	
         `);

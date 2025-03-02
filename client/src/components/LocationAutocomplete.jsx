@@ -67,22 +67,28 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="¿Dónde tendrá lugar?"
-                    className="border border-gray-300 p-2 w-full rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="mb-6 border text-sm rounded-lg block w-full p-2.5  
+                                focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500
+                                enabled:bg-gray-100 enabled:border-gray-300 enabled:text-gray-900 disabled:cursor-not-allowed 
+                                dark:enabled:bg-gray-700 dark:enabled:border-gray-600 dark:enabled:text-gray-400
+                                disabled:bg-white disabled:border-gray-400 disabled:text-black 
+                                dark:disabled:bg-gray-800 dark:disabled:border-gray-500 dark:disabled:text-white"
                     disabled={isDisabled}
+                    required={isDisabled}
                 />
                 <div className="flex gap-2 mt-2">
                     <button
                         type="button"
                         onClick={handleSearch}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition"
                         disabled={isDisabled}
+                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed"
                     >
-                        Buscar
+                        Enviar
                     </button>
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="bg-gray-400 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-500 transition"
+                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed"
                         disabled={isDisabled}
                     >
                         Limpiar
@@ -91,12 +97,16 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
 
                 {/* Sugerencias de búsqueda */}
                 {suggestion.length > 0 && (
-                    <ul className="absolute w-full bg-white border border-gray-300 rounded-lg mt-2 shadow-lg overflow-hidden">
+                    <ul
+                        className="absolute left-0 right-0 w-full bg-gray-50 border border-gray-300 
+                        text-gray-900 text-sm rounded-lg shadow-lg overflow-hidden 
+                        bottom-full mb-1 z-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white overflow-y-auto max-h-60"
+                    >
                         {suggestion.map((location) => (
                             <li
                                 key={location.place_id}
                                 onClick={() => handleSelect(location)}
-                                className="cursor-pointer p-3 hover:bg-gray-100 transition"
+                                className="cursor-pointer p-3 hover:bg-purple-600 transition"
                             >
                                 {location.display_name}
                             </li>

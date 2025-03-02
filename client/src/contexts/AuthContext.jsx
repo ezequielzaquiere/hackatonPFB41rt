@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
         firstName,
         lastName,
         email,
-        avatar,
+        avatarName,
     }) => {
         setAuthUser({
             ...authUser,
@@ -103,7 +103,7 @@ const AuthProvider = ({ children }) => {
             firstName,
             lastName,
             email,
-            avatar,
+            avatar: avatarName,
         });
     };
 

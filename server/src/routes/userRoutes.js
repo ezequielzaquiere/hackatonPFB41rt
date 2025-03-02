@@ -11,15 +11,21 @@ import {
     loginUserController,
     updateActivateUserController,
     sendRecoveryPassEmailController,
-    useRecoveryPassCodeController,
     updateUserProfileController,
     updateUserPassController,
     showUserInfoController,
     listUserRegistrationsController,
+    useRecoveryPassCodeController,
 } from '../controllers/users/index.js';
 
 //Crear router
 const router = express.Router();
+
+// Actualiza la contraseña de un usuario con un código de recuperación.
+router.put(
+    '/:userId/password/recover/:recoverPassCode',
+    useRecoveryPassCodeController
+);
 
 //Endpoint para registrar usuario
 router.post('/register', registerUserController);
@@ -38,9 +44,6 @@ router.put('/password/change', isUserAuthMiddleware, updateUserPassController);
 
 // Enviar código de recuperación de contraseña al email del usuario.
 router.put('/password/reset', sendRecoveryPassEmailController);
-
-// Actualiza la contraseña de un usuario con un código de recuperación.
-router.put('/password/reset/:recoverPassCode', useRecoveryPassCodeController);
 
 //Endpoint que muestra los datos del usuario.
 router.get('/profile/:id', showUserInfoController);

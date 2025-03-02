@@ -1,7 +1,7 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
 //TODO:AÑADIR LOS DE VACIAR CAMPOS
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
-
+//TODO:EDITAR EL CALENDARIO DE LA FECHA Y HORA
 //Importamoslas dependencias
 import toast from 'react-hot-toast';
 import { useNavigate, Navigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { useNavigate, Navigate } from 'react-router-dom';
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import '../styles/datepicker.css';
 import { addHours, format } from 'date-fns';
 
 //Imports de React
@@ -147,8 +148,7 @@ const NewHackathonPage = () => {
             const res = await fetch(`${VITE_API_URL}/api/hackathon/new`, {
                 method: 'post',
                 headers: {
-                    Authorization:
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwNjg4MDIwLCJleHAiOjE3NDEyOTI4MjB9.8mIR895iujfH1mCIJRiPxTcp7RwUX08S0FHDAzfrSyE',
+                    Authorization: authToken,
                 },
                 body: formDataToSend,
             });
@@ -186,37 +186,60 @@ const NewHackathonPage = () => {
 
                 <form onSubmit={handleCreationHackathon}>
                     <div className="bg-black text-white flex flex-col gap-2">
-                        {/* Input text del title */}
-                        <label htmlFor="title">Titulo</label>
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            value={formData.title}
-                            onChange={handleChangeGeneral}
-                            placeholder="escribe un titulo"
-                            required
-                            autoFocus
-                        />
+                        {/**************************************
+                         ********* Input text del title *********
+                         ****************************************/}
+                        <div className="mb-6">
+                            <label
+                                htmlFor="title"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Titulo
+                            </label>
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChangeGeneral}
+                                required
+                                placeholder="Aqui va el título"
+                                autoFocus
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            />
+                        </div>
 
-                        {/* Input textarea del summary */}
-                        <label htmlFor="summary">Descripcion del evento</label>
+                        {/**************************************
+                         ****** Input textarea del summary ******
+                         ****************************************/}
+
+                        <label
+                            htmlFor="summary"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Descripcion del evento
+                        </label>
+
                         <textarea
-                            name="summary"
                             id="summary"
+                            name="summary"
                             value={formData.summary}
                             onChange={handleChangeGeneral}
-                            placeholder="escribe una breve descripcion del evento"
+                            placeholder="Una breve descripcion del evento..."
                             maxLength="140"
-                            rows="3"
+                            rows="4"
                             required
-                        />
+                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        ></textarea>
 
                         <fieldset>
-                            <legend>
+                            <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Fecha y hora de inicio y finalizacion
                             </legend>
-                            {/* Input datepicker de la fecha de inicio */}
+
+                            {/****************************************************
+                             ****** Input datepicker de la fecha de inicio  ******
+                             ****************************************************/}
 
                             <DatePicker
                                 selectsStart
@@ -232,9 +255,14 @@ const NewHackathonPage = () => {
                                 id="startingDate"
                                 placeholderText="Fecha de inicio"
                                 required
+                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                calendarClassName="bg-gray-700 text-white rounded-lg shadow-lg border border-gray-600"
+                                popperClassName="z-50"
                             />
 
-                            {/* Input datepicker de la fecha de finalizacion */}
+                            {/****************************************************
+                             *** Input datepicker de la fecha de fnalizacion  ****
+                             ****************************************************/}
 
                             <DatePicker
                                 selectsEnd
@@ -248,32 +276,37 @@ const NewHackathonPage = () => {
                                 minDate={formData.startingDate}
                                 placeholderText="Fecha de finalizacion"
                                 dateFormat="dd-MM-yyyy HH:mm"
+                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
                             />
                         </fieldset>
 
                         <fieldset>
-                            <legend>Es online o presencial?</legend>
+                            <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Es online o presencial?
+                            </legend>
 
-                            {/* Input radio del tipo de hackathon (presencial u online */}
-                            <label htmlFor="type">Online</label>
-                            <input
-                                type="radio"
-                                name="type"
-                                id="type"
-                                value="online"
-                                checked={formData.type === 'online'}
-                                onChange={handleChangeGeneral}
-                            />
-                            <label htmlFor="type">Presencial</label>
-                            <input
-                                type="radio"
-                                name="type"
-                                id="type"
-                                value="presencial"
-                                checked={formData.type === 'presencial'}
-                                onChange={handleChangeGeneral}
-                            />
+                            <div>
+                                {/* Input radio del tipo de hackathon (presencial u online */}
+                                <label htmlFor="type">Online</label>
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    id="type"
+                                    value="online"
+                                    checked={formData.type === 'online'}
+                                    onChange={handleChangeGeneral}
+                                />
+                                <label htmlFor="type">Presencial</label>
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    id="type"
+                                    value="presencial"
+                                    checked={formData.type === 'presencial'}
+                                    onChange={handleChangeGeneral}
+                                />
+                            </div>
                             {/* Input text de la localizacion */}
                             <label htmlFor="location">Localizacion</label>
                             <LocatioAutocomplete

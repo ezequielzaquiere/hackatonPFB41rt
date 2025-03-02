@@ -1,28 +1,28 @@
-// Importamos los hooks.
-// import { useContext, useEffect, useRef, useState } from 'react';
+//Importamos los hooks.
+import { useContext, useRef, useState } from 'react';
 
-// // Importamos los componentes.
-// import { Navigate } from 'react-router-dom';
+// Importamos los componentes.
+import { Navigate } from 'react-router-dom';
 
-// // Importamos el contexto de autorización.
-// import { AuthContext } from '../contexts/AuthContext';
+// Importamos el contexto de autorización.
+import { AuthContext } from '../contexts/AuthContext';
 
-// // Importamos la función que muestra un mensaje al usuario.
-// import toast from 'react-hot-toast';
+// Importamos la función que muestra un mensaje al usuario.
+import toast from 'react-hot-toast';
 
-// // Importamos el avatar por defecto.
-// import defaultAvatar from '/default-avatar.png';
+// Importamos el avatar por defecto.
+import defaultAvatar from '/default-avatar.png';
 
-// // Importamos la URL de nuestra API.
-// const { VITE_API_URL } = import.meta.env;
+// Importamos la URL de nuestra API.
+const { VITE_API_URL } = import.meta.env;
 
 // Inicializamos el componente.
 const PrivateUserProfilePage = () => {
-    // // Obtenemos los elementos necesarios del contexto de autorización.
-    // const { authToken, authUser, authUpdateProfileState } =
-    //     useContext(AuthContext);
+    // Obtenemos los elementos necesarios del contexto de autorización.
+    const { authToken, authUser, authUpdateProfileState } =
+        useContext(AuthContext);
 
-    // // Creamos una referencia para asignar al input file.
+    // Creamos una referencia para asignar al input file.
     // const inputFileRef = useRef();
 
     // // Declaramos una variable en el State para almacenar el contenido del input.
@@ -32,10 +32,10 @@ const PrivateUserProfilePage = () => {
     // const [email, setEmail] = useState('');
     // const [avatar, setAvatar] = useState('');
 
-    // // Declaramos una variable en el State que indicará si estamos haciendo fetch.
-    // const [loading, setLoading] = useState(false);
+    // Declaramos una variable en el State que indicará si estamos haciendo fetch.
+    const [loading, setLoading] = useState(false);
 
-    // // Si hay algun cambio, actualizamos los datos del usuario.
+    // Si hay algun cambio, actualizamos los datos del usuario.
     // useEffect(() => {
     //     if (authUser) {
     //         setUserName(authUser.username);
@@ -46,42 +46,43 @@ const PrivateUserProfilePage = () => {
     //     }
     // }, [authUser]);
 
-    // // Función que maneja el envío del formulario.
+    // Función que maneja el envío del formulario.
     // const handleUpdateProfile = async (e) => {
     //     try {
     //         // Prevenimos el comportamiento por defecto.
     //         e.preventDefault();
 
-    //         // Indicamos que el fetch va a dar comienzo.
-    //         setLoading(true);
+    // // Indicamos que el fetch va a dar comienzo.
+    // setLoading(true);
 
-    //         // Creamos un objeto de tipo FormData.
-    //         const formData = new FormData();
+    // // Creamos un objeto de tipo FormData.
+    // const formData = new FormData();
 
-    //         // Añadimos al objeto anterior las propiedades y valores necesarios.
-    //         if (authUser.username !== username) {
-    //             formData.append('username', username);
-    //         }
+    // // Añadimos al objeto anterior las propiedades y valores necesarios.
+    // if (authUser.username !== username) {
+    //     formData.append('username', username);
+    // }
 
-    //         if (authUser.firstName !== firstName) {
-    //             formData.append('firstName', firstName);
-    //         }
+    // if (authUser.firstName !== firstName) {
+    //     formData.append('firstName', firstName);
+    // }
 
-    //         if (authUser.lastName !== lastName) {
-    //             formData.append('lastName', lastName);
-    //         }
+    // if (authUser.lastName !== lastName) {
+    //     formData.append('lastName', lastName);
+    // }
 
-    //         if (authUser.email !== email) {
-    //             formData.append('email', email);
-    //         }
+    // if (authUser.email !== email) {
+    //     formData.append('email', email);
+    // }
 
-    //         formData.append('avatar', avatar);
+    // formData.append('avatar', avatar);
 
-    //         // Obtenemos una respuesta.
+    // Obtenemos una respuesta.
     //         const res = await fetch(`${VITE_API_URL}/api/users`, {
     //             method: 'put',
     //             headers: {
-    //                 Authorization: authToken,
+    //                 Authorization:
+    //                     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwNzczNjIyLCJleHAiOjE3NDEzNzg0MjJ9.GmjbDlCvTeNMj2h3Hm3Kx9HqkX47WPHPGOAMtihFtME',
     //             },
     //             body: formData,
     //         });
@@ -114,25 +115,25 @@ const PrivateUserProfilePage = () => {
     //     }
     // };
 
-    // // Si no existe token o el usuario no esta logueado, redirigimos a la página principal.
-    // if (!authToken || !authUser) {
-    //     return <Navigate to="/" />;
-    // }
-
+    // Si no existe token o el usuario no esta logueado, redirigimos a la página principal.
+    if (!authToken || !authUser) {
+        return <Navigate to="/" />;
+    }
+    console.log('auth user:', authUser);
     return (
         <main>
-            <h2>Página de perfil de usuario</h2>
+            <h2>Página de mi perfil</h2>
+            <>
+                <img
+                    src={
+                        authUser.avatar
+                            ? `${VITE_API_URL}/${authUser.avatar}`
+                            : defaultAvatar
+                    }
+                    alt={authUser.username}
+                />
 
-            {/* <img
-                src={
-                    authUser.avatar
-                        ? `${VITE_API_URL}/${authUser.avatar}`
-                        : defaultAvatar
-                }
-                alt={authUser.username}
-            />
-
-            <form onSubmit={handleUpdateProfile}>
+                {/* <form onSubmit={handleUpdateProfile}>
                 <label htmlFor="username">Usuario:</label>
                 <input
                     type="text"
@@ -176,12 +177,13 @@ const PrivateUserProfilePage = () => {
                 />
 
                 <button disabled={loading}>Actualizar</button>
-            </form>
+            </form> */}
 
-            <ul>
-                <li>Usuario: {authUser.username}</li>
-                <li>Email: {authUser.email}</li>
-            </ul> */}
+                <ul>
+                    <li>Usuario: {authUser.username}</li>
+                    <li>Email: {authUser.email}</li>
+                </ul>
+            </>
         </main>
     );
 };

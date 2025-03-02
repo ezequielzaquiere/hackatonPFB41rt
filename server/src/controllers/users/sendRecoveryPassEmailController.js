@@ -24,6 +24,7 @@ const sendRecoveryPassEmailController = async (req, res, next) => {
 
         // Obtenemos los datos del usuario con el email recibido.
         const user = await selectUserByEmailModel(email);
+        console.log(user); //Devuelve ID, password crypt, active, role
 
         // Si el usuario existe le enviamos un código de recuperación de contraseña.
         if (user) {
@@ -40,7 +41,7 @@ const sendRecoveryPassEmailController = async (req, res, next) => {
             const emailBody = `
                 Se ha solicitado un cambio de contraseña para la cuenta vinculada a este email. Si no has sido tú ignora este mensaje.
 
-                <a href="${process.env.CLIENT_URL}/users/password/${recoverPassCode}">¡Click aquí para actualizar tu contraseña!</a>
+                <a href="${process.env.CLIENT_URL}/users/${user.id}/password/${recoverPassCode}">¡Click aquí para actualizar tu contraseña!</a>
             `;
 
             // Enviamos el email.

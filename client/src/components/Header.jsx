@@ -6,7 +6,7 @@ const { VITE_API_URL } = import.meta.env;
 
 //Inicializamos el componente
 const Header = () => {
-    const { authUser, authLogOutState } = useContext(AuthContext);
+    const { authUser, authLogoutState } = useContext(AuthContext);
     return (
         <header>
             <h1 className="text-red-500">
@@ -45,30 +45,40 @@ const Header = () => {
                         </>
                     ) : (
                         <>
-                            authUser.role === `admin` && (
+                            {authUser.role === 'admin' && (
+                                <li>
+                                    <Link to="/hackathon/new">
+                                        Nuevo Hackathon
+                                    </Link>
+                                </li>
+                            )}
+
                             <li>
-                                <Link to="/hackathon/new">Nuevo Hackathon</Link>
+                                <Link to="/users/profile">Mi perfil</Link>
                             </li>
-                            )
+                            <li>
+                                <Link to="/users/password/change">
+                                    Cambiar contraseña
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/users/profile/public">
+                                    Perfil publico
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/details">
+                                    Detalles de los hackathones
+                                </Link>
+                            </li>
+                            <li>
+                                <button onClick={() => authLogoutState()}>
+                                    {' '}
+                                    Cerrar Sesión
+                                </button>
+                            </li>
                         </>
                     )}
-                    <li>
-                        <Link to="/users/profile">Mi perfil</Link>
-                    </li>
-                    <li>
-                        <Link to="/users/password/change">
-                            Cambiar contraseña
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/details">Detalles de los hackathones</Link>
-                    </li>
-                    <li>
-                        <button onClick={() => authLogOutState}>
-                            {' '}
-                            Cerrar Sesión
-                        </button>
-                    </li>
                 </ul>
             </nav>
         </header>
