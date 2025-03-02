@@ -1,5 +1,5 @@
 //Importamos los hooks.
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 // Importamos los componentes.
 import { Navigate } from 'react-router-dom';
@@ -116,26 +116,24 @@ const PrivateUserProfilePage = () => {
     // };
 
     // Si no existe token o el usuario no esta logueado, redirigimos a la página principal.
-    // if (!authToken || !authUser) {
-    //     return <Navigate to="/" />;
-    // }
+    if (!authToken || !authUser) {
+        return <Navigate to="/" />;
+    }
     console.log('auth user:', authUser);
     return (
         <main>
             <h2>Página de mi perfil</h2>
+            <>
+                <img
+                    src={
+                        authUser.avatar
+                            ? `${VITE_API_URL}/${authUser.avatar}`
+                            : defaultAvatar
+                    }
+                    alt={authUser.username}
+                />
 
-            {authUser ? (
-                <>
-                    <img
-                        src={
-                            authUser.avatar
-                                ? `${VITE_API_URL}/${authUser.avatar}`
-                                : defaultAvatar
-                        }
-                        alt={authUser.username}
-                    />
-
-                    {/* <form onSubmit={handleUpdateProfile}>
+                {/* <form onSubmit={handleUpdateProfile}>
                 <label htmlFor="username">Usuario:</label>
                 <input
                     type="text"
@@ -181,14 +179,11 @@ const PrivateUserProfilePage = () => {
                 <button disabled={loading}>Actualizar</button>
             </form> */}
 
-                    <ul>
-                        <li>Usuario: {authUser.username}</li>
-                        <li>Email: {authUser.email}</li>
-                    </ul>
-                </>
-            ) : (
-                <p>Cargando perfil...</p>
-            )}
+                <ul>
+                    <li>Usuario: {authUser.username}</li>
+                    <li>Email: {authUser.email}</li>
+                </ul>
+            </>
         </main>
     );
 };

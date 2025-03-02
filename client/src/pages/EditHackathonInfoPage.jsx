@@ -174,8 +174,7 @@ const EditHackathonPage = () => {
                 {
                     method: 'PATCH',
                     headers: {
-                        Authorization:
-                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwNjg4MDIwLCJleHAiOjE3NDEyOTI4MjB9.8mIR895iujfH1mCIJRiPxTcp7RwUX08S0FHDAzfrSyE',
+                        Authorization: authToken,
                     },
                     body: formDataToSend,
                 }
