@@ -14,7 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { addHours, format } from 'date-fns';
 
 //Imports de React
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 //Importamos la direccion de la api
 const { VITE_API_URL } = import.meta.env;
@@ -52,6 +52,9 @@ const NewHackathonPage = () => {
 
     //Obtenemos la funcion navigate
     let navigate = useNavigate();
+
+    //Creamos un state para controlar el abrir y cerrar del modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     //Comprobamos si el boton se va a desactivar
     const isDisabled = formData.type === 'presencial' ? false : true;
@@ -92,8 +95,34 @@ const NewHackathonPage = () => {
         setFormData({ ...formData, details: html });
     };
 
+    //Funcion que maneja los cambios de las checkboxes de los lenguajes
+    let [selectedLangs, setSelectedLangs] = useState([]);
+    useEffect(() => {
+        setSelectedLangs(formData.programmingLangId || []);
+    }, [formData.programmingLangId]); // Se ejecuta cuando `formData` cambia
+
+    const handleChangeProgrammingLang = (e) => {
+        const langId = Number(e.target.value); // Asegura que el ID es un número
+        const isChecked = e.target.checked;
+
+        setSelectedLangs((prevLangs) =>
+            isChecked
+                ? [...prevLangs, langId]
+                : prevLangs.filter((id) => id !== langId)
+        );
+    };
+
+    //Funcion que maneja el cierre del modal
+    const handleCloseModal = () => {
+        setFormData((prev) => ({
+            ...prev,
+            programmingLangId: selectedLangs, // Actualiza el formData con los lenguajes seleccionados
+        }));
+        setIsModalOpen(false); // Cierra el modal
+    };
+
     //Funcion que maneja los cambios en el input programingLangs
-    const handleChangeProgrammingLangs = (e) => {
+    /*const handleChangeProgrammingLangs = (e) => {
         const programmingLangsSelected = Array.from(
             e.target.selectedOptions,
             (option) => {
@@ -105,7 +134,7 @@ const NewHackathonPage = () => {
             ...formData,
             programmingLangId: programmingLangsSelected,
         }));
-    };
+    };*/
 
     //Funcion que maneja el envio de formulario
     const [loading, setLoading] = useState(false);
@@ -132,9 +161,12 @@ const NewHackathonPage = () => {
                 formDataToSend.append('location', formData.location);
             }
             formDataToSend.append('themeId', formData.themeId);
-            formData.programmingLangId.forEach((lang) => {
+            selectedLangs.forEach((lang) => {
                 formDataToSend.append('programmingLangId', lang);
             });
+            /*formData.programmingLangId.forEach((lang) => {
+                formDataToSend.append('programmingLangId', lang);
+            });*/
             formDataToSend.append('details', formData.details);
             if (formData.image) {
                 formDataToSend.append('image', formData.image);
@@ -149,7 +181,8 @@ const NewHackathonPage = () => {
             const res = await fetch(`${VITE_API_URL}/api/hackathon/new`, {
                 method: 'post',
                 headers: {
-                    Authorization: authToken,
+                    Authorization:
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxMDMwMjE3LCJleHAiOjE3NDE2MzUwMTd9.-5Yxppcjd0GXXLCs0q3-Ciz3oL1I26UTm4N2cW2535U',
                 },
                 body: formDataToSend,
             });
@@ -162,11 +195,11 @@ const NewHackathonPage = () => {
 
             // Mostramos un mensaje al usuario indicando que todo ha ido bien.
             toast.success(body.message, {
-                id: 'register',
+                id: 'createHackathon',
             });
         } catch (err) {
             toast.error(err.message, {
-                id: 'register',
+                id: 'createHackathon',
             });
         } finally {
             setLoading(false);
@@ -208,18 +241,15 @@ const NewHackathonPage = () => {
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         />
                     </div>
-
                     {/**************************************
                      ****** Input textarea del summary ******
                      ****************************************/}
-
                     <label
                         htmlFor="summary"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                         Descripcion del evento
                     </label>
-
                     <textarea
                         id="summary"
                         name="summary"
@@ -231,7 +261,6 @@ const NewHackathonPage = () => {
                         required
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     ></textarea>
-
                     <fieldset>
                         <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Fecha y hora de inicio y finalizacion
@@ -241,6 +270,7 @@ const NewHackathonPage = () => {
                          ****** Input datepicker de la fecha de inicio  ******
                          ****************************************************/}
 
+                        {/** SI DA ERROR ES QUE FALTAN LAS HORAS Y CAMBIAR EL FORMATO PARA INCLUIRLAS */}
                         <DatePicker
                             selectsStart
                             isClearable
@@ -288,7 +318,6 @@ const NewHackathonPage = () => {
                             withPortal
                         />
                     </fieldset>
-
                     <fieldset>
                         <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Es online o presencial?
@@ -355,7 +384,6 @@ const NewHackathonPage = () => {
                             onSelect={handleChangeLocation}
                         />
                     </fieldset>
-
                     {/***************************************************
                      *** Input hackathon detalis (para futuro html?) ****
                      ****************************************************/}
@@ -371,7 +399,6 @@ const NewHackathonPage = () => {
                             id="details"
                         />
                     </fieldset>
-
                     {/***************************************************
                      ***** Input quer maneja la subida de imagenes  *****
                      ****************************************************/}
@@ -400,7 +427,6 @@ const NewHackathonPage = () => {
                             className="hidden"
                         />
                     </fieldset>
-
                     {/***************************************************
                      ***** Input que maneja la subida de documentos  ****
                      ****************************************************/}
@@ -428,9 +454,13 @@ const NewHackathonPage = () => {
                             className="hidden"
                         />
                     </fieldset>
+                    {/********************************************************************
+                     ***** Input select que permite elegir los temas de un hackathon  ****
+                     *********************************************************************/}
                     <fieldset>
-                        <legend>Selecciona una tematica</legend>
-                        {/* Input select que permite elegir los temas de un hackathon */}
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Selecciona una tematica
+                        </legend>
                         <label htmlFor="themeId" hidden>
                             Selecciona una tematica
                         </label>
@@ -440,6 +470,7 @@ const NewHackathonPage = () => {
                             name="themeId"
                             id="themeId"
                             required
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         >
                             <option key="" selected hidden>
                                 --Selecciona una opcion--
@@ -451,9 +482,8 @@ const NewHackathonPage = () => {
                             ))}
                         </select>
                     </fieldset>
-
                     {/* Input select que permite elegir los lenguajes de un hackathon */}
-                    <fieldset>
+                    {/*<fieldset>
                         <legend>Selecciona un lenguaje de programacion</legend>
                         <label htmlFor="programmingLangId" hidden>
                             Selecciona los lenguajes
@@ -476,7 +506,83 @@ const NewHackathonPage = () => {
                                 </option>
                             ))}
                         </select>
-                    </fieldset>
+                    </fieldset>*/}
+                    {/***********************************
+                     *********** MODAL ******************
+                     ************************************/}
+                    <div>
+                        {/* Botón para abrir el modal */}
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        >
+                            Elige los lenguajes
+                        </button>
+
+                        {/* Modal */}
+                        {isModalOpen && (
+                            <div
+                                className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
+                                onClick={() => setIsModalOpen(false)} // Cierra al hacer clic fuera
+                            >
+                                <div
+                                    className="bg-white rounded-lg shadow-sm w-full max-w-4xl mx-4"
+                                    onClick={(e) => e.stopPropagation()} // Evita que el clic se propague al fondo
+                                >
+                                    {/* Encabezado del modal */}
+                                    <div className="flex items-center justify-between p-4 border-b rounded-t">
+                                        <h3 className="text-xl font-semibold text-gray-900">
+                                            Elige un lenguaje
+                                        </h3>
+                                        <button
+                                            onClick={handleCloseModal}
+                                            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 sm:w-10 sm:h-10 inline-flex justify-center items-center"
+                                        >
+                                            &times;
+                                        </button>
+                                    </div>
+
+                                    {/* Cuerpo del modal */}
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                        {hackathonLangs.map((lang) => {
+                                            return (
+                                                <div
+                                                    key={lang.id}
+                                                    className="flex items-center space-x-2"
+                                                >
+                                                    <label
+                                                        htmlFor={
+                                                            lang.programmingLang
+                                                        }
+                                                        className="text-sm sm:text-base font-medium text-gray-900"
+                                                    >
+                                                        {lang.programmingLang}
+                                                    </label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name={
+                                                            lang.programmingLang
+                                                        }
+                                                        id={
+                                                            lang.programmingLang
+                                                        }
+                                                        value={lang.id}
+                                                        checked={selectedLangs.includes(
+                                                            lang.id
+                                                        )} // Verifica si el ID está en el estado
+                                                        onChange={
+                                                            handleChangeProgrammingLang
+                                                        } // Maneja los cambios
+                                                        className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                                    />
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                     <button type="submit" disabled={loading}>
                         Enviar
                     </button>
