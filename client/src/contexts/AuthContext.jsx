@@ -84,26 +84,17 @@ const AuthProvider = ({ children }) => {
     const authLogoutState = () => {
         // Eliminamos el token del State.
         setAuthToken(null);
-
+        // Eliminamos los datos del usuario del State.
+        setAuthUser(null);
         // Eliminamos el token de las cookies.
         cookies.remove(VITE_AUTH_TOKEN);
     };
 
     // Función que actualiza el perfil del usuario en el State.
-    const authUpdateProfileState = ({
-        username,
-        firstName,
-        lastName,
-        email,
-        avatarName,
-    }) => {
+    const authUpdateProfileState = (updateUserData) => {
         setAuthUser({
             ...authUser,
-            username,
-            firstName,
-            lastName,
-            email,
-            avatar: avatarName,
+            ...updateUserData,
         });
     };
 

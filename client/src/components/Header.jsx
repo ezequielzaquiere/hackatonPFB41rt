@@ -57,11 +57,6 @@ const Header = () => {
                                 <Link to="/users/profile">Mi perfil</Link>
                             </li>
                             <li>
-                                <Link to="/users/password/change">
-                                    Cambiar contraseña
-                                </Link>
-                            </li>
-                            <li>
                                 <Link to="/users/profile/public">
                                     Perfil público
                                 </Link>

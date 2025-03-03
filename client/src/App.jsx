@@ -18,6 +18,7 @@ import EditHackathonPage from './pages/EditHackathonInfoPage';
 import SendRecoveryPassCode from './pages/SendRecoveryPassCode';
 import UseRecoveryPassCode from './pages/UseRecoveryPassCode';
 import UserProfilePage from './pages/UserProfilePage';
+import UpdateProfilePage from './pages/UpdateProfilePage';
 
 //Definimos el componente principal
 const App = () => {
@@ -45,6 +46,10 @@ const App = () => {
                 <Route
                     path="/users/profile"
                     element={<PrivateUserProfilePage />}
+                />
+                <Route
+                    path="/users/profile/update"
+                    element={<UpdateProfilePage />}
                 />
                 <Route
                     path="/users/password/reset"
