@@ -79,7 +79,7 @@ const HomePage = () => {
         <>
             {/* Mejor valorados */}
             <section className="w-screen bg-[#191919] text-white flex flex-col py-10 px-10 pb-25">
-                <h2 className="w-screen text-2xl font-bold mb-2">
+                <h2 className="w-screen text-xl font-bold mb-2">
                     Mejor Valorados
                 </h2>
 
@@ -97,7 +97,7 @@ const HomePage = () => {
                                 className="bg-[#191919] text-white text-center rounded-lg hackathonCard flex flex-col items-center gap-4 py-3 font-bold 
                                 shadow-[0px_0px_20px_#9A4EAE]"
                             >
-                                <p className="text-[#9A4EAE] text-2xl font-bold">
+                                <p className="text-[#9A4EAE] text-xl font-bold">
                                     #{index + 1}
                                 </p>
 
@@ -110,7 +110,7 @@ const HomePage = () => {
                                     } // Pasamos el id ***
                                 />
 
-                                <p>
+                                <p className="text-s">
                                     Participantes: {hackathon.participantCount}
                                 </p>
 
