@@ -81,12 +81,10 @@ const UpdateProfilePage = () => {
                 headers: {
                     Authorization: authToken,
                 },
-                isFormData: true,
             });
 
             // Obtenemos el body.
             const body = await res.json();
-            console.log(body);
 
             // Si hay un error lo lanzamos.
             if (body.status === 'error') {
