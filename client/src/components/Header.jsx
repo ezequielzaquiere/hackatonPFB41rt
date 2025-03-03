@@ -62,11 +62,6 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/details">
-                                    Detalles de los hackathones
-                                </Link>
-                            </li>
-                            <li>
                                 <button onClick={() => authLogoutState()}>
                                     {' '}
                                     Cerrar Sesión
