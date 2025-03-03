@@ -111,7 +111,7 @@ const RegisterPage = () => {
                     autoFocus
                     required
                     placeholder="jose.elias"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="firstName" className="font-semibold">
@@ -124,7 +124,7 @@ const RegisterPage = () => {
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                     placeholder="Jose"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="lastName" className="font-semibold">
@@ -137,7 +137,7 @@ const RegisterPage = () => {
                     onChange={(e) => setLastName(e.target.value)}
                     required
                     placeholder="Elias"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="email" className="font-semibold">
@@ -151,7 +151,7 @@ const RegisterPage = () => {
                     autoComplete="email"
                     required
                     placeholder="jose@dominio.com"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="password" className="font-semibold">
@@ -165,7 +165,7 @@ const RegisterPage = () => {
                     autoComplete="new-password"
                     required
                     placeholder="************"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <p className="text-xs pb-2">
@@ -183,7 +183,7 @@ const RegisterPage = () => {
                     autoComplete="new-password"
                     required
                     placeholder="************"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <p className="text-xs pb-2">(*) Campos obligatorios.</p>
@@ -196,7 +196,7 @@ const RegisterPage = () => {
                             : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
                     }`}
                 >
-                    {loading ? 'Registrando...' : 'Registrarse'}
+                    {loading ? 'Registrando...' : '¡Crea tu cuenta!'}
                 </button>
             </form>
         </main>
