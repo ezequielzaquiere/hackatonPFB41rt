@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 //Hooks
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
 import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
+import formatDate from '../utils/formatedDate.js';
 
 //FAQ
 const faqs = [
@@ -35,15 +36,20 @@ const HomePage = () => {
 
     //Traer del backend los 3 mejores hackathones según rating
     const bestHackathones = useBestHackathonesList();
-
+    console.log(bestHackathones);
     //Traer del backend los hackathones a partir de la fecha de solicitud
     const hackathonesFromToday = useHackathonesFromToday();
 
     //Función para imprimir estrellas según avgRating
     const printStars = (avgRating) => {
+        const numericRating = Number(avgRating);
+        const formattedRating = numericRating.toFixed(1); // Redondea a 1 decimal
         const fullStars = Math.floor(avgRating);
         const emptyStars = 5 - fullStars;
-        const starsString = '⭐'.repeat(fullStars) + '☆'.repeat(emptyStars);
+        const starsString =
+            `${formattedRating}` +
+            '⭐'.repeat(fullStars) +
+            '☆'.repeat(emptyStars);
 
         return starsString;
     };
@@ -72,40 +78,45 @@ const HomePage = () => {
     return (
         <>
             {/* Mejor valorados */}
-            <section className="w-screen bg-black text-white text-center flex flex-col flex-center py-10">
-                <h2 className="w-screen text-xl font-bold text-center">
+            <section className="w-screen bg-[#191919] text-white flex flex-col py-10 px-10 pb-25">
+                <h2 className="w-screen text-2xl font-bold mb-2">
                     Mejor Valorados
                 </h2>
 
-                <p className="mb-5">
-                    A la espera de un grafismo para adornar aquí debajo
-                </p>
+                <img
+                    src="/HomePageGraphism1.png"
+                    alt="Adorno debajo del título"
+                    className="w-screen max-w-20 mb-8"
+                ></img>
 
-                <div className="space-y-8">
+                <div className="flex flex-col gap-2 space-y-12 mt-3">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
-                                className="hackathonCard flex flex-col items-center gap-4"
+                                className="bg-[#191919] text-white text-center rounded-lg hackathonCard flex flex-col items-center gap-4 py-3 font-bold 
+                                shadow-[0px_0px_20px_#9A4EAE]"
                             >
-                                <p className="text-pink-500 text-2xl font-bold">
+                                <p className="text-[#9A4EAE] text-2xl font-bold">
                                     #{index + 1}
                                 </p>
 
                                 <img
                                     src={hackathon.image}
                                     alt={hackathon.name}
-                                    className="w-56 h-28 rounded-lg object-cover"
+                                    className="w-56 h-28 rounded-lg object-cover object-[50%_20%]"
                                     onClick={() =>
                                         handleImageClick(hackathon.id)
                                     } // Pasamos el id ***
                                 />
 
                                 <p>
-                                    Número de participantes:{' '}
-                                    {hackathon.participantCount}
+                                    Participantes: {hackathon.participantCount}
                                 </p>
-                                <div>{printStars(hackathon.avgRating)}</div>
+
+                                <div className="mr-5">
+                                    {printStars(hackathon.avgRating)}
+                                </div>
                             </div>
                         )
                     )}
@@ -113,21 +124,27 @@ const HomePage = () => {
             </section>
 
             {/* Próximos Eventos */}
-            <section className="bg-black text-white px-10 py-10">
+            <section className="bg-[#9A4EAE] text-[#191919] px-10 py-10">
                 <div className="mb-12">
                     <h2 className="text-2xl font-bold">Próximos Eventos</h2>
+
+                    <img
+                        src="/nextEventsGraphism.png"
+                        alt="Adorno del título `Próximos Eventos`"
+                        className="w-screen max-w-30 my-2 "
+                    />
 
                     <div className="relative mt-6 overflow-hidden">
                         {/* Contenedor scrollable */}
                         <div
                             ref={scrollContainerRef}
-                            className="flex flex-center gap-4 overflow-x-auto scrollbar-hide"
+                            className="w-screen flex items-center gap-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
                         >
                             {hackathonesFromToday.data?.hackathones?.map(
                                 (hackathon, index) => (
                                     <div
                                         key={index}
-                                        className="min-w-[225px] bg-white p-4 rounded-lg shadow-md text-black"
+                                        className="min-w-[225px] bg-[#191919] p-4 rounded-lg shadow-md text-white snap-start"
                                     >
                                         <img
                                             src={hackathon.image}
@@ -138,10 +155,10 @@ const HomePage = () => {
                                             {hackathon.title}
                                         </h3>
                                         <p className="text-sm">
-                                            {hackathon.startingDate}
-                                        </p>
-                                        <p className="text-sm">
-                                            {hackathon.startingDate}
+                                            {formatDate(
+                                                hackathonesFromToday.data
+                                                    .hackathones[0].createdAt
+                                            )}
                                         </p>
                                     </div>
                                 )
@@ -151,26 +168,31 @@ const HomePage = () => {
                         {/* Botón Izquierda */}
                         <button
                             onClick={handleScrollLeft}
-                            className="absolute left-0 top-1/2 bg-gray-800 p-2 rounded-full hover:bg-gray-700 transition"
+                            className="absolute top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition"
                         >
-                            <ChevronLeft className="text-white w-5 h-5" />
+                            <ChevronLeft className="text-[#9A4EAE] w-5 h-5" />
                         </button>
 
                         {/* Botón Derecha */}
                         <button
                             onClick={handleScrollRight}
-                            className="absolute right-0 top-1/2 -translate-x-1/2 bg-gray-800 p-2 rounded-full hover:bg-gray-700 transition"
+                            className="absolute right-3.75 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition"
                         >
-                            <ChevronRight className="text-white w-5 h-5" />
+                            <ChevronRight className="text-[#9A4EAE] w-5 h-5" />
                         </button>
                     </div>
                 </div>
             </section>
 
             {/* Preguntas Frecuentes */}
-            <section className="bg-black text-white px-10 py-10">
+            <section className="bg-[#191919] text-white px-10 py-10">
                 <div>
                     <h2 className="text-2xl font-bold">Preguntas Frecuentes</h2>
+                    <img
+                        src="/faqGraphism.png"
+                        alt="Adorno del título `Preguntas frecuentes`"
+                        className="w-screen max-w-20 my-3"
+                    />
                     <div className="mt-6">
                         {faqs.map((faq, index) => (
                             <div
@@ -188,18 +210,24 @@ const HomePage = () => {
                                 >
                                     <span>{faq.question}</span>
                                     {activeIndex === index ? (
-                                        <Minus className="w-5 h-5" />
+                                        <Minus className="min-w-5 min-h-5" />
                                     ) : (
-                                        <Plus className="w-5 h-5" />
+                                        <Plus className="min-w-5 min-h-5" />
                                     )}
                                 </div>
 
-                                {/* Respuesta (solo se muestra si está activo) */}
-                                {activeIndex === index && (
-                                    <p className="mt-2 text-sm text-gray-300">
+                                {/* Respuesta con transición */}
+                                <div
+                                    className={`transition-all duration-300 overflow-hidden ${
+                                        activeIndex === index
+                                            ? 'max-h-40 opacity-100 mt-2'
+                                            : 'max-h-0 opacity-0'
+                                    }`}
+                                >
+                                    <p className="text-sm text-gray-300">
                                         {faq.answer}
                                     </p>
-                                )}
+                                </div>
                             </div>
                         ))}
                     </div>
