@@ -9,7 +9,7 @@ import removeImgUtil from '../../utils/removeImgUtil.js';
 //función controladora que actualiza datos del usuario.
 const updateUserProfileController = async (req, res, next) => {
     try {
-        const { username, email, firstName, lastName } = req.body;
+        const { username, firstName, lastName, email } = req.body;
 
         const avatar = req.files?.avatar;
 
@@ -18,9 +18,9 @@ const updateUserProfileController = async (req, res, next) => {
         if (avatar) {
             const user = await selectUserByIdModel(req.user.id);
 
-            user.avatar && (await removeImgUtil(user.avatar));
+            user.avatar && (await removeImgUtil(user.avatar, 'avatar'));
 
-            avatarName = await saveImgUtil(avatar, 400);
+            avatarName = await saveImgUtil(avatar, 400, 'avatar');
         }
 
         await updateUserProfileModel({
