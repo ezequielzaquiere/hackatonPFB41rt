@@ -23,7 +23,7 @@ const Header = () => {
                         <img
                             src={
                                 authUser.avatar
-                                    ? `${VITE_API_URL}/${authUser.avatar}`
+                                    ? `${VITE_API_URL}/avatar/${authUser.avatar}`
                                     : defaultAvatar
                             }
                             alt={authUser.username}
