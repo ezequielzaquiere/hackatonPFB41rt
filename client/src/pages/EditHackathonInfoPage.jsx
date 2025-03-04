@@ -1,21 +1,15 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
 //TODO:AÑADIR LOS DE VACIAR CAMPOS
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
-//TODO EVITAR QUE PUEDA EDITAR EL HACKATHON SI YA HA PASADO LA FECHA
+//TODO EVITAR QUE PUEDA EDITAR EL HACKATHON SI YA HA PASADO LA FECHA?
 //Importamoslas dependencias
-import toast from 'react-hot-toast';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
-
-//Dependencia fecha
-//import DatePicker from 'react-datepicker';
-//import 'react-datepicker/dist/react-datepicker.css';
-import { addHours, format } from 'date-fns';
 
 //Imports de React
 import { useState, useContext, useEffect } from 'react';
 
-//Importamos la direccion de la api
-const { VITE_API_URL } = import.meta.env;
+//Importamos los utils
+import sendingHackathonInfo from '../utils/sendingHackathonInfo';
 
 //Importamos el contexto
 import { AuthContext } from '../contexts/AuthContext';
@@ -26,11 +20,18 @@ import useHackathonLangs from '../hooks/useHackathonLang';
 import useHackathon from '../hooks/useHackathon';
 
 // Importar componentes
-import LocatioAutocomplete from '../components/LocationAutocomplete';
-import DetailTextEditor from '../components/DetailsTextEditor';
+import InputTitle from '../components/HackathonInfoInputs/InputTitle';
+import InputSummary from '../components/HackathonInfoInputs/InputSummary';
+import InputDateRange from '../components/HackathonInfoInputs/InputDateRange';
+import InputRadioLocation from '../components/HackathonInfoInputs/InputRadioLocation';
+import LocatioAutocomplete from '../components/HackathonInfoInputs/LocationAutocomplete';
+import DetailTextEditor from '../components/HackathonInfoInputs/DetailsTextEditor';
+import InputBannerUpload from '../components/HackathonInfoInputs/InputBannerUpload';
+import InputDocumentUpload from '../components/HackathonInfoInputs/InputDocumentUpload';
+import InputSelectThemes from '../components/HackathonInfoInputs/InputSelectThemes';
+import ModalLang from '../components/HackathonInfoInputs/ModalLangs';
 
 const EditHackathonPage = () => {
-    const now = new Date();
     let navigate = useNavigate();
 
     //Obtenemos el id del hackathon
@@ -41,11 +42,6 @@ const EditHackathonPage = () => {
 
     //Obtenemos la info del hackathon a usar
     const { hackathon } = useHackathon(hackathonId);
-
-    //Si no existe devolvemos a la pagina principal
-    if (!hackathon) {
-        navigate('/');
-    }
 
     const [formData, setFormData] = useState({
         title: '',
@@ -63,6 +59,7 @@ const EditHackathonPage = () => {
 
     //Hacemos un useEffect para que se actualce el fomrdat
     useEffect(() => {
+        console.log('Hackathon data:', hackathon);
         if (hackathon) {
             setFormData({
                 title: hackathon.title || '',
@@ -79,6 +76,14 @@ const EditHackathonPage = () => {
             });
         }
     }, [hackathon]);
+
+    //TODO NO CONSIGO QUE FUNCIONE
+    /*useEffect(() => {
+        console.log('Valor de hackathon:', hackathon);
+        if (hackathon === null) {
+            navigate('/');
+        }
+    }, [hackathon, navigate]);*/
     //Comprobamos si el boton se va a desactivar
     const isDisabled = formData.type === 'presencial' ? false : true;
 
@@ -116,297 +121,174 @@ const EditHackathonPage = () => {
         setFormData({ ...formData, details: html });
     };
 
-    //Funcion que maneja los cambios en el input programingLangs
-    const handleChangeProgrammingLangs = (e) => {
-        const programmingLangsSelected = Array.from(
-            e.target.selectedOptions,
-            (option) => {
-                return Number(option.value);
-            }
+    //Creamos un state para controlar el abrir y cerrar del modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    //Funcion que maneja los cambios de las checkboxes de los lenguajes se ejecuta cuando formData cambia
+    let [selectedLangs, setSelectedLangs] = useState([]);
+    useEffect(() => {
+        setSelectedLangs(formData.programmingLangId || []);
+    }, [formData.programmingLangId]);
+
+    const handleChangeProgrammingLang = (e) => {
+        const langId = Number(e.target.value);
+        const isChecked = e.target.checked;
+
+        setSelectedLangs((prevLangs) =>
+            isChecked
+                ? [...prevLangs, langId]
+                : prevLangs.filter((id) => id !== langId)
         );
-        //Tiene que ser asi porque si no no se actualiza bien el array
-        setFormData((formData) => ({
-            ...formData,
-            programmingLangId: programmingLangsSelected,
+    };
+
+    //Funcion que maneja el cierre del modal
+    const handleCloseModal = () => {
+        setFormData((prev) => ({
+            ...prev,
+            programmingLangId: selectedLangs,
         }));
+        // Cierra el modal
+        setIsModalOpen(false);
     };
 
     //Funcion que maneja el envio de formulario
     const [loading, setLoading] = useState(false);
 
-    const handleCreationHackathon = async (e) => {
-        try {
-            e.preventDefault();
+    console.log('Valor de formData.image:', formData.image);
 
-            //Creamos el formData para enviar
-            const formDataToSend = new FormData();
-            formDataToSend.append('title', formData.title);
-            formDataToSend.append('summary', formData.summary);
-            formDataToSend.append(
-                'startingDate',
-                format(formData.startingDate, 'yyyy-MM-dd HH:mm:ss')
-            );
-            formDataToSend.append(
-                'deadline',
-                format(formData.deadline, 'yyyy-MM-dd HH:mm:ss')
-            );
-            formDataToSend.append('type', formData.type);
-            if (formData.type === 'presencial') {
-                formDataToSend.append('location', formData.location);
-            }
-            formDataToSend.append('themeId', formData.themeId);
-            formData.programmingLangId.forEach((lang) => {
-                formDataToSend.append('programmingLangId', lang);
-            });
-            formDataToSend.append('details', formData.details);
-            if (formData.image) {
-                formDataToSend.append('image', formData.image);
-            }
-            if (formData.document) {
-                formDataToSend.append('document', formData.document);
-            }
-
-            //Comenzamos con el envio al backend
-            setLoading(true);
-
-            const res = await fetch(
-                `${VITE_API_URL}/api/hackathon/${hackathonId}`,
-                {
-                    method: 'PATCH',
-                    headers: {
-                        Authorization: authToken,
-                    },
-                    body: formDataToSend,
-                }
-            );
-            const body = await res.json();
-
-            if (body) {
-                // Mostramos un mensaje al usuario indicando que todo ha ido bien.
-                toast.success(body.message, {
-                    id: 'register',
-                });
-            }
-
-            // Si hay algún error lo lanzamos.
-            if (body.status === 'error') {
-                throw new Error(body.message);
-            }
-        } catch (err) {
-            toast.error(err.message, {
-                id: 'register',
-            });
-        } finally {
-            setLoading(false);
-            navigate(`/details/${hackathonId}`);
-        }
-    };
     console.log(formData);
 
-    /*if (!authUser) {
+    //Enviamos los datos del hackathon, en este caso post
+    const handleSubmit = async (e) => {
+        await sendingHackathonInfo({
+            e,
+            formData,
+            selectedLangs,
+            authToken,
+            navigate,
+            setLoading,
+            hackathonId,
+        });
+    };
+
+    //Si no esta logueado o no es adminvuelve a la main
+    /*if (!authUser || authUser.role !== 'admin') {
         return <Navigate to="/" />;
     }*/
 
     return (
         <>
-            <main className="container 2xl">
-                <h2>Formulario crear hackathon</h2>
+            <main className="bg-[#191919] text-[#9A4EAE]">
+                <h2>Formulario editar hackathon</h2>
 
-                <form onSubmit={handleCreationHackathon}>
-                    <div className="bg-black text-white flex flex-col gap-2">
-                        {/* Input text del title */}
-                        <label htmlFor="title">Titulo</label>
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            value={formData.title}
-                            onChange={handleChangeGeneral}
-                            placeholder="escribe un titulo"
-                            required
-                            autoFocus
+                <form onSubmit={handleSubmit} className="bg-[#191919]">
+                    {/***************************************
+                     ********* Input text del title *********
+                     ****************************************/}
+                    <InputTitle
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                    />
+
+                    {/***************************************
+                     ****** Input textarea del summary ******
+                     ****************************************/}
+                    <InputSummary
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                    />
+
+                    {/*****************************************************
+                     ****** Input daterange de inicio y finalizacion ******
+                     ******************************************************/}
+                    <InputDateRange
+                        formData={formData}
+                        handleChangeDate={handleChangeDate}
+                    />
+
+                    <fieldset>
+                        {/****************************************************************
+                         *** Input radio del tipo de hackathon (presencial u online)  ****
+                         *****************************************************************/}
+                        <InputRadioLocation
+                            formData={formData}
+                            handleChangeGeneral={handleChangeGeneral}
                         />
+                        {/*************************************
+                         *** Input text de la localizacion ****
+                         **************************************/}
 
-                        {/* Input textarea del summary */}
-                        <label htmlFor="summary">Descripcion del evento</label>
-                        <textarea
-                            name="summary"
-                            id="summary"
-                            value={formData.summary}
-                            onChange={handleChangeGeneral}
-                            placeholder="escribe una breve descripcion del evento"
-                            maxLength="140"
-                            rows="3"
-                            required
+                        <LocatioAutocomplete
+                            isDisabled={isDisabled}
+                            onSelect={handleChangeLocation}
+                            location={formData.location}
                         />
+                    </fieldset>
 
-                        <fieldset>
-                            <legend>
-                                Fecha y hora de inicio y finalizacion
-                            </legend>
-                            {/* Input datepicker de la fecha de inicio */}
+                    {/***************************************************
+                     *** Input hackathon detalis (para futuro html?) ****
+                     ****************************************************/}
+                    <fieldset>
+                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Detalles del Hackathon
+                        </legend>
+                        <label htmlFor="details" hidden>
+                            Detalles del hackathon
+                        </label>
+                        <DetailTextEditor
+                            onChange={handleChangeDetails}
+                            value={formData.details}
+                            id="details"
+                        />
+                    </fieldset>
 
-                            {/*<DatePicker
-                                selectsStart
-                                showTimeSelect
-                                isClearable
-                                minDate={addHours(now, 24)}
-                                selected={formData.startingDate}
-                                onChange={(date) => {
-                                    handleChangeDate('startingDate', date);
-                                }}
-                                startDate={formData.startingDate}
-                                dateFormat="dd-MM-yyyy HH:mm"
-                                id="startingDate"
-                                placeholderText="Fecha de inicio"
-                                required
-                            />*/}
+                    {/***************************************************
+                     ***** Input quer maneja la subida de imagenes  *****
+                     ****************************************************/}
+                    <fieldset>
+                        <InputBannerUpload
+                            formData={formData}
+                            handleChangeFiles={handleChangeFiles}
+                        />
+                    </fieldset>
 
-                            {/* Input datepicker de la fecha de finalizacion */}
+                    {/***************************************************
+                     ***** Input que maneja la subida de documentos  ****
+                     ****************************************************/}
+                    <fieldset>
+                        <InputDocumentUpload
+                            formData={formData}
+                            handleChangeFiles={handleChangeFiles}
+                        />
+                    </fieldset>
 
-                            {/*<DatePicker
-                                selectsEnd
-                                showTimeSelect
-                                isClearable
-                                selected={formData.deadline}
-                                onChange={(date) => {
-                                    handleChangeDate('deadline', date);
-                                }}
-                                endDate={formData.deadline}
-                                minDate={formData.startingDate}
-                                placeholderText="Fecha de finalizacion"
-                                dateFormat="dd-MM-yyyy HH:mm"
-                                required
-                            />*/}
-                        </fieldset>
+                    {/********************************************************************
+                     ***** Input select que permite elegir los temas de un hackathon  ****
+                     *********************************************************************/}
+                    <fieldset>
+                        <InputSelectThemes
+                            formData={formData}
+                            handleChangeGeneral={handleChangeGeneral}
+                            hackathonThemes={hackathonThemes}
+                        />
+                    </fieldset>
 
-                        <fieldset>
-                            <legend>Es online o presencial?</legend>
-
-                            {/* Input radio del tipo de hackathon (presencial u online */}
-                            <label htmlFor="type">Online</label>
-                            <input
-                                type="radio"
-                                name="type"
-                                id="type"
-                                value="online"
-                                checked={formData.type === 'online'}
-                                onChange={handleChangeGeneral}
-                            />
-                            <label htmlFor="type">Presencial</label>
-                            <input
-                                type="radio"
-                                name="type"
-                                id="type"
-                                value="presencial"
-                                checked={formData.type === 'presencial'}
-                                onChange={handleChangeGeneral}
-                            />
-                            {/* Input text de la localizacion */}
-                            <label htmlFor="location">Localizacion</label>
-                            <LocatioAutocomplete
-                                isDisabled={isDisabled}
-                                onSelect={handleChangeLocation}
-                                location={formData.location}
-                            />
-                        </fieldset>
-                    </div>
-
-                    <div>
-                        <fieldset>
-                            <legend>Detalles del Hackathon</legend>
-                            {/* Input hackathon detalis (para futuro html?) */}
-                            <label htmlFor="details" hidden>
-                                Detalles del hackathon
-                            </label>
-                            <DetailTextEditor
-                                onChange={handleChangeDetails}
-                                value={formData.details}
-                                id="details"
-                            />
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Imagen del banner</legend>
-
-                            {/* Input quer maneja la subida de imagenes */}
-                            <label htmlFor="image"></label>
-                            <input
-                                type="file"
-                                name="image"
-                                accept="image/*"
-                                onChange={handleChangeFiles}
-                            />
-                        </fieldset>
-
-                        {/* Input que maneja la subida de documentos */}
-                        <fieldset>
-                            <legend>Documento de reglas</legend>
-
-                            {/* Input quer maneja la subida de imagenes */}
-                            <label htmlFor="image"></label>
-                            <input
-                                type="file"
-                                name="document"
-                                accept="application/pdf"
-                                onChange={handleChangeFiles}
-                            />
-                        </fieldset>
-                        <fieldset>
-                            <legend>Selecciona una tematica</legend>
-                            {/* Input select que permite elegir los temas de un hackathon */}
-                            <label htmlFor="themeId" hidden>
-                                Selecciona una tematica
-                            </label>
-                            <select
-                                value={formData.themeId}
-                                onChange={handleChangeGeneral}
-                                name="themeId"
-                                id="themeId"
-                                required
-                            >
-                                <option key="" selected hidden>
-                                    --Selecciona una opcion--
-                                </option>
-                                {hackathonThemes.map((theme) => (
-                                    <option key={theme.id} value={theme.id}>
-                                        {theme.theme}
-                                    </option>
-                                ))}
-                            </select>
-                        </fieldset>
-
-                        {/* Input select que permite elegir los lenguajes de un hackathon */}
-                        <fieldset>
-                            <legend>
-                                Selecciona un lenguaje de programacion
-                            </legend>
-                            <label htmlFor="programmingLangId" hidden>
-                                Selecciona los lenguajes
-                            </label>
-                            <select
-                                value={formData.programmingLangId}
-                                onChange={handleChangeProgrammingLangs}
-                                multiple
-                                size={5}
-                                name="programmingLangId"
-                                id="programmingLangId"
-                                required
-                            >
-                                <option key="" hidden>
-                                    --Elige lenguajes--
-                                </option>
-                                {hackathonLangs.map((lang) => (
-                                    <option key={lang.id} value={lang.id}>
-                                        {lang.programmingLang}
-                                    </option>
-                                ))}
-                            </select>
-                        </fieldset>
-                        <button type="submit" disabled={loading}>
-                            Enviar
-                        </button>
-                    </div>
+                    {/*******************************************************************
+                     *********** MODAL Input para elegir el lenguaje/s ******************
+                     ******************************************************************/}
+                    <ModalLang
+                        hackathonLangs={hackathonLangs || []}
+                        isModalOpen={isModalOpen}
+                        setIsModalOpen={setIsModalOpen}
+                        handleCloseModal={handleCloseModal}
+                        handleChangeProgrammingLang={
+                            handleChangeProgrammingLang
+                        }
+                        selectedLangs={selectedLangs || []}
+                    />
+                    <button type="submit" disabled={loading}>
+                        Enviar
+                    </button>
                 </form>
             </main>
         </>

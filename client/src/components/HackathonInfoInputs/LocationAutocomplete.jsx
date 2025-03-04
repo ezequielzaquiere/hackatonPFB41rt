@@ -60,6 +60,12 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
 
     return (
         <>
+            <label
+                htmlFor="location"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+                Localizacion
+            </label>
             <div className="relative w-full">
                 {/* Input de búsqueda */}
                 <input
