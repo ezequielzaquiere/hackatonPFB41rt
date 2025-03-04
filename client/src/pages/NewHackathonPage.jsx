@@ -1,24 +1,27 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
-//TODO:AÑADIR LOS DE VACIAR CAMPOS
-//TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
-//TODO:EDITAR EL CALENDARIO DE LA FECHA Y HORA
+//TODO:AÑADIR LOS DE VACIAR CAMPOS?
+//TODO:EDITAR EL CALENDARIO DE LA FECHA Y HORA ? CREO QUE NO SE PUEDE?
 //TODO:MIRARA PORQUE EL BORDE DEL INPUT ES AMARILLO SUPUESTAMENTE AUTOFILL PERO NO SE CAMBIA?
-//TODO NO CONSIGO QUE ME FUNCIONE NINGUN HOVER
+//TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR ? CREO QUE ESTA?
+//TODO PROBAR SI SOLO EL ADMIN PUEDE ENTRAR
+//TODO: PORQUE NO ME SALE EL TOAST
+//TODO: PUEDE SALIR EL TOAST DE UNA PAGINA A OTRA
+//TODO:PREGUNTAR SI HACER EL OTRO SELECT OTRO MODAL
+
 //Importamoslas dependencias
-import toast from 'react-hot-toast';
+
 import { useNavigate, Navigate } from 'react-router-dom';
 
 //Dependencia fecha
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addHours, format } from 'date-fns';
+import { addHours } from 'date-fns';
 
 //Imports de React
 import { useState, useContext, useEffect } from 'react';
 
-//Importamos la direccion de la api
-const { VITE_API_URL } = import.meta.env;
-
+//Importamos los utils
+import sendingHackathonInfo from '../utils/sendingHackathonInfo';
 //Importamos el contexto
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -29,13 +32,14 @@ import useHackathonLangs from '../hooks/useHackathonLang';
 // Importar componentes
 import LocatioAutocomplete from '../components/LocationAutocomplete';
 import DetailTextEditor from '../components/DetailsTextEditor';
+import ModalLang from '../components/ModalLangs';
 
 const NewHackathonPage = () => {
     const now = new Date();
 
     //Obtenemos el token de autorizacion
     const { authToken, authUser } = useContext(AuthContext);
-
+    console.log(authUser);
     const [formData, setFormData] = useState({
         title: '',
         summary: '',
@@ -95,14 +99,14 @@ const NewHackathonPage = () => {
         setFormData({ ...formData, details: html });
     };
 
-    //Funcion que maneja los cambios de las checkboxes de los lenguajes
+    //Funcion que maneja los cambios de las checkboxes de los lenguajes se ejecuta cuando formData cambia
     let [selectedLangs, setSelectedLangs] = useState([]);
     useEffect(() => {
         setSelectedLangs(formData.programmingLangId || []);
-    }, [formData.programmingLangId]); // Se ejecuta cuando `formData` cambia
+    }, [formData.programmingLangId]);
 
     const handleChangeProgrammingLang = (e) => {
-        const langId = Number(e.target.value); // Asegura que el ID es un número
+        const langId = Number(e.target.value);
         const isChecked = e.target.checked;
 
         setSelectedLangs((prevLangs) =>
@@ -116,110 +120,40 @@ const NewHackathonPage = () => {
     const handleCloseModal = () => {
         setFormData((prev) => ({
             ...prev,
-            programmingLangId: selectedLangs, // Actualiza el formData con los lenguajes seleccionados
+            programmingLangId: selectedLangs,
         }));
-        setIsModalOpen(false); // Cierra el modal
+        // Cierra el modal
+        setIsModalOpen(false);
     };
-
-    //Funcion que maneja los cambios en el input programingLangs
-    /*const handleChangeProgrammingLangs = (e) => {
-        const programmingLangsSelected = Array.from(
-            e.target.selectedOptions,
-            (option) => {
-                return Number(option.value);
-            }
-        );
-        //Tiene que ser asi porque si no no se actualiza bien el array
-        setFormData((formData) => ({
-            ...formData,
-            programmingLangId: programmingLangsSelected,
-        }));
-    };*/
 
     //Funcion que maneja el envio de formulario
     const [loading, setLoading] = useState(false);
 
-    const handleCreationHackathon = async (e) => {
-        let body;
-        try {
-            e.preventDefault();
-
-            //Creamos el formData para enviar
-            const formDataToSend = new FormData();
-            formDataToSend.append('title', formData.title);
-            formDataToSend.append('summary', formData.summary);
-            formDataToSend.append(
-                'startingDate',
-                format(formData.startingDate, 'yyyy-MM-dd HH:mm:ss')
-            );
-            formDataToSend.append(
-                'deadline',
-                format(formData.deadline, 'yyyy-MM-dd HH:mm:ss')
-            );
-            formDataToSend.append('type', formData.type);
-            if (formData.type === 'presencial') {
-                formDataToSend.append('location', formData.location);
-            }
-            formDataToSend.append('themeId', formData.themeId);
-            selectedLangs.forEach((lang) => {
-                formDataToSend.append('programmingLangId', lang);
-            });
-            /*formData.programmingLangId.forEach((lang) => {
-                formDataToSend.append('programmingLangId', lang);
-            });*/
-            formDataToSend.append('details', formData.details);
-            if (formData.image) {
-                formDataToSend.append('image', formData.image);
-            }
-            if (formData.document) {
-                formDataToSend.append('document', formData.document);
-            }
-
-            //Comenzamos con el envio al backend
-            setLoading(true);
-
-            const res = await fetch(`${VITE_API_URL}/api/hackathon/new`, {
-                method: 'post',
-                headers: {
-                    Authorization:
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxMDMwMjE3LCJleHAiOjE3NDE2MzUwMTd9.-5Yxppcjd0GXXLCs0q3-Ciz3oL1I26UTm4N2cW2535U',
-                },
-                body: formDataToSend,
-            });
-            body = await res.json();
-
-            // Si hay algún error lo lanzamos.
-            if (body.status === 'error') {
-                throw new Error(body.message);
-            }
-
-            // Mostramos un mensaje al usuario indicando que todo ha ido bien.
-            toast.success(body.message, {
-                id: 'createHackathon',
-            });
-        } catch (err) {
-            toast.error(err.message, {
-                id: 'createHackathon',
-            });
-        } finally {
-            setLoading(false);
-            navigate(`/details/${body.data.id}`);
-        }
-    };
     console.log(formData);
 
-    //Si no esta logueado vuelve a la main
-    /*if (!authUser) {
+    //Enviamos los datos del hackathon, en este caso post
+    const handleSubmit = async (e) => {
+        await sendingHackathonInfo({
+            e,
+            formData,
+            selectedLangs,
+            authToken,
+            navigate,
+            setLoading,
+        });
+    };
+    //Si no esta logueado o no es adminvuelve a la main
+    if (!authUser || authUser.role !== 'admin') {
         return <Navigate to="/" />;
-    }*/
+    }
 
     return (
         <>
-            <main className="container 2xl">
+            <main className=" bg-[#191919]">
                 <h2>Formulario crear hackathon</h2>
-                {/*"dark:bg-black"*/}
-                <form onSubmit={handleCreationHackathon} className="bg-white">
-                    {/**************************************
+
+                <form onSubmit={handleSubmit} className="bg-[#191919]">
+                    {/***************************************
                      ********* Input text del title *********
                      ****************************************/}
                     <div className="mb-6">
@@ -482,107 +416,21 @@ const NewHackathonPage = () => {
                             ))}
                         </select>
                     </fieldset>
-                    {/* Input select que permite elegir los lenguajes de un hackathon */}
-                    {/*<fieldset>
-                        <legend>Selecciona un lenguaje de programacion</legend>
-                        <label htmlFor="programmingLangId" hidden>
-                            Selecciona los lenguajes
-                        </label>
-                        <select
-                            value={formData.programmingLangId}
-                            onChange={handleChangeProgrammingLangs}
-                            multiple
-                            size={5}
-                            name="programmingLangId"
-                            id="programmingLangId"
-                            required
-                        >
-                            <option key="" hidden>
-                                --Elige lenguajes--
-                            </option>
-                            {hackathonLangs.map((lang) => (
-                                <option key={lang.id} value={lang.id}>
-                                    {lang.programmingLang}
-                                </option>
-                            ))}
-                        </select>
-                    </fieldset>*/}
-                    {/***********************************
-                     *********** MODAL ******************
-                     ************************************/}
-                    <div>
-                        {/* Botón para abrir el modal */}
-                        <button
-                            onClick={() => setIsModalOpen(true)}
-                            className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        >
-                            Elige los lenguajes
-                        </button>
 
-                        {/* Modal */}
-                        {isModalOpen && (
-                            <div
-                                className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
-                                onClick={() => setIsModalOpen(false)} // Cierra al hacer clic fuera
-                            >
-                                <div
-                                    className="bg-white rounded-lg shadow-sm w-full max-w-4xl mx-4"
-                                    onClick={(e) => e.stopPropagation()} // Evita que el clic se propague al fondo
-                                >
-                                    {/* Encabezado del modal */}
-                                    <div className="flex items-center justify-between p-4 border-b rounded-t">
-                                        <h3 className="text-xl font-semibold text-gray-900">
-                                            Elige un lenguaje
-                                        </h3>
-                                        <button
-                                            onClick={handleCloseModal}
-                                            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 sm:w-10 sm:h-10 inline-flex justify-center items-center"
-                                        >
-                                            &times;
-                                        </button>
-                                    </div>
+                    {/*******************************************************************
+                     *********** MODAL Input para elegir el lenguaje/s ******************
+                     ******************************************************************/}
+                    <ModalLang
+                        hackathonLangs={hackathonLangs || []}
+                        isModalOpen={isModalOpen}
+                        setIsModalOpen={setIsModalOpen}
+                        handleCloseModal={handleCloseModal}
+                        handleChangeProgrammingLang={
+                            handleChangeProgrammingLang
+                        }
+                        selectedLangs={selectedLangs || []}
+                    />
 
-                                    {/* Cuerpo del modal */}
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                                        {hackathonLangs.map((lang) => {
-                                            return (
-                                                <div
-                                                    key={lang.id}
-                                                    className="flex items-center space-x-2"
-                                                >
-                                                    <label
-                                                        htmlFor={
-                                                            lang.programmingLang
-                                                        }
-                                                        className="text-sm sm:text-base font-medium text-gray-900"
-                                                    >
-                                                        {lang.programmingLang}
-                                                    </label>
-                                                    <input
-                                                        type="checkbox"
-                                                        name={
-                                                            lang.programmingLang
-                                                        }
-                                                        id={
-                                                            lang.programmingLang
-                                                        }
-                                                        value={lang.id}
-                                                        checked={selectedLangs.includes(
-                                                            lang.id
-                                                        )} // Verifica si el ID está en el estado
-                                                        onChange={
-                                                            handleChangeProgrammingLang
-                                                        } // Maneja los cambios
-                                                        className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                                                    />
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
                     <button type="submit" disabled={loading}>
                         Enviar
                     </button>
