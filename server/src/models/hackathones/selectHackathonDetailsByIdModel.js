@@ -1,10 +1,10 @@
-//Importamos utils
+// Importamos utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-//Importamos la conexion a la base de datos
+// Importamos la conexión a la base de datos
 import getPool from '../../db/getPool.js';
 
-//Funcion que obtiene los detalles de un hackathon concreto por id
+// Función que obtiene los detalles de un hackathon concreto por ID
 const selectHackathonDetailsByIdModel = async (hackathonId) => {
     const pool = await getPool();
 
@@ -25,15 +25,16 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
             h.attachedFile, 
             AVG(r.rating) AS avgRating,
             (
-            SELECT JSON_ARRAYAGG(hl.programmingLangId)
-            FROM hackathonLangs hl
-            WHERE hl.hackathonId = h.id
-            ) AS programmingLangIds,
+                SELECT JSON_ARRAYAGG(pl.programmingLang)
+                FROM hackathonLangs hl
+                JOIN programmingLangs pl ON hl.programmingLangId = pl.id
+                WHERE hl.hackathonId = h.id
+            ) AS programmingLangs,
             (
-				SELECT COUNT(*) 
-				FROM registrations reg 
-				WHERE reg.hackathonId = h.id AND reg.status = 'confirmada'
-			) AS participantCount,
+                SELECT COUNT(*) 
+                FROM registrations reg 
+                WHERE reg.hackathonId = h.id AND reg.status = 'confirmada'
+            ) AS participantCount,
             h.image 
         FROM hackathonList h
         INNER JOIN users u ON u.id = h.userId
@@ -49,7 +50,7 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
         generateErrorUtil(404, 'Hackathon no encontrado');
     }
 
-    //Convertimos a tipo Number la media de ratings
+    // Convertimos a tipo Number la media de ratings
     hackathonList[0].avgRating = Number(hackathonList[0].avgRating);
 
     return hackathonList[0];
