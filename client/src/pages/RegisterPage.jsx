@@ -91,14 +91,14 @@ const RegisterPage = () => {
 
     return (
         <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+                ¡Crea tu cuenta!
+            </h2>
+
             <form
                 onSubmit={handleRegister}
                 className="bg-[#222] text-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col gap-4"
             >
-                <h2 className="text-3xl text-center text-[#9A4EAE] mb-4">
-                    ¡Crea tu cuenta!
-                </h2>
-
                 <label htmlFor="username" className="font-semibold">
                     Usuario *
                 </label>

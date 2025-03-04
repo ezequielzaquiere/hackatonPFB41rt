@@ -78,10 +78,6 @@ const UseRecoveryPassCode = () => {
                 onSubmit={handleUseRecoveryPassCode}
                 className="bg-[#222] text-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col gap-4"
             >
-                <h2 className="text-2xl font-bold text-center text-[#9A4EAE] mb-4">
-                    Restablecer Contraseña
-                </h2>
-
                 <label htmlFor="newPass" className="font-semibold">
                     Nueva Contraseña
                 </label>
@@ -119,7 +115,7 @@ const UseRecoveryPassCode = () => {
                         : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
                 }`}
                 >
-                    {loading ? 'Procesando...' : 'Enviar'}
+                    {loading ? 'Procesando...' : '¡Restablece tu contraseña!'}
                 </button>
             </form>
         </main>
