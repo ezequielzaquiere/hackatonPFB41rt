@@ -14,10 +14,6 @@ const cancelRegistrationController = async (req, res, next) => {
                     'Todavia no has confirmado tu asistencia'
                 );
             }
-
-            if (req.registration === 'cancelada') {
-                generateErrorUtil(409, 'Ya has cancelado tu participación');
-            }
         }
         //Obtener hackathonId
         const { hackathonId } = req.params;

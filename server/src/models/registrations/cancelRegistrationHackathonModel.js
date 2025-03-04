@@ -20,8 +20,8 @@ const cancelRegistrationHackathonModel = async (hackathonId, userId) => {
 
     //Actualizamos el estado de la participacion
     await pool.query(
-        `UPDATE registrations SET status = "cancelada", modifiedAt = ? WHERE userId = ? AND hackathonId = ?`,
-        [new Date(), userId, hackathonId]
+        `DELETE FROM registrations WHERE userId = ? AND hackathonId = ?`,
+        [userId, hackathonId]
     );
 };
 
