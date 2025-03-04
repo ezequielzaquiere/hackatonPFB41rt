@@ -74,7 +74,7 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     disabled:bg-gray-400 disabled:border-gray-400 disabled:text-black disabled:cursor-not-allowed
                     dark:disabled:bg-gray-800 dark:disabled:border-gray-500 dark:disabled:text-white"
                     disabled={isDisabled}
-                    required={isDisabled}
+                    required={!isDisabled}
                 />
                 <div className="flex gap-2 mt-2">
                     <button

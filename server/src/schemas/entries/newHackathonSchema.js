@@ -16,8 +16,20 @@ const newHackathonSchema = joi
         }),
         location: joi.string().min(2).max(200),
         details: joi.string().max(1000),
-        themeId: joi.number().required(),
-        programmingLangId: joi.array().items(joi.number()).required(),
+        themeId: joi.number().required().messages({
+            'any.required': 'Tienes que seleccionar una temática.',
+            'number.base': 'Selecciona por lo menos una temática.',
+        }),
+        programmingLangId: joi
+            .array()
+            .items(joi.number())
+            .min(1)
+            .required()
+            .messages({
+                'any.required': 'Tienes que seleccionar un lenguaje.',
+                'number.base':
+                    'Selecciona por lo menos un lenguaje de programación.',
+            }),
     })
     .messages(joiErrorMessages);
 export default newHackathonSchema;
