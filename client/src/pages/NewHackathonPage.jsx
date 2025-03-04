@@ -151,10 +151,13 @@ const NewHackathonPage = () => {
 
     return (
         <>
-            <main className=" bg-[#191919] text-[#9A4EAE]">
-                <h2>Formulario crear hackathon</h2>
+            <main className=" bg-[#191919] text-[#9A4EAE] w-screen p-10">
+                <h2 className="text-xl mb-4">Crea tu hackathon</h2>
 
-                <form onSubmit={handleSubmit} className="bg-[#191919]">
+                <form
+                    onSubmit={handleSubmit}
+                    className="bg-[#191919] flex flex-col justify-center gap-2 my-6"
+                >
                     {/***************************************
                      ********* Input text del title *********
                      ****************************************/}
@@ -199,7 +202,7 @@ const NewHackathonPage = () => {
                     {/***************************************************
                      *** Input hackathon detalis (para futuro html?) ****
                      ****************************************************/}
-                    <fieldset>
+                    <fieldset className="mt-8">
                         <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Detalles del Hackathon
                         </legend>
@@ -214,7 +217,7 @@ const NewHackathonPage = () => {
                     {/***************************************************
                      ***** Input quer maneja la subida de imagenes  *****
                      ****************************************************/}
-                    <fieldset>
+                    <fieldset className="mb-4">
                         <InputBannerUpload
                             formData={formData}
                             handleChangeFiles={handleChangeFiles}
@@ -223,7 +226,7 @@ const NewHackathonPage = () => {
                     {/***************************************************
                      ***** Input que maneja la subida de documentos  ****
                      ****************************************************/}
-                    <fieldset>
+                    <fieldset className="mb-4">
                         <InputDocumentUpload
                             formData={formData}
                             handleChangeFiles={handleChangeFiles}
@@ -254,9 +257,15 @@ const NewHackathonPage = () => {
                         selectedLangs={selectedLangs || []}
                     />
 
-                    <button type="submit" disabled={loading}>
-                        Enviar
-                    </button>
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-40 mt-15 px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50"
+                        >
+                            Enviar
+                        </button>
+                    </div>
                 </form>
             </main>
         </>

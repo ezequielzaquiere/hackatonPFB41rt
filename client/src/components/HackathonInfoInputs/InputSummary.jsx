@@ -7,7 +7,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
         <>
             <label
                 htmlFor="summary"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block text-sm font-medium text-gray-900 dark:text-white"
             >
                 Descripcion del evento
             </label>
@@ -20,7 +20,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
                 maxLength="140"
                 rows="4"
                 required
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="mb-8 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
             ></textarea>
         </>
     );
