@@ -1,27 +1,25 @@
 //TODO:ELIMINAR LOS CONSOLE.LOG
 //TODO:AÑADIR LOS DE VACIAR CAMPOS?
-//TODO:EDITAR EL CALENDARIO DE LA FECHA Y HORA ? CREO QUE NO SE PUEDE?
 //TODO:MIRARA PORQUE EL BORDE DEL INPUT ES AMARILLO SUPUESTAMENTE AUTOFILL PERO NO SE CAMBIA?
 //TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR ? CREO QUE ESTA?
 //TODO PROBAR SI SOLO EL ADMIN PUEDE ENTRAR
 //TODO: PORQUE NO ME SALE EL TOAST
 //TODO: PUEDE SALIR EL TOAST DE UNA PAGINA A OTRA
 //TODO:PREGUNTAR SI HACER EL OTRO SELECT OTRO MODAL
+//TODO AÑADIR A LOS LENGUAJES LO DE QUESE VEAN EN EL BOTON
 
 //Importamoslas dependencias
 
 import { useNavigate, Navigate } from 'react-router-dom';
 
 //Dependencia fecha
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { addHours } from 'date-fns';
 
 //Imports de React
 import { useState, useContext, useEffect } from 'react';
 
 //Importamos los utils
 import sendingHackathonInfo from '../utils/sendingHackathonInfo';
+
 //Importamos el contexto
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -30,13 +28,18 @@ import useHackathonThemes from '../hooks/useHackathonThemes';
 import useHackathonLangs from '../hooks/useHackathonLang';
 
 // Importar componentes
-import LocatioAutocomplete from '../components/LocationAutocomplete';
-import DetailTextEditor from '../components/DetailsTextEditor';
-import ModalLang from '../components/ModalLangs';
+import InputTitle from '../components/HackathonInfoInputs/InputTitle';
+import InputSummary from '../components/HackathonInfoInputs/InputSummary';
+import InputDateRange from '../components/HackathonInfoInputs/InputDateRange';
+import InputRadioLocation from '../components/HackathonInfoInputs/InputRadioLocation';
+import LocatioAutocomplete from '../components/HackathonInfoInputs/LocationAutocomplete';
+import DetailTextEditor from '../components/HackathonInfoInputs/DetailsTextEditor';
+import InputBannerUpload from '../components/HackathonInfoInputs/InputBannerUpload';
+import InputDocumentUpload from '../components/HackathonInfoInputs/InputDocumentUpload';
+import InputSelectThemes from '../components/HackathonInfoInputs/InputSelectThemes';
+import ModalLang from '../components/HackathonInfoInputs/ModalLangs';
 
 const NewHackathonPage = () => {
-    const now = new Date();
-
     //Obtenemos el token de autorizacion
     const { authToken, authUser } = useContext(AuthContext);
     console.log(authUser);
@@ -85,7 +88,6 @@ const NewHackathonPage = () => {
     //Funcion para manejar los cambios de imagen
     const handleChangeFiles = (e) => {
         const { name, files } = e.target;
-        console.log(files[0]);
         setFormData({ ...formData, [name]: files[0] });
     };
 
@@ -149,170 +151,46 @@ const NewHackathonPage = () => {
 
     return (
         <>
-            <main className=" bg-[#191919]">
+            <main className=" bg-[#191919] text-[#9A4EAE]">
                 <h2>Formulario crear hackathon</h2>
 
                 <form onSubmit={handleSubmit} className="bg-[#191919]">
                     {/***************************************
                      ********* Input text del title *********
                      ****************************************/}
-                    <div className="mb-6">
-                        <label
-                            htmlFor="title"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Titulo
-                        </label>
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleChangeGeneral}
-                            required
-                            placeholder="Aqui va el título"
-                            autoFocus
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        />
-                    </div>
-                    {/**************************************
+                    <InputTitle
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                    />
+                    {/***************************************
                      ****** Input textarea del summary ******
                      ****************************************/}
-                    <label
-                        htmlFor="summary"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                        Descripcion del evento
-                    </label>
-                    <textarea
-                        id="summary"
-                        name="summary"
-                        value={formData.summary}
-                        onChange={handleChangeGeneral}
-                        placeholder="Una breve descripcion del evento..."
-                        maxLength="140"
-                        rows="4"
-                        required
-                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    ></textarea>
+                    <InputSummary
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                    />
+
+                    {/*****************************************************
+                     ****** Input daterange de inicio y finalizacion ******
+                     ******************************************************/}
+                    <InputDateRange
+                        formData={formData}
+                        handleChangeDate={handleChangeDate}
+                    />
+
                     <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Fecha y hora de inicio y finalizacion
-                        </legend>
-
-                        {/****************************************************
-                         ****** Input datepicker de la fecha de inicio  ******
-                         ****************************************************/}
-
-                        {/** SI DA ERROR ES QUE FALTAN LAS HORAS Y CAMBIAR EL FORMATO PARA INCLUIRLAS */}
-                        <DatePicker
-                            selectsStart
-                            isClearable
-                            minDate={addHours(now, 24)}
-                            selected={formData.startingDate}
-                            onChange={(date) => {
-                                handleChangeDate('startingDate', date);
-                            }}
-                            startDate={formData.startingDate}
-                            dateFormat="dd-MM-yyyy"
-                            id="startingDate"
-                            placeholderText="Fecha de inicio"
-                            openToDate={now}
-                            required
-                            withPortal
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            wrapperClassName="w-full"
-                            popperClassName="responsive-datepicker"
-                            calendarClassName="bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        />
-
-                        {/****************************************************
-                         *** Input datepicker de la fecha de fnalizacion  ****
-                         ****************************************************/}
-
-                        <DatePicker
-                            selectsEnd
-                            isClearable
-                            selected={formData.deadline}
-                            onChange={(date) => {
-                                handleChangeDate('deadline', date);
-                            }}
-                            endDate={formData.deadline}
-                            minDate={formData.startingDate}
-                            placeholderText="Fecha de finalizacion"
-                            dateFormat="dd-MM-yyyy"
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            required
-                            openToDate={
-                                formData.startingDate
-                                    ? formData.startingDate
-                                    : now
-                            }
-                            popperClassName="responsive-datepicker"
-                            withPortal
-                        />
-                    </fieldset>
-                    <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Es online o presencial?
-                        </legend>
-
                         {/****************************************************************
                          *** Input radio del tipo de hackathon (presencial u online)  ****
                          *****************************************************************/}
-                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            {/* Opción Online */}
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                                <label
-                                    htmlFor="online"
-                                    className="flex items-center w-full ps-3 cursor-pointer"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="type"
-                                        id="online"
-                                        value="online"
-                                        checked={formData.type === 'online'}
-                                        onChange={handleChangeGeneral}
-                                        required
-                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:focus:ring-0 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500"
-                                    />
-                                    <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        Online
-                                    </span>
-                                </label>
-                            </li>
+                        <InputRadioLocation
+                            formData={formData}
+                            handleChangeGeneral={handleChangeGeneral}
+                        />
 
-                            {/* Opción Presencial */}
-                            <li className="w-full dark:border-gray-600">
-                                <label
-                                    htmlFor="presencial"
-                                    className="flex items-center w-full ps-3 cursor-pointer"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="type"
-                                        id="presencial"
-                                        value="presencial"
-                                        checked={formData.type === 'presencial'}
-                                        onChange={handleChangeGeneral}
-                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:focus:ring-0 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500"
-                                    />
-                                    <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        Presencial
-                                    </span>
-                                </label>
-                            </li>
-                        </ul>
                         {/*************************************
                          *** Input text de la localizacion ****
                          **************************************/}
-                        <label
-                            htmlFor="location"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Localizacion
-                        </label>
+
                         <LocatioAutocomplete
                             isDisabled={isDisabled}
                             onSelect={handleChangeLocation}
@@ -337,84 +215,29 @@ const NewHackathonPage = () => {
                      ***** Input quer maneja la subida de imagenes  *****
                      ****************************************************/}
                     <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Imagen del banner
-                        </legend>
-
-                        <label
-                            htmlFor="image"
-                            className="group flex items-center justify-center px-4 py-2 text-white 
-                                bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg cursor-pointer 
-                                focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition-all"
-                        >
-                            {formData.image
-                                ? formData.image.name
-                                : 'Elige una imagen'}
-                        </label>
-
-                        <input
-                            type="file"
-                            id="image"
-                            name="image"
-                            accept="image/*"
-                            onChange={handleChangeFiles}
-                            className="hidden"
+                        <InputBannerUpload
+                            formData={formData}
+                            handleChangeFiles={handleChangeFiles}
                         />
                     </fieldset>
                     {/***************************************************
                      ***** Input que maneja la subida de documentos  ****
                      ****************************************************/}
                     <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Documento de reglas
-                        </legend>
-
-                        <label
-                            htmlFor="file"
-                            className="group flex items-center justify-center px-4 py-2 text-white 
-                                bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg cursor-pointer 
-                                focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition-all"
-                        >
-                            {formData.document
-                                ? formData.document.name
-                                : 'Elige un documento'}
-                        </label>
-                        <input
-                            type="file"
-                            id="file"
-                            name="document"
-                            accept=".pdf,application/pdf"
-                            onChange={handleChangeFiles}
-                            className="hidden"
+                        <InputDocumentUpload
+                            formData={formData}
+                            handleChangeFiles={handleChangeFiles}
                         />
                     </fieldset>
                     {/********************************************************************
                      ***** Input select que permite elegir los temas de un hackathon  ****
                      *********************************************************************/}
                     <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Selecciona una tematica
-                        </legend>
-                        <label htmlFor="themeId" hidden>
-                            Selecciona una tematica
-                        </label>
-                        <select
-                            value={formData.themeId}
-                            onChange={handleChangeGeneral}
-                            name="themeId"
-                            id="themeId"
-                            required
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        >
-                            <option key="" selected hidden>
-                                --Selecciona una opcion--
-                            </option>
-                            {hackathonThemes.map((theme) => (
-                                <option key={theme.id} value={theme.id}>
-                                    {theme.theme}
-                                </option>
-                            ))}
-                        </select>
+                        <InputSelectThemes
+                            formData={formData}
+                            handleChangeGeneral={handleChangeGeneral}
+                            hackathonThemes={hackathonThemes}
+                        />
                     </fieldset>
 
                     {/*******************************************************************
