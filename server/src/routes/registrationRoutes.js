@@ -11,6 +11,7 @@ import {
 
 //Importar funciones controladoras
 import {
+    checkRegistration,
     registerHackathonController,
     confirmRegistrationHackathonController,
     cancelRegistrationController,
@@ -47,4 +48,8 @@ router.patch(
     hackathonRegistrationStatusMiddleware,
     cancelRegistrationController
 );
+
+//Endpoint para confirmar el registro en un hackathon
+router.get('/:userId/:hackathonId', checkRegistration);
+
 export default router;
