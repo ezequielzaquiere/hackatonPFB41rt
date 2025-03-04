@@ -12,15 +12,13 @@ const InputBannerUpload = ({ formData, handleChangeFiles }) => {
 
     return (
         <>
-            <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <legend className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">
                 Imagen del banner
             </legend>
 
             <label
                 htmlFor="image"
-                className="group flex items-center justify-center px-4 py-2 text-white 
-                                bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg cursor-pointer 
-                                focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition-all"
+                className="w-full px-4 py-2 my-3 rounded-lg shadow-[6px_6px_5px_#191919] bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50"
             >
                 {typeof formData.image === 'string'
                     ? formData.image // Si es un string, muestra el nombre

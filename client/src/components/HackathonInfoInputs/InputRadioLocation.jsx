@@ -6,12 +6,12 @@ const InputRadioLocation = ({ formData, handleChangeGeneral }) => {
     return (
         <>
             <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Es online o presencial?
+                ¿Es online o presencial?
             </legend>
 
-            <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <ul className="items-center w-full text-sm font-medium ">
                 {/* Opción Online */}
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                <li className="mb-2 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]">
                     <label
                         htmlFor="online"
                         className="flex items-center w-full ps-3 cursor-pointer"
@@ -33,7 +33,7 @@ const InputRadioLocation = ({ formData, handleChangeGeneral }) => {
                 </li>
 
                 {/* Opción Presencial */}
-                <li className="w-full dark:border-gray-600">
+                <li className="mb-8 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]">
                     <label
                         htmlFor="presencial"
                         className="flex items-center w-full ps-3 cursor-pointer"

@@ -26,9 +26,7 @@ const ModalLang = ({
                     e.preventDefault();
                     setIsModalOpen(true);
                 }}
-                className="flex w-full items-center justify-center px-4 py-2 text-white 
-                                bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg cursor-pointer 
-                                focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition-all"
+                className="w-full px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50"
             >
                 Elige los lenguajes
             </button>
@@ -57,7 +55,7 @@ const ModalLang = ({
                         </div>
 
                         {/* Cuerpo del modal */}
-                        <div className="flex justify-center bg-[#191919]">
+                        <div className="flex justify-center bg-[#191919] min-h-[400px] max-h-[800px]">
                             <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4 w-full p-4">
                                 {hackathonLangs.map((lang) => {
                                     const isChecked = selectedLangs.includes(
@@ -69,8 +67,8 @@ const ModalLang = ({
                                             className={`w-full border text-sm rounded-lg transition-all
                                                                     ${
                                                                         isChecked
-                                                                            ? 'bg-blue-100 border-blue-500 text-blue-900 dark:bg-blue-900 dark:border-blue-400 dark:text-white'
-                                                                            : 'bg-gray-50 border-gray-300 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white'
+                                                                            ? 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                                                                            : 'bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]'
                                                                     }
                                                                     hover:bg-gray-100 dark:hover:bg-gray-600 focus:ring-blue-500 focus:border-blue-500`}
                                         >
