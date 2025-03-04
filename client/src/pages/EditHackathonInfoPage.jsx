@@ -59,7 +59,6 @@ const EditHackathonPage = () => {
 
     //Hacemos un useEffect para que se actualce el fomrdat
     useEffect(() => {
-        console.log('Hackathon data:', hackathon);
         if (hackathon) {
             setFormData({
                 title: hackathon.title || '',
@@ -81,7 +80,7 @@ const EditHackathonPage = () => {
     /*useEffect(() => {
         console.log('Valor de hackathon:', hackathon);
         if (hackathon === null) {
-            navigate('/');
+            
         }
     }, [hackathon, navigate]);*/
     //Comprobamos si el boton se va a desactivar

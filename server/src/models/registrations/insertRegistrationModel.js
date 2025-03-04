@@ -79,35 +79,47 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                             <style>
                                 body {
                                     font-family: Arial, sans-serif;
-                                    background-color: #f3e5f5;
-                                    color: #4a148c;
+                                    background-color: #191919;
+                                    color: #9A4EAE;
                                     margin: 0;
                                     padding: 0;
+                                    text-align: center;
                                 }
                                 .container {
                                     max-width: 600px;
                                     margin: 40px auto;
-                                    background: #ffffff;
+                                    background: #222222;
                                     padding: 20px;
                                     border-radius: 10px;
-                                    box-shadow: 0 0 10px rgba(74, 20, 140, 0.2);
+                                    box-shadow: 0 0 10px rgba(154, 78, 174, 0.2);
                                     text-align: center;
                                 }
                                 h1 {
-                                    color: #6a1b9a;
+                                    color: #9A4EAE;
                                 }
                                 p {
                                     font-size: 16px;
                                     line-height: 1.6;
-                                    color: #4a148c;
+                                    color: #c39acd;
+                                }
+                                .btn {
+                                    display: inline-block;
+                                    margin-top: 20px;
+                                    padding: 12px 24px;
+                                    font-size: 18px;
+                                    color: #ffffff !important;
+                                    background-color: #9A4EAE;
+                                    text-decoration: none;
+                                    border-radius: 5px;
+                                    transition: background 0.3s ease-in-out;
                                 }
                                 .btn:hover {
-                                    background-color: #6a1b9a;
+                                    background-color: #7B3D8B;
                                 }
                                 .footer {
                                     margin-top: 20px;
                                     font-size: 14px;
-                                    color: #7b1fa2;
+                                    color: #c39acd;
                                 }
                                 ul {
                                     list-style: none;
@@ -116,11 +128,12 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                     text-align: left;
                                 }
                                 li {
-                                    background: #f3e5f5;
+                                    background: #2A2A2A;
                                     padding: 10px;
                                     margin: 5px 0;
                                     border-radius: 5px;
-                                    color: #4a148c;
+                                    border-left: 4px solid #9A4EAE;
+                                    color: #c39acd;
                                     font-size: 16px;
                                     line-height: 1.5;
                                 }
@@ -150,14 +163,14 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                         📍 <strong>Localización:</strong> ${hackathonLocation}
                                     </li>
                                 </ul>
-                                <a href="${process.env.CLIENT_URL}/register/${hackathonId}/${confirmationCode}" 
-                                    style="display: inline-block; margin-top: 20px; padding: 12px 24px; font-size: 18px; color: #ffffff !important; background-color: #8e24aa; text-decoration: none; border-radius: 5px; transition: background 0.3s ease-in-out;">
-                                        ¡Confirma tu asistencia!
+                                <a href="${process.env.CLIENT_URL}/register/${hackathonId}/${confirmationCode}" class="btn">
+                                    ¡Confirma tu asistencia!
                                 </a>
                                 <p class="footer">Si no solicitaste este registro, puedes ignorar este correo.</p>
                             </div>
                         </body>
                         </html>
+
                         `;
 
     //Enviamos el correo de confirmacion

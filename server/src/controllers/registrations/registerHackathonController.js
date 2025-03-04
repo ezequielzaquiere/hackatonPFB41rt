@@ -10,13 +10,6 @@ const registerHackathonController = async (req, res, next) => {
             if (req.registration === 'confirmada') {
                 generateErrorUtil(409, 'La asistencia ya ha sido confirmada');
             }
-
-            if (req.registration === 'cancelada') {
-                generateErrorUtil(
-                    409,
-                    'No puedes volverte a inscribir si ya has cancelado tu participacion'
-                );
-            }
         }
         //Obtener hackathonId
         const { hackathonId } = req.params;
