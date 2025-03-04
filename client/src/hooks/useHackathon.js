@@ -23,7 +23,16 @@ const useHackathon = (hackathonId) => {
 
         fetchHackathon();
     }, [hackathonId]);
-    return { hackathon };
+
+    // Función que actualiza la media de valoraciones de un hackathon del State.
+    const updateRatingHackathonState = (avgRating) => {
+        setHackathon({
+            ...hackathon,
+            avgRating,
+        });
+    };
+
+    return { hackathon, updateRatingHackathonState };
 };
 
 export default useHackathon;
