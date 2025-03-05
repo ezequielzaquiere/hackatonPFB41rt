@@ -22,12 +22,6 @@ div#root {
     min-height: 100vh;
 }
 
-div#root > header > div.user-info > img {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-}
-
 main {
     flex-grow: 1;
 }
