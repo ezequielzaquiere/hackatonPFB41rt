@@ -7,7 +7,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
         <>
             <label
                 htmlFor="summary"
-                className="block text-sm font-medium text-gray-900 dark:text-white"
+                className="block text-sm font-medium text-[#9A4EAE]"
             >
                 Descripcion del evento
             </label>

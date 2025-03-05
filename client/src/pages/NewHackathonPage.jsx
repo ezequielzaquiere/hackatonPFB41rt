@@ -5,7 +5,6 @@
 //TODO PROBAR SI SOLO EL ADMIN PUEDE ENTRAR
 //TODO: PORQUE NO ME SALE EL TOAST
 //TODO: PUEDE SALIR EL TOAST DE UNA PAGINA A OTRA
-//TODO:PREGUNTAR SI HACER EL OTRO SELECT OTRO MODAL
 //TODO AÑADIR A LOS LENGUAJES LO DE QUESE VEAN EN EL BOTON
 
 //Importamoslas dependencias
@@ -203,10 +202,10 @@ const NewHackathonPage = () => {
                      *** Input hackathon detalis (para futuro html?) ****
                      ****************************************************/}
                     <fieldset className="mt-8">
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <legend className="block mb-2 text-sm font-medium text-[#9A4EAE]">
                             Detalles del Hackathon
                         </legend>
-                        <label htmlFor="details" hidden>
+                        <label htmlFor="details" className="hidden">
                             Detalles del hackathon
                         </label>
                         <DetailTextEditor

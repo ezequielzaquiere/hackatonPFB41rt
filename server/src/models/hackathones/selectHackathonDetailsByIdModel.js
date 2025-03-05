@@ -31,6 +31,11 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
                 WHERE hl.hackathonId = h.id
             ) AS programmingLangs,
             (
+            SELECT JSON_ARRAYAGG(hl.programmingLangId)
+            FROM hackathonLangs hl
+            WHERE hl.hackathonId = h.id
+            ) AS programmingLangIds,
+            (
                 SELECT COUNT(*) 
                 FROM registrations reg 
                 WHERE reg.hackathonId = h.id AND reg.status = 'confirmada'

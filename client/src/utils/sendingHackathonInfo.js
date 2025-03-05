@@ -84,7 +84,9 @@ const sendingHackathonInfo = async ({
         });
     } finally {
         setLoading(false);
-        navigate(`/details/${body.data.id}`);
+        isCreating
+            ? navigate(`/details/${body.data.id}`)
+            : navigate(`/details/${hackathonId}`);
     }
 };
 

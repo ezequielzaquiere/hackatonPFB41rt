@@ -62,7 +62,7 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
         <>
             <label
                 htmlFor="location"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-[#9A4EAE]"
             >
                 Localizacion
             </label>

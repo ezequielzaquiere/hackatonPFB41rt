@@ -39,6 +39,8 @@ const EditHackathonPage = () => {
 
     //Obtenemos el token de autorizacion
     const { authToken, authUser } = useContext(AuthContext);
+    console.log(authToken);
+    console.log(authUser);
 
     //Obtenemos la info del hackathon a usar
     const { hackathon } = useHackathon(hackathonId);
@@ -171,16 +173,21 @@ const EditHackathonPage = () => {
     };
 
     //Si no esta logueado o no es adminvuelve a la main
-    /*if (!authUser || authUser.role !== 'admin') {
-        return <Navigate to="/" />;
-    }*/
+    /*useEffect(() => {
+        if (!authUser || authUser.role !== 'admin') {
+            navigate('/');
+        }
+    }, [authUser, navigate]);*/
 
     return (
         <>
-            <main className="bg-[#191919] text-[#9A4EAE]">
+            <main className="bg-[#191919] text-[#9A4EAE] w-screen p-10">
                 <h2>Formulario editar hackathon</h2>
 
-                <form onSubmit={handleSubmit} className="bg-[#191919]">
+                <form
+                    onSubmit={handleSubmit}
+                    className="bg-[#191919] flex flex-col justify-center gap-2 my-6"
+                >
                     {/***************************************
                      ********* Input text del title *********
                      ****************************************/}
@@ -228,7 +235,7 @@ const EditHackathonPage = () => {
                      *** Input hackathon detalis (para futuro html?) ****
                      ****************************************************/}
                     <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <legend className="block mb-2 text-sm font-medium text-[#9A4EAE]">
                             Detalles del Hackathon
                         </legend>
                         <label htmlFor="details" hidden>
