@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const InputDocumentUpload = ({ formData, handleChangeFiles }) => {
     return (
         <>
-            <legend className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">
+            <legend className="block mb-4 text-sm font-medium text-[#9A4EAE]">
                 Documento de reglas
             </legend>
 

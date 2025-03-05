@@ -6,7 +6,7 @@ const InputTitle = ({ formData, handleChangeGeneral }) => {
         <div className="mb-6">
             <label
                 htmlFor="title"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-[#9A4EAE]"
             >
                 Titulo
             </label>

@@ -9,7 +9,7 @@ const InputSelectThemes = ({
 }) => {
     return (
         <>
-            <legend className="block text-sm font-medium text-gray-900 dark:text-white">
+            <legend className="block text-sm font-medium text-[#9A4EAE]">
                 Selecciona una tematica
             </legend>
             <label htmlFor="themeId" hidden>
@@ -22,9 +22,9 @@ const InputSelectThemes = ({
                 id="themeId"
                 required
                 className="w-full px-4 py-2 my-3 rounded-lg shadow-[6px_6px_5px_#191919] 
-               bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none 
-               focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50 
-               appearance-none"
+                bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none 
+                focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50 
+                appearance-none"
             >
                 <option key="" hidden className="text-gray-500 bg-[#222]">
                     ------------------- ▽

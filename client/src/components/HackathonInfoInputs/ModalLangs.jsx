@@ -43,7 +43,7 @@ const ModalLang = ({
                     >
                         {/* Encabezado del modal */}
                         <div className="flex bg-[#191919] items-center justify-between p-4 border-b rounded-t">
-                            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            <h3 className="text-xl font-semibold text-[#9A4EAE]">
                                 Elige un lenguaje
                             </h3>
                             <button

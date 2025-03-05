@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const InputRadioLocation = ({ formData, handleChangeGeneral }) => {
     return (
         <>
-            <legend className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <legend className="block mb-2 text-sm font-medium text-[#9A4EAE]">
                 ¿Es online o presencial?
             </legend>
 

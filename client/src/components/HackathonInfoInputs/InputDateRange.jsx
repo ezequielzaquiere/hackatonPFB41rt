@@ -9,7 +9,7 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
     const now = new Date();
     return (
         <>
-            <legend className="block text-sm font-medium text-gray-900 dark:text-white">
+            <legend className="block text-sm font-medium text-[#9A4EAE]">
                 Fecha y hora de inicio y finalizacion
             </legend>
 
