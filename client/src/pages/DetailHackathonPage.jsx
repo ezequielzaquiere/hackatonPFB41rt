@@ -1,43 +1,29 @@
-// Importamos useState para manejar estados y useContext para acceder al contexto de autenticación.
 import { useState, useContext, useEffect } from 'react';
-// Hook personalizado para obtener los datos del hackathon.
 import useHackathon from '../hooks/useHackathon';
-// useParams para obtener el ID de la URL y useNavigate para movernos entre páginas.
 import { useParams, useNavigate } from 'react-router-dom';
-// Iconos para mejorar la interfaz.
-import { FaUsers, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
-// Librería para mostrar mensajes emergentes.
+import { FaUsers, FaMapMarkerAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-// Importamos el contexto donde está la información del usuario autenticado.
 import { AuthContext } from '../contexts/AuthContext';
+
 const { VITE_API_URL } = import.meta.env;
 
 const DetailHackathonPage = () => {
-    // Sacamos el ID del hackathon de la URL.
     const { hackathonId } = useParams();
-    // Obtenemos los datos del hackathon con nuestro hook personalizado.
     const { hackathon } = useHackathon(hackathonId);
-    // Hook para navegar entre páginas.
     const navigate = useNavigate();
-    // Estado para manejar la estrella sobre la que pasamos el raton.
-    const [hoveredRating, setHoveredRating] = useState(null);
-    // Estado para la calificación del usuario (mal inicializado, falta el valor actual).
-    const [userRating, setUserRating] = useState(hackathon?.avgRating || 0);
-
-    // Extraemos el token de autenticación y la info del usuario desde el contexto.
     const { authToken, authUser } = useContext(AuthContext);
-    // Estado para saber si el usuario ya está apuntado.
     const [registeredHackathons, setRegisteredHackathons] = useState({});
+    const [rating, setRating] = useState(0);
+    const [hasVoted, setHasVoted] = useState({});
 
     useEffect(() => {
-        // Verificar si el usuario ya está registrado en este hackathon
         if (authUser && hackathon) {
             const checkRegistration = async () => {
                 const response = await fetch(
                     `${VITE_API_URL}/api/register/${authUser.id}/${hackathonId}`,
                     {
                         headers: {
-                            Authorization: `${authToken}`,
+                            Authorization: authToken,
                         },
                     }
                 );
@@ -51,10 +37,42 @@ const DetailHackathonPage = () => {
             };
 
             checkRegistration();
+
+            // Verificar si el usuario ya ha votado en este hackathon
+            const checkVote = async () => {
+                const response = await fetch(
+                    `${VITE_API_URL}/api/hackathon/${hackathonId}/ratings/${authUser.id}`,
+                    {
+                        headers: {
+                            Authorization: authToken,
+                        },
+                    }
+                );
+                if (response.ok) {
+                    setHasVoted((prev) => ({
+                        ...prev,
+                        [hackathonId]: true,
+                    }));
+                    // Guardar en localStorage que el usuario ya ha votado
+                    localStorage.setItem(`hasVoted_${hackathonId}`, 'true');
+                }
+            };
+
+            checkVote();
+
+            // Cargar el estado de hasVoted desde localStorage
+            const hasVotedStored = localStorage.getItem(
+                `hasVoted_${hackathonId}`
+            );
+            if (hasVotedStored === 'true') {
+                setHasVoted((prev) => ({
+                    ...prev,
+                    [hackathonId]: true,
+                }));
+            }
         }
     }, [authUser, hackathonId, authToken, hackathon]);
 
-    // Función para el registro del usuario en el hackathon
     const handleRegister = async () => {
         if (!authToken) {
             toast.error('Debes iniciar sesión', { id: '1' });
@@ -73,7 +91,7 @@ const DetailHackathonPage = () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `${authToken}`,
+                        Authorization: authToken,
                     },
                     body: JSON.stringify({ userId: authUser.id }),
                 }
@@ -90,7 +108,6 @@ const DetailHackathonPage = () => {
         }
     };
 
-    // Función para cancelar inscrimpion a hackathon
     const handleUnregister = async () => {
         try {
             const response = await fetch(
@@ -99,7 +116,7 @@ const DetailHackathonPage = () => {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `${authToken}`,
+                        Authorization: authToken,
                     },
                     body: JSON.stringify({ userId: authUser.id }),
                 }
@@ -112,55 +129,70 @@ const DetailHackathonPage = () => {
             toast.success('Te has desinscrito del hackathon');
             setRegisteredHackathons((prev) => ({
                 ...prev,
-                [hackathonId]: false, // Cambiamos el estado de registro a false
+                [hackathonId]: false,
             }));
         } catch (error) {
             toast.error(error.message);
         }
     };
 
-    // Función para mostrar las estrellas de votación
-    const printStars = (rating) => {
-        return Array.from({ length: 5 }, (_, i) => (
-            <FaStar
-                key={i}
-                className={`cursor-pointer transition duration-300 ${
-                    i < (hoveredRating || rating)
-                        ? 'text-yellow-400'
-                        : 'text-gray-300'
-                }`}
-                onMouseEnter={() => setHoveredRating(i + 1)}
-                onMouseLeave={() => setHoveredRating(null)}
-                onClick={() => handleRating(i + 1)}
-            />
-        ));
-    };
+    const handleRatingSubmit = async (e) => {
+        e.preventDefault();
 
-    // Función que maneja la votación del hackathon
-    const handleRating = (rating) => {
-        if (!hackathon.hasParticipated) {
-            toast.error(
-                'Para votar, debes haber participado en el hackathon.',
-                { id: '4' }
-            );
+        if (!authToken) {
+            toast.error('Debes iniciar sesión para votar', { id: '4' });
             return;
         }
 
         if (new Date(hackathon.deadline) > new Date()) {
             toast.error(
-                'Solo puedes votar después de que el evento haya terminado.',
+                'No puedes votar un hackathon que aún no ha finalizado',
                 { id: '5' }
             );
             return;
         }
 
-        setUserRating(rating);
-        toast.success(`¡Gracias por tu calificación de ${rating} estrellas!`, {
-            id: '6',
-        });
+        if (!registeredHackathons[hackathonId]) {
+            toast.error('Solo los participantes pueden votar el hackathon', {
+                id: '6',
+            });
+            return;
+        }
+
+        if (hasVoted[hackathonId]) {
+            toast.error('Ya has votado este hackathon', { id: '7' });
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `${VITE_API_URL}/api/hackathon/${hackathonId}/ratings`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: authToken,
+                    },
+                    body: JSON.stringify({ rating }),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error('Error al enviar la valoración.');
+            }
+
+            toast.success('Valoración enviada con éxito', { id: '8' });
+            setHasVoted((prev) => ({
+                ...prev,
+                [hackathonId]: true,
+            }));
+            // Guardar en localStorage que el usuario ya ha votado
+            localStorage.setItem(`hasVoted_${hackathonId}`, 'true');
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
 
-    // Mientras los datos se están cargando, mostramos un mensaje.
     if (!hackathon) return <p className="text-white">Loading...</p>;
 
     const id = Number(hackathonId);
@@ -185,7 +217,6 @@ const DetailHackathonPage = () => {
 
             {/* Contenedor principal con la información del hackathon */}
             <div className="bg-white shadow-2xl rounded-3xl p-8 max-w-lg w-full border border-gray-300 text-gray-800 flex flex-col items-center">
-                {/* Imagen del hackathon */}
                 <img
                     src={hackathon.image}
                     alt={hackathon.title}
@@ -195,7 +226,6 @@ const DetailHackathonPage = () => {
                     {hackathon.title}
                 </h2>
 
-                {/* Datos del hackathon como número de participantes y ubicación */}
                 <div className="flex items-center gap-2 mt-4 text-gray-700">
                     <FaUsers className="text-blue-500" />
                     <span>{hackathon.participantCount} participantes</span>
@@ -213,11 +243,10 @@ const DetailHackathonPage = () => {
                         </>
                     )}
                     {hackathon.type === 'online' && (
-                        <span className="ml-4 text-gray-700">Online</span>
+                        <span className="ml-4 text-gray-700">🌐 Online</span>
                     )}
                 </div>
 
-                {/* Descripción y lenguajes de programación */}
                 <p className="text-gray-600 mt-4 text-center">
                     {hackathon.summary}
                 </p>
@@ -225,48 +254,82 @@ const DetailHackathonPage = () => {
                     {hackathon.programmingLangs.join(' | ')}
                 </p>
 
-                {/* Fechas del hackathon */}
                 <p className="text-sm text-gray-500 mt-4">
-                    <span className="font-semibold">Fecha de inicio:</span>{' '}
+                    <span className="font-semibold">🛫 Fecha de inicio:</span>{' '}
                     {new Date(hackathon.startingDate).toLocaleDateString()}
                 </p>
                 <p className="text-sm text-gray-500 mt-2">
-                    <span className="font-semibold">Fecha límite:</span>{' '}
+                    <span className="font-semibold">🛬 Fecha límite:</span>{' '}
                     {new Date(hackathon.deadline).toLocaleDateString()}
                 </p>
 
-                {/* Sección de votación con estrellas */}
-                <div className="mt-4 flex gap-1">
-                    Votar {printStars(userRating)}
-                </div>
-
-                {/* Mensaje si el hackathon ya terminó */}
-                {new Date(hackathon.deadline) < new Date() && (
+                {new Date(hackathon.deadline) < new Date() ? (
                     <h3 className="mt-4 text-lg font-semibold text-red-500">
                         El evento ha terminado
                     </h3>
+                ) : (
+                    <>
+                        {authToken ? (
+                            registeredHackathons[hackathonId] ? (
+                                <button
+                                    onClick={handleUnregister}
+                                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-400 transition duration-300"
+                                >
+                                    Desapuntarse
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleRegister}
+                                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-400 transition duration-300"
+                                >
+                                    Apuntarse
+                                </button>
+                            )
+                        ) : (
+                            <p className="mt-4 text-red-500">
+                                Inicia sesión para apuntarte.
+                            </p>
+                        )}
+                    </>
                 )}
 
-                {/* Botón de apuntarse, solo si el usuario ha iniciado sesión */}
-                {authToken ? (
-                    registeredHackathons[hackathonId] ? (
-                        <button
-                            onClick={handleUnregister}
-                            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-400 transition duration-300"
-                        >
-                            Desapuntarse
-                        </button>
-                    ) : (
-                        <button
-                            onClick={handleRegister}
-                            className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-400 transition duration-300"
-                        >
-                            Apuntarse
-                        </button>
-                    )
-                ) : (
-                    <p className="mt-4 text-red-500">
-                        Inicia sesión para apuntarte.
+                {/* Componente para valorar el hackathon */}
+                {new Date(hackathon.deadline) < new Date() &&
+                    registeredHackathons[hackathonId] &&
+                    !hasVoted[hackathonId] && (
+                        <div className="mt-6">
+                            <h3 className="text-lg font-semibold text-gray-900">
+                                Valora este hackathon
+                            </h3>
+                            <form
+                                onSubmit={handleRatingSubmit}
+                                className="flex flex-col items-center"
+                            >
+                                <div className="flex gap-2 mt-2">
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                        <button
+                                            type="button"
+                                            key={star}
+                                            onClick={() => setRating(star)}
+                                            className={`text-2xl ${rating >= star ? 'text-yellow-400' : 'text-gray-300'}`}
+                                        >
+                                            ★
+                                        </button>
+                                    ))}
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-400 transition duration-300"
+                                >
+                                    Enviar valoración
+                                </button>
+                            </form>
+                        </div>
+                    )}
+
+                {hasVoted[hackathonId] && (
+                    <p className="mt-4 text-green-500">
+                        ¡Gracias por tu valoración!
                     </p>
                 )}
             </div>
