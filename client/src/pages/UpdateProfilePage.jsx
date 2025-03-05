@@ -1,8 +1,8 @@
 //Importamos los hooks.
 import { useContext, useRef, useState, useEffect } from 'react';
 
-// Importamos los componentes.
-import { Navigate } from 'react-router-dom';
+// Importamos componentes y hook.
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // Importamos el contexto de autorización.
 import { AuthContext } from '../contexts/AuthContext';
@@ -19,6 +19,7 @@ const UpdateProfilePage = () => {
     const { authToken, authUser, authUpdateProfileState } =
         useContext(AuthContext);
 
+    const navigate = useNavigate();
     // Creamos una referencia para asignar al input file.
     const inputFileRef = useRef();
 
@@ -93,6 +94,7 @@ const UpdateProfilePage = () => {
 
             // Actualizamos la info del usuario.
             authUpdateProfileState(body.data.user);
+            navigate('/users/profile');
 
             // Indicamos al usuario que todo ha ido bien.
             toast.success(body.message, {
@@ -117,10 +119,15 @@ const UpdateProfilePage = () => {
     }
 
     return (
-        <main>
-            <h2>Editar perfil</h2>
+        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mb-4">
+                Editar perfil
+            </h2>
             <>
-                <form onSubmit={handleUpdateProfile}>
+                <form
+                    onSubmit={handleUpdateProfile}
+                    className="bg-[#222] text-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col gap-4"
+                >
                     <label htmlFor="username">Usuario:</label>
                     <input
                         type="text"
@@ -128,6 +135,7 @@ const UpdateProfilePage = () => {
                         value={username}
                         onChange={(e) => setUserName(e.target.value)}
                         autoFocus
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                     />
 
                     <label htmlFor="firstName">Nombre:</label>
@@ -136,6 +144,7 @@ const UpdateProfilePage = () => {
                         id="firstName"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                     />
 
                     <label htmlFor="lastName">Apellidos:</label>
@@ -144,6 +153,7 @@ const UpdateProfilePage = () => {
                         id="lastName"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                     />
 
                     <label htmlFor="email">Email:</label>
@@ -152,6 +162,7 @@ const UpdateProfilePage = () => {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                     />
 
                     <label htmlFor="avatar">Avatar:</label>
@@ -161,9 +172,19 @@ const UpdateProfilePage = () => {
                         ref={inputFileRef}
                         onChange={(e) => setAvatar(e.target.files[0])}
                         accept="image/png,image/jpeg"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                     />
 
-                    <button disabled={loading}>Actualizar</button>
+                    <button
+                        disabled={loading}
+                        className={`w-full px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
+                            loading
+                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                        }`}
+                    >
+                        {loading ? 'Actualizando...' : 'Actualizar'}
+                    </button>
                 </form>
             </>
         </main>

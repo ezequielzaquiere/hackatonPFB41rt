@@ -20,7 +20,7 @@ const updateUserProfileController = async (req, res, next) => {
 
             user.avatar && (await removeImgUtil(user.avatar, 'avatar'));
 
-            avatarName = await saveImgUtil(avatar, 400, 'avatar');
+            avatarName = await saveImgUtil(avatar, 200, 'avatar');
         }
 
         await updateUserProfileModel({

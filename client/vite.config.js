@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
     plugins: [tailwindcss(), react()],
     server: {
-        port: 8000,
+        port: 3000,
         historyApiFallback: true, // Redirige rutas desconocidas en desarrollo
     },
     build: {

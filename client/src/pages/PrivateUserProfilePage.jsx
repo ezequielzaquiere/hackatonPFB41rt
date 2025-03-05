@@ -24,8 +24,10 @@ const PrivateUserProfilePage = () => {
     }
 
     return (
-        <main>
-            <h2>Página de mi perfil</h2>
+        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mb-4">
+                Área privada de usuario. Bienvenid@, {authUser.username}!
+            </h2>
             <>
                 <img
                     src={
@@ -37,15 +39,31 @@ const PrivateUserProfilePage = () => {
                 />
 
                 <ul>
-                    <li>Nombre: {authUser.firstName}</li>
-                    <li>Apellido: {authUser.lastName}</li>
-                    <li>Usuario: {authUser.username}</li>
-                    <li>Email: {authUser.email}</li>
-                    <li>
-                        <Link to="/users/profile/update">Editar perfil</Link>
+                    <li className="text-xl text-center text-[#efeff5] mb-4">
+                        Nombre: {authUser.firstName}
+                    </li>
+                    <li className="text-xl text-center text-[#efeff5] mb-4">
+                        Apellido: {authUser.lastName}
+                    </li>
+                    <li className="text-xl text-center text-[#efeff5] mb-4">
+                        Usuario: {authUser.username}
+                    </li>
+                    <li className="text-xl text-center text-[#efeff5] mb-4">
+                        Email: {authUser.email}
                     </li>
                     <li>
-                        <Link to="/users/password/change">
+                        <Link
+                            to="/users/profile/update"
+                            className="text-[#9A4EAE] hover:underline text-center text-sm"
+                        >
+                            Editar perfil
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/users/password/change"
+                            className="text-[#9A4EAE] hover:underline text-center text-sm"
+                        >
                             Cambiar contraseña
                         </Link>
                     </li>

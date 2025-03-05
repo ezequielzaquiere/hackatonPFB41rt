@@ -24,8 +24,10 @@ const UserProfilePage = () => {
     }
 
     return (
-        <main>
-            <h2>Página de perfil de usuario</h2>
+        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mb-4">
+                Página de perfil de usuario
+            </h2>
 
             <img
                 src={
@@ -37,7 +39,9 @@ const UserProfilePage = () => {
             />
 
             <ul>
-                <li>Usuario: {authUser.username}</li>
+                <li className="text-xl text-center text-[#efeff5] mb-4">
+                    Usuario: {authUser.username}
+                </li>
             </ul>
         </main>
     );
