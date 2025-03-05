@@ -1,14 +1,8 @@
-// Dependencia que valida las props.
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // Dependencia que valida las props.
+import { useState } from 'react'; // Hooks.
+import toast from 'react-hot-toast'; // Función que muestra un mensaje al usuario.
 
-// Hooks.
-import { useState } from 'react';
-
-// Función que muestra un mensaje al usuario.
-import toast from 'react-hot-toast';
-
-// Obtenemos las variables de entorno necesarias.
-const { VITE_API_URL } = import.meta.env;
+const { VITE_API_URL } = import.meta.env; // Obtenemos las variables de entorno necesarias.
 
 // Inicializamos el componente.
 const RatingHackathon = ({
@@ -20,52 +14,50 @@ const RatingHackathon = ({
 }) => {
     // Declaramos en el State una variable para almacenar el valor del input.
     const [rating, setRating] = useState('');
-
-    // Función que maneja el envío del formulario.
     const handleAddRating = async (e) => {
         try {
-            // Comprobamos que la opción seleccionada sea válida.
-            if (rating > 0 && rating < 6) {
-                e.preventDefault();
+            e.preventDefault();
+
+            // Convertir el valor de rating a número
+            const numericRating = Number(rating);
+
+            // Comprobamos que el valor esté en el rango correcto (1-5).
+            if (numericRating >= 1 && numericRating <= 5) {
                 setLoading(true);
 
-                // Obtenemos una respuesta.
                 const res = await fetch(
                     `${VITE_API_URL}/api/hackathon/${hackathonId}/ratings`,
                     {
-                        method: 'post',
+                        method: 'POST',
                         headers: {
                             Authorization: authToken,
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'application/json', // Asegúrate de incluir este header
                         },
                         body: JSON.stringify({
-                            value: rating,
+                            value: numericRating, // Envía el valor como un número
                         }),
                     }
                 );
 
-                // Obtenemos el body.
-                const body = await res.json();
-
-                // Si hay algún error lo lanzamos.
-                if (body.status === 'error') {
-                    throw new Error(body.message);
+                // Verifica si la respuesta es exitosa
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(
+                        errorData.message || 'Error al valorar el hackathon'
+                    );
                 }
 
-                // Actualizamos en el State la media de votos.
+                const body = await res.json();
+
+                // Actualizamos el estado con la media de las valoraciones.
                 updateRatingHackathonState(body.data.hackathon.avgRating);
 
-                // Mostramos un mensaje al usuario para indicar que todo ha ido bien.
-                toast.success(body.message, {
-                    id: 'getHackathon',
-                });
+                toast.success(body.message, { id: 'getHackathon' });
             } else {
                 throw new Error('Por favor, selecciona un valor entre 1 y 5');
             }
         } catch (err) {
-            toast.error(err.message, {
-                id: 'getHackathon',
-            });
+            toast.error(err.message, { id: 'getHackathon' });
         } finally {
             setLoading(false);
             // Vaciamos el contenido del input.
@@ -78,7 +70,7 @@ const RatingHackathon = ({
             <select
                 id="ratings"
                 value={rating}
-                onChange={(e) => setRating(Number(e.target.value))}
+                onChange={(e) => setRating(e.target.value)} // Solo cambiamos el valor
                 required
             >
                 <option value="">--Seleccionar--</option>
