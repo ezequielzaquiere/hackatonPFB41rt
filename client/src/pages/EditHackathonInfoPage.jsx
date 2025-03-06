@@ -155,8 +155,6 @@ const EditHackathonPage = () => {
     //Funcion que maneja el envio de formulario
     const [loading, setLoading] = useState(false);
 
-    console.log('Valor de formData.image:', formData.image);
-
     console.log(formData);
 
     //Enviamos los datos del hackathon, en este caso post
@@ -173,11 +171,10 @@ const EditHackathonPage = () => {
     };
 
     //Si no esta logueado o no es adminvuelve a la main
-    /*useEffect(() => {
-        if (!authUser || authUser.role !== 'admin') {
-            navigate('/');
-        }
-    }, [authUser, navigate]);*/
+
+    /*if (!authUser || authUser.role !== 'admin') {
+        return <Navigate to="/" />;
+    }*/
 
     return (
         <>

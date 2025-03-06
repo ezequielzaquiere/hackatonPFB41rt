@@ -40,7 +40,7 @@ router.patch(
 );
 
 //Endpoint que cancela la inscripcion de usuario (No puede volver a inscribirse)
-router.patch(
+router.delete(
     '/:hackathonId',
     isUserAuthMiddleware,
     isDevMiddleware,
