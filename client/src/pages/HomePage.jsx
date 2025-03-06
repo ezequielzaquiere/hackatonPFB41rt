@@ -15,11 +15,11 @@ const faqs = [
         answer: 'Un hackathon es un evento en el que programadores, diseñadores y otros profesionales de la tecnología colaboran para desarrollar soluciones innovadoras en un tiempo limitado, generalmente entre 24 y 48 horas.',
     },
     {
-        question: '¿Quién puede participar en un Hackathon?',
+        question: '¿Quién puede participar en un hackathon?',
         answer: 'Cualquier persona interesada en la tecnología y la innovación puede participar. Aunque suelen estar orientados a programadores, también pueden participar diseñadores, especialistas en negocios y emprendedores.',
     },
     {
-        question: '¿Se necesita experiencia para participar en un Hackathon?',
+        question: '¿Se necesita experiencia para participar en un hackathon?',
         answer: 'No es obligatorio. Hay hackathones para todos los niveles, desde principiantes hasta expertos. Lo más importante es la creatividad, el trabajo en equipo y la disposición para aprender.',
     },
     {
@@ -51,7 +51,7 @@ const HomePage = () => {
         const fullStars = Math.floor(avgRating);
         const emptyStars = 5 - fullStars;
         const starsString =
-            `${formattedRating}` +
+            `${formattedRating} ` +
             '⭐'.repeat(fullStars) +
             '☆'.repeat(emptyStars);
 
@@ -81,32 +81,93 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="hidden lg:block relative w-full">
-                {/* Imagen de fondo */}
+            <div className="lg:block relative w-full min-h-[450px] h-full bg-[#191919] bg-center flex flex-col justify-center items-center gap-3">
+                {/* Imagen centrada */}
                 <img
-                    src="/landingPanoramic.png"
-                    alt="Portada"
-                    className="w-full object-cover"
+                    src="/hackVerse.png"
+                    alt="Logo de HackVerse"
+                    className="w-[300px] object-center"
                 />
 
-                {/* Degradado en el bottom */}
-                <div className="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent"></div>
-
-                {/* Contenido sobre la imagen */}
-                <div className="absolute bottom-10 left-10 text-white">
-                    <h1 className="text-4xl font-bold">HackVerse®</h1>
-                    <p className="text-lg">
+                {/* Texto en la parte inferior */}
+                <div className="text-white">
+                    <p className="text-s text-center">
                         ¡Bienvenido a las mejores competiciones de código!
                     </p>
                 </div>
             </div>
 
+            {/* Próximos Eventos */}
+            <section className="bg-[#191919] text-white p-10 lg:px-20 lg:py-20 relative">
+                <div className="mb-4">
+                    <h2 className="text-2xl md:text-3xl">Próximos Eventos</h2>
+
+                    <img
+                        src="/nextEventsGraphismPink.png"
+                        alt="Adorno del título Próximos Eventos"
+                        className="w-screen max-w-30 pt-2 pb-5 md:max-w-40"
+                    />
+
+                    <div className="relative mt-6 overflow-hidden">
+                        {/* Contenedor scrollable */}
+                        <div
+                            ref={scrollContainerRef}
+                            className="w-screen flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory md:gap-4 md:overflow-hidden"
+                        >
+                            {hackathonesFromToday.data?.hackathones?.map(
+                                (hackathon, index) => (
+                                    <div
+                                        key={index}
+                                        className="relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#212121] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[150px] md:p-3"
+                                    >
+                                        {/* Capa negra sobre el fondo */}
+                                        <div className="absolute bg-black/5 rounded-lg"></div>
+
+                                        {/* Contenido encima de la capa negra */}
+                                        <div className="relative">
+                                            <img
+                                                src={hackathon.image}
+                                                alt=""
+                                                className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-24"
+                                            />
+                                            <h3 className="mt-2 text-xs font-semibold md:text-sm">
+                                                {hackathon.title}
+                                            </h3>
+                                            <p className="text-[10px] md:text-xs">
+                                                {formatDate(
+                                                    hackathonesFromToday.data
+                                                        .hackathones[0]
+                                                        .createdAt
+                                                )}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
+                    {/* Botón Izquierda */}
+                    <button
+                        onClick={handleScrollLeft}
+                        className="absolute left-0 bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
+                    >
+                        <ChevronLeft className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
+                    </button>
+
+                    {/* Botón Derecha */}
+                    <button
+                        onClick={handleScrollRight}
+                        className="absolute right-0 bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
+                    >
+                        <ChevronRight className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
+                    </button>
+                </div>
+            </section>
+
             {/* Mejor valorados */}
 
             <section className="max-w-screen p-10 lg:px-20 lg:py-20 bg-[#191919] text-white flex flex-col">
-                <h2 className="w-screen text-xl font-bold mb-2 md:text-2xl">
-                    Mejor Valorados
-                </h2>
+                <h2 className="w-full text-2xl pb-2">Los mejores valorados</h2>
 
                 <img
                     src="/HomePageGraphism1.png"
@@ -114,35 +175,40 @@ const HomePage = () => {
                     className="w-screen max-w-20 mb-8 md:max-w-32"
                 />
 
-                <div className="max-w-80 flex flex-col gap-2 space-y-12 mt-3 md:flex-row md:flex-wrap md:max-w-screen md:justify-around md:px-40">
+                <div className="w-full flex flex-col justify-center items-center space-y-12 gap-1 md:flex-row md:flex-wrap md:max-w-screen md:justify-around md:px-40">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
-                                className="bg-[#191919] text-white text-center rounded-lg flex flex-col items-center gap-4 py-3 font-bold 
-                    shadow-[0px_0px_20px_#9A4EAE] md:min-w-lg md:max-w-xs md:py-6 md:flex-row"
+                                className="flex flex-col items-center w-full md:w-auto gap-4"
                             >
-                                <p className="text-[#9A4EAE] text-xl font-bold md:p-6">
+                                <p className="text-[#9A4EAE] text-xl font-bold pl-2 text-center md:p-6">
                                     #{index + 1}
                                 </p>
 
-                                <img
-                                    src={hackathon.image}
-                                    alt={hackathon.name}
-                                    className="w-56 h-28 rounded-lg object-cover object-[50%_20%] md:w-64 md:h-36"
-                                    onClick={() =>
-                                        handleImageClick(hackathon.id)
-                                    }
-                                />
+                                {/* Tarjeta contenedora */}
+                                <div className="w-[280px] h-[150px] md:w-[350px] md:h-[200px] bg-[#212121] text-white text-center rounded-lg flex overflow-hidden gap-3">
+                                    {/* Imagen en la izquierda (50% de la tarjeta) */}
+                                    <div className="w-1/2 h-full">
+                                        <img
+                                            src={hackathon.image}
+                                            alt={hackathon.name}
+                                            className="w-full h-full object-cover"
+                                            onClick={() =>
+                                                handleImageClick(hackathon.id)
+                                            }
+                                        />
+                                    </div>
 
-                                <div className="md:flex-col">
-                                    <p className="text-s md:text-base">
-                                        Participantes:{' '}
-                                        {hackathon.participantCount}
-                                    </p>
-
-                                    <div className="">
-                                        {printStars(hackathon.avgRating)}
+                                    {/* Contenido en la derecha (50% de la tarjeta) */}
+                                    <div className="w-1/2 h-full flex flex-col justify-center items-center gap-2">
+                                        <p className="text-xs md:text-base">
+                                            Participantes:{' '}
+                                            {hackathon.participantCount}
+                                        </p>
+                                        <div>
+                                            {printStars(hackathon.avgRating)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -151,73 +217,10 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* Próximos Eventos */}
-            <section className="bg-[#9A4EAE] text-[#191919] p-10 lg:px-20 lg:py-20">
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold md:text-3xl">
-                        Próximos Eventos
-                    </h2>
-
-                    <img
-                        src="/nextEventsGraphism.png"
-                        alt="Adorno del título Próximos Eventos"
-                        className="w-screen max-w-30 my-2 md:max-w-40"
-                    />
-
-                    <div className="relative mt-6 overflow-hidden">
-                        {/* Contenedor scrollable */}
-                        <div
-                            ref={scrollContainerRef}
-                            className="w-screen flex items-center gap-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory md:gap-8 md:overflow-hidden"
-                        >
-                            {hackathonesFromToday.data?.hackathones?.map(
-                                (hackathon, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-col justify-around min-w-[225px] min-h-[350px] bg-[#191919] p-4 rounded-lg text-white snap-start md:min-w-[300px] md:p-6"
-                                    >
-                                        <img
-                                            src={hackathon.image}
-                                            alt=""
-                                            className="w-full h-40 object-cover object-[50%_25%] rounded-md md:h-48"
-                                        />
-                                        <h3 className="mt-3 text-lg font-semibold md:text-xl">
-                                            {hackathon.title}
-                                        </h3>
-                                        <p className="text-sm md:text-base">
-                                            {formatDate(
-                                                hackathonesFromToday.data
-                                                    .hackathones[0].createdAt
-                                            )}
-                                        </p>
-                                    </div>
-                                )
-                            )}
-                        </div>
-
-                        {/* Botón Izquierda */}
-                        <button
-                            onClick={handleScrollLeft}
-                            className="absolute top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
-                        >
-                            <ChevronLeft className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
-                        </button>
-
-                        {/* Botón Derecha */}
-                        <button
-                            onClick={handleScrollRight}
-                            className="absolute right-3.75 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
-                        >
-                            <ChevronRight className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
-                        </button>
-                    </div>
-                </div>
-            </section>
-
             {/* Preguntas Frecuentes */}
             <section className="bg-[#191919] text-white px-10 py-10 md:px-20 md:py-16 lg:py-20">
                 <div>
-                    <h2 className="text-2xl font-bold md:text-3xl">
+                    <h2 className="text-2xl md:text-3xl">
                         Preguntas Frecuentes
                     </h2>
                     <img
@@ -254,7 +257,7 @@ const HomePage = () => {
                                 <div
                                     className={`transition-all duration-300 overflow-hidden ${
                                         activeIndex === index
-                                            ? 'max-h-40 opacity-100 mt-2'
+                                            ? 'max-h-80 opacity-100 mt-2'
                                             : 'max-h-0 opacity-0'
                                     } md:text-base`}
                                 >
