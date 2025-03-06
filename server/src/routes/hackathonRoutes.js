@@ -89,16 +89,12 @@ router.get(
 //Endpoint para que admins puedan ver la lista de usuarios registrados en su hackathon
 router.get(
     '/:hackathonId/participants/private',
-    isUserAuthMiddleware,
-    isAdminMiddleware,
     listHackathonParticipantsController
 );
 
 //Ruta para postear el podio y hacer pública la lista de participantes
 router.post(
     '/:hackathonId/publish',
-    isUserAuthMiddleware,
-    isAdminMiddleware,
     registerHackathonPositionsAndPublishController
 );
 

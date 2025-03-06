@@ -43,11 +43,11 @@ const registerHackathonPositionsAndPublish = async (req, res, next) => {
         
         
         //Recoger todos los usuarios registrados en un hackathon (confirmados)
-        const usersParticipated = await listHackathonParticipants(hackathonId);
+        await listHackathonParticipants(hackathonId);
 
 
         //Dejar que el admin pueda introducir el top 3
-        const usersPodium = await insertPodiumModel(first, second, third, hackathonId);
+        await insertPodiumModel(first, second, third, hackathonId);
 
 
         //Publicar la lista de registrados de hackathon

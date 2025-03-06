@@ -16,6 +16,10 @@ import {
     showUserInfoController,
     listUserRegistrationsController,
     useRecoveryPassCodeController,
+    listCreatedHackathonsHistoryController,
+    listFutureUserRegistrationsController,
+    listFutureCreatedHackathonsController,
+    listUserRegistrationsHistoryController,
 } from '../controllers/users/index.js';
 
 //Crear router
@@ -50,6 +54,18 @@ router.get('/profile/:id', showUserInfoController);
 
 //Endpoint para enseñar hackathones en los que un usuario está registrado
 router.get('/profile/:id/participations', listUserRegistrationsController);
+
+//Endpoint para enseñar hackathones en los que un usuario está registrado
+router.get('/profile/:username/futureParticipations', listFutureUserRegistrationsController);
+
+//Endpoint para enseñar hackathones en los que un usuario está registrado
+router.get('/profile/:username/participationHistory', listUserRegistrationsHistoryController);
+
+//Endpoint para enseñar hackathones en los que un usuario está registrado
+router.get('/profile/:username/creationHistory', listCreatedHackathonsHistoryController);
+
+//Endpoint para enseñar hackathones en los que un usuario está registrado
+router.get('/profile/:username/futureCreations', listFutureCreatedHackathonsController);
 
 //Endpoint que edita los datos del usuario.
 router.put('/profile/edit', isUserAuthMiddleware, updateUserProfileController);

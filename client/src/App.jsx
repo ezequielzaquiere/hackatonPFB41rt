@@ -20,6 +20,9 @@ import UseRecoveryPassCode from './pages/UseRecoveryPassCode';
 import UserProfilePage from './pages/UserProfilePage';
 import UpdateProfilePage from './pages/UpdateProfilePage';
 import VerificationRegisterHackathon from './pages/VerificationRegisterHackathon';
+import UserHackathons from './pages/SeeUserHackathons';
+import ChooseTop3 from './pages/ChooseTop3';
+import AdminHackathons from './pages/SeeAdminHackathons';
 
 //Definimos el componente principal
 const App = () => {
@@ -83,6 +86,20 @@ const App = () => {
                     path="/details/:hackathonId/edit"
                     element={<EditHackathonPage />}
                 />
+                <Route
+                    path = "/:username/registrations"
+                    element ={<UserHackathons/>}
+                />
+                <Route
+                    path = "/:username/myhackathons"
+                    element ={<AdminHackathons/>}
+                />
+
+                <Route
+                path = "/:hackathonId/ranking/set"
+                element = { <ChooseTop3/>}
+                />
+
 
                 <Route path="*" element={<NotFound />} />
             </Routes>

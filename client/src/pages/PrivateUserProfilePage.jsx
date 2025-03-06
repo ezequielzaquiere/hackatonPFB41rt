@@ -61,6 +61,14 @@ const PrivateUserProfilePage = () => {
                     </li>
                     <li>
                         <Link
+                            to={`/${authUser.username}/registrations`}
+                            className="text-[#9A4EAE] hover:underline text-center text-sm"
+                        >
+                            Ver mis inscripciones
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
                             to="/users/password/change"
                             className="text-[#9A4EAE] hover:underline text-center text-sm"
                         >
