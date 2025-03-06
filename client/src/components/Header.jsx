@@ -8,7 +8,7 @@ const { VITE_API_URL } = import.meta.env;
 const Header = () => {
     const { authUser, authLogoutState } = useContext(AuthContext);
     return (
-        <header className="bg-[#9A4EAE] p-6 lg:px-12 lg:py-8">
+        <header className="bg-[#191919] p-6 lg:px-12 lg:py-8">
             {
                 // Si el usuario está autenticado, mostramos su información.
                 authUser && (
