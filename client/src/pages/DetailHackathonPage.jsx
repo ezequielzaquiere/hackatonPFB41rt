@@ -113,7 +113,7 @@ const DetailHackathonPage = () => {
             const response = await fetch(
                 `${VITE_API_URL}/api/register/${hackathonId}`,
                 {
-                    method: 'PATCH',
+                    method: 'delete',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: authToken,
@@ -192,6 +192,16 @@ const DetailHackathonPage = () => {
         }
     };
 
+    //Funcion que te lleva a editar el hackathon
+    const goToModifyHackathon = () => {
+        navigate(`/details/${hackathonId}/edit`);
+    };
+
+    //Funcion que copia los datos de un hackathon
+    const cloneHackathon = () => {
+        navigate('/hackathon/new', { state: { hackathonId } });
+    };
+
     if (!hackathon) return <p className="text-white">Loading...</p>;
 
     const id = Number(hackathonId);
@@ -206,6 +216,22 @@ const DetailHackathonPage = () => {
                 >
                     ⬅ Anterior
                 </button>
+                {authUser.role === 'admin' && (
+                    <>
+                        <button
+                            onClick={goToModifyHackathon}
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                        >
+                            Modificar
+                        </button>
+                        <button
+                            onClick={cloneHackathon}
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                        >
+                            Copiar
+                        </button>
+                    </>
+                )}
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
                     className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"

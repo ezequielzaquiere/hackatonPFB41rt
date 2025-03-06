@@ -6,15 +6,6 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //Funcion que permite cancelar la participacion en un hackathon
 const cancelRegistrationController = async (req, res, next) => {
     try {
-        //Comprobamos el estado del registro
-        if (req.registration) {
-            if (req.registration === 'pendiente') {
-                generateErrorUtil(
-                    409,
-                    'Todavia no has confirmado tu asistencia'
-                );
-            }
-        }
         //Obtener hackathonId
         const { hackathonId } = req.params;
 

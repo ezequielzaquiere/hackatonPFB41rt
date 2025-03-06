@@ -9,7 +9,7 @@
 
 //Importamoslas dependencias
 
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 //Dependencia fecha
 
@@ -25,6 +25,7 @@ import { AuthContext } from '../contexts/AuthContext';
 //Importamos los hooks
 import useHackathonThemes from '../hooks/useHackathonThemes';
 import useHackathonLangs from '../hooks/useHackathonLang';
+import useHackathon from '../hooks/useHackathon';
 
 // Importar componentes
 import InputTitle from '../components/HackathonInfoInputs/InputTitle';
@@ -56,6 +57,34 @@ const NewHackathonPage = () => {
         document: null,
     });
 
+    //Obtenemos el id si existe
+    const location = useLocation();
+
+    const hackathonId = location.state.hackathonId || null;
+
+    //Si existe el hackathonId obtenemos los datos d eese hackathon
+
+    const { hackathon } = useHackathon(hackathonId);
+    console.log(hackathon);
+
+    //Si venimos para crear un hackatghon nuevo con datos de otro
+    useEffect(() => {
+        if (hackathon) {
+            setFormData({
+                title: hackathon.title || '',
+                summary: hackathon.summary || '',
+                startingDate: hackathon.startingDate || null,
+                deadline: hackathon.deadline || null,
+                type: hackathon.type || '',
+                location: hackathon.location || '',
+                themeId: hackathon.themeId || '',
+                programmingLangId: hackathon.programmingLangIds || [],
+                details: hackathon.details || '',
+                image: hackathon.image || null,
+                document: hackathon.document || null,
+            });
+        }
+    }, [hackathon]);
     //Obtenemos la funcion navigate
     let navigate = useNavigate();
 
@@ -82,7 +111,6 @@ const NewHackathonPage = () => {
         setFormData({ ...formData, [field]: date });
         console.log(formData);
     };
-    console.log(formData.startingDate);
 
     //Funcion para manejar los cambios de imagen
     const handleChangeFiles = (e) => {
@@ -196,6 +224,7 @@ const NewHackathonPage = () => {
                         <LocatioAutocomplete
                             isDisabled={isDisabled}
                             onSelect={handleChangeLocation}
+                            location={formData.location}
                         />
                     </fieldset>
                     {/***************************************************
@@ -210,6 +239,7 @@ const NewHackathonPage = () => {
                         </label>
                         <DetailTextEditor
                             onChange={handleChangeDetails}
+                            value={formData.details}
                             id="details"
                         />
                     </fieldset>

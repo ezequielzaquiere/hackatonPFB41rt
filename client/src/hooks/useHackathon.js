@@ -5,6 +5,7 @@ const useHackathon = (hackathonId) => {
 
     useEffect(() => {
         const fetchHackathon = async () => {
+            if (!hackathonId) return;
             try {
                 const response = await fetch(
                     `${VITE_API_URL}/api/hackathon/hackathones/details/${hackathonId}`
