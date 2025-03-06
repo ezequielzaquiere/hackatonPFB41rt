@@ -7,10 +7,9 @@ const listHackathonParticipants = async (hackathonId) => {
 
     const [hackathonParticipants] = await pool.query(
         `
-        SELECT u.username, u.avatar, p.position, reg.status
+        SELECT u.id, u.username, u.avatar, reg.status
         FROM registrations reg
         INNER JOIN users u ON u.id = reg.userId
-        INNER JOIN podium p ON p.registrationId = reg.id
         WHERE reg.hackathonId = ? AND reg.status = 'confirmada'
         ORDER BY u.username;
         `,
