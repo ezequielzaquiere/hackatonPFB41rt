@@ -15,14 +15,14 @@ const ratingHackathonController = async (req, res, next) => {
         // Obtenemos los datos del hackathon.
         let hackathon = await selectHackathonDetailsByIdModel(hackathonId);
 
-        //Verificamos si el hackathon ha finalizado.
+        // Verificamos si el hackathon ha finalizado.
         const now = new Date();
         const hackathonDeadline = new Date(hackathon.deadline);
 
         if (hackathonDeadline > now) {
             generateErrorUtil(
                 400,
-                'No puedes valorar un hackathon que aun no ha finalizado'
+                'No puedes valorar un hackathon que aún no ha finalizado'
             );
         }
 
@@ -39,27 +39,19 @@ const ratingHackathonController = async (req, res, next) => {
             );
         }
 
-        //Si es el admin, lanzamos un error.
+        // Si es el admin, lanzamos un error.
         if (req.user.role === 'admin') {
             generateErrorUtil(401, 'No tienes suficientes permisos');
         }
 
-        // Obtenemos los campos necesarios.
+        // Obtenemos el valor de la valoración.
         const { rating } = req.body;
 
-        // Si falta el campo de valoración, lanzamos un error.
-        if (!rating) {
-            generateErrorUtil(400, 'Faltan campos');
-        }
-
-        // Array de valoraciones válidas.
-        const validRatings = [1, 2, 3, 4, 5];
-
-        // Si el voto no es válido lanzamos un error.
-        if (!validRatings.includes(rating)) {
+        // Validación del valor de la valoración.
+        if (typeof rating !== 'number' || rating < 1 || rating > 5) {
             generateErrorUtil(
                 400,
-                'La valoración debe ser un valor entero entre 1 y 5'
+                'La valoración debe ser un número entero entre 1 y 5'
             );
         }
 

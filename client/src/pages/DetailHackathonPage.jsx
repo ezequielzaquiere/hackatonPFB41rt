@@ -38,7 +38,6 @@ const DetailHackathonPage = () => {
 
             checkRegistration();
 
-            // Verificar si el usuario ya ha votado en este hackathon
             const checkVote = async () => {
                 const response = await fetch(
                     `${VITE_API_URL}/api/hackathon/${hackathonId}/ratings/${authUser.id}`,
@@ -53,14 +52,12 @@ const DetailHackathonPage = () => {
                         ...prev,
                         [hackathonId]: true,
                     }));
-                    // Guardar en localStorage que el usuario ya ha votado
                     localStorage.setItem(`hasVoted_${hackathonId}`, 'true');
                 }
             };
 
             checkVote();
 
-            // Cargar el estado de hasVoted desde localStorage
             const hasVotedStored = localStorage.getItem(
                 `hasVoted_${hackathonId}`
             );
@@ -98,7 +95,10 @@ const DetailHackathonPage = () => {
             );
             if (!response.ok)
                 throw new Error('Error al registrarse en el hackathon.');
-            toast.success('Te has apuntado al hackathon.', { id: '3' });
+            toast.success(
+                'Para confirmar tu registro, revisa tu correo electrónico',
+                { id: '3' }
+            );
             setRegisteredHackathons((prev) => ({
                 ...prev,
                 [hackathonId]: true,
@@ -186,7 +186,6 @@ const DetailHackathonPage = () => {
                 ...prev,
                 [hackathonId]: true,
             }));
-            // Guardar en localStorage que el usuario ya ha votado
             localStorage.setItem(`hasVoted_${hackathonId}`, 'true');
         } catch (error) {
             toast.error(error.message);
@@ -198,67 +197,67 @@ const DetailHackathonPage = () => {
     const id = Number(hackathonId);
 
     return (
-        <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-500 to-purple-700 text-white items-center justify-center p-6">
+        <div className="flex flex-col min-h-screen bg-[#191919] text-white items-center justify-center p-6">
             {/* Botones para ir al hackathon anterior o al siguiente */}
             <div className="flex gap-4 mb-6">
                 <button
                     onClick={() => navigate(`/details/${id - 1}`)}
-                    className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+                    className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
                 >
                     ⬅ Anterior
                 </button>
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
-                    className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+                    className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
                 >
                     Siguiente ➡
                 </button>
             </div>
 
             {/* Contenedor principal con la información del hackathon */}
-            <div className="bg-white shadow-2xl rounded-3xl p-8 max-w-lg w-full border border-gray-300 text-gray-800 flex flex-col items-center">
+            <div className="bg-[#191919] rounded-3xl p-8 max-w-lg w-full border border-gray-700 text-white flex flex-col items-center shadow-[0px_0px_20px_#9A4EAE]">
                 <img
                     src={hackathon.image}
                     alt={hackathon.title}
-                    className="w-32 h-32 rounded-full border-4 border-gray-300 mb-4"
+                    className="w-32 h-32 rounded-full border-4 border-gray-700 mb-4"
                 />
-                <h2 className="text-3xl font-bold text-gray-900 text-center">
+                <h2 className="text-3xl font-bold text-white text-center">
                     {hackathon.title}
                 </h2>
 
-                <div className="flex items-center gap-2 mt-4 text-gray-700">
-                    <FaUsers className="text-blue-500" />
+                <div className="flex items-center gap-2 mt-4 text-gray-300">
+                    <FaUsers className="text-[#9A4EAE]" />
                     <span>{hackathon.participantCount} participantes</span>
                     {hackathon.type === 'presencial' && hackathon.location && (
                         <>
-                            <FaMapMarkerAlt className="text-red-500 ml-4" />
+                            <FaMapMarkerAlt className="text-[#9A4EAE] ml-4" />
                             <a
                                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hackathon.location)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
+                                className="text-[#9A4EAE] hover:underline"
                             >
                                 {hackathon.location}
                             </a>
                         </>
                     )}
                     {hackathon.type === 'online' && (
-                        <span className="ml-4 text-gray-700">🌐 Online</span>
+                        <span className="ml-4 text-gray-300">🌐 Online</span>
                     )}
                 </div>
 
-                <p className="text-gray-600 mt-4 text-center">
+                <p className="text-gray-300 mt-4 text-center">
                     {hackathon.summary}
                 </p>
-                <p className="text-gray-600 mt-4 text-center">
+                <p className="text-gray-300 mt-4 text-center">
                     {hackathon.programmingLangs.join(' | ')}
                 </p>
 
-                <p className="text-sm text-gray-500 mt-4">
+                <p className="text-sm text-gray-400 mt-4">
                     <span className="font-semibold">🛫 Fecha de inicio:</span>{' '}
                     {new Date(hackathon.startingDate).toLocaleDateString()}
                 </p>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-gray-400 mt-2">
                     <span className="font-semibold">🛬 Fecha límite:</span>{' '}
                     {new Date(hackathon.deadline).toLocaleDateString()}
                 </p>
@@ -298,7 +297,7 @@ const DetailHackathonPage = () => {
                     registeredHackathons[hackathonId] &&
                     !hasVoted[hackathonId] && (
                         <div className="mt-6">
-                            <h3 className="text-lg font-semibold text-gray-900">
+                            <h3 className="text-lg font-semibold text-white">
                                 Valora este hackathon
                             </h3>
                             <form
@@ -319,7 +318,7 @@ const DetailHackathonPage = () => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-400 transition duration-300"
+                                    className="mt-4 bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition duration-300"
                                 >
                                     Enviar valoración
                                 </button>

@@ -163,7 +163,7 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                                         📍 <strong>Localización:</strong> ${hackathonLocation}
                                     </li>
                                 </ul>
-                                <a href="${process.env.CLIENT_URL}/register/${hackathonId}/${confirmationCode}" class="btn">
+                                <a href="${process.env.CLIENT_URL}/hackathon/validate/${hackathonId}/${confirmationCode}" class="btn">
                                     ¡Confirma tu asistencia!
                                 </a>
                                 <p class="footer">Si no solicitaste este registro, puedes ignorar este correo.</p>
@@ -172,6 +172,8 @@ const insertRegistrationModel = async (userId, hackathonId) => {
                         </html>
 
                         `;
+
+    console.log(htmlEmail);
 
     //Enviamos el correo de confirmacion
     await sendEmailUtil(user.email, subject, htmlEmail);
