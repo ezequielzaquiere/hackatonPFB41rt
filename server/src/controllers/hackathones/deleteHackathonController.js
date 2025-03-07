@@ -78,7 +78,7 @@ const deleteHackathonController = async (req, res, next) => {
         //Enviamos la respuesta
         res.status(201).send({
             status: 'ok',
-            message: 'Evento hackathon eliminado',
+            message: 'Hackathon eliminado',
         });
     } catch (err) {
         next(err);

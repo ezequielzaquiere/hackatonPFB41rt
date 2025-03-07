@@ -7,9 +7,9 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
         <>
             <label
                 htmlFor="summary"
-                className="block text-sm font-medium text-[#9A4EAE]"
+                className="block mb-2 text-base font-semibold text-white"
             >
-                Descripcion del evento
+                Descripcion del hackathon *
             </label>
             <textarea
                 id="summary"
@@ -20,7 +20,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
                 maxLength="140"
                 rows="4"
                 required
-                className="mb-8 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                className="mb-8 w-full bg-[#333] border border-[#9A4EAE] text-white p-2 md:p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
             ></textarea>
         </>
     );
@@ -29,7 +29,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
 //Validadcion de props
 InputSummary.propTypes = {
     handleChangeGeneral: PropTypes.func.isRequired,
-    formData: PropTypes.array.isRequired,
+    formData: PropTypes.object.isRequired,
 };
 
 export default InputSummary;

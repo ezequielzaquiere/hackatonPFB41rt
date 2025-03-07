@@ -7,18 +7,28 @@ import joiErrorMessages from '../user/joiErrorMessages.js';
 // Creamos el esquema de Joi donde comprobamos todas las propiedades necesarias.
 const newHackathonSchema = joi
     .object({
-        title: joi.string().min(5).max(200).required(),
-        summary: joi.string().min(3).max(30).required(),
-        startingDate: joi.date().required(),
-        deadline: joi.date().required(),
+        title: joi.string().min(5).max(200).required().messages({
+            'any.required': 'El hackathon necesita tener un título',
+        }),
+        summary: joi.string().min(3).max(140).required().messages({
+            'any.required':
+                'El hackathon necesita tener una pequeña descripción.',
+        }),
+        startingDate: joi.date().required().messages({
+            'any.required': 'El hackathon necesita tener una fecha de inicio.',
+        }),
+        deadline: joi.date().required().messages({
+            'any.required':
+                'El hackathon necesita tener una fecha de finalización.',
+        }),
         type: joi.string().valid('online', 'presencial').required().messages({
             'any.only': 'El campo "{#key}" debe ser "online" o "dual".',
         }),
         location: joi.string().min(2).max(200),
-        details: joi.string().max(1000),
+        details: joi.string().allow(''),
         themeId: joi.number().required().messages({
-            'any.required': 'Tienes que seleccionar una temática.',
-            'number.base': 'Selecciona por lo menos una temática.',
+            'any.required': 'El hackathon necesita tener una temática.',
+            'number.base': 'El hackathon necesita tener una temática.',
         }),
         programmingLangId: joi
             .array()

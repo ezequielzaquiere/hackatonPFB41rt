@@ -5,16 +5,16 @@ import PropTypes from 'prop-types';
 const InputRadioLocation = ({ formData, handleChangeGeneral }) => {
     return (
         <>
-            <legend className="block mb-2 text-sm font-medium text-[#9A4EAE]">
-                ¿Es online o presencial?
+            <legend className="block mb-2 text-base font-semibold text-white pt-4">
+                ¿Es online o presencial? *
             </legend>
 
-            <ul className="items-center w-full text-sm font-medium ">
+            <ul className="w-full text-sm font-medium flex flex-col md:flex-row gap-1">
                 {/* Opción Online */}
-                <li className="mb-2 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]">
+                <li className="mb-2 bg-[#333] border flex-1 border-[#9A4EAE] text-white p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]">
                     <label
                         htmlFor="online"
-                        className="flex items-center w-full ps-3 cursor-pointer"
+                        className="flex items-center w-full cursor-pointer"
                     >
                         <input
                             type="radio"
@@ -24,19 +24,22 @@ const InputRadioLocation = ({ formData, handleChangeGeneral }) => {
                             checked={formData.type === 'online'}
                             onChange={handleChangeGeneral}
                             required
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:focus:ring-0 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500"
+                            hidden
+                            className="w-4 h-4 text-blue-600  focus:ring-0 bg-gray-600 "
                         />
-                        <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <span
+                            className={`w-full py-3 text-sm font-medium box-border border-2 ${formData.type === 'online' ? 'text-white bg-[#9A4EAE] border-[#9A4EAE]' : 'text-gray-300 border-transparent'} rounded-md flex justify-center items-center transition-all duration-200`}
+                        >
                             Online
                         </span>
                     </label>
                 </li>
 
                 {/* Opción Presencial */}
-                <li className="mb-8 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]">
+                <li className="mb-2 bg-[#333] flex-1 border border-[#9A4EAE] text-white p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]">
                     <label
                         htmlFor="presencial"
-                        className="flex items-center w-full ps-3 cursor-pointer"
+                        className="flex items-center w-full cursor-pointer"
                     >
                         <input
                             type="radio"
@@ -45,9 +48,12 @@ const InputRadioLocation = ({ formData, handleChangeGeneral }) => {
                             value="presencial"
                             checked={formData.type === 'presencial'}
                             onChange={handleChangeGeneral}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:focus:ring-0 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500"
+                            hidden
+                            className="w-5 h-5 border-2 border-gray-400 rounded-full bg-white focus:outline-none checked:bg-green-500 checked:border-green-500 relative"
                         />
-                        <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <span
+                            className={`w-full py-3 text-sm font-medium box-border border-2 ${formData.type === 'presencial' ? 'text-white bg-[#9A4EAE] border-[#9A4EAE]' : 'text-gray-300 border-transparent'} rounded-md flex justify-center items-center transition-all duration-200`}
+                        >
                             Presencial
                         </span>
                     </label>

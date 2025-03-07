@@ -6,9 +6,9 @@ const InputTitle = ({ formData, handleChangeGeneral }) => {
         <div className="mb-6">
             <label
                 htmlFor="title"
-                className="block mb-2 text-sm font-medium text-[#9A4EAE]"
+                className="block mb-2 text-base font-semibold text-white"
             >
-                Titulo
+                Titulo *
             </label>
             <input
                 type="text"
@@ -19,7 +19,7 @@ const InputTitle = ({ formData, handleChangeGeneral }) => {
                 required
                 placeholder="Aqui va el título"
                 autoFocus
-                className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                className="bg-[#333] border border-[#9A4EAE] w-full text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
             />
         </div>
     );
@@ -28,6 +28,6 @@ const InputTitle = ({ formData, handleChangeGeneral }) => {
 //Validadcion de props
 InputTitle.propTypes = {
     handleChangeGeneral: PropTypes.func.isRequired,
-    formData: PropTypes.array.isRequired,
+    formData: PropTypes.object.isRequired,
 };
 export default InputTitle;

@@ -1,6 +1,6 @@
 //Importamos dependencias
 import toast from 'react-hot-toast';
-import { format } from 'date-fns';
+import { format, isBefore } from 'date-fns';
 
 //Importamos la direccionde la api
 const { VITE_API_URL } = import.meta.env;
@@ -15,6 +15,16 @@ const sendingHackathonInfo = async ({
     setLoading,
     hackathonId,
 }) => {
+    if (isBefore(formData.startingDate, new Date())) {
+        toast.error('La fecha de inicio no es válida.');
+        return;
+    }
+
+    if (isBefore(formData.deadline, formData.startingDate)) {
+        toast.error('La fecha de finalización no es válida.');
+        return;
+    }
+
     let body;
     const isCreating = !hackathonId;
 
@@ -84,9 +94,8 @@ const sendingHackathonInfo = async ({
         });
     } finally {
         setLoading(false);
-        isCreating
-            ? navigate(`/details/${body.data.id}`)
-            : navigate(`/details/${hackathonId}`);
+
+        navigate(`/details/${isCreating ? body.data.id : hackathonId}`);
     }
 };
 
