@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FaUsers, FaMapMarkerAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../contexts/AuthContext';
+import { isAfter } from 'date-fns';
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -202,9 +203,30 @@ const DetailHackathonPage = () => {
         navigate('/hackathon/new', { state: { hackathonId } });
     };
 
+    //Funcion que elimina un hackathon y todo lo relacionado con el
+    const deleteHackathon = async () => {
+        try {
+            const response = await fetch(
+                `${VITE_API_URL}/api/hackathon/${hackathonId}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: authToken,
+                    },
+                }
+            );
+            const body = await response.json();
+            toast.success(body.message);
+            navigate('/*');
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
+
     if (!hackathon) return <p className="text-white">Loading...</p>;
 
     const id = Number(hackathonId);
+    console.log(hackathon);
 
     return (
         <div className="flex flex-col min-h-screen bg-[#191919] text-white items-center justify-center p-6">
@@ -219,19 +241,30 @@ const DetailHackathonPage = () => {
                 {authUser.role === 'admin' && (
                     <>
                         <button
-                            onClick={goToModifyHackathon}
-                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
-                        >
-                            Modificar
-                        </button>
-                        <button
                             onClick={cloneHackathon}
                             className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
                         >
                             Copiar
                         </button>
+                        <button
+                            onClick={deleteHackathon}
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                        >
+                            Eliminar
+                        </button>
                     </>
                 )}
+                {authUser.role === 'admin' &&
+                    isAfter(hackathon.startingDate, new Date()) && (
+                        <>
+                            <button
+                                onClick={goToModifyHackathon}
+                                className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                            >
+                                Modificar
+                            </button>
+                        </>
+                    )}
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
                     className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"

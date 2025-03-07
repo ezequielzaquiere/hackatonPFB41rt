@@ -60,13 +60,12 @@ const NewHackathonPage = () => {
     //Obtenemos el id si existe
     const location = useLocation();
 
-    const hackathonId = location.state.hackathonId || null;
+    const hackathonId = location.state?.hackathonId || null;
 
     //Si existe el hackathonId obtenemos los datos d eese hackathon
 
     const { hackathon } = useHackathon(hackathonId);
     console.log(hackathon);
-
     //Si venimos para crear un hackatghon nuevo con datos de otro
     useEffect(() => {
         if (hackathon) {
@@ -178,12 +177,31 @@ const NewHackathonPage = () => {
 
     return (
         <>
-            <main className=" bg-[#191919] text-[#9A4EAE] w-screen p-10">
-                <h2 className="text-xl mb-4">Crea tu hackathon</h2>
+            <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-4 md:px-4 lg:px-6 py-10 text-sm md:text-base">
+                <div className="flex items-center justify-center gap-4">
+                    {/* Imagen de la izquierda */}
+                    <img
+                        src="/HomePageGraphism1.png"
+                        alt="Adorno del título Crear Hackathon"
+                        className="max-w-30 pt-2 pb-5 md:max-w-40"
+                    />
+
+                    {/* Título */}
+                    <h2 className="text-2xl md:text-3xl  text-center text-[#9A4EAE] mb-6 md:mb-8 lg:mb-10">
+                        Crea tu Hackathon
+                    </h2>
+
+                    {/* Imagen de la derecha */}
+                    <img
+                        src="/InvertedHomePageGraphism1.png"
+                        alt="Adorno del título Crear Hackathon"
+                        className="max-w-30 pt-2 pb-5 md:max-w-40"
+                    />
+                </div>
 
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-[#191919] flex flex-col justify-center gap-2 my-6"
+                    className="bg-[#222] text-white p-4 md:p-4 lg:p-6 rounded-lg shadow-lg w-full max-w-full md:max-w-2xl flex flex-col gap-4"
                 >
                     {/***************************************
                      ********* Input text del title *********
@@ -206,6 +224,31 @@ const NewHackathonPage = () => {
                     <InputDateRange
                         formData={formData}
                         handleChangeDate={handleChangeDate}
+                    />
+
+                    {/********************************************************************
+                     ***** Input select que permite elegir los temas de un hackathon  ****
+                     *********************************************************************/}
+                    <fieldset>
+                        <InputSelectThemes
+                            formData={formData}
+                            handleChangeGeneral={handleChangeGeneral}
+                            hackathonThemes={hackathonThemes}
+                        />
+                    </fieldset>
+
+                    {/*******************************************************************
+                     *********** MODAL Input para elegir el lenguaje/s ******************
+                     ******************************************************************/}
+                    <ModalLang
+                        hackathonLangs={hackathonLangs || []}
+                        isModalOpen={isModalOpen}
+                        setIsModalOpen={setIsModalOpen}
+                        handleCloseModal={handleCloseModal}
+                        handleChangeProgrammingLang={
+                            handleChangeProgrammingLang
+                        }
+                        selectedLangs={selectedLangs || []}
                     />
 
                     <fieldset>
@@ -261,30 +304,6 @@ const NewHackathonPage = () => {
                             handleChangeFiles={handleChangeFiles}
                         />
                     </fieldset>
-                    {/********************************************************************
-                     ***** Input select que permite elegir los temas de un hackathon  ****
-                     *********************************************************************/}
-                    <fieldset>
-                        <InputSelectThemes
-                            formData={formData}
-                            handleChangeGeneral={handleChangeGeneral}
-                            hackathonThemes={hackathonThemes}
-                        />
-                    </fieldset>
-
-                    {/*******************************************************************
-                     *********** MODAL Input para elegir el lenguaje/s ******************
-                     ******************************************************************/}
-                    <ModalLang
-                        hackathonLangs={hackathonLangs || []}
-                        isModalOpen={isModalOpen}
-                        setIsModalOpen={setIsModalOpen}
-                        handleCloseModal={handleCloseModal}
-                        handleChangeProgrammingLang={
-                            handleChangeProgrammingLang
-                        }
-                        selectedLangs={selectedLangs || []}
-                    />
 
                     <div className="flex justify-center">
                         <button

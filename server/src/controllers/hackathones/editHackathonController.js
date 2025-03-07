@@ -54,6 +54,12 @@ const editHackathonController = async (req, res, next) => {
 
             docName = await saveDocUtil(attachedFile);
         }
+        //Convertimos el array de lenguajes a numero (recibimos los numeros en string)
+        if (programmingLangId && programmingLangId.length > 0) {
+            let programmingLangIdArray = programmingLangId.map(Number);
+
+            await editHackathonLangsModel(hackathonId, programmingLangIdArray);
+        }
 
         //Comprobamos las fechas
         let formatedStartingDate = hackathon.startingDate || '';
@@ -84,6 +90,8 @@ const editHackathonController = async (req, res, next) => {
             generateErrorUtil(400, 'Faltan campo de localizacion');
         }
 
+        await validateSchemaUtil(newHackathonSchema, req.body);
+
         await editHackathonModel({
             title,
             summary,
@@ -97,13 +105,6 @@ const editHackathonController = async (req, res, next) => {
             imgName,
             hackathonId,
         });
-
-        //Convertimos el array de lenguajes a numero (recibimos los numeros en string)
-        if (programmingLangId && programmingLangId.length > 0) {
-            let programmingLangIdArray = programmingLangId.map(Number);
-
-            await editHackathonLangsModel(hackathonId, programmingLangIdArray);
-        }
 
         res.status(200).send({
             status: 'ok',

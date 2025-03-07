@@ -40,6 +40,6 @@ const InputBannerUpload = ({ formData, handleChangeFiles }) => {
 //Validadcion de props
 InputBannerUpload.propTypes = {
     handleChangeFiles: PropTypes.func.isRequired,
-    formData: PropTypes.array.isRequired,
+    formData: PropTypes.object.isRequired,
 };
 export default InputBannerUpload;
