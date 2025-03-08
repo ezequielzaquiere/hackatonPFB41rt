@@ -15,6 +15,8 @@ const UseRecoveryPassCode = () => {
     const [newPassword, setNewPassword] = useState('');
     const [repeatedNewPass, setRepeatedNewPass] = useState('');
 
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeatedPass, setShowRepeatedPass] = useState(false);
     // Declaramos una variable en el State para indicar si estamos haciendo fetch.
     const [loading, setLoading] = useState(false);
 
@@ -74,6 +76,9 @@ const UseRecoveryPassCode = () => {
 
     return (
         <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+                ¡Restablece tu contraseña!
+            </h2>
             <form
                 onSubmit={handleUseRecoveryPassCode}
                 className="bg-[#222] text-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col gap-4"
@@ -81,42 +86,88 @@ const UseRecoveryPassCode = () => {
                 <label htmlFor="newPass" className="font-semibold">
                     Nueva Contraseña
                 </label>
-                <input
-                    type="password"
-                    id="newPass"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    autoComplete="new-password"
-                    autoFocus
-                    required
-                    className="bg-[#333] mb-4 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] hover:ring-2 hover:ring-[#9A4EAE] transition"
-                />
+                <div className="relative">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        id="newPass"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showPassword ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
+
+                <p className="text-xs pb-2">
+                    Debe contener mínimo 8 caracteres, una letra, un número y un
+                    caracter especial (!@#$%^&*()).
+                </p>
 
                 <label htmlFor="repatedPass" className="font-semibold">
                     Repetir Contraseña
                 </label>
-                <input
-                    type="password"
-                    id="repatedPass"
-                    value={repeatedNewPass}
-                    onChange={(e) => setRepeatedNewPass(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] hover:ring-2 hover:ring-[#9A4EAE] transition"
-                />
+                <div className="relative">
+                    <input
+                        type={showRepeatedPass ? 'text' : 'password'}
+                        id="repatedPass"
+                        value={repeatedNewPass}
+                        onChange={(e) => setRepeatedNewPass(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowRepeatedPass(!showRepeatedPass)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showPassword ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
-                ${
-                    loading
-                        ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                        : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
-                }`}
-                >
-                    {loading ? 'Procesando...' : '¡Restablece tu contraseña!'}
-                </button>
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`max-w-[200px] min-w-[200px]  mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        ${
+                            loading
+                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                        }`}
+                    >
+                        {loading ? 'Procesando...' : 'Enviar'}
+                    </button>
+                </div>
             </form>
         </main>
     );

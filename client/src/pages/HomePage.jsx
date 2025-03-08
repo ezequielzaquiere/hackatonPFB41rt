@@ -64,14 +64,14 @@ const HomePage = () => {
     // Funciones para desplazar el carrusel
     const handleScrollLeft = () => {
         scrollContainerRef.current?.scrollBy({
-            left: -242,
+            left: -350,
             behavior: 'smooth',
         });
     };
 
     const handleScrollRight = () => {
         scrollContainerRef.current?.scrollBy({
-            left: 242,
+            left: 350,
             behavior: 'smooth',
         });
     };
@@ -91,16 +91,16 @@ const HomePage = () => {
 
                 {/* Texto en la parte inferior */}
                 <div className="text-white">
-                    <p className="text-s text-center">
+                    <p className="px-5 text-lg text-center">
                         ¡Bienvenido a las mejores competiciones de código!
                     </p>
                 </div>
             </div>
 
             {/* Próximos Eventos */}
-            <section className="bg-[#191919] text-white p-10 lg:px-20 lg:py-20 relative">
+            <section className="bg-[#191919] text-white p-10 relative">
                 <div className="mb-4">
-                    <h2 className="text-2xl md:text-3xl">Próximos Eventos</h2>
+                    <h2 className="text-2xl md:text-2xl">Próximos Eventos</h2>
 
                     <img
                         src="/nextEventsGraphismPink.png"
@@ -118,7 +118,7 @@ const HomePage = () => {
                                 (hackathon, index) => (
                                     <div
                                         key={index}
-                                        className="relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#212121] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[150px] md:min-h-[200px] md:p-3"
+                                        className="relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#212121] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
                                     >
                                         {/* Capa negra sobre el fondo */}
                                         <div className="absolute bg-black/5 rounded-lg"></div>
@@ -128,12 +128,12 @@ const HomePage = () => {
                                             <img
                                                 src={hackathon.image}
                                                 alt=""
-                                                className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-24"
+                                                className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-32"
                                             />
-                                            <h3 className="mt-2 text-xs font-semibold md:text-sm">
+                                            <h3 className="mt-2 text-xs md:text-lg font-semibold ">
                                                 {hackathon.title}
                                             </h3>
-                                            <p className="text-[10px] md:text-xs">
+                                            <p className="text-xs">
                                                 {formatDate(
                                                     hackathonesFromToday.data
                                                         .hackathones[0]
@@ -166,7 +166,7 @@ const HomePage = () => {
 
             {/* Mejor valorados */}
 
-            <section className="max-w-screen p-10 lg:px-20 lg:py-20 bg-[#191919] text-white flex flex-col">
+            <section className="max-w-screen p-10  bg-[#191919] text-white flex flex-col">
                 <h2 className="w-full text-2xl pb-2">Los mejores valorados</h2>
 
                 <img
@@ -175,19 +175,19 @@ const HomePage = () => {
                     className="w-screen max-w-20 mb-8 md:max-w-32"
                 />
 
-                <div className="w-full flex flex-col justify-center items-center gap-1 md:flex-wrap">
+                <div className="w-full flex flex-col justify-center items-center gap-15 md:flex-wrap">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
                                 className="flex flex-col items-center w-full gap-4"
                             >
-                                <p className="text-[#9A4EAE] text-xl font-bold pl-2 text-center md:p-6">
+                                <p className="text-[#9A4EAE] text-3xl font-bold pl-2 text-center md:p-6">
                                     #{index + 1}
                                 </p>
 
                                 {/* Tarjeta contenedora */}
-                                <div className="w-[280px] h-[150px] lg:w-[480px] lg:mb-10 bg-[#212121] text-white text-center rounded-lg flex overflow-hidden gap-3">
+                                <div className="w-[280px] h-[150px] md:w-[480px] md:h-[200px] md:mb-10 bg-[#212121] text-white text-center rounded-lg flex overflow-hidden gap-3">
                                     {/* Imagen en la izquierda (50% de la tarjeta) */}
                                     <div className="w-1/2 h-full">
                                         <img
@@ -218,17 +218,15 @@ const HomePage = () => {
             </section>
 
             {/* Preguntas Frecuentes */}
-            <section className="bg-[#191919] text-white px-10 py-10 md:px-20 md:py-16 lg:py-20">
+            <section className="bg-[#191919] text-white px-10 py-10">
                 <div>
-                    <h2 className="text-2xl md:text-3xl">
-                        Preguntas Frecuentes
-                    </h2>
+                    <h2 className="text-2xl">Preguntas Frecuentes</h2>
                     <img
                         src="/faqGraphism.png"
                         alt="Adorno del título Preguntas frecuentes"
                         className="w-screen max-w-20 my-3 md:max-w-32"
                     />
-                    <div className="mt-6 md:max-w-screen mg:mt-10 flex flex-col items-center justify-center">
+                    <div className="mt-6 md:max-w-screen flex flex-col items-center justify-center">
                         {faqs.map((faq, index) => (
                             <div
                                 key={index}
@@ -243,7 +241,7 @@ const HomePage = () => {
                                         )
                                     }
                                 >
-                                    <span className="md:text-lg lg:text-xl">
+                                    <span className="md:text-lg">
                                         {faq.question}
                                     </span>
                                     {activeIndex === index ? (
