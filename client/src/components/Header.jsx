@@ -117,7 +117,7 @@ const Header = () => {
                                 authLogoutState();
                                 setIsOpen(false);
                             }}
-                            className="text-white hover:text-gray-300 transition"
+                            className="max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] text-white hover:text-gray-300 transition bg-[#9A4EAE]  hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50"
                         >
                             Cerrar Sesión
                         </button>
@@ -136,7 +136,7 @@ const Header = () => {
                                 : defaultAvatar
                         }
                         alt={authUser.username}
-                        className="h-12 w-12 rounded-full border-2 border-white shadow-md"
+                        className="h-9 w-9 rounded-full border-2 border-white shadow-md"
                     />
                 </div>
             )}

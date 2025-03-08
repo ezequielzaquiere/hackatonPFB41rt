@@ -175,20 +175,19 @@ const HomePage = () => {
                     className="w-screen max-w-20 mb-8 md:max-w-32"
                 />
 
-                <div className="w-full flex flex-col justify-center items-center gap-15 md:flex-wrap">
+                <div className="w-full flex flex-col justify-center items-center gap-15 mt-10">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
-                                className="flex flex-col items-center w-full gap-4"
+                                className="relative flex flex-col items-center w-full gap-4"
                             >
-                                <p className="text-[#9A4EAE] text-3xl font-bold pl-2 text-center md:p-6">
-                                    #{index + 1}
-                                </p>
-
                                 {/* Tarjeta contenedora */}
-                                <div className="w-[280px] h-[150px] md:w-[480px] md:h-[200px] md:mb-10 bg-[#212121] text-white text-center rounded-lg flex overflow-hidden gap-3">
+                                <div className="w-[280px] h-[150px] md:w-[480px] md:h-[200px] md:mb-10 bg-[#212121] text-white text-center rounded-lg flex gap-3 relative">
                                     {/* Imagen en la izquierda (50% de la tarjeta) */}
+                                    <p className="absolute bottom-0 left-[-30px] text-[white] text-7xl md:text-8xl lg:text-9xl font-extrabold text-center drop-shadow-[0px_0px_5px_#9A4EAE]">
+                                        {index + 1}
+                                    </p>
                                     <div className="w-1/2 h-full">
                                         <img
                                             src={hackathon.image}
