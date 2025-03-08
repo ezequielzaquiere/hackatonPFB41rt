@@ -1,61 +1,50 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
     return (
         <>
-            <footer className="bg-[#191919] shadow-sm p-4">
-                <div className="bg-[#191919] rounded-xl w-full max-w-screen-xl mx-auto p-4 md:py-8">
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                        <a
-                            href="#"
-                            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
-                        >
+            <footer className="bg-[#191919] shadow-sm p-10">
+                <div className="bg-[#191919] w-full">
+                    <div className="flex flex-col justify-between ">
+                        <a href="#" className="flex items-center mb-4">
                             <img
                                 src="/logo.png"
                                 className="h-8"
                                 alt="Flowbite Logo"
                             />
-                            <span className=" text-white self-center text-2xl font-semibold whitespace-nowrap">
+                            <span className=" text-white self-center text-2xl pl-2">
                                 HackVerse®
                             </span>
                         </a>
-                        <ul className="flex flex-wrap items-center mb-6 text-sm text-[white] sm:mb-0">
+                        <ul
+                            className="flex flex-col gap-3 mt-2 text-sm text-[white] md:mt-5 md:flex-row md:justify-around
+                        "
+                        >
                             <li>
-                                <a
-                                    href="#"
-                                    className="hover:underline me-4 md:me-6"
-                                >
-                                    Sobre nosotros
-                                </a>
+                                <Link to="/about">Sobre nosotros</Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    className="hover:underline me-4 md:me-6"
-                                >
-                                    Política de Privacidad
-                                </a>
+                                <Link to="/privacy-policy">
+                                    Política de privacidad
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    className="hover:underline me-4 md:me-6"
-                                >
-                                    Política de Cookies
-                                </a>
+                                <Link to="/cookies-policy">
+                                    Política de cookies
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:underline">
-                                    Términos y Condiciones
-                                </a>
+                                <Link to="/terms-and-conditions">
+                                    Términos y condiciones
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:underline">
-                                    Contacto
-                                </a>
+                                <Link to="/contact">Contacto</Link>
                             </li>
                         </ul>
                     </div>
-                    <hr className="border-t border-[#191919] my-6 lg:my-8" />
-                    <span className="block text-sm text-white sm:text-center">
+                    <hr className="border-t border-[#ffffff] mt-6 mb-3 text-center" />
+                    <span className="w-full block text-sm text-white text-center">
                         © 2025{' '}
                         <a
                             href="https://flowbite.com/"

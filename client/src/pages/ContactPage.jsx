@@ -1,29 +1,42 @@
-import { Link } from 'react-router-dom';
-
-// Inicializamos el componente.
 const Contact = () => {
     return (
+        <div className="bg-[#191919] text-white min-h-screen flex flex-col items-center py-10 px-10 text-center">
+            <section className="w-screen flex justify-start px-10 py-5">
+                <div className="flex flex-col gap-10">
+                    <div className="flex justify-center">
+                        <img src="/logo.png" className="w-20" />
+                    </div>
+                    <h1 className="text-2xl mt-3 text-center">Contáctanos</h1>
+                    <p className="text-base ml-10">
+                        ¿Tienes dudas, sugerencias o necesitas ayuda? En
+                        Hackverse estamos aquí para escucharte y brindarte el
+                        soporte que necesites.
+                    </p>
 
-          <div className="max-w-3xl text-center">
-             <h2 className="text-3xl font-bold mb-4">Contáctanos - Hackverse</h2>
-             <p className="mb-6 text-white">
-             ¿Tienes dudas, sugerencias o necesitas ayuda? En Hackverse estamos aquí para escucharte y brindarte el soporte que necesites.
-            </p>
+                    <h2 className="text-xl mt-10">Información de Contacto</h2>
+                    <p className="text-base ml-10">
+                        📧 Correo Electrónico:{' '}
+                        <a
+                            href="mailto:hackverse.hackathones@gmail.com"
+                            className="text-blue-400 hover:underline"
+                        >
+                            hackverse.hackathones@gmail.com
+                        </a>
+                    </p>
 
-             <h3 className="text-2xl font-semibold mt-6 mb-3">Información de Contacto</h3>
-             <p className="mb-6 text-white">
-             📧Correo Electrónico:[correo@hackverse.com]
-            </p>
-            <p className="text-lg font-semibold mt-8">Para cualquier consulta, escríbenos a nuestro correo electrónico y te responderemos lo antes posible.</p>
-            
+                    <p className="text-base ml-10">
+                        Para cualquier consulta, escríbenos a nuestro correo
+                        electrónico y te responderemos lo antes posible.
+                    </p>
 
-           <p className="text-lg font-semibold mt-8">Estamos aquí para ayudarte y construir juntos una comunidad de innovación. ¡No dudes en contactarnos!</p>
-          </div>
-        
-      );
-    };
-      
-
-
+                    <p className="text-base mt-10 ml-10">
+                        Estamos aquí para ayudarte y construir juntos una
+                        comunidad de innovación. ¡No dudes en contactarnos!
+                    </p>
+                </div>
+            </section>
+        </div>
+    );
+};
 
 export default Contact;

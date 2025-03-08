@@ -22,6 +22,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [showPassword, setShowPassword] = useState(false);
     //Creamos una variable en el State para indicar si estamos haciendo fetch.
     const [loading, setLoading] = useState(false);
 
@@ -77,6 +78,9 @@ const LoginPage = () => {
 
     return (
         <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+                ¡Inicia sesión!
+            </h2>
             <form
                 onSubmit={handleLogin}
                 className="bg-[#222] text-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col gap-4"
@@ -90,36 +94,68 @@ const LoginPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
+                    placeholder="email@ejemplo.com"
                     autoFocus
                     required
-                    className="bg-[#333] mb-4 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition  hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="bg-[#333] mb-4 border border-[#9A4EAE] focus:bg-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition  hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="password" className="font-semibold">
                     Contraseña
                 </label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
-                    required
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] hover:ring-2 hover:ring-[#9A4EAE] transition"
-                />
+                <div className="relative">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showPassword ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
 
-                <button
-                    disabled={loading}
-                    className={`w-full mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
-                ${
-                    loading
-                        ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                        : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
-                }`}
+                <div className="flex justify-center">
+                    <button
+                        disabled={loading}
+                        className={`min-w-[200px] max-w-[200px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        ${
+                            loading
+                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                        }`}
+                    >
+                        {loading ? 'Cargando...' : 'Iniciar sesión'}
+                    </button>
+                </div>
+
+                <p className="text-[#9A4EAE] text-center text-sm mt-4 hover:underline">
+                    ¿Todavía no tienes cuenta?
+                </p>
+                <Link
+                    to="/register"
+                    className="text-[#9A4EAE] text-center text-sm mb-5 hover:underline"
                 >
-                    {loading ? 'Cargando...' : 'Iniciar sesión'}
-                </button>
-
+                    <strong>¡Regístrate aquí!</strong>
+                </Link>
                 <Link
                     to="/users/password/reset"
                     className="text-[#9A4EAE] hover:underline text-center text-sm"

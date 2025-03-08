@@ -13,7 +13,7 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ValidateUserPage from './pages/ValidateUserPage';
 import PrivateUserProfilePage from './pages/PrivateUserProfilePage';
-import ChangePassword from './pages/ChangePassword';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 import EditHackathonPage from './pages/EditHackathonInfoPage';
 import SendRecoveryPassCode from './pages/SendRecoveryPassCode';
 import UseRecoveryPassCode from './pages/UseRecoveryPassCode';
@@ -23,7 +23,11 @@ import VerificationRegisterHackathon from './pages/VerificationRegisterHackathon
 import UserHackathons from './pages/SeeUserHackathons';
 import ChooseTop3 from './pages/ChooseTop3';
 import AdminHackathons from './pages/SeeAdminHackathons';
-
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import CookiesPolicyPage from './pages/CookiesPolicyPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsAndConditionPage from './pages/TermsAndConditionsPage';
 //Definimos el componente principal
 const App = () => {
     return (
@@ -70,7 +74,7 @@ const App = () => {
                 />
                 <Route
                     path="/users/password/change"
-                    element={<ChangePassword />}
+                    element={<ChangePasswordPage />}
                 />
 
                 <Route
@@ -87,20 +91,31 @@ const App = () => {
                     element={<EditHackathonPage />}
                 />
                 <Route
-                    path = "/:username/registrations"
-                    element ={<UserHackathons/>}
+                    path="/:username/registrations"
+                    element={<UserHackathons />}
                 />
                 <Route
-                    path = "/:username/myhackathons"
-                    element ={<AdminHackathons/>}
+                    path="/:username/myhackathons"
+                    element={<AdminHackathons />}
                 />
 
                 <Route
-                path = "/:hackathonId/ranking/set"
-                element = { <ChooseTop3/>}
+                    path="/:hackathonId/ranking/set"
+                    element={<ChooseTop3 />}
                 />
 
+                <Route path="/about" element={<AboutPage />} />
 
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+
+                <Route path="/cookies-policy" element={<CookiesPolicyPage />} />
+
+                <Route
+                    path="/terms-and-conditions"
+                    element={<TermsAndConditionPage />}
+                />
+
+                <Route path="/contact" element={<ContactPage />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
 

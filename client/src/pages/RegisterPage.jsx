@@ -28,6 +28,9 @@ const RegisterPage = () => {
     const [password, setPassword] = useState('');
     const [repeatedPass, setRepeatedPass] = useState('');
 
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeatedPass, setShowRepeatedPass] = useState(false);
+
     //Creamos una variable en el State para indicar si estamos haciendo fetch.
     const [loading, setLoading] = useState(false);
 
@@ -110,8 +113,8 @@ const RegisterPage = () => {
                     autoComplete="username"
                     autoFocus
                     required
-                    placeholder="jose.elias"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    placeholder="usuario123"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="firstName" className="font-semibold">
@@ -123,8 +126,8 @@ const RegisterPage = () => {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
-                    placeholder="Jose"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    placeholder="Tu nombre"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="lastName" className="font-semibold">
@@ -136,8 +139,8 @@ const RegisterPage = () => {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
-                    placeholder="Elias"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    placeholder="Tu apellido"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="email" className="font-semibold">
@@ -150,24 +153,42 @@ const RegisterPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
                     required
-                    placeholder="jose@dominio.com"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    placeholder="email@ejemplo.com"
+                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
                 />
 
                 <label htmlFor="password" className="font-semibold">
                     Contraseña *
                 </label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                    placeholder="************"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
-                />
-
+                <div className="relative">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showPassword ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
                 <p className="text-xs pb-2">
                     Debe contener mínimo 8 caracteres, una letra, un número y un
                     caracter especial (!@#$%^&*()).
@@ -175,29 +196,49 @@ const RegisterPage = () => {
                 <label htmlFor="repeatedPass" className="font-semibold">
                     Repetir Contraseña:
                 </label>
-                <input
-                    type="password"
-                    id="repeatedPass"
-                    value={repeatedPass}
-                    onChange={(e) => setRepeatedPass(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                    placeholder="************"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
-                />
-
+                <div className="relative">
+                    <input
+                        type={showRepeatedPass ? 'text' : 'password'}
+                        id="repeatedPass"
+                        value={repeatedPass}
+                        onChange={(e) => setRepeatedPass(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowRepeatedPass(!showRepeatedPass)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showRepeatedPass ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
                 <p className="text-xs pb-2">(*) Campos obligatorios.</p>
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
-                        loading
-                            ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                            : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
-                    }`}
-                >
-                    {loading ? 'Registrando...' : '¡Crea tu cuenta!'}
-                </button>
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
+                            loading
+                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                        }`}
+                    >
+                        {loading ? 'Registrando...' : '¡Crea tu cuenta!'}
+                    </button>
+                </div>
             </form>
         </main>
     );
