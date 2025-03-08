@@ -62,9 +62,9 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
         <>
             <label
                 htmlFor="location"
-                className="block mb-2 text-sm font-medium text-[#9A4EAE]"
+                className={`block mb-2 mt-2 text-base font-semibold ${isDisabled ? 'text-[#555]' : 'text-white'}`}
             >
-                Localizacion
+                {isDisabled ? 'Localización' : 'Localización *'}
             </label>
             <div className="relative w-full">
                 {/* Input de búsqueda */}
@@ -73,23 +73,23 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="¿Dónde tendrá lugar?"
-                    className="mb-2 bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="mb-2 bg-[#333] border border-[#9A4EAE] w-full text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] disabled:bg-[#555] disabled:border-[#777] disabled:text-gray-400 disabled:cursor-not-allowed"
                     disabled={isDisabled}
                     required={!isDisabled}
                 />
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-2 mt-2 w-full">
                     <button
                         type="button"
                         onClick={handleSearch}
                         disabled={isDisabled}
-                        className="bg-[#9A4EAE] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="bg-[#9A4EAE] flex-1 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] disabled:bg-[#7A3E8F] disabled:border-[#7A3E8F] disabled:text-gray-300 disabled:cursor-not-allowed"
                     >
-                        Enviar
+                        Buscar
                     </button>
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="bg-[#9A4EAE] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="bg-[#9A4EAE] flex-1 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] disabled:bg-[#7A3E8F] disabled:border-[#7A3E8F] disabled:text-gray-300 disabled:cursor-not-allowed"
                         disabled={isDisabled}
                     >
                         Limpiar
@@ -99,15 +99,16 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                 {/* Sugerencias de búsqueda */}
                 {suggestion.length > 0 && (
                     <ul
-                        className="absolute left-0 right-0 w-full bg-gray-50 border border-gray-300 
-                        text-gray-900 text-sm rounded-lg shadow-lg overflow-hidden 
-                        bottom-full mb-1 z-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white overflow-y-auto max-h-60"
+                        className="absolute left-0 right-0 w-full bg-[#333] border border-gray-600 
+                                    text-white text-sm rounded-lg shadow-lg overflow-hidden 
+                                    bottom-full mb-1 z-50 overflow-y-auto max-h-60"
+                        x
                     >
                         {suggestion.map((location) => (
                             <li
                                 key={location.place_id}
                                 onClick={() => handleSelect(location)}
-                                className="cursor-pointer p-3 hover:bg-purple-600 transition"
+                                className="cursor-pointer p-3 hover:bg-[#9A4EAE] transition"
                             >
                                 {location.display_name}
                             </li>

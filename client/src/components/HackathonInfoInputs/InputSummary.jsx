@@ -9,7 +9,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
                 htmlFor="summary"
                 className="block mb-2 text-base font-semibold text-white"
             >
-                Descripcion del hackathon *
+                Descripcion del Hackathon *
             </label>
             <textarea
                 id="summary"

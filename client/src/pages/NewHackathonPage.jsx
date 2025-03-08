@@ -187,7 +187,7 @@ const NewHackathonPage = () => {
                     />
 
                     {/* Título */}
-                    <h2 className="text-2xl md:text-3xl  text-center text-[#9A4EAE] mb-6 md:mb-8 lg:mb-10">
+                    <h2 className="text-2xl md:text-3xl  text-center text-white mb-6 md:mb-8 lg:mb-10">
                         Crea tu Hackathon
                     </h2>
 
@@ -229,13 +229,12 @@ const NewHackathonPage = () => {
                     {/********************************************************************
                      ***** Input select que permite elegir los temas de un hackathon  ****
                      *********************************************************************/}
-                    <fieldset>
-                        <InputSelectThemes
-                            formData={formData}
-                            handleChangeGeneral={handleChangeGeneral}
-                            hackathonThemes={hackathonThemes}
-                        />
-                    </fieldset>
+
+                    <InputSelectThemes
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                        hackathonThemes={hackathonThemes}
+                    />
 
                     {/*******************************************************************
                      *********** MODAL Input para elegir el lenguaje/s ******************
@@ -274,12 +273,10 @@ const NewHackathonPage = () => {
                      *** Input hackathon detalis (para futuro html?) ****
                      ****************************************************/}
                     <fieldset className="mt-8">
-                        <legend className="block mb-2 text-sm font-medium text-[#9A4EAE]">
+                        <legend className="block mb-2 text-base font-semibold text-white">
                             Detalles del Hackathon
                         </legend>
-                        <label htmlFor="details" className="hidden">
-                            Detalles del hackathon
-                        </label>
+
                         <DetailTextEditor
                             onChange={handleChangeDetails}
                             value={formData.details}

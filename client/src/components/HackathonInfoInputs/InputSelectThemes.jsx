@@ -9,8 +9,8 @@ const InputSelectThemes = ({
 }) => {
     return (
         <>
-            <legend className="block text-sm font-medium text-[#9A4EAE]">
-                Selecciona una tematica
+            <legend className="block mb-2 text-base font-semibold text-white">
+                Temática *
             </legend>
             <label htmlFor="themeId" hidden>
                 Selecciona una tematica
@@ -24,10 +24,14 @@ const InputSelectThemes = ({
                 className="w-full px-4 py-2 my-3 rounded-lg shadow-[6px_6px_5px_#191919] 
                 bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none 
                 focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50 
-                appearance-none"
+                appearance-none text-center"
             >
-                <option key="" hidden className="text-gray-500 bg-[#222]">
-                    ------------------- ▽
+                <option
+                    key=""
+                    hidden
+                    className="text-gray-500 text-center bg-[#222]"
+                >
+                    ▽ Selecciona una temática
                 </option>
                 {hackathonThemes.map((theme) => (
                     <option
@@ -46,7 +50,7 @@ const InputSelectThemes = ({
 //Validadcion de props
 InputSelectThemes.propTypes = {
     handleChangeGeneral: PropTypes.func.isRequired,
-    formData: PropTypes.array.isRequired,
+    formData: PropTypes.object.isRequired,
     hackathonThemes: PropTypes.array.isRequired,
 };
 

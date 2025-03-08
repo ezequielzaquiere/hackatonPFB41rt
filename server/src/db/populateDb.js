@@ -21,7 +21,7 @@ const populateDb = async () => {
                 ('Python', "${now}"),
                 ('Java', "${now}"),
                 ('C++', "${now}"),
-                ('C#', "${now}"),
+                ('CSharp', "${now}"),
                 ('Ruby', "${now}"),
                 ('Go', "${now}"),
                 ('Swift', "${now}"),
@@ -273,8 +273,6 @@ const populateDb = async () => {
                 (5, 18, "confirmada", "${now}");
 
         `);
-
-        
 
         //Tabla de ratings
         await pool.query(`

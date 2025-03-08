@@ -73,18 +73,12 @@ const TextEditor = ({ value, onChange }) => {
 
     return (
         <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Descripción
-            </label>
-            <div
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 dark:autofill:focus:border-blue-500 autofill:focus:border-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-            "
-            >
+            <div className="bg-[#333] border border-[#555] text-white placeholder-[#777] focus:ring-[#9A4EAE] focus:border-[#9A4EAE] block w-full p-2.5 rounded-lg">
                 <MenuBar editor={editor} />
-                <div className="p-4 min-h-[250px] bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-b-lg focus:outline-none">
+                <div className="p-4 min-h-[250px] bg-[#444] border border-[#666] rounded-b-lg focus:outline-none">
                     <EditorContent
                         editor={editor}
-                        className="focus:outline-none min-h-[200px]"
+                        className="focus:outline-none min-h-[200px] bg-[#444] text-white"
                     />
                 </div>
             </div>

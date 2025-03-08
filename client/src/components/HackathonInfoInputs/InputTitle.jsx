@@ -8,7 +8,7 @@ const InputTitle = ({ formData, handleChangeGeneral }) => {
                 htmlFor="title"
                 className="block mb-2 text-base font-semibold text-white"
             >
-                Titulo *
+                Título *
             </label>
             <input
                 type="text"
