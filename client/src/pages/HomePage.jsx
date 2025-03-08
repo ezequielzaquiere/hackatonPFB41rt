@@ -81,12 +81,12 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="lg:block relative w-full min-h-[450px] h-full bg-[#191919] bg-center flex flex-col justify-center items-center gap-3">
+            <div className="relative w-full min-h-[450px] h-full bg-[#191919] bg-center flex flex-col justify-center items-center gap-3">
                 {/* Imagen centrada */}
                 <img
                     src="/hackVerse.png"
                     alt="Logo de HackVerse"
-                    className="w-[300px] object-center"
+                    className="w-[300px] mx-auto object-center"
                 />
 
                 {/* Texto en la parte inferior */}
@@ -112,13 +112,13 @@ const HomePage = () => {
                         {/* Contenedor scrollable */}
                         <div
                             ref={scrollContainerRef}
-                            className="w-screen flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory md:gap-4 md:overflow-hidden"
+                            className="w-screen flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory md:gap-4 md:overflow-hidden md:min-h-[185px]"
                         >
                             {hackathonesFromToday.data?.hackathones?.map(
                                 (hackathon, index) => (
                                     <div
                                         key={index}
-                                        className="relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#212121] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[150px] md:p-3"
+                                        className="relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#212121] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[150px] md:min-h-[200px] md:p-3"
                                     >
                                         {/* Capa negra sobre el fondo */}
                                         <div className="absolute bg-black/5 rounded-lg"></div>
@@ -149,7 +149,7 @@ const HomePage = () => {
                     {/* Botón Izquierda */}
                     <button
                         onClick={handleScrollLeft}
-                        className="absolute left-0 bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
+                        className="absolute left-[16px] bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
                     >
                         <ChevronLeft className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
                     </button>
@@ -157,7 +157,7 @@ const HomePage = () => {
                     {/* Botón Derecha */}
                     <button
                         onClick={handleScrollRight}
-                        className="absolute right-0 bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
+                        className="absolute right-[16px] bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
                     >
                         <ChevronRight className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
                     </button>
@@ -175,19 +175,19 @@ const HomePage = () => {
                     className="w-screen max-w-20 mb-8 md:max-w-32"
                 />
 
-                <div className="w-full flex flex-col justify-center items-center space-y-12 gap-1 md:flex-row md:flex-wrap md:max-w-screen md:justify-around md:px-40">
+                <div className="w-full flex flex-col justify-center items-center gap-1 md:flex-wrap">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
-                                className="flex flex-col items-center w-full md:w-auto gap-4"
+                                className="flex flex-col items-center w-full gap-4"
                             >
                                 <p className="text-[#9A4EAE] text-xl font-bold pl-2 text-center md:p-6">
                                     #{index + 1}
                                 </p>
 
                                 {/* Tarjeta contenedora */}
-                                <div className="w-[280px] h-[150px] md:w-[350px] md:h-[200px] bg-[#212121] text-white text-center rounded-lg flex overflow-hidden gap-3">
+                                <div className="w-[280px] h-[150px] lg:w-[480px] lg:mb-10 bg-[#212121] text-white text-center rounded-lg flex overflow-hidden gap-3">
                                     {/* Imagen en la izquierda (50% de la tarjeta) */}
                                     <div className="w-1/2 h-full">
                                         <img
