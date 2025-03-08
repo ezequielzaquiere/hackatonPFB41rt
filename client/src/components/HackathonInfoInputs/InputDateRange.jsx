@@ -3,14 +3,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addHours } from 'date-fns';
 import PropTypes from 'prop-types';
-
 //Input de rango de fechas
 const InputDateRange = ({ formData, handleChangeDate }) => {
     const now = new Date();
     return (
         <>
             <legend className="block mb-2 text-base font-semibold text-white">
-                Fecha y hora de inicio y finalizacion *
+                Fechas del Hackathon *
             </legend>
 
             {/****************************************************
