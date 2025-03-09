@@ -176,115 +176,101 @@ const NewHackathonPage = () => {
     }
 
     return (
-        <>
-            <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-15 py-15 text-sm md:text-base">
-                {/* Encabezado con imágenes y título */}
-                <div className="flex items-center justify-center gap-6">
-                    {/* Título */}
-                    <h2 className="text-3xl md:text-4xl text-center text-[#9A4EAE] mb-10">
-                        ¡Crea tu Hackathon!
-                    </h2>
+        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-15 py-10 lg:px-24 lg:py-20">
+            {/* Encabezado con título */}
+            <h2 className="text-3xl lg:text-4xl text-center text-[#9A4EAE] mb-10">
+                ¡Crea tu Hackathon!
+            </h2>
+
+            {/* Formulario */}
+            <form
+                onSubmit={handleSubmit}
+                className="bg-[#222] text-white p-6 lg:p-8 rounded-lg shadow-lg w-full max-w-2xl lg:max-w-3xl flex flex-col gap-5"
+            >
+                {/* Input Title */}
+                <InputTitle
+                    formData={formData}
+                    handleChangeGeneral={handleChangeGeneral}
+                />
+
+                {/* Input Summary */}
+                <InputSummary
+                    formData={formData}
+                    handleChangeGeneral={handleChangeGeneral}
+                />
+
+                {/* Input Date Range */}
+                <InputDateRange
+                    formData={formData}
+                    handleChangeDate={handleChangeDate}
+                />
+
+                {/* Input Select Themes */}
+                <InputSelectThemes
+                    formData={formData}
+                    handleChangeGeneral={handleChangeGeneral}
+                    hackathonThemes={hackathonThemes}
+                />
+
+                {/* Modal para selección de lenguajes */}
+                <ModalLang
+                    hackathonLangs={hackathonLangs || []}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    handleCloseModal={handleCloseModal}
+                    handleChangeProgrammingLang={handleChangeProgrammingLang}
+                    selectedLangs={selectedLangs || []}
+                />
+
+                {/* Radio para tipo de hackathon */}
+                <InputRadioLocation
+                    formData={formData}
+                    handleChangeGeneral={handleChangeGeneral}
+                />
+
+                {/* Input de ubicación */}
+                <LocatioAutocomplete
+                    isDisabled={isDisabled}
+                    onSelect={handleChangeLocation}
+                    location={formData.location}
+                />
+
+                {/* Detalles del Hackathon */}
+                <fieldset className="mt-6">
+                    <legend className="block mb-2 text-base lg:text-lg font-semibold text-white">
+                        Detalles del Hackathon
+                    </legend>
+                    <DetailTextEditor
+                        onChange={handleChangeDetails}
+                        value={formData.details}
+                        id="details"
+                    />
+                </fieldset>
+
+                {/* Subida de imágenes */}
+                <InputBannerUpload
+                    formData={formData}
+                    handleChangeFiles={handleChangeFiles}
+                />
+
+                {/* Subida de documentos */}
+                <InputDocumentUpload
+                    formData={formData}
+                    handleChangeFiles={handleChangeFiles}
+                />
+
+                {/* Botón de Enviar */}
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-40 lg:w-48 px-4 py-3 lg:px-5 lg:py-4 my-4 font-semibold rounded-lg shadow-lg bg-[#7a3e8f] text-white hover:bg-[#9A4EAE] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50"
+                    >
+                        Enviar
+                    </button>
                 </div>
-
-                {/* Formulario */}
-                <form
-                    onSubmit={handleSubmit}
-                    className="bg-[#222] text-white p-6 md:p-8 rounded-lg shadow-lg w-full max-w-full flex flex-col gap-2"
-                >
-                    {/* Input Title */}
-                    <InputTitle
-                        formData={formData}
-                        handleChangeGeneral={handleChangeGeneral}
-                    />
-
-                    {/* Input Summary */}
-                    <InputSummary
-                        formData={formData}
-                        handleChangeGeneral={handleChangeGeneral}
-                    />
-
-                    {/* Input Date Range */}
-                    <InputDateRange
-                        formData={formData}
-                        handleChangeDate={handleChangeDate}
-                    />
-
-                    {/* Input Select Themes */}
-                    <InputSelectThemes
-                        formData={formData}
-                        handleChangeGeneral={handleChangeGeneral}
-                        hackathonThemes={hackathonThemes}
-                    />
-
-                    {/* Modal para selección de lenguajes */}
-                    <ModalLang
-                        hackathonLangs={hackathonLangs || []}
-                        isModalOpen={isModalOpen}
-                        setIsModalOpen={setIsModalOpen}
-                        handleCloseModal={handleCloseModal}
-                        handleChangeProgrammingLang={
-                            handleChangeProgrammingLang
-                        }
-                        selectedLangs={selectedLangs || []}
-                    />
-
-                    {/* Radio para tipo de hackathon */}
-                    <fieldset>
-                        <InputRadioLocation
-                            formData={formData}
-                            handleChangeGeneral={handleChangeGeneral}
-                        />
-
-                        {/* Input de ubicación */}
-                        <LocatioAutocomplete
-                            isDisabled={isDisabled}
-                            onSelect={handleChangeLocation}
-                            location={formData.location}
-                        />
-                    </fieldset>
-
-                    {/* Detalles del Hackathon */}
-                    <fieldset className="mt-8">
-                        <legend className="block mb-2 text-base font-semibold text-white">
-                            Detalles del Hackathon
-                        </legend>
-
-                        <DetailTextEditor
-                            onChange={handleChangeDetails}
-                            value={formData.details}
-                            id="details"
-                        />
-                    </fieldset>
-
-                    {/* Subida de imagenes */}
-                    <fieldset className="mb-4">
-                        <InputBannerUpload
-                            formData={formData}
-                            handleChangeFiles={handleChangeFiles}
-                        />
-                    </fieldset>
-
-                    {/* Subida de documentos */}
-                    <fieldset className="mb-4">
-                        <InputDocumentUpload
-                            formData={formData}
-                            handleChangeFiles={handleChangeFiles}
-                        />
-                    </fieldset>
-
-                    {/* Botón de Enviar */}
-                    <div className="flex justify-center">
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-35 px-3 py-3 my-4 font-semibold rounded-lg shadow-lg bg-[#7a3e8f] text-white hover:bg-[#9A4EAE] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50"
-                        >
-                            Enviar
-                        </button>
-                    </div>
-                </form>
-            </main>
-        </>
+            </form>
+        </main>
     );
 };
 

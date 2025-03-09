@@ -16,7 +16,7 @@ const InputDocumentUpload = ({ formData, handleChangeFiles }) => {
                 className="w-full flex items-center justify-center px-6 py-2 my-3 rounded-lg shadow-lg bg-[#7A3E8F] text-white font-semibold cursor-pointer 
             hover:bg-[#9A4EAE] hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] focus:ring-opacity-50"
             >
-                📄{' '}
+                {' '}
                 {typeof formData.document === 'string'
                     ? formData.document
                     : formData.document?.name || 'Elige un documento'}
