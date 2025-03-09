@@ -203,11 +203,11 @@ const DetailHackathonPage = () => {
 
     const deleteHackathon = async () => {
         toast((t) => (
-            <div className="flex flex-col gap-2 text-black">
-                <p>¿Seguro que quieres eliminar el Hackathon?</p>
-                <div className="flex gap-4 justify-center">
-                    <button
+
+            <div className="flex flex-col gap-2 text-white">
+       
                         className="bg-[#9A4EAE] hover:bg-[#7a3a8a] text-white px-4 py-2 rounded"
+
                         onClick={async () => {
                             try {
                                 const response = await fetch(
