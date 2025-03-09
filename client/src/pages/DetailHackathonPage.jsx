@@ -193,98 +193,131 @@ const DetailHackathonPage = () => {
         }
     };
 
-    //Funcion que te lleva a editar el hackathon
     const goToModifyHackathon = () => {
         navigate(`/details/${hackathonId}/edit`);
     };
 
-    //Funcion que copia los datos de un hackathon
     const cloneHackathon = () => {
         navigate('/hackathon/new', { state: { hackathonId } });
     };
 
-    //Funcion que elimina un hackathon y todo lo relacionado con el
     const deleteHackathon = async () => {
-        try {
-            const response = await fetch(
-                `${VITE_API_URL}/api/hackathon/${hackathonId}`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: authToken,
-                    },
-                }
-            );
-            const body = await response.json();
-            toast.success(body.message);
-            navigate('/*');
-        } catch (err) {
-            toast.error(err.message);
-        }
+        toast((t) => (
+            <div className="flex flex-col gap-2 text-black">
+                <p>¿Seguro que quieres eliminar el Hackathon?</p>
+                <div className="flex gap-4 justify-center">
+                    <button
+                        className="bg-[#9A4EAE] hover:bg-[#7a3a8a] text-white px-4 py-2 rounded"
+                        onClick={async () => {
+                            try {
+                                const response = await fetch(
+                                    `${VITE_API_URL}/api/hackathon/${hackathonId}`,
+                                    {
+                                        method: 'DELETE',
+                                        headers: {
+                                            Authorization: authToken,
+                                        },
+                                    }
+                                );
+                                const body = await response.json();
+
+                                if (!response.ok)
+                                    throw new Error(
+                                        body.message || 'Error al eliminar'
+                                    );
+                                toast.dismiss(t.id);
+
+                                const successToast = toast.success(
+                                    'Hackathon eliminado correctamente',
+                                    {
+                                        duration: 2000,
+                                        className:
+                                            'bg-gray-800 text-white font-semibold p-4 rounded-lg shadow-lg',
+                                    }
+                                );
+                                setTimeout(() => {
+                                    toast.dismiss(successToast);
+                                    navigate('/');
+                                }, 2000);
+                            } catch (error) {
+                                toast.error(error.message);
+                            }
+                        }}
+                    >
+                        Sí, eliminar
+                    </button>
+                    <button
+                        className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                        onClick={() => {
+                            toast.dismiss(t.id);
+                        }}
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        ));
     };
 
     if (!hackathon) return <p className="text-white">Loading...</p>;
 
     const id = Number(hackathonId);
-    console.log(hackathon);
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#191919] text-white items-center justify-center p-6">
-            {/* Botones para ir al hackathon anterior o al siguiente */}
-            <div className="flex gap-4 mb-6">
+        <div className="bg-[#191919] min-h-screen text-white p-10">
+            {/* Botones de navegación y acciones */}
+            <div className="flex gap-4 mb-6 justify-center">
                 <button
                     onClick={() => navigate(`/details/${id - 1}`)}
-                    className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                    className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition"
                 >
                     ⬅ Anterior
                 </button>
-                {authUser.role === 'admin' && (
+                {authUser?.role === 'admin' && (
                     <>
                         <button
                             onClick={cloneHackathon}
-                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition"
                         >
                             Copiar
                         </button>
                         <button
                             onClick={deleteHackathon}
-                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition"
                         >
                             Eliminar
                         </button>
                     </>
                 )}
-                {authUser.role === 'admin' &&
+                {authUser?.role === 'admin' &&
                     isAfter(hackathon.startingDate, new Date()) && (
-                        <>
-                            <button
-                                onClick={goToModifyHackathon}
-                                className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
-                            >
-                                Modificar
-                            </button>
-                        </>
+                        <button
+                            onClick={goToModifyHackathon}
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition"
+                        >
+                            Modificar
+                        </button>
                     )}
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
-                    className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                    className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition"
                 >
                     Siguiente ➡
                 </button>
             </div>
 
-            {/* Contenedor principal con la información del hackathon */}
-            <div className="bg-[#191919] rounded-3xl p-8 max-w-lg w-full border border-gray-700 text-white flex flex-col items-center shadow-[0px_0px_20px_#9A4EAE]">
+            {/* Contenedor principal del hackathon */}
+            <div className="bg-[#212121] rounded-3xl p-8 max-w-lg mx-auto border border-gray-700 ">
                 <img
                     src={hackathon.image}
                     alt={hackathon.title}
-                    className="w-32 h-32 rounded-full border-4 border-gray-700 mb-4"
+                    className="w-32 h-32 rounded-full border-4 border-gray-700 mx-auto mb-4"
                 />
                 <h2 className="text-3xl font-bold text-white text-center">
                     {hackathon.title}
                 </h2>
 
-                <div className="flex items-center gap-2 mt-4 text-gray-300">
+                <div className="flex items-center gap-2 mt-4 text-gray-300 justify-center">
                     <FaUsers className="text-[#9A4EAE]" />
                     <span>{hackathon.participantCount} participantes</span>
                     {hackathon.type === 'presencial' && hackathon.location && (
@@ -322,7 +355,7 @@ const DetailHackathonPage = () => {
                 </p>
 
                 {new Date(hackathon.deadline) < new Date() ? (
-                    <h3 className="mt-4 text-lg font-semibold text-red-500">
+                    <h3 className="mt-4 text-lg font-semibold text-[#9A4EAE] text-center">
                         El evento ha terminado
                     </h3>
                 ) : (
@@ -331,32 +364,32 @@ const DetailHackathonPage = () => {
                             registeredHackathons[hackathonId] ? (
                                 <button
                                     onClick={handleUnregister}
-                                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-400 transition duration-300"
+                                    className="bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition w-full mt-4"
                                 >
                                     Desapuntarse
                                 </button>
                             ) : (
                                 <button
                                     onClick={handleRegister}
-                                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-400 transition duration-300"
+                                    className="bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition w-full mt-4"
                                 >
                                     Apuntarse
                                 </button>
                             )
                         ) : (
-                            <p className="mt-4 text-red-500">
+                            <p className="mt-4 text-[#9A4EAE] text-center">
                                 Inicia sesión para apuntarte.
                             </p>
                         )}
                     </>
                 )}
 
-                {/* Componente para valorar el hackathon */}
+                {/* Valoración del hackathon */}
                 {new Date(hackathon.deadline) < new Date() &&
                     registeredHackathons[hackathonId] &&
                     !hasVoted[hackathonId] && (
                         <div className="mt-6">
-                            <h3 className="text-lg font-semibold text-white">
+                            <h3 className="text-lg font-semibold text-white text-center">
                                 Valora este hackathon
                             </h3>
                             <form
@@ -369,7 +402,7 @@ const DetailHackathonPage = () => {
                                             type="button"
                                             key={star}
                                             onClick={() => setRating(star)}
-                                            className={`text-2xl ${rating >= star ? 'text-yellow-400' : 'text-gray-300'}`}
+                                            className={`text-2xl ${rating >= star ? 'text-[#9A4EAE]' : 'text-gray-300'}`}
                                         >
                                             ★
                                         </button>
@@ -377,7 +410,7 @@ const DetailHackathonPage = () => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="mt-4 bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition duration-300"
+                                    className="mt-4 bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition w-full"
                                 >
                                     Enviar valoración
                                 </button>
@@ -386,7 +419,7 @@ const DetailHackathonPage = () => {
                     )}
 
                 {hasVoted[hackathonId] && (
-                    <p className="mt-4 text-green-500">
+                    <p className="mt-4 text-[#9A4EAE] text-center">
                         ¡Gracias por tu valoración!
                     </p>
                 )}
