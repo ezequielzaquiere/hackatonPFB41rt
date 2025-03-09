@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 
 //Componentes
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //Autorización
 import { AuthContext } from '../contexts/AuthContext';
@@ -21,6 +21,10 @@ const ChangePassword = () => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [repeatNewPassword, setRepeatNewPassword] = useState('');
+
+    const [showActualPassword, setActualPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showRepeatedPass, setRepeatedPass] = useState(false);
 
     //Variable en el State para indicar si se está haciendo fetch.
     const [loading, setLoading] = useState(false);
@@ -101,29 +105,68 @@ const ChangePassword = () => {
                 <label htmlFor="currentPassword" className="font-semibold">
                     Contraseña Actual
                 </label>
-                <input
-                    type="password"
-                    id="currentPassword"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    autoComplete="current-password"
-                    required
-                    autoFocus
-                    className="bg-[#333] mb-4 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] hover:ring-2 hover:ring-[#9A4EAE] transition"
-                />
+                <div className="relative">
+                    <input
+                        type={showActualPassword ? 'text' : 'password'}
+                        id="currentPassword"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        autoComplete="current-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 focus:placeholder-transparent rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setActualPassword(!showActualPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showActualPassword ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
 
                 <label htmlFor="newPassword" className="font-semibold">
                     Nueva Contraseña
                 </label>
-                <input
-                    type="password"
-                    id="newPassword"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] hover:ring-2 hover:ring-[#9A4EAE] transition"
-                />
+                <div className="relative">
+                    <input
+                        type={showNewPassword ? 'text' : 'password'}
+                        id="newPassword"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 focus:placeholder-transparent rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showNewPassword ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
 
                 <p className="text-xs pb-2">
                     Debe contener mínimo 8 caracteres, una letra, un número y un
@@ -133,28 +176,62 @@ const ChangePassword = () => {
                 <label htmlFor="repeatNewPassword" className="font-semibold">
                     Repetir Contraseña
                 </label>
-                <input
-                    type="password"
-                    id="repeatNewPassword"
-                    value={repeatNewPassword}
-                    onChange={(e) => setRepeatNewPassword(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] hover:ring-2 hover:ring-[#9A4EAE] transition"
-                />
+                <div className="relative">
+                    <input
+                        type={showRepeatedPass ? 'text' : 'password'}
+                        id="repeatNewPassword"
+                        value={repeatNewPassword}
+                        onChange={(e) => setRepeatNewPassword(e.target.value)}
+                        autoComplete="new-password"
+                        required
+                        placeholder="************"
+                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 focus:placeholder-transparent rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setRepeatedPass(!showRepeatedPass)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                    >
+                        {showRepeatedPass ? (
+                            <img
+                                src="/ojo-abierto.png"
+                                className="max-w-[30px]"
+                            />
+                        ) : (
+                            <img
+                                src="/ojo-cerrado.png"
+                                className="max-w-[30px]"
+                            />
+                        )}
+                    </button>
+                </div>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
-                ${
-                    loading
-                        ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                        : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
-                }`}
-                >
-                    {loading ? 'Cambiando...' : 'Enviar'}
-                </button>
+                <div className="flex justify-center gap-5">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`max-w-[150px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        ${
+                            loading
+                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                        }`}
+                    >
+                        {loading ? 'Cambiando...' : 'Enviar'}
+                    </button>
+
+                    <Link
+                        to="/users/profile"
+                        className={`max-w-[150px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        ${
+                            loading
+                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                        }`}
+                    >
+                        Atrás
+                    </Link>
+                </div>
             </form>
         </main>
     );

@@ -73,7 +73,7 @@ const RegisterPage = () => {
             //Si todo va bien mostramos un mensaje de confirmación al usuario.
             toast.success(body.message, {
                 id: 'register',
-                duration: 10000,
+                duration: 3000,
             });
             //Dirigimos a la página principal.
             navigate('/');
@@ -114,7 +114,7 @@ const RegisterPage = () => {
                     autoFocus
                     required
                     placeholder="usuario123"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                 />
 
                 <label htmlFor="firstName" className="font-semibold">
@@ -127,7 +127,7 @@ const RegisterPage = () => {
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                     placeholder="Tu nombre"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                 />
 
                 <label htmlFor="lastName" className="font-semibold">
@@ -140,7 +140,7 @@ const RegisterPage = () => {
                     onChange={(e) => setLastName(e.target.value)}
                     required
                     placeholder="Tu apellido"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                 />
 
                 <label htmlFor="email" className="font-semibold">
@@ -154,7 +154,7 @@ const RegisterPage = () => {
                     autoComplete="email"
                     required
                     placeholder="email@ejemplo.com"
-                    className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                 />
 
                 <label htmlFor="password" className="font-semibold">
@@ -169,7 +169,7 @@ const RegisterPage = () => {
                         autoComplete="new-password"
                         required
                         placeholder="************"
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
                     <button
                         type="button"
@@ -205,7 +205,7 @@ const RegisterPage = () => {
                         autoComplete="new-password"
                         required
                         placeholder="************"
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
                     <button
                         type="button"
@@ -233,10 +233,10 @@ const RegisterPage = () => {
                         className={`max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                                : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50'
                         }`}
                     >
-                        {loading ? 'Registrando...' : '¡Crea tu cuenta!'}
+                        {loading ? 'Registrando...' : '¡Registrarse!'}
                     </button>
                 </div>
             </form>

@@ -43,7 +43,7 @@ const HomePage = () => {
     console.log(bestHackathones);
     //Traer del backend los hackathones a partir de la fecha de solicitud
     const hackathonesFromToday = useHackathonesFromToday();
-
+    console.log(hackathonesFromToday);
     //Función para imprimir estrellas según avgRating
     const printStars = (avgRating) => {
         const numericRating = Number(avgRating);
@@ -81,16 +81,31 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="relative w-full min-h-[450px] h-full bg-[#191919] bg-center flex flex-col justify-center items-center gap-3">
+            <div className="relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
+                {/* Video de fondo */}
+                <video
+                    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                >
+                    <source src="/bg-video.mp4" type="video/mp4" />
+                    Tu navegador no soporta videos.
+                </video>
+
+                {/* Capa de transparencia sobre el video */}
+                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-0"></div>
+
                 {/* Imagen centrada */}
                 <img
                     src="/hackVerse.png"
                     alt="Logo de HackVerse"
-                    className="w-[300px] mx-auto object-center"
+                    className="w-[300px] mx-auto object-center relative z-10"
                 />
 
                 {/* Texto en la parte inferior */}
-                <div className="text-white">
+                <div className="text-white relative z-10">
                     <p className="px-5 text-lg text-center">
                         ¡Bienvenido a las mejores competiciones de código!
                     </p>
@@ -98,7 +113,7 @@ const HomePage = () => {
             </div>
 
             {/* Próximos Eventos */}
-            <section className="bg-[#191919] text-white p-10 relative">
+            <section className="bg-[#191919] text-white p-20 relative">
                 <div className="mb-4">
                     <h2 className="text-2xl md:text-2xl">Próximos Eventos</h2>
 
@@ -118,7 +133,7 @@ const HomePage = () => {
                                 (hackathon, index) => (
                                     <div
                                         key={index}
-                                        className="relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#212121] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
+                                        className="hover:scale-105 hover:rounded-2xl relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#242424] hover:bg-[#303030] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
                                     >
                                         {/* Capa negra sobre el fondo */}
                                         <div className="absolute bg-black/5 rounded-lg"></div>
@@ -129,6 +144,11 @@ const HomePage = () => {
                                                 src={hackathon.image}
                                                 alt=""
                                                 className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-32"
+                                                onClick={() =>
+                                                    handleImageClick(
+                                                        hackathon.id
+                                                    )
+                                                }
                                             />
                                             <h3 className="mt-2 text-xs md:text-lg font-semibold ">
                                                 {hackathon.title}
@@ -166,7 +186,7 @@ const HomePage = () => {
 
             {/* Mejor valorados */}
 
-            <section className="max-w-screen p-10  bg-[#191919] text-white flex flex-col">
+            <section className="max-w-screen p-20  bg-[#191919] text-white flex flex-col">
                 <h2 className="w-full text-2xl pb-2">Los mejores valorados</h2>
 
                 <img
@@ -175,7 +195,7 @@ const HomePage = () => {
                     className="w-screen max-w-20 mb-8 md:max-w-32"
                 />
 
-                <div className="w-full flex flex-col justify-center items-center gap-15 mt-10">
+                <div className="flex flex-col lg:flex-row lg:min-w-full gap-15 mt-10">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
@@ -183,7 +203,7 @@ const HomePage = () => {
                                 className="relative flex flex-col items-center w-full gap-4"
                             >
                                 {/* Tarjeta contenedora */}
-                                <div className="w-[280px] h-[150px] md:w-[480px] md:h-[200px] md:mb-10 bg-[#212121] text-white text-center rounded-lg flex gap-3 relative">
+                                <div className="hover:scale-110 w-[280px] h-[150px] md:w-[430px] md:h-[180px] md:mb-10 bg-[#242424] hover:bg-[#303030] text-white text-center rounded-lg flex gap-3 relative">
                                     {/* Imagen en la izquierda (50% de la tarjeta) */}
                                     <p className="absolute bottom-0 left-[-30px] text-[white] text-7xl md:text-8xl lg:text-9xl font-extrabold text-center drop-shadow-[0px_0px_5px_#9A4EAE]">
                                         {index + 1}
@@ -217,19 +237,19 @@ const HomePage = () => {
             </section>
 
             {/* Preguntas Frecuentes */}
-            <section className="bg-[#191919] text-white px-10 py-10">
+            <section className="bg-[#191919] text-white px-20 py-10">
                 <div>
                     <h2 className="text-2xl">Preguntas Frecuentes</h2>
                     <img
                         src="/faqGraphism.png"
                         alt="Adorno del título Preguntas frecuentes"
-                        className="w-screen max-w-20 my-3 md:max-w-32"
+                        className="w-screen max-w-20 mt- mb-15 md:max-w-32"
                     />
                     <div className="mt-6 md:max-w-screen flex flex-col items-center justify-center">
                         {faqs.map((faq, index) => (
                             <div
                                 key={index}
-                                className="border border-white p-4 rounded-md mb-2 md:p-6"
+                                className="hover:bg-[#303030] border border-white p-4 rounded-md mb-2 md:p-6"
                             >
                                 {/* Pregunta */}
                                 <div
