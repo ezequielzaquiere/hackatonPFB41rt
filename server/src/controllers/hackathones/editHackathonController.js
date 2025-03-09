@@ -90,8 +90,6 @@ const editHackathonController = async (req, res, next) => {
             generateErrorUtil(400, 'Faltan campo de localizacion');
         }
 
-        await validateSchemaUtil(newHackathonSchema, req.body);
-
         await editHackathonModel({
             title,
             summary,
