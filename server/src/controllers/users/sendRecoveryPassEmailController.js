@@ -39,10 +39,33 @@ const sendRecoveryPassEmailController = async (req, res, next) => {
 
             // Cuerpo del email de recuperación de contraseña.
             const emailBody = `
-                Se ha solicitado un cambio de contraseña para la cuenta vinculada a este email. Si no has sido tú ignora este mensaje.
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #191919; color: #ffffff; border-radius: 10px;">
+                    <h2 style="text-align: center; color: #9A4EAE;">Recuperación de Contraseña</h2>
 
-                <a href="${process.env.CLIENT_URL}/users/${user.id}/password/${recoverPassCode}">¡Click aquí para actualizar tu contraseña!</a>
-            `;
+                    <p style="font-size: 16px; text-align: center;">
+                        Se ha solicitado un cambio de contraseña para la cuenta vinculada a este email.
+                        Si no has sido tú, puedes ignorar este mensaje.
+                    </p>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="${process.env.CLIENT_URL}/users/${user.id}/password/${recoverPassCode}"
+                            style="display: inline-block; padding: 12px 25px; font-size: 18px; 
+                            background-color: #7A3E8F; color: #ffffff; text-decoration: none; 
+                            font-weight: bold; border-radius: 5px;">
+                            ¡Click aquí para actualizar tu contraseña!
+                        </a>
+                    </div>
+
+                    <p style="font-size: 14px; text-align: center; color: #cccccc;">
+                        Si no solicitaste este cambio, no es necesario realizar ninguna acción.
+                    </p>
+
+                    <hr style="border: 1px solid #444;">
+                    <p style="text-align: center; font-size: 12px; color: #999;">
+                        &copy; ${new Date().getFullYear()} Hackverse. Todos los derechos reservados.
+                    </p>
+                 </div>
+`;
 
             console.log(emailBody);
             // Enviamos el email.

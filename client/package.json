@@ -19,6 +19,7 @@
         "@tiptap/starter-kit": "^2.11.5",
         "bootstrap-icons": "^1.11.3",
         "date-fns": "^4.1.0",
+        "framer-motion": "^12.4.10",
         "js-cookie": "^3.0.5",
         "lucide-react": "^0.476.0",
         "prop-types": "^15.8.1",

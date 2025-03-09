@@ -8,42 +8,41 @@ const InputSelectThemes = ({
     hackathonThemes,
 }) => {
     return (
-        <>
-            <legend className="block mb-2 text-base font-semibold text-white">
+        <div className="mb-5">
+            <legend className="block text-base font-semibold text-white">
                 Temática *
             </legend>
             <label htmlFor="themeId" hidden>
                 Selecciona una tematica
             </label>
-            <select
-                value={formData.themeId}
-                onChange={handleChangeGeneral}
-                name="themeId"
-                id="themeId"
-                required
-                className="w-full px-4 py-2 my-3 rounded-lg shadow-[6px_6px_5px_#191919] 
-                bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none 
-                focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50 
-                appearance-none text-center"
-            >
-                <option
-                    key=""
-                    hidden
-                    className="text-gray-500 text-center bg-[#222]"
+            <div className="flex justify-center">
+                <select
+                    value={formData.themeId}
+                    onChange={handleChangeGeneral}
+                    name="themeId"
+                    id="themeId"
+                    required
+                    className="hover:scale-105 transition focus:placeholder-transparent
+                    focus:bg-[#7A3E8F] w-full px-4 py-2 my-3 rounded-lg shadow-[6px_6px_5px_#191919] 
+                    bg-[#7a3e8f] text-white hover:bg-[#7A3E8F] focus:outline-none 
+                    focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50 
+                    text-center"
                 >
-                    ▽ Selecciona una temática
-                </option>
-                {hackathonThemes.map((theme) => (
-                    <option
-                        key={theme.id}
-                        value={theme.id}
-                        className=" hover:bg-[#9A4EAE] hover:text-white"
-                    >
-                        {theme.theme}
+                    <option key="" hidden className=" text-center bg-[#222]">
+                        Selecciona una temática
                     </option>
-                ))}
-            </select>
-        </>
+                    {hackathonThemes.map((theme) => (
+                        <option
+                            key={theme.id}
+                            value={theme.id}
+                            className="hover:bg-[#9a4eae]"
+                        >
+                            {theme.theme}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        </div>
     );
 };
 

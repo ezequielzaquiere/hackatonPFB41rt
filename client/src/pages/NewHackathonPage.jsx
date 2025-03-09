@@ -177,68 +177,46 @@ const NewHackathonPage = () => {
 
     return (
         <>
-            <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-4 md:px-4 lg:px-6 py-10 text-sm md:text-base">
-                <div className="flex items-center justify-center gap-4">
-                    {/* Imagen de la izquierda */}
-                    <img
-                        src="/HomePageGraphism1.png"
-                        alt="Adorno del título Crear Hackathon"
-                        className="max-w-30 pt-2 pb-5 md:max-w-40"
-                    />
-
+            <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-15 py-15 text-sm md:text-base">
+                {/* Encabezado con imágenes y título */}
+                <div className="flex items-center justify-center gap-6">
                     {/* Título */}
-                    <h2 className="text-2xl md:text-3xl  text-center text-white mb-6 md:mb-8 lg:mb-10">
-                        Crea tu Hackathon
+                    <h2 className="text-3xl md:text-4xl text-center text-[#9A4EAE] mb-10">
+                        ¡Crea tu Hackathon!
                     </h2>
-
-                    {/* Imagen de la derecha */}
-                    <img
-                        src="/InvertedHomePageGraphism1.png"
-                        alt="Adorno del título Crear Hackathon"
-                        className="max-w-30 pt-2 pb-5 md:max-w-40"
-                    />
                 </div>
 
+                {/* Formulario */}
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-[#222] text-white p-4 md:p-4 lg:p-6 rounded-lg shadow-lg w-full max-w-full md:max-w-2xl flex flex-col gap-4"
+                    className="bg-[#222] text-white p-6 md:p-8 rounded-lg shadow-lg w-full max-w-full flex flex-col gap-2"
                 >
-                    {/***************************************
-                     ********* Input text del title *********
-                     ****************************************/}
+                    {/* Input Title */}
                     <InputTitle
                         formData={formData}
                         handleChangeGeneral={handleChangeGeneral}
                     />
-                    {/***************************************
-                     ****** Input textarea del summary ******
-                     ****************************************/}
+
+                    {/* Input Summary */}
                     <InputSummary
                         formData={formData}
                         handleChangeGeneral={handleChangeGeneral}
                     />
 
-                    {/*****************************************************
-                     ****** Input daterange de inicio y finalizacion ******
-                     ******************************************************/}
+                    {/* Input Date Range */}
                     <InputDateRange
                         formData={formData}
                         handleChangeDate={handleChangeDate}
                     />
 
-                    {/********************************************************************
-                     ***** Input select que permite elegir los temas de un hackathon  ****
-                     *********************************************************************/}
-
+                    {/* Input Select Themes */}
                     <InputSelectThemes
                         formData={formData}
                         handleChangeGeneral={handleChangeGeneral}
                         hackathonThemes={hackathonThemes}
                     />
 
-                    {/*******************************************************************
-                     *********** MODAL Input para elegir el lenguaje/s ******************
-                     ******************************************************************/}
+                    {/* Modal para selección de lenguajes */}
                     <ModalLang
                         hackathonLangs={hackathonLangs || []}
                         isModalOpen={isModalOpen}
@@ -250,28 +228,22 @@ const NewHackathonPage = () => {
                         selectedLangs={selectedLangs || []}
                     />
 
+                    {/* Radio para tipo de hackathon */}
                     <fieldset>
-                        {/****************************************************************
-                         *** Input radio del tipo de hackathon (presencial u online)  ****
-                         *****************************************************************/}
                         <InputRadioLocation
                             formData={formData}
                             handleChangeGeneral={handleChangeGeneral}
                         />
 
-                        {/*************************************
-                         *** Input text de la localizacion ****
-                         **************************************/}
-
+                        {/* Input de ubicación */}
                         <LocatioAutocomplete
                             isDisabled={isDisabled}
                             onSelect={handleChangeLocation}
                             location={formData.location}
                         />
                     </fieldset>
-                    {/***************************************************
-                     *** Input hackathon detalis (para futuro html?) ****
-                     ****************************************************/}
+
+                    {/* Detalles del Hackathon */}
                     <fieldset className="mt-8">
                         <legend className="block mb-2 text-base font-semibold text-white">
                             Detalles del Hackathon
@@ -283,18 +255,16 @@ const NewHackathonPage = () => {
                             id="details"
                         />
                     </fieldset>
-                    {/***************************************************
-                     ***** Input quer maneja la subida de imagenes  *****
-                     ****************************************************/}
+
+                    {/* Subida de imagenes */}
                     <fieldset className="mb-4">
                         <InputBannerUpload
                             formData={formData}
                             handleChangeFiles={handleChangeFiles}
                         />
                     </fieldset>
-                    {/***************************************************
-                     ***** Input que maneja la subida de documentos  ****
-                     ****************************************************/}
+
+                    {/* Subida de documentos */}
                     <fieldset className="mb-4">
                         <InputDocumentUpload
                             formData={formData}
@@ -302,11 +272,12 @@ const NewHackathonPage = () => {
                         />
                     </fieldset>
 
+                    {/* Botón de Enviar */}
                     <div className="flex justify-center">
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-40 mt-15 px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50"
+                            className="w-35 px-3 py-3 my-4 font-semibold rounded-lg shadow-lg bg-[#7a3e8f] text-white hover:bg-[#9A4EAE] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50"
                         >
                             Enviar
                         </button>

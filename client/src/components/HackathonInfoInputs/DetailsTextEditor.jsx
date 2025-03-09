@@ -8,34 +8,55 @@ const MenuBar = ({ editor }) => {
     if (!editor) return null;
 
     return (
-        <div className="flex flex-wrap justify-center gap-2 p-2 bg-gray-50 border border-gray-300 rounded-t-lg dark:bg-gray-700 dark:border-gray-600">
+        <div className="flex flex-wrap justify-center gap-2 p-3 bg-[#191919] border border-[#9A4EAE] rounded-t-lg">
+            {/* Botón de Negrita */}
             <button
                 onClick={() => editor.chain().focus().toggleBold().run()}
-                className={`px-3 py-1 rounded border ${editor.isActive('bold') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
+                    editor.isActive('bold')
+                        ? 'bg-[#9A4EAE] text-white shadow-md'
+                        : 'bg-[#222] text-white hover:bg-[#7A3E8F]'
+                }`}
             >
                 <strong>B</strong>
             </button>
+
+            {/* Botón de Itálica */}
             <button
                 onClick={() => editor.chain().focus().toggleItalic().run()}
-                className={`px-3 py-1 rounded border ${editor.isActive('italic') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
+                    editor.isActive('italic')
+                        ? 'bg-[#9A4EAE] text-white shadow-md'
+                        : 'bg-[#222] text-white hover:bg-[#7A3E8F]'
+                }`}
             >
                 <em>I</em>
             </button>
+
+            {/* Botón de Tachado */}
             <button
                 onClick={() => editor.chain().focus().toggleStrike().run()}
-                className={`px-3 py-1 rounded border ${editor.isActive('strike') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
+                    editor.isActive('strike')
+                        ? 'bg-[#9A4EAE] text-white shadow-md'
+                        : 'bg-[#222] text-white hover:bg-[#7A3E8F]'
+                }`}
             >
                 <s>S</s>
             </button>
+
+            {/* Botón de Undo */}
             <button
                 onClick={() => editor.chain().focus().undo().run()}
-                className="px-3 py-1 rounded border hover:bg-gray-200 dark:hover:bg-gray-600"
+                className="px-4 py-2 rounded-lg border bg-[#222] text-white hover:bg-[#7A3E8F] transition-all duration-300"
             >
                 ↺ Undo
             </button>
+
+            {/* Botón de Redo */}
             <button
                 onClick={() => editor.chain().focus().redo().run()}
-                className="px-3 py-1 rounded border hover:bg-gray-200 dark:hover:bg-gray-600"
+                className="px-4 py-2 rounded-lg border bg-[#222] text-white hover:bg-[#7A3E8F] transition-all duration-300"
             >
                 ↻ Redo
             </button>

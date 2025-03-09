@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 //Input de textarea de  los detalles
 const InputSummary = ({ formData, handleChangeGeneral }) => {
     return (
-        <>
+        <div className="mb-5">
             <label
                 htmlFor="summary"
-                className="block mb-2 text-base font-semibold text-white"
+                className="block text-base font-semibold text-white mb-2"
             >
                 Descripcion del Hackathon *
             </label>
@@ -20,9 +20,10 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
                 maxLength="140"
                 rows="4"
                 required
-                className="mb-8 w-full bg-[#333] border border-[#9A4EAE] text-white p-2 md:p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                className="focus:placeholder-transparent
+focus:bg-[#7A3E8F] w-full bg-[#333] border border-[#7a3e8f] text-white p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
             ></textarea>
-        </>
+        </div>
     );
 };
 

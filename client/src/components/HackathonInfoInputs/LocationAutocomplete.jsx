@@ -59,10 +59,10 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
     };
 
     return (
-        <>
+        <div>
             <label
                 htmlFor="location"
-                className={`block mb-2 mt-2 text-base font-semibold ${isDisabled ? 'text-[#555]' : 'text-white'}`}
+                className={`mb-2 block text-base font-semibold ${isDisabled ? 'text-[#555]' : 'text-white'}`}
             >
                 {isDisabled ? 'Localización' : 'Localización *'}
             </label>
@@ -73,23 +73,23 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="¿Dónde tendrá lugar?"
-                    className="mb-2 bg-[#333] border border-[#9A4EAE] w-full text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] disabled:bg-[#555] disabled:border-[#777] disabled:text-gray-400 disabled:cursor-not-allowed"
+                    className=" focus:placeholder-transparent bg-[#333] border border-[#7a3e8f] w-full text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:bg-[#7a3e8f] transition enabled:hover:ring-2 enabled:hover:ring-[#7a3e8f] disabled:bg-[#555] disabled:border-[#777] disabled:text-gray-400 disabled:cursor-not-allowed"
                     disabled={isDisabled}
                     required={!isDisabled}
                 />
-                <div className="flex gap-2 mt-2 w-full">
+                <div className="flex gap-2 w-full">
                     <button
                         type="button"
                         onClick={handleSearch}
                         disabled={isDisabled}
-                        className="bg-[#9A4EAE] flex-1 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] disabled:bg-[#7A3E8F] disabled:border-[#7A3E8F] disabled:text-gray-300 disabled:cursor-not-allowed"
+                        className="bg-[#7a3e8f] flex-1 text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] hover:bg-[#9A4EAE] disabled:bg-[#7A3E8F] disabled:border-[#7A3E8F] hover:scale-105 disabled:text-gray-300 disabled:cursor-not-allowed mt-3"
                     >
                         Buscar
                     </button>
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="bg-[#9A4EAE] flex-1 border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition enabled:hover:ring-2 enabled:hover:ring-[#9A4EAE] disabled:bg-[#7A3E8F] disabled:border-[#7A3E8F] disabled:text-gray-300 disabled:cursor-not-allowed"
+                        className="bg-[#7a3e8f] flex-1 text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:bg-[#9A4EAE] hover:scale-105 disabled:bg-[#7A3E8F] disabled:border-[#7A3E8F] disabled:text-gray-300 disabled:cursor-not-allowed mt-3"
                         disabled={isDisabled}
                     >
                         Limpiar
@@ -101,7 +101,7 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     <ul
                         className="absolute left-0 right-0 w-full bg-[#333] border border-gray-600 
                                     text-white text-sm rounded-lg shadow-lg overflow-hidden 
-                                    bottom-full mb-1 z-50 overflow-y-auto max-h-60"
+                                    bottom-full z-50 overflow-y-auto max-h-60"
                         x
                     >
                         {suggestion.map((location) => (
@@ -116,7 +116,7 @@ const LocatioAutocomplete = ({ onSelect, isDisabled, location }) => {
                     </ul>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 
