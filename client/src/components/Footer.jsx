@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <>
-            <footer className="bg-[#191919] shadow-sm p-10">
+            <footer className="bg-[#191919] shadow-sm px-20 py-10">
                 <div className="bg-[#191919] w-full">
                     <div className="flex flex-col justify-between ">
                         <a href="#" className="flex items-center mb-4">
@@ -20,25 +20,25 @@ const Footer = () => {
                             className="flex flex-col gap-3 mt-2 text-sm text-[white] md:mt-5 md:flex-row md:justify-around
                         "
                         >
-                            <li>
+                            <li className="hover:scale-115">
                                 <Link to="/about">Sobre nosotros</Link>
                             </li>
-                            <li>
+                            <li className="hover:scale-115">
                                 <Link to="/privacy-policy">
                                     Política de privacidad
                                 </Link>
                             </li>
-                            <li>
+                            <li className="hover:scale-115">
                                 <Link to="/cookies-policy">
                                     Política de cookies
                                 </Link>
                             </li>
-                            <li>
+                            <li className="hover:scale-115">
                                 <Link to="/terms-and-conditions">
                                     Términos y condiciones
                                 </Link>
                             </li>
-                            <li>
+                            <li className="hover:scale-115">
                                 <Link to="/contact">Contacto</Link>
                             </li>
                         </ul>

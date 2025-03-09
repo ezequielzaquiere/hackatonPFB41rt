@@ -1,5 +1,8 @@
-// Inicializamos el componente.
+import { useEffect } from 'react';
 const About = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="bg-[#191919] text-white min-h-screen flex flex-col items-center py-10 px-10">
             <section className="flex flex-wrap justify-center gap-10 mb-15 mt-10">

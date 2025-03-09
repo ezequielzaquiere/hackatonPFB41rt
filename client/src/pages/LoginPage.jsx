@@ -97,7 +97,7 @@ const LoginPage = () => {
                     placeholder="email@ejemplo.com"
                     autoFocus
                     required
-                    className="bg-[#333] mb-4 border border-[#9A4EAE] focus:bg-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition  hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="focus:placeholder-transparent bg-[#333] mb-4 border border-[#7A3E8F] focus:bg-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition  hover:ring-2 hover:ring-[#7A3E8F]"
                 />
 
                 <label htmlFor="password" className="font-semibold">
@@ -112,7 +112,7 @@ const LoginPage = () => {
                         autoComplete="new-password"
                         required
                         placeholder="************"
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:placeholder-transparent bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md w-full pr-10 focus:outline-none focus:ring-2 focus:bg-[#7A3E8F] focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
                     <button
                         type="button"
@@ -140,21 +140,21 @@ const LoginPage = () => {
                         ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                                : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] focus:ring-opacity-50'
                         }`}
                     >
                         {loading ? 'Cargando...' : 'Iniciar sesión'}
                     </button>
                 </div>
 
-                <p className="text-[#9A4EAE] text-center text-sm mt-4 hover:underline">
-                    ¿Todavía no tienes cuenta?
+                <p className="text-[#9A4EAE] text-center text-sm mt-4">
+                    ¿Aún no te has registrado?
                 </p>
                 <Link
                     to="/register"
                     className="text-[#9A4EAE] text-center text-sm mb-5 hover:underline"
                 >
-                    <strong>¡Regístrate aquí!</strong>
+                    <strong>¡Crea tu cuenta!</strong>
                 </Link>
                 <Link
                     to="/users/password/reset"

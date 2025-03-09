@@ -11,14 +11,14 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="bg-[#191919] text-ss p-6 lg:px-12 lg:py-8 flex justify-between items-center relative">
+        <header className="bg-[#191919] border-black border-b-1 text-ss px-20 py-5 flex justify-between items-center relative">
             {/* Logo */}
             <Link to="/">
                 <img src="/logo.png" alt="Hackverse" className="h-10" />
             </Link>
 
             {/* NAV para Desktop */}
-            <nav className="ml-28 hidden lg:flex space-x-8">
+            <nav className="relative ml-28 hidden lg:flex space-x-8">
                 {!authUser ? (
                     <>
                         <Link
@@ -117,7 +117,7 @@ const Header = () => {
                                 authLogoutState();
                                 setIsOpen(false);
                             }}
-                            className="max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] text-white hover:text-gray-300 transition bg-[#9A4EAE]  hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50"
+                            className="max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] text-white transition bg-[#7A3E8F]  hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50"
                         >
                             Cerrar Sesión
                         </button>

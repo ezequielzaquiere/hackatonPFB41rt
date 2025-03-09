@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
 const Cookies = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="bg-[#191919] text-white min-h-screen flex flex-col items-center py-10 px-10">
             <section className="w-screen flex justify-start px-10 py-5">
