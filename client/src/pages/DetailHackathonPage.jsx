@@ -205,22 +205,61 @@ const DetailHackathonPage = () => {
 
     //Funcion que elimina un hackathon y todo lo relacionado con el
     const deleteHackathon = async () => {
-        try {
-            const response = await fetch(
-                `${VITE_API_URL}/api/hackathon/${hackathonId}`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: authToken,
-                    },
-                }
-            );
-            const body = await response.json();
-            toast.success(body.message);
-            navigate('/*');
-        } catch (err) {
-            toast.error(err.message);
-        }
+        toast((t) => (
+            <div className="flex flex-col gap-2 text-white">
+                <p>Seguro que quieres eliminar el Hackathon?</p>
+                <div className="flex gap-4 justify-center">
+                    <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                        onClick={async () => {
+                            try {
+                                const response = await fetch(
+                                    `${VITE_API_URL}/api/hackathon/${hackathonId}`,
+                                    {
+                                        method: 'DELETE',
+                                        headers: {
+                                            Authorization: authToken,
+                                        },
+                                    }
+                                );
+                                const body = await response.json();
+
+                                if (!response.ok)
+                                    throw new Error(
+                                        body.message || 'Error al eliminar'
+                                    );
+                                toast.dismiss(t.id);
+
+                                const successToast = toast.success(
+                                    'Hackathon eliminado correctamente',
+                                    {
+                                        duration: 2000,
+                                        className:
+                                            'bg-gray-800 text-white font-semibold p-4 rounded-lg shadow-lg',
+                                    }
+                                );
+                                setTimeout(() => {
+                                    toast.dismiss(successToast);
+                                    navigate('/');
+                                }, 2000);
+                            } catch (error) {
+                                toast.error(error.message);
+                            }
+                        }}
+                    >
+                        Sí, eliminar
+                    </button>
+                    <button
+                        className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                        onClick={() => {
+                            toast.dismiss(t.id);
+                        }}
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        ));
     };
 
     if (!hackathon) return <p className="text-white">Loading...</p>;
@@ -238,7 +277,7 @@ const DetailHackathonPage = () => {
                 >
                     ⬅ Anterior
                 </button>
-                {authUser.role === 'admin' && (
+                {authUser?.role === 'admin' && (
                     <>
                         <button
                             onClick={cloneHackathon}
@@ -254,7 +293,7 @@ const DetailHackathonPage = () => {
                         </button>
                     </>
                 )}
-                {authUser.role === 'admin' &&
+                {authUser?.role === 'admin' &&
                     isAfter(hackathon.startingDate, new Date()) && (
                         <>
                             <button
