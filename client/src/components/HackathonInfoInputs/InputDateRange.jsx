@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 const InputDateRange = ({ formData, handleChangeDate }) => {
     const now = new Date();
     return (
-        <>
-            <legend className="block mb-2 text-base font-semibold text-white">
+        <div className="mb-5">
+            <legend className="block text-base font-semibold text-white mb-2">
                 Fechas del Hackathon *
             </legend>
 
@@ -31,17 +31,12 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
                     openToDate={now}
                     required
                     withPortal
-                    className="w-full bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="focus:placeholder-transparent
+focus:bg-[#7A3E8F] w-full bg-[#333] border border-[#7a3e8f] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
                     wrapperClassName="w-full"
                     popperClassName="w-full responsive-datepicker"
                     calendarClassName="bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     style={{ width: '100% !important' }} // Usamos !important
-                />
-
-                <img
-                    src="/faqGraphism.png"
-                    alt="Adorno del título Crear Hackathon"
-                    className="hidden lg:block max-w-30 pt-2 pb-5"
                 />
 
                 {/****************************************************
@@ -59,7 +54,7 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
                     minDate={formData.startingDate || addHours(now, 48)}
                     placeholderText="Fecha de finalizacion"
                     dateFormat="dd-MM-yyyy"
-                    className="w-full bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                    className="w-full bg-[#333] border border-[#7a3e8f] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
                     required
                     openToDate={
                         formData.startingDate ? formData.startingDate : now
@@ -69,7 +64,7 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
                     withPortal
                 />
             </div>
-        </>
+        </div>
     );
 };
 //Validadcion de props

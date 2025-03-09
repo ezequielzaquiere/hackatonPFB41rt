@@ -15,7 +15,7 @@ const ModalLang = ({
         <div className="w-full">
             <label
                 htmlFor="modal"
-                className="block mb-2 text-base font-semibold text-white"
+                className="block text-base font-semibold text-white"
             >
                 Lenguaje | Lenguajes *
             </label>
@@ -26,7 +26,7 @@ const ModalLang = ({
                     e.preventDefault();
                     setIsModalOpen(true);
                 }}
-                className="w-full px-4 py-2 my-3 rounded-lg  text-center shadow-[6px_6px_5px_#191919] bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50"
+                className="hover:scale-105 transition w-full py-2 my-3 rounded-lg  text-center shadow-[6px_6px_5px_#191919] bg-[#7a3e8f] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50"
             >
                 Selecciona los lenguajes
             </button>
@@ -34,7 +34,7 @@ const ModalLang = ({
             {/* Modal */}
             {isModalOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
+                    className="fixed inset-0 z-50 flex justify-center items-center bg-[#191919] bg-opacity-50"
                     onClick={() => setIsModalOpen(false)} // Cierra al hacer clic fuera
                 >
                     <div
@@ -42,21 +42,21 @@ const ModalLang = ({
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Encabezado del modal */}
-                        <div className="flex bg-[#191919] items-center justify-between p-4 border-b rounded-t">
+                        <div className="flex bg-[#242424] items-center justify-between p-4 border-b rounded-t">
                             <h3 className="text-xl font-semibold text-white">
                                 Elige un lenguaje
                             </h3>
 
                             <button
                                 onClick={handleCloseModal}
-                                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 sm:w-10 sm:h-10 inline-flex justify-center items-center"
+                                className=" text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 sm:w-10 sm:h-10 inline-flex justify-center items-center"
                             >
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
 
                         {/* Cuerpo del modal */}
-                        <div className="flex justify-center bg-[#191919] max-h-screen overflow-hidden">
+                        <div className="flex justify-center bg-[#242424] max-h-screen overflow-hidden">
                             <div className="w-full p-4 max-h-[80vh] overflow-y-auto">
                                 <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
                                     {hackathonLangs.map((lang) => {
@@ -65,9 +65,9 @@ const ModalLang = ({
                                         return (
                                             <li
                                                 key={lang.id}
-                                                className={`w-full border text-sm rounded-lg transition-all
-                                                ${isChecked ? 'bg-[#9A4EAE] border-[#9A4EAE] text-white hover:bg-[#7A3E8F]' : 'bg-[#333] border border-[#9A4EAE] text-white hover:bg-[#444]'}
-                                                p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE]`}
+                                                className={`hover:scale-110 w-full border text-sm rounded-lg transition-all
+                                                ${isChecked ? 'hover:scale-110 bg-[#7a3e8f] border-[#7a3e8f] text-white ' : 'bg-[#242424] border border-[#7a3e8f] text-white hover:bg-[#444]'}
+                                                p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f]`}
                                             >
                                                 <label
                                                     htmlFor={
@@ -76,7 +76,7 @@ const ModalLang = ({
                                                     className="cursor-pointer"
                                                 >
                                                     <article className="flex flex-col items-center justify-center p-2">
-                                                        <header className="mb-2">
+                                                        <header className="">
                                                             <img
                                                                 src={`/src/assets/languages/${lang.programmingLang}.svg`}
                                                                 alt={

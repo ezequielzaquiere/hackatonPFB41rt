@@ -20,25 +20,25 @@ const Footer = () => {
                             className="flex flex-col gap-3 mt-2 text-sm text-[white] md:mt-5 md:flex-row md:justify-around
                         "
                         >
-                            <li className="hover:scale-115">
+                            <li className="hover:scale-115 transition">
                                 <Link to="/about">Sobre nosotros</Link>
                             </li>
-                            <li className="hover:scale-115">
+                            <li className="hover:scale-115 transition">
                                 <Link to="/privacy-policy">
                                     Política de privacidad
                                 </Link>
                             </li>
-                            <li className="hover:scale-115">
+                            <li className="hover:scale-115 transition">
                                 <Link to="/cookies-policy">
                                     Política de cookies
                                 </Link>
                             </li>
-                            <li className="hover:scale-115">
+                            <li className="hover:scale-115 transition">
                                 <Link to="/terms-and-conditions">
                                     Términos y condiciones
                                 </Link>
                             </li>
-                            <li className="hover:scale-115">
+                            <li className="hover:scale-115 transition">
                                 <Link to="/contact">Contacto</Link>
                             </li>
                         </ul>

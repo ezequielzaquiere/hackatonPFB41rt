@@ -2,7 +2,7 @@
 import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import { motion } from 'framer-motion';
 //Hooks
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
 import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
@@ -79,6 +79,7 @@ const HomePage = () => {
     // Para controlar la pregunta activa
     const [activeIndex, setActiveIndex] = useState(null);
 
+    const text = '¡Bienvenido a las mejores competiciones de código!';
     return (
         <>
             <div className="relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
@@ -104,11 +105,28 @@ const HomePage = () => {
                     className="w-[300px] mx-auto object-center relative z-10"
                 />
 
-                {/* Texto en la parte inferior */}
+                {/* Texto animado con Framer Motion */}
                 <div className="text-white relative z-10">
-                    <p className="px-5 text-lg text-center">
-                        ¡Bienvenido a las mejores competiciones de código!
-                    </p>
+                    <motion.p
+                        className="px-5 text-lg text-center font-mono"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{
+                            delay: 0.3,
+                            staggerChildren: 0.03,
+                        }}
+                    >
+                        {text.split('').map((char, index) => (
+                            <motion.span
+                                key={index}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                {char}
+                            </motion.span>
+                        ))}
+                    </motion.p>
                 </div>
             </div>
 

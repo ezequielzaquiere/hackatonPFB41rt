@@ -17,7 +17,7 @@ const About = () => {
                     <img
                         key={image}
                         src={`/${image}`}
-                        className="min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px] md:w-32 md:h-32"
+                        className="min-w-[150px] min-h-[150px] max-w-[150px] max-h-[150px] md:w-32 md:h-32"
                     />
                 ))}
             </section>

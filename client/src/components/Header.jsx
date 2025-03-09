@@ -14,7 +14,11 @@ const Header = () => {
         <header className="bg-[#191919] border-black border-b-1 text-ss px-20 py-5 flex justify-between items-center relative">
             {/* Logo */}
             <Link to="/">
-                <img src="/logo.png" alt="Hackverse" className="h-10" />
+                <img
+                    src="/logo.png"
+                    alt="Hackverse"
+                    className="h-10 hover:scale-115"
+                />
             </Link>
 
             {/* NAV para Desktop */}
@@ -23,13 +27,13 @@ const Header = () => {
                     <>
                         <Link
                             to="/register"
-                            className="text-white hover:text-gray-300 transition"
+                            className="text-white transition hover:scale-115"
                         >
                             Registro
                         </Link>
                         <Link
                             to="/login"
-                            className="text-white hover:text-gray-300 transition"
+                            className="text-white transition hover:scale-115"
                         >
                             Iniciar Sesión
                         </Link>
@@ -38,7 +42,7 @@ const Header = () => {
                     <>
                         <Link
                             to="/users/profile"
-                            className="text-white hover:text-gray-300 transition"
+                            className="text-white transition hover:scale-115"
                         >
                             Mi perfil
                         </Link>
@@ -46,7 +50,7 @@ const Header = () => {
                         {authUser.role === 'admin' && (
                             <Link
                                 to="/hackathon/new"
-                                className="text-white hover:text-gray-300 transition"
+                                className="text-white transition hover:scale-115"
                             >
                                 Nuevo Hackathon
                             </Link>
@@ -54,7 +58,7 @@ const Header = () => {
 
                         <button
                             onClick={authLogoutState}
-                            className="text-white hover:text-gray-300 transition"
+                            className="text-white transition hover:scale-115"
                         >
                             Cerrar Sesión
                         </button>
@@ -127,18 +131,20 @@ const Header = () => {
 
             {/* Usuario Autenticado - Avatar y Nombre */}
             {authUser && (
-                <div className="hidden lg:flex items-center space-x-2">
-                    <p className="text-white">@{authUser.username}</p>
-                    <img
-                        src={
-                            authUser.avatar
-                                ? `${VITE_API_URL}/avatar/${authUser.avatar}`
-                                : defaultAvatar
-                        }
-                        alt={authUser.username}
-                        className="h-9 w-9 rounded-full border-2 border-white shadow-md"
-                    />
-                </div>
+                <Link to="/users/profile">
+                    <div className="hover:scale-115 transition hidden lg:flex items-center space-x-2">
+                        <p className="text-white">@{authUser.username}</p>
+                        <img
+                            src={
+                                authUser.avatar
+                                    ? `${VITE_API_URL}/avatar/${authUser.avatar}`
+                                    : defaultAvatar
+                            }
+                            alt={authUser.username}
+                            className="h-9 w-9 object-cover rounded-full border-2 border-white shadow-md"
+                        />
+                    </div>
+                </Link>
             )}
         </header>
     );

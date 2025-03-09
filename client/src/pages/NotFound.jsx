@@ -1,16 +1,23 @@
 import { Link } from 'react-router-dom';
-// Inicializamos el componente.
+
 const NotFound = () => {
     return (
-        <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white text-center p-4">
-            <h1 className="text-6xl font-bold animate-bounce">404</h1>
-            <p className="text-xl mt-4">
+        <div className="min-h-full flex-grow flex flex-col items-center justify-center bg-[#191919] text-white text-center p-4">
+            {/* Número 404 con animación */}
+            <h1 className="text-8xl font-extrabold text-[#9A4EAE] animate-bounce">
+                404
+            </h1>
+
+            {/* Mensaje de error */}
+            <p className="text-xl mt-4 max-w-lg">
                 ¡Oops! Parece que te perdiste en el ciberespacio.
             </p>
+
+            {/* Botón de regreso */}
             <div className="mt-6">
                 <Link
                     to="/"
-                    className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+                    className="px-6 py-3 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition duration-300"
                 >
                     Volver a casa
                 </Link>
