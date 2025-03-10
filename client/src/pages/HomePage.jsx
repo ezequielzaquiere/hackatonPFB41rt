@@ -228,7 +228,7 @@ const HomePage = () => {
                                     </p>
                                     <div className="w-1/2 h-full">
                                         <img
-                                            src={hackathon.image}
+                                            src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                                             alt={hackathon.name}
                                             className="w-full h-full object-cover"
                                             onClick={() =>
