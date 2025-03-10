@@ -120,7 +120,7 @@ const UpdateProfilePage = () => {
 
     return (
         <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s">
-            <h2 className="text-3xl text-center text-[#9A4EAE] mb-4">
+            <h2 className="text-3xl text-center text-[#7A3E8F] mb-10">
                 Editar perfil
             </h2>
             <>
@@ -135,7 +135,7 @@ const UpdateProfilePage = () => {
                         value={username}
                         onChange={(e) => setUserName(e.target.value)}
                         autoFocus
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:bg-[#7A3E8F] bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
 
                     <label htmlFor="firstName">Nombre:</label>
@@ -144,7 +144,7 @@ const UpdateProfilePage = () => {
                         id="firstName"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:bg-[#7A3E8F] bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
 
                     <label htmlFor="lastName">Apellidos:</label>
@@ -153,7 +153,7 @@ const UpdateProfilePage = () => {
                         id="lastName"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:bg-[#7A3E8F] bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
 
                     <label htmlFor="email">Email:</label>
@@ -162,7 +162,7 @@ const UpdateProfilePage = () => {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:bg-[#7A3E8F] bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
 
                     <label htmlFor="avatar">Avatar:</label>
@@ -172,7 +172,7 @@ const UpdateProfilePage = () => {
                         ref={inputFileRef}
                         onChange={(e) => setAvatar(e.target.files[0])}
                         accept="image/png,image/jpeg"
-                        className="bg-[#333] border border-[#9A4EAE] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] transition hover:ring-2 hover:ring-[#9A4EAE]"
+                        className="focus:bg-[#7A3E8F] bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
 
                     <button
@@ -180,7 +180,7 @@ const UpdateProfilePage = () => {
                         className={`w-full px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                                : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] hover:transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] focus:ring-opacity-50'
                         }`}
                     >
                         {loading ? 'Actualizando...' : 'Actualizar'}
