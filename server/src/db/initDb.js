@@ -103,7 +103,7 @@ const main = async () => {
                 hackathonId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(hackathonId) REFERENCES hackathonList(id),
                 confirmationCode CHAR(30),
-                status ENUM ("pendiente", "confirmada","cancelada") DEFAULT "pendiente",
+                status ENUM ("pendiente", "confirmada") DEFAULT "pendiente",
                 createdAt DATETIME,
                 modifiedAt DATETIME
             )	

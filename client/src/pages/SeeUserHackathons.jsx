@@ -91,6 +91,9 @@ const UserHackathons = () => {
                             src={hackathon.image}
                             alt={hackathon.name}
                             className="h-25 w-40 rounded-lg m-auto align-center object-cover"
+                            onClick={() =>
+                                navigate(`/details/${hackathon.id}`)
+                            }
                         />
 
                         <p>

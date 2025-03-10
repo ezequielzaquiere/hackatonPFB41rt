@@ -20,6 +20,7 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
             h.type,
             h.themeId,
             h.location,
+            h.resultsPublished,
             t.theme,
             h.details,
             h.attachedFile, 
@@ -40,6 +41,18 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
                 FROM registrations reg 
                 WHERE reg.hackathonId = h.id AND reg.status = 'confirmada'
             ) AS participantCount,
+            (
+                SELECT JSON_ARRAYAGG(
+                    JSON_OBJECT (
+                        'position', p.position,
+                        'userId', u.id,
+                        'username', u.username
+                    )
+                ) FROM podium p
+                INNER JOIN registrations reg ON reg.id = p.registrationId
+                INNER JOIN users u ON u.id = reg.userId
+                WHERE reg.hackathonId = h.id
+            ) AS topThree,
             h.image 
         FROM hackathonList h
         INNER JOIN users u ON u.id = h.userId

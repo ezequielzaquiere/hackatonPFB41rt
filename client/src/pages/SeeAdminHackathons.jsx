@@ -4,11 +4,20 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 const { VITE_API_URL } = import.meta.env;
+import { useContext } from 'react';
+import { AuthContext } from "../contexts/AuthContext";
 
 
 const AdminHackathons = () => {
     const user = useParams();
     const navigate = useNavigate();
+    
+    const { authToken, authUser } = useContext(AuthContext);
+    //TODO: Que espere a que cargue el authUser para hacer el check
+    if (!authToken) {
+        navigate("/");
+    }
+    
 
     const [pastHackathons, setPastHackathons] = React.useState("");
     const [futureHackathons, setFutureHackathons] = React.useState("");
@@ -96,6 +105,9 @@ const AdminHackathons = () => {
                             src={hackathon.image}
                             alt={hackathon.name}
                             className="h-25 w-40 rounded-lg m-auto align-center object-cover"
+                            onClick={() =>
+                                navigate(`/details/${hackathon.id}`)
+                            }
                         />
 
                         <p>
