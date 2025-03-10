@@ -67,6 +67,7 @@ const AdminHackathons = () => {
                                 key={index}
                                 className="hover:scale-105 hover:bg-[#303030] transition bg-[#222] p-4 rounded-lg shadow-lg flex flex-col items-center"
                             >
+                                <h2></h2>
                                 <img
                                     src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                                     alt={hackathon.name}
