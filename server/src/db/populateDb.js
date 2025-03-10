@@ -68,27 +68,27 @@ const populateDb = async () => {
 
         //Tabla usuarios
         await pool.query(`
-            INSERT INTO users (username, firstName, lastName, email, password, role, active, createdAt) VALUES
-                ('user1', 'John', 'Doe', 'john.doe@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user2', 'Jane', 'Smith', 'jane.smith@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user3', 'Mike', 'Brown', 'mike.brown@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user4', 'Emily', 'Davis', 'emily.davis@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user5', 'Chris', 'Wilson', 'chris.wilson@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user6', 'Pat', 'Johnson', 'pat.johnson@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user7', 'Alex', 'Martinez', 'alex.martinez@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user8', 'Sam', 'Lopez', 'sam.lopez@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user9', 'Jordan', 'White', 'jordan.white@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user10', 'Taylor', 'Harris', 'taylor.harris@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user11', 'Casey', 'Clark', 'casey.clark@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user12', 'Jamie', 'Lewis', 'jamie.lewis@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user13', 'Morgan', 'Young', 'morgan.young@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user14', 'Drew', 'Allen', 'drew.allen@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user15', 'Taylor', 'King', 'taylor.king@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user16', 'Robin', 'Scott', 'robin.scott@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user17', 'Blake', 'Hall', 'blake.hall@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user18', 'Charlie', 'Adams', 'charlie.adams@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user19', 'Alexis', 'Baker', 'alexis.baker@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
-                ('user20', 'Parker', 'Gonzalez', 'parker.gonzalez@example.com', '${usersHashedPass}', 'dev', 1, '${now}');
+            INSERT INTO users (username, firstName, lastName, email, password, role, active, lastAuthUpdate, createdAt) VALUES
+                ('user1', 'John', 'Doe', 'john.doe@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user2', 'Jane', 'Smith', 'jane.smith@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user3', 'Mike', 'Brown', 'mike.brown@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user4', 'Emily', 'Davis', 'emily.davis@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user5', 'Chris', 'Wilson', 'chris.wilson@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user6', 'Pat', 'Johnson', 'pat.johnson@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user7', 'Alex', 'Martinez', 'alex.martinez@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user8', 'Sam', 'Lopez', 'sam.lopez@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user9', 'Jordan', 'White', 'jordan.white@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user10', 'Taylor', 'Harris', 'taylor.harris@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user11', 'Casey', 'Clark', 'casey.clark@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user12', 'Jamie', 'Lewis', 'jamie.lewis@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user13', 'Morgan', 'Young', 'morgan.young@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user14', 'Drew', 'Allen', 'drew.allen@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user15', 'Taylor', 'King', 'taylor.king@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user16', 'Robin', 'Scott', 'robin.scott@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user17', 'Blake', 'Hall', 'blake.hall@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user18', 'Charlie', 'Adams', 'charlie.adams@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user19', 'Alexis', 'Baker', 'alexis.baker@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}'),
+                ('user20', 'Parker', 'Gonzalez', 'parker.gonzalez@example.com', '${usersHashedPass}', 'dev', 1,'${now}', '${now}');
         `);
 
         //Lista hackathones

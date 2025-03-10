@@ -36,6 +36,7 @@ const main = async () => {
                 active BOOLEAN,
                 avatar VARCHAR(500),
                 role ENUM ("dev", "admin") DEFAULT "dev",
+                lastAuthUpdate DATETIME,
                 createdAt DATETIME               
             )	
         `);
