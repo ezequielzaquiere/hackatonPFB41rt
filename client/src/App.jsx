@@ -39,7 +39,7 @@ const App = () => {
 
             {/* Aquí va el Toaster */}
             <Toaster
-                position="top-right"
+                position="bottom-right"
                 toastOptions={{
                     duration: 3000, // Duración predeterminada del toast
 

@@ -11,7 +11,11 @@ const MenuBar = ({ editor }) => {
         <div className="flex flex-wrap justify-center gap-2 p-3 bg-[#191919] border border-[#9A4EAE] rounded-t-lg">
             {/* Botón de Negrita */}
             <button
-                onClick={() => editor.chain().focus().toggleBold().run()}
+                type="button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    editor.chain().focus().toggleBold().run();
+                }}
                 className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
                     editor.isActive('bold')
                         ? 'bg-[#9A4EAE] text-white shadow-md'
@@ -23,7 +27,11 @@ const MenuBar = ({ editor }) => {
 
             {/* Botón de Itálica */}
             <button
-                onClick={() => editor.chain().focus().toggleItalic().run()}
+                type="button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    editor.chain().focus().toggleItalic().run();
+                }}
                 className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
                     editor.isActive('italic')
                         ? 'bg-[#9A4EAE] text-white shadow-md'
@@ -35,7 +43,11 @@ const MenuBar = ({ editor }) => {
 
             {/* Botón de Tachado */}
             <button
-                onClick={() => editor.chain().focus().toggleStrike().run()}
+                type="button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    editor.chain().focus().toggleStrike().run();
+                }}
                 className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
                     editor.isActive('strike')
                         ? 'bg-[#9A4EAE] text-white shadow-md'
@@ -47,7 +59,11 @@ const MenuBar = ({ editor }) => {
 
             {/* Botón de Undo */}
             <button
-                onClick={() => editor.chain().focus().undo().run()}
+                type="button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    editor.chain().focus().undo().run();
+                }}
                 className="px-4 py-2 rounded-lg border bg-[#222] text-white hover:bg-[#7A3E8F] transition-all duration-300"
             >
                 ↺ Undo
@@ -55,7 +71,11 @@ const MenuBar = ({ editor }) => {
 
             {/* Botón de Redo */}
             <button
-                onClick={() => editor.chain().focus().redo().run()}
+                type="button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    editor.chain().focus().redo().run();
+                }}
                 className="px-4 py-2 rounded-lg border bg-[#222] text-white hover:bg-[#7A3E8F] transition-all duration-300"
             >
                 ↻ Redo
