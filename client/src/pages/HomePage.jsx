@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
 import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
 import formatDate from '../utils/formatedDate.js';
-
+const { VITE_API_URL } = import.meta.env;
 //FAQ
 const faqs = [
     {
@@ -40,10 +40,10 @@ const HomePage = () => {
 
     //Traer del backend los 3 mejores hackathones según rating
     const bestHackathones = useBestHackathonesList();
-    console.log(bestHackathones);
+
     //Traer del backend los hackathones a partir de la fecha de solicitud
     const hackathonesFromToday = useHackathonesFromToday();
-    console.log(hackathonesFromToday);
+
     //Función para imprimir estrellas según avgRating
     const printStars = (avgRating) => {
         const numericRating = Number(avgRating);
@@ -159,7 +159,7 @@ const HomePage = () => {
                                         {/* Contenido encima de la capa negra */}
                                         <div className="relative">
                                             <img
-                                                src={hackathon.image}
+                                                src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                                                 alt=""
                                                 className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-32"
                                                 onClick={() =>
@@ -174,8 +174,8 @@ const HomePage = () => {
                                             <p className="text-xs">
                                                 {formatDate(
                                                     hackathonesFromToday.data
-                                                        .hackathones[0]
-                                                        .createdAt
+                                                        .hackathones[index]
+                                                        .startingDate
                                                 )}
                                             </p>
                                         </div>

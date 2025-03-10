@@ -238,7 +238,7 @@ const DetailHackathonPage = () => {
                 >
                     ⬅ Anterior
                 </button>
-                {authUser.role === 'admin' && (
+                {authUser?.role === 'admin' && (
                     <>
                         <button
                             onClick={cloneHackathon}
@@ -254,7 +254,7 @@ const DetailHackathonPage = () => {
                         </button>
                     </>
                 )}
-                {authUser.role === 'admin' &&
+                {authUser?.role === 'admin' &&
                     isAfter(hackathon.startingDate, new Date()) && (
                         <>
                             <button
