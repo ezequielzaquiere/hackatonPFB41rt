@@ -320,7 +320,7 @@ const DetailHackathonPage = () => {
                 <img
                     src={hackathon.image}
                     alt={hackathon.title}
-                    className="w-32 h-32 rounded-full border-4 border-gray-300 mb-4"
+                    className="w-42 h-32 rounded-2xl  mb-4 md:mb-0 md:ml-4"
                 />
                 <h2 className="text-3xl font-bold text-gray-900 text-center">
                     {hackathon.title}

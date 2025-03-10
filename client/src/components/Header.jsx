@@ -95,6 +95,12 @@ const Header = () => {
                 {!authUser ? (
                     <>
                         <Link
+                            to="/hackathones"
+                            className="text-white transition hover:scale-115"
+                        >
+                            Hackathones
+                        </Link>
+                        <Link
                             to="/register"
                             className="hover:text-gray-300 transition"
                             onClick={() => setIsOpen(false)}
@@ -112,6 +118,12 @@ const Header = () => {
                 ) : (
                     <>
                         <Link
+                            to="/hackathones"
+                            className="hover:text-gray-300 transition"
+                        >
+                            Hackathones
+                        </Link>
+                        <Link
                             to="/users/profile"
                             className="hover:text-gray-300 transition"
                             onClick={() => setIsOpen(false)}
@@ -121,7 +133,7 @@ const Header = () => {
 
                         {authUser.role === 'admin' && (
                             <Link
-                            to="admin/myhackathons"
+                                to="admin/myhackathons"
                                 className="hover:text-gray-300 transition"
                                 onClick={() => setIsOpen(false)}
                             >
@@ -156,7 +168,7 @@ const Header = () => {
                             className="h-9 w-9 object-cover rounded-full border-2 border-white shadow-md"
                         />
                     </div>
-                                </Link>
+                </Link>
             )}
         </header>
     );
