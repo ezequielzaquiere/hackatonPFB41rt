@@ -49,10 +49,10 @@ const Header = () => {
 
                         {authUser.role === 'admin' && (
                             <Link
-                                to="/hackathon/new"
+                                to="/admin/myhackathons"
                                 className="text-white transition hover:scale-115"
                             >
-                                Nuevo Hackathon
+                                Mis hackathones
                             </Link>
                         )}
 
@@ -109,11 +109,11 @@ const Header = () => {
 
                         {authUser.role === 'admin' && (
                             <Link
-                                to="/hackathon/new"
+                            to="admin/myhackathons"
                                 className="hover:text-gray-300 transition"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Nuevo Hackathon
+                                Mis hackathones
                             </Link>
                         )}
                         <button
@@ -144,7 +144,7 @@ const Header = () => {
                             className="h-9 w-9 object-cover rounded-full border-2 border-white shadow-md"
                         />
                     </div>
-                </Link>
+                                </Link>
             )}
         </header>
     );

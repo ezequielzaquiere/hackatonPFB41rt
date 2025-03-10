@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 //Importamos las páginas
 import HomePage from './pages/HomePage';
@@ -28,6 +29,7 @@ import ContactPage from './pages/ContactPage';
 import CookiesPolicyPage from './pages/CookiesPolicyPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionPage from './pages/TermsAndConditionsPage';
+
 //Definimos el componente principal
 const App = () => {
     return (
@@ -36,9 +38,43 @@ const App = () => {
 
             {/* Aquí va el Toaster */}
             <Toaster
-                position="top-center"
+                position="top-right"
                 toastOptions={{
-                    duration: 1500,
+                    duration: 3000, // Duración predeterminada del toast
+
+                    style: {
+                        background: '#242424',
+                        color: '#FFFFFF',
+                        border: '1px solid #9A4EAE',
+                        borderRadius: '8px',
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+                        padding: '16px',
+                    },
+
+                    success: {
+                        style: {
+                            background: '#242424',
+                            color: '#FFFFFF',
+                            border: '1px solid #9A4EAE',
+                        },
+                        icon: <CheckCircle size={20} color="#9A4EAE" />,
+                        iconTheme: {
+                            primary: '#9A4EAE',
+                            secondary: '#FFFFFF',
+                        },
+                    },
+                    error: {
+                        style: {
+                            background: '#242424',
+                            color: '#FFFFFF',
+                            border: '1px solid #9A4EAE',
+                        },
+                        icon: <XCircle size={20} color="#9A4EAE" />,
+                        iconTheme: {
+                            primary: '#9A4EAE',
+                            secondary: '#FFFFFF',
+                        },
+                    },
                 }}
             />
 

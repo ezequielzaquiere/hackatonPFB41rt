@@ -1,5 +1,5 @@
 
-import selectHackathonDetailsByIdModel from '../../models/hackathones/selectHackathonDetailsByIdModel.js';
+import checkPublished from '../../models/hackathones/checkPublished.js';
 import listHackathonParticipants from '../../models/registrations/listHackathonParticipantsModel.js';
 import insertPodiumModel from '../../models/podium/insertPodiumModel.js';
 import editPublicRegistration from '../../models/hackathones/editPublicRegistrationsModel.js';
@@ -21,7 +21,7 @@ const registerHackathonPositionsAndPublish = async (req, res, next) => {
 
 
         // Obtenemos los datos del hackathon.
-        let hackathon = await selectHackathonDetailsByIdModel(hackathonId);
+        let hackathon = await checkPublished(hackathonId);
 
         //Check para no volver a cambiar el podio una vez publicado
         if (hackathon.resultsPublised == 1) {
@@ -41,11 +41,6 @@ const registerHackathonPositionsAndPublish = async (req, res, next) => {
             )
         }
         
-        
-        //Recoger todos los usuarios registrados en un hackathon (confirmados)
-        await listHackathonParticipants(hackathonId);
-
-
         //Dejar que el admin pueda introducir el top 3
         await insertPodiumModel(first, second, third, hackathonId);
 
