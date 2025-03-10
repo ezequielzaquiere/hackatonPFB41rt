@@ -7,15 +7,21 @@ const insertPodiumModel = async (first, second, third, hackathonId) => {
     
     const pool = await getPool();
 
-
+    //Recibe IDs de usuario y el ID del hackathon, mapea a los registros correspondientes y les asigna el podio
     // Insertamos la posición en podio
     const [insertPodium] = await pool.query(
         `
             INSERT INTO podium (registrationId, position, createdAt)
-            VALUES (?, 1, NOW()), (?, 2, NOW()), (?, 3, NOW())
+            VALUES 
+            ((SELECT reg.id FROM registrations reg 
+            WHERE reg.hackathonId=? AND reg.userId = ?), 1, NOW()),
+            ((SELECT reg.id FROM registrations reg 
+            WHERE reg.hackathonId=? AND reg.userId = ?), 2, NOW()),
+            ((SELECT reg.id FROM registrations reg 
+            WHERE reg.hackathonId=? AND reg.userId = ?), 3, NOW());
 
         `,
-        [first, second, third]
+        [hackathonId, first, hackathonId, second, hackathonId, third]
     );
     return insertPodium;
 };
