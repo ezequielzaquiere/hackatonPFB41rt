@@ -50,7 +50,7 @@ const UserHackathons = () => {
                             className="flex-1 rounded-md m-auto max-h-fit shadow-[0px_0px_20px_#9A4EAE] max-w-100 items-center"
                         >
                             <img
-                                src={hackathon.image}
+                                src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                                 alt={hackathon.name}
                                 className="w-56 h-28 m-auto rounded-lg align-center object-cover"
                                 onClick={() =>
