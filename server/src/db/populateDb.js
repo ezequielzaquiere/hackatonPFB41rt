@@ -89,7 +89,6 @@ const populateDb = async () => {
                 ('cadams', 'Carlos', 'Adame', 'carlos.adame@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
                 ('abustos', 'Ana', 'Bustos', 'ana.bustos@example.com', '${usersHashedPass}', 'dev', 1, '${now}'),
                 ('pgonzalez', 'Pablo', 'González', 'pablo.gonzalez@example.com', '${usersHashedPass}', 'dev', 1, '${now}');
-
         `);
 
         //Lista hackathones

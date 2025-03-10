@@ -35,10 +35,10 @@ const updateUserPassModel = async (userId, currentPassword, newPassword) => {
     const hashedPass = await bcrypt.hash(newPassword, 10);
 
     // Actualizamos la contraseña del usuario.
-    await pool.query(`UPDATE users SET password = ? WHERE id = ?`, [
-        hashedPass,
-        userId,
-    ]);
+    await pool.query(
+        `UPDATE users SET password = ?, lastAuthUpdate = ? WHERE id = ?`,
+        [hashedPass, new Date(), userId]
+    );
 };
 
 export default updateUserPassModel;
