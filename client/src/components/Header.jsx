@@ -26,6 +26,12 @@ const Header = () => {
                 {!authUser ? (
                     <>
                         <Link
+                            to="/hackathones"
+                            className="text-white transition hover:scale-115"
+                        >
+                            Hackathones
+                        </Link>
+                        <Link
                             to="/register"
                             className="text-white transition hover:scale-115"
                         >
@@ -40,6 +46,12 @@ const Header = () => {
                     </>
                 ) : (
                     <>
+                        <Link
+                            to="/hackathones"
+                            className="text-white transition hover:scale-115"
+                        >
+                            Hackathones
+                        </Link>
                         <Link
                             to="/users/profile"
                             className="text-white transition hover:scale-115"
