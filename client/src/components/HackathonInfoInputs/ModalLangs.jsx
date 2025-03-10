@@ -59,7 +59,7 @@ const ModalLang = ({
                         {/* Cuerpo del modal */}
                         <div className="flex justify-center bg-[#242424] max-h-screen overflow-hidden">
                             <div className="w-full p-4 max-h-[80vh] overflow-y-auto">
-                                <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+                                <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3">
                                     {hackathonLangs.map((lang) => {
                                         const isChecked =
                                             selectedLangs.includes(lang.id);
