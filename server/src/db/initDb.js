@@ -138,7 +138,7 @@ const main = async () => {
         console.log('¡Tablas creadas!');
 
         // Encriptamos la contraseña del administrador.
-        const hashedPass = await bcrypt.hash('admin', 10);
+        const hashedPass = await bcrypt.hash(process.env.ADMIN_PASS, 10);
 
         // Insertamos el usuario administrador.
         await pool.query(

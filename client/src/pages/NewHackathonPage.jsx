@@ -1,12 +1,3 @@
-//TODO:ELIMINAR LOS CONSOLE.LOG
-//TODO:AÑADIR LOS DE VACIAR CAMPOS?
-//TODO:MIRARA PORQUE EL BORDE DEL INPUT ES AMARILLO SUPUESTAMENTE AUTOFILL PERO NO SE CAMBIA?
-//TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR ? CREO QUE ESTA?
-//TODO PROBAR SI SOLO EL ADMIN PUEDE ENTRAR
-//TODO: PORQUE NO ME SALE EL TOAST
-//TODO: PUEDE SALIR EL TOAST DE UNA PAGINA A OTRA
-//TODO AÑADIR A LOS LENGUAJES LO DE QUESE VEAN EN EL BOTON
-
 //Importamoslas dependencias
 
 import { useNavigate, Navigate, useLocation } from 'react-router-dom';
@@ -42,7 +33,6 @@ import ModalLang from '../components/HackathonInfoInputs/ModalLangs';
 const NewHackathonPage = () => {
     //Obtenemos el token de autorizacion
     const { authToken, authUser } = useContext(AuthContext);
-    console.log(authUser);
     const [formData, setFormData] = useState({
         title: '',
         summary: '',
@@ -65,7 +55,7 @@ const NewHackathonPage = () => {
     //Si existe el hackathonId obtenemos los datos d eese hackathon
 
     const { hackathon } = useHackathon(hackathonId);
-    console.log(hackathon);
+
     //Si venimos para crear un hackatghon nuevo con datos de otro
     useEffect(() => {
         if (hackathon) {
@@ -108,7 +98,6 @@ const NewHackathonPage = () => {
     //Funcion para manejar los cambios de hora
     const handleChangeDate = (field, date) => {
         setFormData({ ...formData, [field]: date });
-        console.log(formData);
     };
 
     //Funcion para manejar los cambios de imagen
@@ -157,8 +146,6 @@ const NewHackathonPage = () => {
     //Funcion que maneja el envio de formulario
     const [loading, setLoading] = useState(false);
 
-    console.log(formData);
-
     //Enviamos los datos del hackathon, en este caso post
     const handleSubmit = async (e) => {
         await sendingHackathonInfo({
@@ -176,7 +163,7 @@ const NewHackathonPage = () => {
     }
 
     return (
-        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-15 py-10 lg:px-24 lg:py-20">
+        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-2 sm:px-6 lg:px-24 py-10 lg:py-20">
             {/* Encabezado con título */}
             <h2 className="text-3xl lg:text-4xl text-center text-[#9A4EAE] mb-10">
                 ¡Crea tu Hackathon!
