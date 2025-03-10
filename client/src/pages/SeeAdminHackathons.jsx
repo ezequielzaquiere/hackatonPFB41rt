@@ -1,129 +1,147 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 const { VITE_API_URL } = import.meta.env;
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 const AdminHackathons = () => {
-    const user = useParams();
+    const { username } = useParams();
     const navigate = useNavigate();
-
     const { authToken, authUser } = useContext(AuthContext);
-    //TODO: Que espere a que cargue el authUser para hacer el check
-    if (!authToken) {
-        navigate('/');
-    }
 
-    const [pastHackathons, setPastHackathons] = React.useState('');
-    const [futureHackathons, setFutureHackathons] = React.useState('');
+    // Si no hay token, redirigir a inicio
+    if (!authToken) navigate('/');
+
+    const [pastHackathons, setPastHackathons] = React.useState([]);
+    const [futureHackathons, setFutureHackathons] = React.useState([]);
 
     React.useEffect(() => {
-        const fetchHackathonData = async (username) => {
+        const fetchHackathonData = async () => {
             try {
                 const response1 = await fetch(
                     `${VITE_API_URL}/api/users/profile/${username}/creationHistory`
                 );
                 const data1 = await response1.json();
-                setPastHackathons(data1);
+                setPastHackathons(data1.data?.user || []);
+
                 const response2 = await fetch(
                     `${VITE_API_URL}/api/users/profile/${username}/futureCreations`
                 );
                 const data2 = await response2.json();
-                setFutureHackathons(data2);
+                setFutureHackathons(data2.data?.user || []);
             } catch (err) {
                 toast.error(err.message);
             }
         };
 
-        fetchHackathonData(user.username);
-    }, [user.username]);
+        fetchHackathonData();
+    }, [username]);
 
     return (
-        <div className="flex w-screen text-center w-400 h-150 flex-col bg-[#191919] text-white">
-            <div className="flex-1 text-[32px] font-bold">
-                <h1>Mis hackathones</h1>
-            </div>
-            <div className="flex-1 bg-fuchsia-800 align-center m-auto max-w-1/2 shadow-[0px_0px_5px_#191919] rounded-lg px-5 text-[18px]">
-                <button onClick={() => navigate(`/hackathon/new`)}>
-                    {' '}
-                    Crear hackathon nuevo
+        <main className="bg-[#191919] min-h-screen flex flex-col items-center px-8 py-12 lg:px-20 lg:py-20">
+            {/* Título */}
+            <h1 className="text-3xl lg:text-3xl text-[#9A4EAE] font-bold mb-8">
+                Mis Hackathones
+            </h1>
+
+            {/* Botón para crear nuevo hackathon */}
+            <div className="hover:scale-105 transition w-full flex justify-center max-w-md">
+                <button
+                    onClick={() => navigate(`/hackathon/new`)}
+                    className="w-1/2 py-3 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all shadow-lg"
+                >
+                    Crear nuevo Hackathon
                 </button>
             </div>
-            <div className="flex-10 pl-10 mb-10">
-                <h2 className=" text-[24px] text-left font-medium mb-5">
-                    Hackathones activos
+
+            {/* Hackathones activos */}
+            <section className="w-full max-w-4xl mt-12">
+                <h2 className="text-2xl text-white font-semibold mb-6">
+                    Hackathones Activos
                 </h2>
-                <div className="flex gap-20 h-44 w-full flex-row">
-                    {futureHackathons.data?.user?.map((hackathon, index) => (
-                        <div
-                            key={index}
-                            className="flex-1 rounded-md m-auto max-h-fit shadow-[0px_0px_20px_#9A4EAE] max-w-100 items-center"
-                        >
-                            <img
-                                src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
-                                alt={hackathon.name}
-                                className="w-56 h-28 m-auto rounded-lg align-center object-cover"
-                                onClick={() =>
-                                    navigate(`/details/${hackathon.id}`)
-                                }
-                            />
-
-                            <p>
-                                Número de participantes:{' '}
-                                {hackathon.participantCount}
-                            </p>
-                            <p
-                                className="bg-fuchsia-800 align-center m-auto max-w-1/2 shadow-[0px_0px_5px_#191919] rounded-lg"
-                                onClick={() =>
-                                    navigate(`/details/${hackathon.id}/edit`)
-                                }
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {futureHackathons.length > 0 ? (
+                        futureHackathons.map((hackathon, index) => (
+                            <div
+                                key={index}
+                                className="hover:scale-105 hover:bg-[#303030] transition bg-[#222] p-4 rounded-lg shadow-lg flex flex-col items-center"
                             >
-                                {' '}
-                                Modificar detalles
-                            </p>
-                        </div>
-                    ))}
+                                <img
+                                    src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
+                                    alt={hackathon.name}
+                                    className="w-full h-40 object-cover rounded-lg"
+                                    onClick={() =>
+                                        navigate(`/details/${hackathon.id}`)
+                                    }
+                                />
+                                <p className="text-white mt-3">
+                                    Participantes: {hackathon.participantCount}
+                                </p>
+                                <button
+                                    className="hover:scale-105 transition w-[220px] py-2 mt-4 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE]"
+                                    onClick={() =>
+                                        navigate(
+                                            `/details/${hackathon.id}/edit`
+                                        )
+                                    }
+                                >
+                                    Modificar Detalles
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-gray-400">
+                            No tienes hackathones activos.
+                        </p>
+                    )}
                 </div>
-            </div>
+            </section>
 
-            <div className="flex-10 text-[24px] text-left font-medium">
-                <h2>Historial de hackathones</h2>
-                <div className="flex gap-20 text-[16px] font-normal text-center justify-center h-44 w-full flex-row">
-                    {pastHackathons.data?.user?.map((hackathon, index) => (
-                        <div
-                            key={index}
-                            className="flex-1 shadow-[0px_0px_20px_#9A4EAE] max-w-100 rounded-md m-auto max-h-fit items-center"
-                        >
-                            <img
-                                src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
-                                alt={hackathon.name}
-                                className="h-25 w-40 rounded-lg m-auto align-center object-cover"
-                                onClick={() =>
-                                    navigate(`/details/${hackathon.id}`)
-                                }
-                            />
-
-                            <p>
-                                Número de participantes:{' '}
-                                {hackathon.participantCount}
-                            </p>
-                            <p> Media de valoración: {hackathon.avgRating}</p>
-                            <p
-                                className="bg-blue-700 m-auto max-w-1/2 rounded-lg"
-                                onClick={() =>
-                                    navigate(`/${hackathon.id}/ranking/set`)
-                                }
+            {/* Historial de hackathones */}
+            <section className="w-full max-w-4xl mt-16">
+                <h2 className="text-2xl text-white font-semibold mb-6">
+                    Historial de Hackathones
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {pastHackathons.length > 0 ? (
+                        pastHackathons.map((hackathon, index) => (
+                            <div
+                                key={index}
+                                className="hover:scale-105 hover:bg-[#303030] transition bg-[#222] p-4 rounded-lg shadow-lg flex flex-col items-center"
                             >
-                                {' '}
-                                Publicar podio
-                            </p>
-                        </div>
-                    ))}
+                                <img
+                                    src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
+                                    alt={hackathon.name}
+                                    className="w-full h-40 object-cover rounded-lg"
+                                    onClick={() =>
+                                        navigate(`/details/${hackathon.id}`)
+                                    }
+                                />
+                                <p className="text-white text-center mt-3">
+                                    Participantes: {hackathon.participantCount}
+                                </p>
+                                <p className="text-white text-center">
+                                    Media de valoración: {hackathon.avgRating}
+                                </p>
+                                <button
+                                    className="hover:scale-105 w-full py-2 mt-4 bg-[#1ABC9C] text-black font-semibold rounded-lg hover:bg-[#2ED9B3] transition-all"
+                                    onClick={() =>
+                                        navigate(`/${hackathon.id}/ranking/set`)
+                                    }
+                                >
+                                    Publicar Podio
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-gray-400">
+                            No tienes hackathones en tu historial.
+                        </p>
+                    )}
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     );
 };
 
