@@ -7,6 +7,7 @@ const filterHackathonesModel = async ({
     programmingLang,
     type,
     image,
+
 }) => {
     const pool = await getPool();
 
@@ -26,6 +27,7 @@ const filterHackathonesModel = async ({
     `;
 
     const params = [];
+
 
     if (image) {
         query += ` AND h.image >= ?`;

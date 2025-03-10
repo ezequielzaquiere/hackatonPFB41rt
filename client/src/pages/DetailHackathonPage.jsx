@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FaUsers, FaMapMarkerAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../contexts/AuthContext';
+import { isAfter } from 'date-fns';
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -191,6 +192,76 @@ const DetailHackathonPage = () => {
         } catch (error) {
             toast.error(error.message);
         }
+    };
+    const deleteHackathon = async () => {
+        toast(
+            (t) => (
+                <div className="flex flex-col gap-2 text-white">
+                    <p>¿Seguro que quieres eliminar el Hackathon?</p>
+                    <div className="flex gap-4 justify-center">
+                        <button
+                            className="bg-[#9A4EAE] hover:bg-[#7a3a8a] text-white px-4 py-2 rounded"
+                            onClick={async () => {
+                                try {
+                                    const response = await fetch(
+                                        `${VITE_API_URL}/api/hackathon/${hackathonId}`,
+                                        {
+                                            method: 'DELETE',
+                                            headers: {
+                                                Authorization: authToken,
+                                            },
+                                        }
+                                    );
+                                    const body = await response.json();
+
+                                    if (!response.ok)
+                                        throw new Error(
+                                            body.message || 'Error al eliminar'
+                                        );
+                                    toast.dismiss(t.id);
+
+                                    const successToast = toast.success(
+                                        'Hackathon eliminado correctamente',
+                                        {
+                                            duration: 2000,
+                                            className:
+                                                'bg-gray-800 text-white font-semibold p-4 rounded-lg shadow-lg',
+                                        }
+                                    );
+                                    setTimeout(() => {
+                                        toast.dismiss(successToast);
+                                        navigate('/');
+                                    }, 2000);
+                                } catch (error) {
+                                    toast.error(error.message);
+                                }
+                            }}
+                        >
+                            Sí, eliminar
+                        </button>
+                        <button
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                            onClick={() => {
+                                toast.dismiss(t.id);
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            ),
+            { position: 'top-center', duration: 10000 }
+        );
+    };
+
+    //Funcion que te lleva a editar el hackathon
+    const goToModifyHackathon = () => {
+        navigate(`/details/${hackathonId}/edit`);
+    };
+
+    //Funcion que copia los datos de un hackathon
+    const cloneHackathon = () => {
+        navigate('/hackathon/new', { state: { hackathonId } });
     };
 
     if (!hackathon) return <p className="text-white">Loading...</p>;

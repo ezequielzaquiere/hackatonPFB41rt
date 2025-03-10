@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 
+
 import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +23,9 @@ const HackathonsPage = () => {
 
     const [hackathons, setHackathons] = useState([]);
 
+
     const hasFetched = useRef(false); // Usamos useRef para controlar si ya se ha hecho la primera carga
+
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
@@ -32,13 +35,16 @@ const HackathonsPage = () => {
         });
     };
 
+
     const fetchHackathons = async (filters = {}, showSuccessToast = true) => {
+
         try {
             const queryParams = new URLSearchParams(filters).toString();
             const response = await fetch(
                 `${VITE_API_URL}/api/hackathon/hackathones/filter?${queryParams}`
             );
             const data = await response.json();
+
 
             if (data.success) {
                 setHackathons(data.data);
@@ -53,6 +59,7 @@ const HackathonsPage = () => {
         } catch (error) {
             console.error('Error al obtener los hackathones:', error);
             toast.error('Error de red al cargar los hackathones.');
+
         }
     };
 
@@ -73,6 +80,7 @@ const HackathonsPage = () => {
             location: '',
             type: '',
         });
+
 
         fetchHackathons({}, false); // No mostrar el toast de éxito
         toast.success('Filtros limpiados correctamente.');
@@ -271,6 +279,7 @@ const HackathonsPage = () => {
                     ))
                 ) : (
                     <p className="text-gray-300 text-center col-span-full">
+
                         No se encontraron hackathones con esos filtros.
                     </p>
                 )}

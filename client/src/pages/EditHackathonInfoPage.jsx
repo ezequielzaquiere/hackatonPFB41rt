@@ -39,8 +39,6 @@ const EditHackathonPage = () => {
 
     //Obtenemos el token de autorizacion
     const { authToken, authUser } = useContext(AuthContext);
-    console.log(authToken);
-    console.log(authUser);
 
     //Obtenemos la info del hackathon a usar
     const { hackathon } = useHackathon(hackathonId);
@@ -78,6 +76,8 @@ const EditHackathonPage = () => {
         }
     }, [hackathon]);
 
+    console.log(hackathon);
+
     //TODO NO CONSIGO QUE FUNCIONE
     /*useEffect(() => {
         console.log('Valor de hackathon:', hackathon);
@@ -85,6 +85,7 @@ const EditHackathonPage = () => {
             
         }
     }, [hackathon, navigate]);*/
+
     //Comprobamos si el boton se va a desactivar
     const isDisabled = formData.type === 'presencial' ? false : true;
 
@@ -103,7 +104,6 @@ const EditHackathonPage = () => {
     //Funcion para manejar los cambios de hora
     const handleChangeDate = (field, date) => {
         setFormData({ ...formData, [field]: date });
-        console.log(formData);
     };
 
     //Funcion para manejar los cambios de imagen
@@ -155,8 +155,6 @@ const EditHackathonPage = () => {
     //Funcion que maneja el envio de formulario
     const [loading, setLoading] = useState(false);
 
-    console.log(formData);
-
     //Enviamos los datos del hackathon, en este caso post
     const handleSubmit = async (e) => {
         await sendingHackathonInfo({
@@ -171,114 +169,49 @@ const EditHackathonPage = () => {
     };
 
     //Si no esta logueado o no es adminvuelve a la main
-
-    /*if (!authUser || authUser.role !== 'admin') {
+    if (!authUser || authUser.role !== 'admin') {
         return <Navigate to="/" />;
-    }*/
+    }
 
     return (
         <>
-            <main className="bg-[#191919] text-[#9A4EAE] w-screen p-10">
-                <h2>Formulario editar hackathon</h2>
+            <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-2 sm:px-6 lg:px-24 py-10 lg:py-20">
+                {/* Encabezado con título */}
+                <h2 className="text-3xl lg:text-4xl text-center text-[#9A4EAE] mb-10">
+                    ¡Edita el Hackathon!
+                </h2>
 
+                {/* Formulario */}
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-[#191919] flex flex-col justify-center gap-2 my-6"
+                    className="bg-[#222] text-white p-6 lg:p-8 rounded-lg shadow-lg w-full max-w-2xl lg:max-w-3xl flex flex-col gap-5"
                 >
-                    {/***************************************
-                     ********* Input text del title *********
-                     ****************************************/}
+                    {/* Input Title */}
                     <InputTitle
                         formData={formData}
                         handleChangeGeneral={handleChangeGeneral}
                     />
 
-                    {/***************************************
-                     ****** Input textarea del summary ******
-                     ****************************************/}
+                    {/* Input Summary */}
                     <InputSummary
                         formData={formData}
                         handleChangeGeneral={handleChangeGeneral}
                     />
 
-                    {/*****************************************************
-                     ****** Input daterange de inicio y finalizacion ******
-                     ******************************************************/}
+                    {/* Input Date Range */}
                     <InputDateRange
                         formData={formData}
                         handleChangeDate={handleChangeDate}
                     />
 
-                    <fieldset>
-                        {/****************************************************************
-                         *** Input radio del tipo de hackathon (presencial u online)  ****
-                         *****************************************************************/}
-                        <InputRadioLocation
-                            formData={formData}
-                            handleChangeGeneral={handleChangeGeneral}
-                        />
-                        {/*************************************
-                         *** Input text de la localizacion ****
-                         **************************************/}
+                    {/* Input Select Themes */}
+                    <InputSelectThemes
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                        hackathonThemes={hackathonThemes}
+                    />
 
-                        <LocatioAutocomplete
-                            isDisabled={isDisabled}
-                            onSelect={handleChangeLocation}
-                            location={formData.location}
-                        />
-                    </fieldset>
-
-                    {/***************************************************
-                     *** Input hackathon detalis (para futuro html?) ****
-                     ****************************************************/}
-                    <fieldset>
-                        <legend className="block mb-2 text-sm font-medium text-[#9A4EAE]">
-                            Detalles del Hackathon
-                        </legend>
-                        <label htmlFor="details" hidden>
-                            Detalles del hackathon
-                        </label>
-                        <DetailTextEditor
-                            onChange={handleChangeDetails}
-                            value={formData.details}
-                            id="details"
-                        />
-                    </fieldset>
-
-                    {/***************************************************
-                     ***** Input quer maneja la subida de imagenes  *****
-                     ****************************************************/}
-                    <fieldset>
-                        <InputBannerUpload
-                            formData={formData}
-                            handleChangeFiles={handleChangeFiles}
-                        />
-                    </fieldset>
-
-                    {/***************************************************
-                     ***** Input que maneja la subida de documentos  ****
-                     ****************************************************/}
-                    <fieldset>
-                        <InputDocumentUpload
-                            formData={formData}
-                            handleChangeFiles={handleChangeFiles}
-                        />
-                    </fieldset>
-
-                    {/********************************************************************
-                     ***** Input select que permite elegir los temas de un hackathon  ****
-                     *********************************************************************/}
-                    <fieldset>
-                        <InputSelectThemes
-                            formData={formData}
-                            handleChangeGeneral={handleChangeGeneral}
-                            hackathonThemes={hackathonThemes}
-                        />
-                    </fieldset>
-
-                    {/*******************************************************************
-                     *********** MODAL Input para elegir el lenguaje/s ******************
-                     ******************************************************************/}
+                    {/* Modal para selección de lenguajes */}
                     <ModalLang
                         hackathonLangs={hackathonLangs || []}
                         isModalOpen={isModalOpen}
@@ -289,9 +222,55 @@ const EditHackathonPage = () => {
                         }
                         selectedLangs={selectedLangs || []}
                     />
-                    <button type="submit" disabled={loading}>
-                        Enviar
-                    </button>
+
+                    {/* Radio para tipo de hackathon */}
+                    <InputRadioLocation
+                        formData={formData}
+                        handleChangeGeneral={handleChangeGeneral}
+                    />
+
+                    {/* Input de ubicación */}
+                    <LocatioAutocomplete
+                        isDisabled={isDisabled}
+                        onSelect={handleChangeLocation}
+                        location={formData.location}
+                    />
+
+                    {/* Detalles del Hackathon */}
+                    <fieldset className="mt-6">
+                        <legend className="block mb-2 text-base lg:text-lg font-semibold text-white">
+                            Detalles del Hackathon
+                        </legend>
+                        <DetailTextEditor
+                            onChange={handleChangeDetails}
+                            value={formData.details}
+                            id="details"
+                        />
+                    </fieldset>
+
+                    {/* Subida de imágenes */}
+                    <InputBannerUpload
+                        formData={formData}
+                        handleChangeFiles={handleChangeFiles}
+                    />
+
+                    {/* Subida de documentos */}
+
+                    <InputDocumentUpload
+                        formData={formData}
+                        handleChangeFiles={handleChangeFiles}
+                    />
+
+                    {/* Botón de Enviar */}
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="w-40 lg:w-48 px-4 py-3 lg:px-5 lg:py-4 my-4 font-semibold rounded-lg shadow-lg bg-[#7a3e8f] text-white hover:bg-[#9A4EAE] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50"
+                            disabled={loading}
+                        >
+                            Enviar
+                        </button>
+                    </div>
                 </form>
             </main>
         </>

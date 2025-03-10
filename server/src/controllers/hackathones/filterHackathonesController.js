@@ -3,7 +3,9 @@ import HackathonesFilter from '../../models/hackathones/filterHackathonesModel.j
 
 const filterHackathonesController = async (req, res, next) => {
     try {
+
         const { title, programmingLang, startingDate, location, type, image } =
+
             req.query;
         const hackathones = await HackathonesFilter({
             title,
@@ -12,6 +14,7 @@ const filterHackathonesController = async (req, res, next) => {
             location,
             type,
             image,
+
         });
 
         if (hackathones.length === 0) {
