@@ -131,8 +131,8 @@ const Header = () => {
 
             {/* Usuario Autenticado - Avatar y Nombre */}
             {authUser && (
-                <Link to="/users/profile">
-                    <div className="hover:scale-115 transition hidden lg:flex items-center space-x-2">
+                <Link to="/users/profile" className="hidden">
+                    <div className="hover:scale-115 transition hidden lg:flex items-center">
                         <p className="text-white">@{authUser.username}</p>
                         <img
                             src={

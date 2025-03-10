@@ -207,6 +207,35 @@ const DetailHackathonPage = () => {
                 >
                     ⬅ Anterior
                 </button>
+
+                {authUser?.role === 'admin' && (
+                    <>
+                        <button
+                            onClick={cloneHackathon}
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                        >
+                            Copiar
+                        </button>
+                        <button
+                            onClick={deleteHackathon}
+                            className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                        >
+                            Eliminar
+                        </button>
+                    </>
+                )}
+                {authUser?.role === 'admin' &&
+                    isAfter(hackathon.startingDate, new Date()) && (
+                        <>
+                            <button
+                                onClick={goToModifyHackathon}
+                                className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a3a8a] transition duration-300"
+                            >
+                                Modificar
+                            </button>
+                        </>
+                    )}
+
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
                     className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
