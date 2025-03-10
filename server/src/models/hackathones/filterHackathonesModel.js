@@ -6,14 +6,20 @@ const filterHackathonesModel = async ({
     location,
     programmingLang,
     type,
+<<<<<<< HEAD
     image,
+=======
+>>>>>>> 0ee0556c7d56e893c980df2e0d9728984fc9a463
 }) => {
     const pool = await getPool();
 
     let query = `
         SELECT 
             h.id, 
+<<<<<<< HEAD
             h.image,
+=======
+>>>>>>> 0ee0556c7d56e893c980df2e0d9728984fc9a463
             h.title, 
             h.startingDate, 
             h.location,
@@ -26,10 +32,14 @@ const filterHackathonesModel = async ({
     `;
 
     const params = [];
+<<<<<<< HEAD
     if (image) {
         query += ` AND h.image >= ?`;
         params.push(image);
     }
+=======
+
+>>>>>>> 0ee0556c7d56e893c980df2e0d9728984fc9a463
     // Filtro por título
     if (title) {
         query += ` AND LOWER(h.title) LIKE LOWER(?)`;

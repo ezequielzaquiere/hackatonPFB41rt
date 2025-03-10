@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+
 import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ const HackathonsPage = () => {
         navigate(`/details/${id}`); // Redirige a la página de detalles ***
     };
     const [isFormVisible, setIsFormVisible] = useState(false); // Estado para controlar la visibilidad del formulario
+
     const [filters, setFilters] = useState({
         title: '',
         programmingLang: '',
@@ -19,6 +21,7 @@ const HackathonsPage = () => {
     });
 
     const [hackathons, setHackathons] = useState([]);
+
     const hasFetched = useRef(false); // Usamos useRef para controlar si ya se ha hecho la primera carga
 
     const handleFilterChange = (e) => {
@@ -70,6 +73,7 @@ const HackathonsPage = () => {
             location: '',
             type: '',
         });
+
         fetchHackathons({}, false); // No mostrar el toast de éxito
         toast.success('Filtros limpiados correctamente.');
     };
