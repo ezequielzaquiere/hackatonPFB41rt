@@ -175,16 +175,18 @@ const UpdateProfilePage = () => {
                         className="focus:bg-[#7A3E8F] bg-[#333] border border-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                     />
 
-                    <button
-                        disabled={loading}
-                        className={`w-full px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
-                            loading
-                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] hover:transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] focus:ring-opacity-50'
-                        }`}
-                    >
-                        {loading ? 'Actualizando...' : 'Actualizar'}
-                    </button>
+                    <div className="flex justify-center">
+                        <button
+                            disabled={loading}
+                            className={`max-w-[200px] px-6 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
+                                loading
+                                    ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                    : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] hover:transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] focus:ring-opacity-50'
+                            }`}
+                        >
+                            {loading ? 'Actualizando...' : 'Actualizar'}
+                        </button>
+                    </div>
                 </form>
             </>
         </main>
