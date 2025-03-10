@@ -29,6 +29,7 @@ import ContactPage from './pages/ContactPage';
 import CookiesPolicyPage from './pages/CookiesPolicyPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionPage from './pages/TermsAndConditionsPage';
+import HackathonsPage from './pages/HackathonsPage';
 
 //Definimos el componente principal
 const App = () => {
@@ -96,6 +97,7 @@ const App = () => {
                     path="/users/profile"
                     element={<PrivateUserProfilePage />}
                 />
+                <Route path="/hackathones" element={<HackathonsPage />} />
                 <Route
                     path="/users/profile/update"
                     element={<UpdateProfilePage />}
