@@ -6,12 +6,14 @@ const filterHackathonesModel = async ({
     location,
     programmingLang,
     type,
+    image,
 }) => {
     const pool = await getPool();
 
     let query = `
         SELECT 
             h.id, 
+            h.image,
             h.title, 
             h.startingDate, 
             h.location,
@@ -24,7 +26,10 @@ const filterHackathonesModel = async ({
     `;
 
     const params = [];
-
+    if (image) {
+        query += ` AND h.image >= ?`;
+        params.push(image);
+    }
     // Filtro por título
     if (title) {
         query += ` AND LOWER(h.title) LIKE LOWER(?)`;
