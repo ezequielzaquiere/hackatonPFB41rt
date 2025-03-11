@@ -20,6 +20,7 @@ const listCreatedHackathonsHistoryModel = async (creator) => {
                 hl.userId,
                 hl.startingDate,
                 hl.deadline,
+                hl.resultsPublished,
                 u.username,
                 (
                     SELECT AVG(rating)

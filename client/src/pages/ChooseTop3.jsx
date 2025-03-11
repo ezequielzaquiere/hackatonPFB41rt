@@ -9,30 +9,31 @@ import toast from 'react-hot-toast';
 const ChooseTop3 = () => {
     const navigate = useNavigate();
     const { authToken, authUser } = useContext(AuthContext);
-
+            
     // Redirigir si no hay token de autenticación
-    if (!authToken) {
+    if (!authToken || !authUser.role === "admin")  {
         navigate('/');
     }
 
     const [participants, setParticipants] = React.useState([]);
+    const [thisHackathon, setThisHackathon] = React.useState([]);
+
     const hackathon = useParams();
+    
 
     React.useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchParticipants = async () => {
             try {
-                const response = await fetch(
-                    `${VITE_API_URL}/api/hackathon/${hackathon.hackathonId}/participants/private`
-                );
-                const data = await response.json();
-                setParticipants(data.data.hackathonUsers);
-                console.log(data);
-            } catch (error) {
-                toast.error(
-                    'Ha habido un fallo al obtener los usuarios registrados.',
-                    error
-                );
-            }
+                const response1 = await fetch(`${VITE_API_URL}/api/hackathon/${hackathon.hackathonId}/participants/private`);
+                const data1 = await response1.json();
+                setParticipants(data1.data.hackathonUsers);
+                const response2 = await fetch(`${VITE_API_URL}/api/hackathon/hackathones/details/${hackathon.hackathonId}`);
+                const data2 = await response2.json();
+                setThisHackathon(data2.data.hackathon)
+            } catch (err) {
+                toast.error("Ha habido un fallo al obtener los usuarios registrados.");
+            };
         };
 
         fetchParticipants();
@@ -60,9 +61,9 @@ const ChooseTop3 = () => {
                 `${VITE_API_URL}/api/hackathon/${hackathon.hackathonId}/publish`,
                 {
                     method: 'POST',
-                    headers: {
+                headers: {
                         'Content-Type': 'application/json',
-                    },
+                },
                     body: JSON.stringify(podiumData),
                 }
             );
@@ -84,7 +85,7 @@ const ChooseTop3 = () => {
         <div className="bg-[#191919] text-white min-h-screen p-10">
             {/* Título */}
             <h1 className="text-3xl font-bold text-center mb-10">
-                Selecciona el Top 3
+                Selecciona el Top 3 del hackathon: {thisHackathon.title}
             </h1>
 
             {/* Contenedor de selección */}
@@ -168,7 +169,7 @@ const ChooseTop3 = () => {
                 <div className="flex justify-end">
                     <button
                         onClick={() =>
-                            handleSubmit(firstPlace, secondPlace, thirdPlace)
+                                handleSubmit(firstPlace, secondPlace, thirdPlace)
                         }
                         className="bg-[#9A4EAE] text-white px-4 py-2 rounded-md hover:bg-[#7B3A8E] transition"
                     >
