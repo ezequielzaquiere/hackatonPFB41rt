@@ -4,6 +4,8 @@ import toast from 'react-hot-toast';
 const { VITE_API_URL } = import.meta.env;
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import formatDate from '../utils/formatedDate.js'
+
 
 const AdminHackathons = () => {
     const { username } = useParams();
@@ -11,7 +13,7 @@ const AdminHackathons = () => {
     const { authToken, authUser } = useContext(AuthContext);
 
     // Si no hay token, redirigir a inicio
-    if (!authToken) navigate('/');
+    if (!authToken || authUser.role !== "admin") navigate('/');
 
     const [pastHackathons, setPastHackathons] = React.useState([]);
     const [futureHackathons, setFutureHackathons] = React.useState([]);
@@ -76,8 +78,14 @@ const AdminHackathons = () => {
                                         navigate(`/details/${hackathon.id}`)
                                     }
                                 />
+                                <p className="text-white text-center mt-3">
+                                    {hackathon.title}
+                                </p>
                                 <p className="text-white mt-3">
                                     Participantes: {hackathon.participantCount}
+                                </p>
+                                <p className="text-white text-center mt-3">
+                                    Inicio: {formatDate(hackathon.startingDate)}
                                 </p>
                                 <button
                                     className="hover:scale-105 transition w-[220px] py-2 mt-4 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE]"
@@ -120,12 +128,16 @@ const AdminHackathons = () => {
                                     }
                                 />
                                 <p className="text-white text-center mt-3">
+                                    {hackathon.title}
+                                </p>
+                                <p className="text-white text-center mt-3">
                                     Participantes: {hackathon.participantCount}
                                 </p>
                                 <p className="text-white text-center">
                                     Media de valoración: {hackathon.avgRating}
                                 </p>
-                                <button
+                                {(hackathon.resultsPublished === 0 &&
+                                    <button
                                     className="hover:scale-105 w-full py-2 mt-4 bg-[#1ABC9C] text-black font-semibold rounded-lg hover:bg-[#2ED9B3] transition-all"
                                     onClick={() =>
                                         navigate(`/${hackathon.id}/ranking/set`)
@@ -133,6 +145,8 @@ const AdminHackathons = () => {
                                 >
                                     Publicar Podio
                                 </button>
+                                )}
+                                
                             </div>
                         ))
                     ) : (

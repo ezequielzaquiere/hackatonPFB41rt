@@ -23,6 +23,7 @@ import {
     listHackathonParticipantsController,
     registerHackathonPositionsAndPublishController,
     bestHackathonesController,
+    selectRatingsByHackathonIdAndUserIdController,
 } from '../controllers/hackathones/index.js';
 import listNextHackathonesController from '../controllers/hackathones/listNextHackathonesController.js';
 
@@ -78,6 +79,12 @@ router.post(
     isUserAuthMiddleware,
     ratingHackathonController
 );
+
+//Ruta rating de un hackathon dado un userId
+router.get(
+    '/:hackathonId/ratings/:userId',
+    selectRatingsByHackathonIdAndUserIdController
+)
 
 //Endpoint para enseñar lista pública de usuarios registrados en un hackathon
 router.get(
