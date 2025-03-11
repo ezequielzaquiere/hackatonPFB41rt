@@ -268,7 +268,7 @@ const EditHackathonPage = () => {
                             className="w-40 lg:w-48 px-4 py-3 lg:px-5 lg:py-4 my-4 font-semibold rounded-lg shadow-lg bg-[#7a3e8f] text-white hover:bg-[#9A4EAE] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] focus:ring-opacity-50"
                             disabled={loading}
                         >
-                            Enviar
+                            Editar
                         </button>
                     </div>
                 </form>

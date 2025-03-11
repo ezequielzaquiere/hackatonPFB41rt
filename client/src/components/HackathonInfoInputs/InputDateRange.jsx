@@ -15,7 +15,7 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
             {/****************************************************
              ****** Input datepicker de la fecha de inicio  ******
              ****************************************************/}
-            <div className="flex flex-col lg:flex-row lg:justify-start gap-4 w-full justify-between lg:items-center">
+            <div className="flex flex-col lg:flex-row lg:justify-center gap-4 w-full justify-between lg:items-center">
                 <DatePicker
                     selectsStart
                     isClearable
