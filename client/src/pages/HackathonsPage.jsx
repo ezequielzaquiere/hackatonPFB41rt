@@ -228,12 +228,10 @@ const HackathonsPage = () => {
                         <div
                             key={hackathon.id}
                             className="bg-[#242424] hover:bg-[#303030] p-6 rounded-lg shadow-lg flex flex-col md:flex-row justify-between items-center hover:scale-105 hover:rounded-2xl transition-all duration-300 ease-in-out"
+                            onClick={() => handleClick(hackathon.id)}
                         >
                             {/* Contenido de la tarjeta */}
-                            <div
-                                className="flex-1 "
-                                onClick={() => handleClick(hackathon.id)}
-                            >
+                            <div className="flex-1 ">
                                 <h2 className="text-xl font-bold text-[#9A4EAE] mb-2">
                                     {hackathon.title}
                                 </h2>

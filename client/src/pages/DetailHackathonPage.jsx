@@ -278,7 +278,7 @@ const DetailHackathonPage = () => {
     const id = Number(hackathonId);
 
     return (
-        <div className="bg-[#191919] min-h-screen text-white p-10">
+        <div className="bg-[#191919] flex-grow text-white p-10">
             {/* Botones de navegación y acciones */}
             <div className="flex flex-col md:flex-row gap-4 mb-6 justify-center items-center">
                 {/* Botones del admin (arriba en móviles) */}
@@ -287,13 +287,13 @@ const DetailHackathonPage = () => {
                         <>
                             <button
                                 onClick={cloneHackathon}
-                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="hover:scale-110  px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Copiar
                             </button>
                             <button
                                 onClick={deleteHackathon}
-                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Eliminar
                             </button>
@@ -303,27 +303,11 @@ const DetailHackathonPage = () => {
                         isAfter(hackathon.startingDate, new Date()) && (
                             <button
                                 onClick={goToModifyHackathon}
-                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Modificar
                             </button>
                         )}
-                </div>
-
-                {/* Botones de navegación (abajo en móviles) */}
-                <div className="flex gap-4 justify-center order-2 md:order-none">
-                    <button
-                        onClick={() => navigate(`/details/${id - 1}`)}
-                        className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
-                    >
-                        ⬅ Anterior
-                    </button>
-                    <button
-                        onClick={() => navigate(`/details/${id + 1}`)}
-                        className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
-                    >
-                        Siguiente ➡
-                    </button>
                 </div>
             </div>
 
@@ -403,14 +387,14 @@ const DetailHackathonPage = () => {
                                     registeredHackathons[hackathonId] ? (
                                         <button
                                             onClick={handleUnregister}
-                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
+                                            className="hover:scale-110 bg-[#7a3a8a] text-white py-2 px-4 rounded-lg hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Desapuntarse
                                         </button>
                                     ) : (
                                         <button
                                             onClick={handleRegister}
-                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
+                                            className="hover:scale-110 bg-[#7a3a8a] text-white py-2 px-4 rounded-lg hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Apuntarse
                                         </button>
@@ -443,7 +427,7 @@ const DetailHackathonPage = () => {
                                                     onClick={() =>
                                                         setRating(star)
                                                     }
-                                                    className={`text-2xl ${rating >= star ? 'text-[#9A4EAE]' : 'text-gray-300'}`}
+                                                    className={`text-2xl ${rating >= star ? 'text-[#fcd53f]' : 'text-gray-300'}`}
                                                 >
                                                     ★
                                                 </button>
@@ -451,7 +435,7 @@ const DetailHackathonPage = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit"
+                                            className="hover:scale-110 mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                                         >
                                             Enviar valoración
                                         </button>
@@ -485,6 +469,21 @@ const DetailHackathonPage = () => {
                         </div>
                     )}
                 </div>
+            </div>
+            {/* Botones de navegación (abajo en móviles) */}
+            <div className="flex gap-4 justify-center order-2 md:order-none mt-7">
+                <button
+                    onClick={() => navigate(`/details/${id - 1}`)}
+                    className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                >
+                    ⬅ Anterior
+                </button>
+                <button
+                    onClick={() => navigate(`/details/${id + 1}`)}
+                    className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                >
+                    Siguiente ➡
+                </button>
             </div>
         </div>
     );

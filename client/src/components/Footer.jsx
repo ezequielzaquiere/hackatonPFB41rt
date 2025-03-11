@@ -45,14 +45,7 @@ const Footer = () => {
                     </div>
                     <hr className="border-t border-[#ffffff] mt-6 mb-3 text-center" />
                     <span className="w-full block text-sm text-white text-center">
-                        © 2025{' '}
-                        <a
-                            href="https://flowbite.com/"
-                            className="hover:underline"
-                        >
-                            HackVerse
-                        </a>
-                        . All Rights Reserved.
+                        © 2025 HackVerse . All Rights Reserved.
                     </span>
                 </div>
             </footer>

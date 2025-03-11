@@ -60,12 +60,23 @@ const Header = () => {
                         </Link>
 
                         {authUser.role === 'admin' && (
-                            <Link
-                                to="/admin/myhackathons"
-                                className="text-white transition hover:scale-115"
-                            >
-                                Mis hackathones
-                            </Link>
+                            <div className="flex gap-5">
+                                <Link
+                                    to="admin/myhackathons"
+                                    className="hover:scale-110 transition text-white "
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Mis hackathones
+                                </Link>
+
+                                <Link
+                                    to="/hackathon/new"
+                                    className=" hover:scale-110  text-white hover:text-gray-300 transition"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Crear Hackathon
+                                </Link>
+                            </div>
                         )}
 
                         <button
@@ -132,13 +143,23 @@ const Header = () => {
                         </Link>
 
                         {authUser.role === 'admin' && (
-                            <Link
-                                to="admin/myhackathons"
-                                className="hover:text-gray-300 transition"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Mis hackathones
-                            </Link>
+                            <>
+                                <Link
+                                    to="admin/myhackathons"
+                                    className="hover:text-gray-300 transition"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Mis hackathones
+                                </Link>
+
+                                <Link
+                                    to="/hackathon/new"
+                                    className="hover:text-gray-300 transition"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Crear Hackathon
+                                </Link>
+                            </>
                         )}
                         <button
                             onClick={() => {
