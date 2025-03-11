@@ -40,25 +40,36 @@ const DetailHackathonPage = () => {
             checkRegistration();
 
             const checkVote = async () => {
-                const response = await fetch(
-                    `${VITE_API_URL}/api/hackathon/${hackathonId}/ratings/${authUser.id}`,
-                    {
-                        headers: {
-                            Authorization: authToken,
-                        },
+                try {
+                    const response = await fetch(
+                        `${VITE_API_URL}/api/hackathon/${hackathonId}/ratings/${authUser.id}`
+                    );
+                    if (!response.ok) {
+                        throw new Error('Error al verificar el voto');
                     }
-                );
-                if (response.ok) {
-                    setHasVoted((prev) => ({
-                        ...prev,
-                        [hackathonId]: true,
-                    }));
-                    localStorage.setItem(`hasVoted_${hackathonId}`, 'true');
+                    const result = await response.json();
+
+                    if (result.data && result.data.rating.length > 0) {
+                        setHasVoted((prev) => ({
+                            ...prev,
+                            [hackathonId]: true,
+                        }));
+                        localStorage.setItem(`hasVoted_${hackathonId}`, 'true');
+                    } else {
+                        setHasVoted((prev) => ({
+                            ...prev,
+                            [hackathonId]: false,
+                        }));
+                        localStorage.removeItem(`hasVoted_${hackathonId}`);
+                    }
+                } catch (error) {
+                    console.error('Error en checkVote:', error);
                 }
             };
 
             checkVote();
 
+            // Verifica si hay un voto almacenado en localStorage
             const hasVotedStored = localStorage.getItem(
                 `hasVoted_${hackathonId}`
             );
@@ -208,7 +219,7 @@ const DetailHackathonPage = () => {
                     <p>¿Seguro que quieres eliminar el Hackathon?</p>
                     <div className="flex gap-4 justify-center">
                         <button
-                            className="bg-[#9A4EAE] hover:bg-[#7a3a8a] text-white px-4 py-2 rounded"
+                            className="bg-[#7a3a8a] hover:bg-[#9A4EAE] text-white px-4 py-2 rounded"
                             onClick={async () => {
                                 try {
                                     const response = await fetch(
@@ -276,13 +287,13 @@ const DetailHackathonPage = () => {
                         <>
                             <button
                                 onClick={cloneHackathon}
-                                className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition w-fit"
+                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Copiar
                             </button>
                             <button
                                 onClick={deleteHackathon}
-                                className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition w-fit"
+                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Eliminar
                             </button>
@@ -292,7 +303,7 @@ const DetailHackathonPage = () => {
                         isAfter(hackathon.startingDate, new Date()) && (
                             <button
                                 onClick={goToModifyHackathon}
-                                className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition w-fit"
+                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Modificar
                             </button>
@@ -303,13 +314,13 @@ const DetailHackathonPage = () => {
                 <div className="flex gap-4 justify-center order-2 md:order-none">
                     <button
                         onClick={() => navigate(`/details/${id - 1}`)}
-                        className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition w-fit"
+                        className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                     >
                         ⬅ Anterior
                     </button>
                     <button
                         onClick={() => navigate(`/details/${id + 1}`)}
-                        className="px-4 py-2 bg-[#9A4EAE] text-white font-semibold rounded-lg hover:bg-[#7a3a8a] transition w-fit"
+                        className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                     >
                         Siguiente ➡
                     </button>
@@ -392,14 +403,14 @@ const DetailHackathonPage = () => {
                                     registeredHackathons[hackathonId] ? (
                                         <button
                                             onClick={handleUnregister}
-                                            className="bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition w-fit mt-4"
+                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Desapuntarse
                                         </button>
                                     ) : (
                                         <button
                                             onClick={handleRegister}
-                                            className="bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition w-fit mt-4"
+                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Apuntarse
                                         </button>
@@ -440,7 +451,7 @@ const DetailHackathonPage = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="mt-4 bg-[#9A4EAE] text-white py-2 px-4 rounded hover:bg-[#7a3a8a] transition w-fit"
+                                            className="mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit"
                                         >
                                             Enviar valoración
                                         </button>
