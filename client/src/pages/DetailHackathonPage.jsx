@@ -16,6 +16,7 @@ const DetailHackathonPage = () => {
     const [registeredHackathons, setRegisteredHackathons] = useState({});
     const [rating, setRating] = useState(0);
     const [hasVoted, setHasVoted] = useState({});
+    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
 
     useEffect(() => {
         if (authUser && hackathon) {
@@ -278,7 +279,10 @@ const DetailHackathonPage = () => {
     const id = Number(hackathonId);
 
     return (
-        <div className="bg-[#191919] flex-grow text-white p-10">
+        <div
+            className="min-h-screen text-white p-10 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        >
             {/* Botones de navegación y acciones */}
             <div className="flex flex-col md:flex-row gap-4 mb-6 justify-center items-center">
                 {/* Botones del admin (arriba en móviles) */}
@@ -287,13 +291,13 @@ const DetailHackathonPage = () => {
                         <>
                             <button
                                 onClick={cloneHackathon}
-                                className="hover:scale-110  px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Copiar
                             </button>
                             <button
                                 onClick={deleteHackathon}
-                                className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Eliminar
                             </button>
@@ -303,7 +307,7 @@ const DetailHackathonPage = () => {
                         isAfter(hackathon.startingDate, new Date()) && (
                             <button
                                 onClick={goToModifyHackathon}
-                                className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Modificar
                             </button>
@@ -312,7 +316,10 @@ const DetailHackathonPage = () => {
             </div>
 
             {/* Contenedor principal del hackathon */}
-            <div className="bg-[#212121] rounded-3xl p-8 border border-gray-700 max-w-4xl mx-auto">
+            <div
+                className="bg-[#212121] rounded-3xl p-8 border border-gray-700 max-w-4xl mx-auto shadow-lg shadow-black/50
+"
+            >
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Imagen */}
                     <div className="flex flex-col items-center gap-6 order-1 md:order-none">
@@ -387,14 +394,14 @@ const DetailHackathonPage = () => {
                                     registeredHackathons[hackathonId] ? (
                                         <button
                                             onClick={handleUnregister}
-                                            className="hover:scale-110 bg-[#7a3a8a] text-white py-2 px-4 rounded-lg hover:bg-[#9A4EAE] transition w-fit mt-4"
+                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Desapuntarse
                                         </button>
                                     ) : (
                                         <button
                                             onClick={handleRegister}
-                                            className="hover:scale-110 bg-[#7a3a8a] text-white py-2 px-4 rounded-lg hover:bg-[#9A4EAE] transition w-fit mt-4"
+                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Apuntarse
                                         </button>
@@ -427,7 +434,7 @@ const DetailHackathonPage = () => {
                                                     onClick={() =>
                                                         setRating(star)
                                                     }
-                                                    className={`text-2xl ${rating >= star ? 'text-[#fcd53f]' : 'text-gray-300'}`}
+                                                    className={`text-2xl ${rating >= star ? 'text-[#9A4EAE]' : 'text-gray-300'}`}
                                                 >
                                                     ★
                                                 </button>
@@ -435,7 +442,7 @@ const DetailHackathonPage = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="hover:scale-110 mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                            className="mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit"
                                         >
                                             Enviar valoración
                                         </button>
@@ -470,17 +477,18 @@ const DetailHackathonPage = () => {
                     )}
                 </div>
             </div>
-            {/* Botones de navegación (abajo en móviles) */}
-            <div className="flex gap-4 justify-center order-2 md:order-none mt-7">
+
+            {/* Botones de navegación (debajo de la tarjeta en todas las pantallas) */}
+            <div className="flex gap-4 justify-center mt-6">
                 <button
                     onClick={() => navigate(`/details/${id - 1}`)}
-                    className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                    className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                 >
                     ⬅ Anterior
                 </button>
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
-                    className="hover:scale-110 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                    className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                 >
                     Siguiente ➡
                 </button>

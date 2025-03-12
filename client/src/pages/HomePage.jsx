@@ -239,6 +239,7 @@ const HomePage = () => {
 
                                     {/* Contenido en la derecha (50% de la tarjeta) */}
                                     <div className="w-1/2 h-full flex flex-col justify-center items-center gap-2">
+                                        <h2>{hackathon.title}</h2>
                                         <p className="text-xs md:text-base">
                                             Participantes:{' '}
                                             {hackathon.participantCount}

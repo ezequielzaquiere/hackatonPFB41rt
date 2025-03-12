@@ -10,6 +10,7 @@ const HackathonsPage = () => {
     const handleClick = (id) => {
         navigate(`/details/${id}`); // Redirige a la página de detalles ***
     };
+    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
     const [isFormVisible, setIsFormVisible] = useState(false); // Estado para controlar la visibilidad del formulario
 
     const [filters, setFilters] = useState({
@@ -79,7 +80,10 @@ const HackathonsPage = () => {
     };
 
     return (
-        <div className="bg-[#191919] text-white min-h-screen p-10">
+        <div
+            className="bg-[#191919] text-white min-h-screen p-10"
+            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        >
             {/* Título */}
             <h1 className="text-3xl font-bold text-center mb-10">
                 Hackathones
