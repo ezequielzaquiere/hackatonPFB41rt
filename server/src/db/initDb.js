@@ -66,7 +66,7 @@ const main = async () => {
                 userId INT UNSIGNED NOT NULL,
                 FOREIGN KEY(userId) REFERENCES users(id),
                 title VARCHAR(100) NOT NULL,
-                summary VARCHAR(140) NOT NULL,
+                summary VARCHAR(500) NOT NULL,
                 startingDate TIMESTAMP NOT NULL,
                 deadline TIMESTAMP NOT NULL,
                 type ENUM ("online", "presencial"),
