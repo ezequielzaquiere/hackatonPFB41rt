@@ -17,6 +17,7 @@ const { VITE_API_URL } = import.meta.env;
 const UserProfilePage = () => {
     // Obtenemos los elementos necesarios del contexto de autorización.
     const { authUser } = useContext(AuthContext);
+    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
 
     // Si el usuario no esta logueado, redirigimos a la página principal.
     if (!authUser) {
@@ -24,7 +25,10 @@ const UserProfilePage = () => {
     }
 
     return (
-        <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s">
+        <main
+            className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s"
+            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        >
             <h2 className="text-3xl text-center text-[#9A4EAE] mb-4">
                 Página de perfil de usuario
             </h2>

@@ -275,7 +275,7 @@ const populateDb = async () => {
         await pool.query(`
             INSERT INTO ratings (userId, hackathonId, rating, createdAt) VALUES
                 (4, 2, 5, "${now}"),
-                (6, 2, 3, "${now}"),
+                (6, 2, 4, "${now}"),
                 (11, 4, 4, "${now}"),
                 (12, 4, 1, "${now}"),
                 (13, 5, 5, "${now}"),
@@ -283,7 +283,7 @@ const populateDb = async () => {
                 (15, 5, 4, "${now}"),
                 (13, 12, 5, "${now}"),
                 (14, 12, 5, "${now}"),
-                (15, 12, 5, "${now}"),
+                (15, 12, 4, "${now}"),
                 (10, 18, 4, "${now}"),
                 (11, 18, 2, "${now}"),
                 (12, 18, 3, "${now}"),
