@@ -4,8 +4,7 @@ import toast from 'react-hot-toast';
 const { VITE_API_URL } = import.meta.env;
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
-import formatDate from '../utils/formatedDate.js'
-
+import formatDate from '../utils/formatedDate.js';
 
 const AdminHackathons = () => {
     const { username } = useParams();
@@ -13,7 +12,7 @@ const AdminHackathons = () => {
     const { authToken, authUser } = useContext(AuthContext);
 
     // Si no hay token, redirigir a inicio
-    if (!authToken || authUser.role !== "admin") navigate('/');
+    if (!authToken || authUser.role !== 'admin') navigate('/');
 
     const [pastHackathons, setPastHackathons] = React.useState([]);
     const [futureHackathons, setFutureHackathons] = React.useState([]);
@@ -43,7 +42,7 @@ const AdminHackathons = () => {
     return (
         <main className="bg-[#191919] min-h-screen flex flex-col items-center px-8 py-12 lg:px-20 lg:py-20">
             {/* Título */}
-            <h1 className="text-3xl lg:text-3xl text-[#9A4EAE] font-bold mb-8">
+            <h1 className="text-3xl lg:text-3xl text-[#9A4EAE] mb-8">
                 Mis Hackathones
             </h1>
 
@@ -136,17 +135,18 @@ const AdminHackathons = () => {
                                 <p className="text-white text-center">
                                     Media de valoración: {hackathon.avgRating}
                                 </p>
-                                {(hackathon.resultsPublished === 0 &&
+                                {hackathon.resultsPublished === 0 && (
                                     <button
-                                    className="hover:scale-105 w-full py-2 mt-4 bg-[#1ABC9C] text-black font-semibold rounded-lg hover:bg-[#2ED9B3] transition-all"
-                                    onClick={() =>
-                                        navigate(`/${hackathon.id}/ranking/set`)
-                                    }
-                                >
-                                    Publicar Podio
-                                </button>
+                                        className="hover:scale-105 w-full py-2 mt-4 bg-[#1ABC9C] text-black font-semibold rounded-lg hover:bg-[#2ED9B3] transition-all"
+                                        onClick={() =>
+                                            navigate(
+                                                `/${hackathon.id}/ranking/set`
+                                            )
+                                        }
+                                    >
+                                        Publicar Podio
+                                    </button>
                                 )}
-                                
                             </div>
                         ))
                     ) : (

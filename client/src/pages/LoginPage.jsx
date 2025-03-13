@@ -76,8 +76,9 @@ const LoginPage = () => {
     }
 
     return (
-        <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
-            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+
+        <main className="bg-[#191919] min-h-140 flex flex-grow flex-col justify-center items-center p-6">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mt-10 mb-10">
                 ¡Inicia sesión!
             </h2>
             <form
@@ -135,7 +136,7 @@ const LoginPage = () => {
                 <div className="flex justify-center">
                     <button
                         disabled={loading}
-                        className={`min-w-[200px] max-w-[200px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        className={`hover:scale-105 min-w-[200px] max-w-[200px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
                         ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
@@ -146,18 +147,18 @@ const LoginPage = () => {
                     </button>
                 </div>
 
-                <p className="text-[#9A4EAE] text-center text-sm mt-4">
+                <p className="text-[#9A4EAE] text-center text-base mt-4">
                     ¿Aún no te has registrado?
                 </p>
                 <Link
                     to="/register"
-                    className="text-[#9A4EAE] text-center text-sm mb-5 hover:underline"
+                    className="text-[#9A4EAE] text-center text-xl mb-5 hover:underline"
                 >
                     <strong>¡Crea tu cuenta!</strong>
                 </Link>
                 <Link
                     to="/users/password/reset"
-                    className="text-[#9A4EAE] hover:underline text-center text-sm"
+                    className="text-[#9A4EAE] hover:underline text-center text-base"
                 >
                     ¿Has olvidado tu contraseña?
                 </Link>

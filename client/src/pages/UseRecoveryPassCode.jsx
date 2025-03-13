@@ -75,8 +75,8 @@ const UseRecoveryPassCode = () => {
     };
 
     return (
-        <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
-            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+        <main className="bg-[#191919] min-h-140 flex flex-col justify-start items-center p-6">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mt-10 mb-10">
                 ¡Restablece tu contraseña!
             </h2>
             <form
@@ -158,7 +158,7 @@ const UseRecoveryPassCode = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`max-w-[200px] min-w-[200px]  mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        className={`hover:scale-105 max-w-[200px] min-w-[200px]  mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
                         ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'

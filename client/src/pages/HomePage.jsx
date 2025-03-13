@@ -81,7 +81,7 @@ const HomePage = () => {
     const text = '¡Bienvenido a las mejores competiciones de código!';
     return (
         <>
-            <div className="relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
+            <div className=" relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
                 {/* Video de fondo */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -120,7 +120,12 @@ const HomePage = () => {
                                 key={index}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: index * 0.05 }}
+                                transition={{
+                                    delay: index * 0.05,
+                                    duration: 0.8,
+                                    repeat: Infinity,
+                                    repeatType: 'reverse',
+                                }}
                             >
                                 {char}
                             </motion.span>
@@ -130,9 +135,11 @@ const HomePage = () => {
             </div>
 
             {/* Próximos Eventos */}
-            <section className="bg-[#191919] text-white p-20 relative">
+
+            <section className="bg-[#191919] text-white px-7 py-5 md:px-10 md:py-10 relative">
+
                 <div className="mb-4">
-                    <h2 className="text-2xl md:text-2xl">Próximos Eventos</h2>
+                    <h2 className="text-2xl">Próximos Eventos</h2>
 
                     <img
                         src="/nextEventsGraphismPink.png"
@@ -141,49 +148,36 @@ const HomePage = () => {
                     />
 
                     <div className="relative mt-6 overflow-hidden">
-                        {/* Contenedor scrollable */}
                         <div
                             ref={scrollContainerRef}
-                            className="w-screen flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory md:gap-4 md:overflow-hidden md:min-h-[185px]"
+                            className="px-10 w-screen flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory md:gap-4 md:overflow-hidden md:min-h-[185px]"
                         >
                             {hackathonesFromToday.data?.hackathones?.map(
                                 (hackathon, index) => (
                                     <div
                                         key={index}
-                                        className="hover:scale-105 hover:rounded-2xl relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#242424] hover:bg-[#303030] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
+                                        className="h-full hover:scale-110 transition hover:rounded-2xl relative flex flex-col justify-around min-w-[162px] min-h-[235px] bg-[#242424] hover:bg-[#303030] p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
                                     >
-                                        {/* Capa negra sobre el fondo */}
-                                        <div className="absolute bg-black/5 rounded-lg"></div>
-
-                                        {/* Contenido encima de la capa negra */}
-                                        <div className="relative">
-                                            <img
-                                                src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
-                                                alt=""
-                                                className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-32"
-                                                onClick={() =>
-                                                    handleImageClick(
-                                                        hackathon.id
-                                                    )
-                                                }
-                                            />
-                                            <h3 className="mt-2 text-xs md:text-lg font-semibold ">
-                                                {hackathon.title}
-                                            </h3>
-                                            <p className="text-xs">
-                                                {formatDate(
-                                                    hackathonesFromToday.data
-                                                        .hackathones[index]
-                                                        .startingDate
-                                                )}
-                                            </p>
-                                        </div>
+                                        <img
+                                            src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
+                                            alt=""
+                                            className="w-full h-20 object-cover object-[50%_25%] rounded-md md:h-32"
+                                            onClick={() =>
+                                                handleImageClick(hackathon.id)
+                                            }
+                                        />
+                                        <h3 className="mt-2 text-xs md:text-lg font-semibold">
+                                            {hackathon.title}
+                                        </h3>
+                                        <p className="text-xs">
+                                            {formatDate(hackathon.startingDate)}
+                                        </p>
                                     </div>
                                 )
                             )}
                         </div>
                     </div>
-                    {/* Botón Izquierda */}
+
                     <button
                         onClick={handleScrollLeft}
                         className="absolute left-[16px] bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
@@ -191,7 +185,6 @@ const HomePage = () => {
                         <ChevronLeft className="text-[#9A4EAE] w-5 h-5 md:w-7 md:h-7" />
                     </button>
 
-                    {/* Botón Derecha */}
                     <button
                         onClick={handleScrollRight}
                         className="absolute right-[16px] bottom-1/3 p-2 rounded-full bg-[#191919] hover:bg-gray-700 transition md:p-4"
@@ -203,7 +196,9 @@ const HomePage = () => {
 
             {/* Mejor valorados */}
 
-            <section className="max-w-screen p-20  bg-[#191919] text-white flex flex-col">
+
+            <section className="max-w-screen px-10 py-5  bg-[#191919] text-white flex flex-col">
+
                 <h2 className="w-full text-2xl pb-2">Los mejores valorados</h2>
 
                 <img
@@ -212,7 +207,7 @@ const HomePage = () => {
                     className="w-screen max-w-20 mb-8 md:max-w-32"
                 />
 
-                <div className="flex flex-col lg:flex-row lg:min-w-full gap-15 mt-10">
+                <div className="flex flex-col lg:flex-row lg:min-w-full gap-15 mt-5">
                     {bestHackathones.data?.bestHackathones?.map(
                         (hackathon, index) => (
                             <div
@@ -220,7 +215,7 @@ const HomePage = () => {
                                 className="relative flex flex-col items-center w-full gap-4"
                             >
                                 {/* Tarjeta contenedora */}
-                                <div className="hover:scale-110 w-[280px] h-[150px] md:w-[430px] md:h-[180px] md:mb-10 bg-[#242424] hover:bg-[#303030] text-white text-center rounded-lg flex gap-3 relative">
+                                <div className="transition hover:scale-110 w-[280px] h-[150px] md:w-[430px] md:h-[180px] md:mb-10 bg-[#242424] hover:bg-[#303030] text-white text-center rounded-lg flex gap-3 relative">
                                     {/* Imagen en la izquierda (50% de la tarjeta) */}
                                     <p className="absolute bottom-0 left-[-30px] text-[white] text-7xl md:text-8xl lg:text-9xl font-extrabold text-center drop-shadow-[0px_0px_5px_#9A4EAE]">
                                         {index + 1}
@@ -238,7 +233,10 @@ const HomePage = () => {
 
                                     {/* Contenido en la derecha (50% de la tarjeta) */}
                                     <div className="w-1/2 h-full flex flex-col justify-center items-center gap-2">
-                                        <h2>{hackathon.title}</h2>
+                                        <h2 className="font-bold">
+                                            {hackathon.title}
+                                        </h2>
+
                                         <p className="text-xs md:text-base">
                                             Participantes:{' '}
                                             {hackathon.participantCount}
@@ -255,7 +253,9 @@ const HomePage = () => {
             </section>
 
             {/* Preguntas Frecuentes */}
-            <section className="bg-[#191919] text-white px-20 py-10">
+
+            <section className="bg-[#191919] text-white px-10 pt-15 md:pt-5 pb-10">
+
                 <div>
                     <h2 className="text-2xl">Preguntas Frecuentes</h2>
                     <img
@@ -267,7 +267,7 @@ const HomePage = () => {
                         {faqs.map((faq, index) => (
                             <div
                                 key={index}
-                                className="hover:bg-[#303030] border border-white p-4 rounded-md mb-2 md:p-6"
+                                className="transition hover:bg-[#303030] border border-white p-4 rounded-md mb-2 md:p-6"
                             >
                                 {/* Pregunta */}
                                 <div
