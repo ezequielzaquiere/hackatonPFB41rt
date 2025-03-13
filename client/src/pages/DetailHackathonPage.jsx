@@ -279,25 +279,22 @@ const DetailHackathonPage = () => {
     const id = Number(hackathonId);
 
     return (
-        <div
-            className="min-h-screen text-white p-10 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
+        <div className="bg-[#191919] text-white p-5 mt-5 flex flex-col flex-grow items-center justify-center">
             {/* Botones de navegación y acciones */}
-            <div className="flex flex-col md:flex-row gap-4 mb-6 justify-center items-center">
+            <div className="flex flex-col gap-4 mb-6 justify-center items-center">
                 {/* Botones del admin (arriba en móviles) */}
                 <div className="flex flex-wrap gap-4 justify-center order-1 md:order-none">
                     {authUser?.role === 'admin' && (
                         <>
                             <button
                                 onClick={cloneHackathon}
-                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="hover:scale-105 px-4 py-2 bg-[#7a3e8f] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Copiar
                             </button>
                             <button
                                 onClick={deleteHackathon}
-                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="hover:scale-105 px-4 py-2 bg-[#7a3e8f] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Eliminar
                             </button>
@@ -307,7 +304,7 @@ const DetailHackathonPage = () => {
                         isAfter(hackathon.startingDate, new Date()) && (
                             <button
                                 onClick={goToModifyHackathon}
-                                className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                                className="hover:scale-105 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                             >
                                 Modificar
                             </button>
@@ -316,17 +313,14 @@ const DetailHackathonPage = () => {
             </div>
 
             {/* Contenedor principal del hackathon */}
-            <div
-                className="bg-[#212121] rounded-3xl p-8 border border-gray-700 max-w-4xl mx-auto shadow-lg shadow-black/50
-"
-            >
-                <div className="flex flex-col md:flex-row gap-8">
+            <div className="bg-[#242424] rounded-xl p-8 lg:min-w-[800px] lg:max-w-[800px]">
+                <div className="flex flex-col w-full gap-8">
                     {/* Imagen */}
-                    <div className="flex flex-col items-center gap-6  order-1 md:order-none">
+                    <div className="flex flex-col items-center">
                         <img
                             src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                             alt={hackathon.title}
-                            className="w-42 h-32 object-cover rounded-2xl mt-2 md:mb-0 md:ml-4 py-1"
+                            className="object-cover max-w-[400px] w-full rounded-2xl mt-2 md:mb-0 md:ml-4 py-1"
                         />
                     </div>
 
@@ -386,7 +380,7 @@ const DetailHackathonPage = () => {
 
                         {new Date(hackathon.deadline) < new Date() ? (
                             <h3 className="mt-4 text-lg font-semibold text-[#9A4EAE] text-center md:text-left">
-                                El evento ha terminado
+                                ¡El evento ha terminado!
                             </h3>
                         ) : (
                             <>
@@ -394,14 +388,14 @@ const DetailHackathonPage = () => {
                                     registeredHackathons[hackathonId] ? (
                                         <button
                                             onClick={handleUnregister}
-                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
+                                            className="hover:scale-105 not-visited:bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Desapuntarse
                                         </button>
                                     ) : (
                                         <button
                                             onClick={handleRegister}
-                                            className="bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
+                                            className="hover:scale-105 bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit mt-4"
                                         >
                                             Apuntarse
                                         </button>
@@ -434,7 +428,7 @@ const DetailHackathonPage = () => {
                                                     onClick={() =>
                                                         setRating(star)
                                                     }
-                                                    className={`text-2xl ${rating >= star ? 'text-[#9A4EAE]' : 'text-gray-300'}`}
+                                                    className={`text-2xl ${rating >= star ? 'text-[#fcd53f]' : 'text-gray-300'}`}
                                                 >
                                                     ★
                                                 </button>
@@ -442,7 +436,7 @@ const DetailHackathonPage = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit"
+                                            className="hover:scale-105 mt-4 bg-[#7a3a8a] text-white py-2 px-4 rounded hover:bg-[#9A4EAE] transition w-fit"
                                         >
                                             Enviar valoración
                                         </button>
@@ -459,7 +453,7 @@ const DetailHackathonPage = () => {
 
                     {/* Ranking */}
                     {hackathon.resultsPublished === 1 && (
-                        <div className="bg-[#2a2a2a] rounded-3xl p-6 w-fit h-fit order-3 md:order-none">
+                        <div className="bg-[#2a2a2a] rounded-3xl p-6 w-fit h-fit order-3 md:order-none flex flex-col justify-center">
                             <h3 className="text-xl font-bold text-[#9A4EAE] mb-4">
                                 Ranking
                             </h3>
@@ -482,13 +476,13 @@ const DetailHackathonPage = () => {
             <div className="flex gap-4 justify-center mt-6">
                 <button
                     onClick={() => navigate(`/details/${id - 1}`)}
-                    className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                    className="hover:scale-105 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                 >
                     ⬅ Anterior
                 </button>
                 <button
                     onClick={() => navigate(`/details/${id + 1}`)}
-                    className="px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
+                    className="hover:scale-105 px-4 py-2 bg-[#7a3a8a] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition w-fit"
                 >
                     Siguiente ➡
                 </button>
