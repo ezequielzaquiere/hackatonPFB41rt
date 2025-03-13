@@ -4,7 +4,7 @@ const About = () => {
         window.scrollTo(0, 0);
     }, []);
     return (
-        <div className="bg-[#191919] text-white min-h-screen flex flex-col items-center py-10 px-10">
+        <div className="bg-[#191919] text-white min-h-screen flex flex-col items-center p-20 mx-10">
             <section className="flex flex-wrap justify-center gap-10 mb-15 mt-10">
                 {[
                     'ezequiel.png',
@@ -22,9 +22,9 @@ const About = () => {
                 ))}
             </section>
 
-            <section className="w-screen flex justify-start px-10 py-5">
+            <section className="w-screen flex px-20">
                 <div className="flex flex-col gap-5 md:justify-">
-                    <h2 className="text-3xl mt-3">¿Quiénes somos?</h2>
+                    <h2 className="text-2xl mt-10">¿Quiénes somos?</h2>
                     <p className="text-white ml-10 ">
                         Hackverse es una plataforma innovadora dedicada a la
                         organización y promoción de hackatones. Creemos en el
