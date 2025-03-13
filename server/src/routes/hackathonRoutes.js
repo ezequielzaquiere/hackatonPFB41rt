@@ -24,6 +24,7 @@ import {
     registerHackathonPositionsAndPublishController,
     bestHackathonesController,
     selectRatingsByHackathonIdAndUserIdController,
+    listHackathonesLocationsController,
 } from '../controllers/hackathones/index.js';
 import listNextHackathonesController from '../controllers/hackathones/listNextHackathonesController.js';
 
@@ -73,6 +74,9 @@ router.get('/hackathones/details/:id', hackathonDetailController);
 // Ruta para obtener la lista de tecnologías de los hackathones
 router.get('/hackathones/langs', listHackathonesLangsController);
 
+// Ruta para obtener la lista de localizaciones
+router.get('/hackathones/location', listHackathonesLocationsController);
+
 //Ruta rating de un hackathon
 router.post(
     '/:hackathonId/ratings',
@@ -84,7 +88,7 @@ router.post(
 router.get(
     '/:hackathonId/ratings/:userId',
     selectRatingsByHackathonIdAndUserIdController
-)
+);
 
 //Endpoint para enseñar lista pública de usuarios registrados en un hackathon
 router.get(

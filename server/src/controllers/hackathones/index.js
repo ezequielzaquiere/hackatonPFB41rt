@@ -13,7 +13,7 @@ import listHackathonParticipantsController from './listHackathonParticipantsCont
 import bestHackathonesController from './bestHackathonesController.js';
 import listNextHackathonesController from './listNextHackathonesController.js';
 import selectRatingsByHackathonIdAndUserIdController from './listRatingsByHackathonIdAndUserIdController.js';
-
+import listHackathonesLocationsController from './listHackathonesLocationsController.js';
 //Exportar funciones en un solo objeto
 export {
     newHackathonController,
@@ -29,4 +29,5 @@ export {
     listHackathonParticipantsController,
     bestHackathonesController,
     selectRatingsByHackathonIdAndUserIdController,
+    listHackathonesLocationsController,
 };

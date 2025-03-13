@@ -93,6 +93,7 @@ const RegisterPage = () => {
     }
 
     return (
+
         <main className="bg-[#191919] min-h-screen flex flex-col justify-start items-center px-10 py-10 text-s">
             <h2 className="text-3xl text-center text-[#9A4EAE] mt-10 mb-10">
                 ¡Crea tu cuenta!
