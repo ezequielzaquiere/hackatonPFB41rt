@@ -61,8 +61,8 @@ const SendRecoveryPassCode = () => {
     };
 
     return (
-        <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
-            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+        <main className="bg-[#191919] min-h-140 flex flex-col justify-start items-center p-6">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mt-10 mb-10">
                 ¡Recupera tu contraseña!
             </h2>
             <form
@@ -88,7 +88,7 @@ const SendRecoveryPassCode = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`min-w-[200px] mb-5 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        className={`hover:scale-105 transition min-w-[200px] mb-5 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
                         ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
@@ -99,12 +99,12 @@ const SendRecoveryPassCode = () => {
                     </button>
                 </div>
 
-                <p className="text-[#7A3E8F] text-center text-sm">
+                <p className="text-[#7A3E8F] text-center text-base">
                     ¿No ves nada en tu bandeja de entrada?
                 </p>
                 <Link
                     to="/users/password/reset"
-                    className="text-[#9A4EAE] font-bold hover:underline text-center text-sm"
+                    className="text-[#9A4EAE] font-bold hover:underline text-center text-base"
                 >
                     Reenviar email
                 </Link>

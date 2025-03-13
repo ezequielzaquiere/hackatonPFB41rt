@@ -19,7 +19,6 @@ const RegisterPage = () => {
     const { authUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
 
     //Creamos una variable en el State para cada elemento del formulario.
     const [username, setUsername] = useState('');
@@ -94,11 +93,8 @@ const RegisterPage = () => {
     }
 
     return (
-        <main
-            className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-10 py-10 text-s"
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
-            <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
+        <main className="bg-[#191919] min-h-screen flex flex-col justify-start items-center px-10 py-10 text-s">
+            <h2 className="text-3xl text-center text-[#9A4EAE] mt-10 mb-10">
                 ¡Crea tu cuenta!
             </h2>
 
@@ -234,7 +230,7 @@ const RegisterPage = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
+                        className={`hover:scale-105 transition max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
                                 : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50'

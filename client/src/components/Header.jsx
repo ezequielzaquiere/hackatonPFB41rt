@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { Menu, X } from 'lucide-react'; // Iconos de menú hamburguesa
 import defaultAvatar from '/default-avatar.png';
+import { motion } from 'framer-motion';
 const { VITE_API_URL } = import.meta.env;
 
 // Inicializamos el componente
@@ -27,19 +28,19 @@ const Header = () => {
                     <>
                         <Link
                             to="/hackathones"
-                            className="text-white transition hover:scale-115"
+                            className="hover:text-gray-300 text-white transition hover:scale-115"
                         >
                             Hackathones
                         </Link>
                         <Link
                             to="/register"
-                            className="text-white transition hover:scale-115"
+                            className="hover:text-gray-300 text-white transition hover:scale-115"
                         >
                             Registro
                         </Link>
                         <Link
                             to="/login"
-                            className="text-white transition hover:scale-115"
+                            className="hover:text-gray-300 text-white transition hover:scale-115"
                         >
                             Iniciar Sesión
                         </Link>
@@ -48,22 +49,16 @@ const Header = () => {
                     <>
                         <Link
                             to="/hackathones"
-                            className="text-white transition hover:scale-115"
+                            className="hover:text-gray-300 text-white transition hover:scale-115"
                         >
                             Hackathones
-                        </Link>
-                        <Link
-                            to="/users/profile"
-                            className="text-white transition hover:scale-115"
-                        >
-                            Mi perfil
                         </Link>
 
                         {authUser.role === 'admin' && (
                             <div className="flex gap-5">
                                 <Link
                                     to="admin/myhackathons"
-                                    className="hover:scale-110 transition text-white "
+                                    className="hover:text-gray-300 hover:scale-110 transition text-white "
                                     onClick={() => setIsOpen(false)}
                                 >
                                     Mis hackathones
@@ -81,7 +76,7 @@ const Header = () => {
 
                         <button
                             onClick={authLogoutState}
-                            className="text-white transition hover:scale-115"
+                            className="hover:text-gray-300 text-white transition hover:scale-115"
                         >
                             Cerrar Sesión
                         </button>
@@ -99,7 +94,7 @@ const Header = () => {
 
             {/* Menú Hamburguesa */}
             <nav
-                className={`absolute top-20 right-4 bg-[#222] text-white p-6 rounded-lg shadow-lg w-64 h-auto z-50 flex flex-col space-y-4 transition-all duration-300 ${
+                className={`border-1 border-[#7A3E8F] absolute top-20 right-4 bg-[#222] text-white p-6 rounded-lg shadow-lg w-50 h-auto z-50 flex flex-col space-y-4 transition ${
                     isOpen ? 'block' : 'hidden'
                 } lg:hidden`}
             >
@@ -107,20 +102,20 @@ const Header = () => {
                     <>
                         <Link
                             to="/hackathones"
-                            className="text-white transition hover:scale-115"
+                            className="hover:text-gray-300 text-white transition hover:scale-115"
                         >
                             Hackathones
                         </Link>
                         <Link
                             to="/register"
-                            className="hover:scale-105 transition "
+                            className="hover:text-gray-300 hover:scale-105 transition "
                             onClick={() => setIsOpen(false)}
                         >
                             Registro
                         </Link>
                         <Link
                             to="/login"
-                            className="hover:scale-105 transition "
+                            className="hover:text-gray-300 hover:scale-105 transition "
                             onClick={() => setIsOpen(false)}
                         >
                             Iniciar Sesión
@@ -133,13 +128,6 @@ const Header = () => {
                             className="hover:text-gray-300 transition"
                         >
                             Hackathones
-                        </Link>
-                        <Link
-                            to="/users/profile"
-                            className="hover:text-gray-300 transition"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Mi perfil
                         </Link>
 
                         {authUser.role === 'admin' && (
@@ -176,9 +164,9 @@ const Header = () => {
 
             {/* Usuario Autenticado - Avatar y Nombre */}
             {authUser && (
-                <Link to="/users/profile" className="hidden">
-                    <div className="hover:scale-115 transition hidden lg:flex items-center">
-                        <p className="text-white">@{authUser.username}</p>
+                <Link to="/users/profile" className="hidden lg:block">
+                    <div className="hover:scale-115 transition hidden min-w-10 h-full lg:flex items-center">
+                        <p className="text-white pr-4">@{authUser.username}</p>
                         <img
                             src={
                                 authUser.avatar
