@@ -177,7 +177,7 @@ const EditHackathonPage = () => {
         <>
             <main className="bg-[#191919] min-h-screen flex flex-col justify-center items-center px-2 sm:px-6 lg:px-24 py-10 lg:py-20">
                 {/* Encabezado con título */}
-                <h2 className="text-3xl lg:text-4xl text-center text-[#9A4EAE] mb-10">
+                <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
                     ¡Edita el Hackathon!
                 </h2>
 

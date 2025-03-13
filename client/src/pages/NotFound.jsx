@@ -14,7 +14,7 @@ const NotFound = () => {
             </p>
 
             {/* Botón de regreso */}
-            <div className="mt-6">
+            <div className="hover:scale-105 transition mt-6">
                 <Link
                     to="/"
                     className="px-6 py-3 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition duration-300"
