@@ -82,7 +82,7 @@ const HackathonsPage = () => {
     return (
         <div className="bg-[#191919] text-white min-h-screen p-10">
             {/* Título */}
-            <h1 className="text-3xl font-bold text-center mb-10">
+            <h1 className="text-3xl text-[#9a4eae] text-center mt-10 mb-10">
                 Hackathones
             </h1>
 
@@ -90,9 +90,16 @@ const HackathonsPage = () => {
             <div className="flex justify-end mb-4">
                 <button
                     onClick={() => setIsFormVisible(!isFormVisible)}
-                    className="bg-[#9A4EAE] text-white px-4 py-2 rounded-md hover:bg-[#7B3A8E] transition"
+                    className="hover:scale-105 transition  bg-[#7A3E8F] text-white px-4 py-2 rounded-md hover:bg-[#9a4eae]"
                 >
-                    {isFormVisible ? 'Ocultar Filtros' : 'Mostrar Filtros'}
+                    {isFormVisible ? (
+                        'Ocultar Filtros'
+                    ) : (
+                        <div className="flex gap-2 ">
+                            <p>Filtrar</p>
+                            <img src="/filter.png" className="w-6" />
+                        </div>
+                    )}
                 </button>
             </div>
 
@@ -109,7 +116,7 @@ const HackathonsPage = () => {
                                 htmlFor="title"
                                 className="block text-sm font-medium mb-2"
                             >
-                                Título:
+                                Título
                             </label>
                             <input
                                 type="text"
@@ -127,7 +134,7 @@ const HackathonsPage = () => {
                                 htmlFor="programmingLang"
                                 className="block text-sm font-medium mb-2"
                             >
-                                Lenguaje de programación:
+                                Lenguaje de programación
                             </label>
                             <input
                                 type="text"
@@ -145,7 +152,7 @@ const HackathonsPage = () => {
                                 htmlFor="startingDate"
                                 className="block text-sm font-medium mb-2"
                             >
-                                Fecha de inicio:
+                                Fecha de inicio
                             </label>
                             <input
                                 type="date"
@@ -163,7 +170,7 @@ const HackathonsPage = () => {
                                 htmlFor="type"
                                 className="block text-sm font-medium mb-2"
                             >
-                                Tipo:
+                                Tipo
                             </label>
                             <select
                                 id="type"
@@ -184,7 +191,7 @@ const HackathonsPage = () => {
                                 htmlFor="location"
                                 className="block text-sm font-medium mb-2"
                             >
-                                Ubicación:
+                                Ubicación
                             </label>
                             <select
                                 id="location"
@@ -207,14 +214,14 @@ const HackathonsPage = () => {
                     <div className="flex justify-end gap-4 mt-6">
                         <button
                             type="submit"
-                            className="bg-[#9A4EAE] text-white px-4 py-2 rounded-md hover:bg-[#7B3A8E] transition"
+                            className="bg-[#7B3A8E] text-white px-4 py-2 rounded-md hover:bg-[#9A4EAE] hover:scale-105 transition"
                         >
                             Filtrar
                         </button>
                         <button
                             type="button"
                             onClick={clearFilters}
-                            className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
+                            className="hover:scale-105 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
                         >
                             Limpiar Filtros
                         </button>
@@ -237,10 +244,10 @@ const HackathonsPage = () => {
                                     {hackathon.title}
                                 </h2>
                                 <p className="text-gray-300">
-                                    <strong>Tipo:</strong> {hackathon.type}
+                                    <strong>Tipo</strong> {hackathon.type}
                                 </p>
                                 <p className="text-gray-300">
-                                    <strong>Fecha de inicio:</strong>{' '}
+                                    <strong>Fecha de inicio</strong>{' '}
                                     {format(
                                         hackathon.startingDate,
                                         'dd-MM-yyyy'
@@ -248,12 +255,12 @@ const HackathonsPage = () => {
                                 </p>
                                 {hackathon.location && (
                                     <p className="text-gray-300">
-                                        <strong>Ubicación:</strong>{' '}
+                                        <strong>Ubicación</strong>{' '}
                                         {hackathon.location}
                                     </p>
                                 )}
                                 <p className="text-gray-300">
-                                    <strong>Lenguajes:</strong>{' '}
+                                    <strong>Lenguajes</strong>{' '}
                                     {hackathon.programmingLangs
                                         ?.split(',')
                                         .join(', ') || 'No especificado'}
