@@ -58,11 +58,8 @@ const UserHackathons = () => {
     }, [authUser.username]);
 
     return (
-        <main
-            className="flex min-h-screen items-center text-center px-8 py-12 lg:px-20 lg:py-20 flex-col bg-[#191919]"
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
-            <div className="flex-1 text-[32px] lg:text-[32px] text-[#9A4EAE] font-bold mb-8">
+        <main className="flex min-h-screen items-center text-center px-8 py-12 lg:px-20 lg:py-20 flex-col bg-[#191919]">
+            <div className="flex-1 text-3xl text-[#9A4EAE] mb-8">
                 <h1>Lista de hackathones</h1>
             </div>
             <section className="w-full max-w-4xl mt-12">

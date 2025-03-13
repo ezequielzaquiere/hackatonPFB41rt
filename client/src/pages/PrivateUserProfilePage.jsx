@@ -67,24 +67,26 @@ const PrivateUserProfilePage = () => {
                 </ul>
 
                 {/* Botones de acción */}
-                <div className="mt-6 flex flex-col items-center w-full gap-3 mt-10">
+                <div className="flex flex-col items-center w-full gap-3 mt-10">
                     <Link
                         to="/users/profile/update"
-                        className="min-w-[220px] text-center py-2 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all"
+                        className="min-w-[220px] text-center py-2 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all hover:scale-105"
                     >
                         Editar perfil
                     </Link>
 
-                    <Link
-                        to={`/${authUser.username}/registrations`}
-                        className="min-w-[220px] text-center py-2 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all"
-                    >
-                        Ver mis inscripciones
-                    </Link>
+                    {authUser.role === 'dev' && (
+                        <Link
+                            to={`/${authUser.username}/registrations`}
+                            className="min-w-[220px] text-center py-2 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all hover:scale-105"
+                        >
+                            Ver mis inscripciones
+                        </Link>
+                    )}
 
                     <Link
                         to="/users/password/change"
-                        className="min-w-[220px] text-center py-2 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all"
+                        className="min-w-[220px] text-center py-2 bg-[#7A3E8F] text-white font-semibold rounded-lg hover:bg-[#9A4EAE] transition-all hover:scale-105"
                     >
                         Cambiar contraseña
                     </Link>
