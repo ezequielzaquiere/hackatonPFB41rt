@@ -210,11 +210,11 @@ const ChangePassword = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`max-w-[150px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        className={`hover:scale-105 max-w-[150px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
                         ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                                : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
                         }`}
                     >
                         {loading ? 'Cambiando...' : 'Enviar'}
@@ -222,11 +222,11 @@ const ChangePassword = () => {
 
                     <Link
                         to="/users/profile"
-                        className={`max-w-[150px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
+                        className={`hover:scale-105 max-w-[150px] mt-5 mb-1 px-4 py-2 font-semibold rounded-lg transition duration-300 shadow-[4px_4px_10px_#191919] 
                         ${
                             loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                : 'bg-[#9A4EAE] text-white hover:bg-[#7A3E8F] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
+                                : 'bg-[#7A3E8F] text-white hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:ring-[#9A4EAE] focus:ring-opacity-50'
                         }`}
                     >
                         Atrás

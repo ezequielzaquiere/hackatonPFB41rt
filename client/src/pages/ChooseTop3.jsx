@@ -9,9 +9,9 @@ import toast from 'react-hot-toast';
 const ChooseTop3 = () => {
     const navigate = useNavigate();
     const { authToken, authUser } = useContext(AuthContext);
-            
+
     // Redirigir si no hay token de autenticación
-    if (!authToken || !authUser.role === "admin")  {
+    if (!authToken || !authUser.role === 'admin') {
         navigate('/');
     }
 
@@ -19,21 +19,26 @@ const ChooseTop3 = () => {
     const [thisHackathon, setThisHackathon] = React.useState([]);
 
     const hackathon = useParams();
-    
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
         const fetchParticipants = async () => {
             try {
-                const response1 = await fetch(`${VITE_API_URL}/api/hackathon/${hackathon.hackathonId}/participants/private`);
+                const response1 = await fetch(
+                    `${VITE_API_URL}/api/hackathon/${hackathon.hackathonId}/participants/private`
+                );
                 const data1 = await response1.json();
                 setParticipants(data1.data.hackathonUsers);
-                const response2 = await fetch(`${VITE_API_URL}/api/hackathon/hackathones/details/${hackathon.hackathonId}`);
+                const response2 = await fetch(
+                    `${VITE_API_URL}/api/hackathon/hackathones/details/${hackathon.hackathonId}`
+                );
                 const data2 = await response2.json();
-                setThisHackathon(data2.data.hackathon)
+                setThisHackathon(data2.data.hackathon);
             } catch (err) {
-                toast.error("Ha habido un fallo al obtener los usuarios registrados.");
-            };
+                toast.error(
+                    'Ha habido un fallo al obtener los usuarios registrados.'
+                );
+            }
         };
 
         fetchParticipants();
@@ -61,9 +66,9 @@ const ChooseTop3 = () => {
                 `${VITE_API_URL}/api/hackathon/${hackathon.hackathonId}/publish`,
                 {
                     method: 'POST',
-                headers: {
+                    headers: {
                         'Content-Type': 'application/json',
-                },
+                    },
                     body: JSON.stringify(podiumData),
                 }
             );
@@ -84,12 +89,20 @@ const ChooseTop3 = () => {
     return (
         <div className="bg-[#191919] text-white min-h-screen p-10">
             {/* Título */}
-            <h1 className="text-3xl font-bold text-center mb-10">
-                Selecciona el Top 3 del hackathon: {thisHackathon.title}
+            <h1 className="text-3xl text-center text-[#9A4EAE] mb-10 mt-10">
+                ¡Selecciona el Top 3!
             </h1>
 
             {/* Contenedor de selección */}
-            <div className="bg-[#212121] p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+            <div className="bg-[#212121] p-6 rounded-lg shadow-lg max-w-2xl mx-auto ">
+                <div className="flex flex-col justify-center items-center text-xl text-center mb-10 mt-5 gap-4">
+                    <h2>{thisHackathon.title}</h2>
+                    <img
+                        src={`${VITE_API_URL}/imgHack/${thisHackathon.image}`}
+                        alt=""
+                        className="mb-5 rounded-lg"
+                    />
+                </div>
                 {/* Primer puesto */}
                 <div className="mb-6">
                     <label className="block text-sm font-medium mb-2">
@@ -169,9 +182,9 @@ const ChooseTop3 = () => {
                 <div className="flex justify-end">
                     <button
                         onClick={() =>
-                                handleSubmit(firstPlace, secondPlace, thirdPlace)
+                            handleSubmit(firstPlace, secondPlace, thirdPlace)
                         }
-                        className="bg-[#9A4EAE] text-white px-4 py-2 rounded-md hover:bg-[#7B3A8E] transition"
+                        className="hover:scale-105 bg-[#7a3e8f] text-white px-4 py-2 rounded-md hover:bg-[#9A4EAE] transition"
                     >
                         Enviar
                     </button>
