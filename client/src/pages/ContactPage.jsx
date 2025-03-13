@@ -4,7 +4,7 @@ const Contact = () => {
         window.scrollTo(0, 0);
     }, []);
     return (
-        <section className="bg-[#191919] text-white w-screen flex items-center justify-center px-10 py-10">
+        <section className="bg-[#191919] text-white w-screen flex items-center justify-center px-10 py-15">
             <div className="flex flex-col items-center gap-10">
                 <div className="flex justify-center">
                     <img src="/logo.png" className="w-20" />

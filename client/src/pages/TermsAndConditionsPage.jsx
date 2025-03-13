@@ -5,7 +5,7 @@ const Terms = () => {
     }, []);
     return (
         <div className="bg-[#191919] text-white min-h-screen flex flex-col items-center py-10 px-10">
-            <section className="w-screen flex justify-start px-10 py-5">
+            <section className="w-screen flex justify-start px-20 py-5">
                 <div className="flex flex-col gap-5">
                     <h1 className="text-2xl mt-3">
                         Términos y Condiciones de Hackverse
