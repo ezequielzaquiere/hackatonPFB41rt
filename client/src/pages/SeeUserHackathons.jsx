@@ -10,7 +10,6 @@ const UserHackathons = () => {
     const user = useParams();
     const navigate = useNavigate();
     const { authToken, authUser } = useContext(AuthContext);
-    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
 
     const [pastRegistrations, setPastRegistrations] = React.useState([]);
     const [futureRegistrations, setFutureRegistrations] = React.useState([]);
@@ -58,10 +57,7 @@ const UserHackathons = () => {
     }, [authUser.username]);
 
     return (
-        <main
-            className="flex min-h-screen items-center text-center px-8 py-12 lg:px-20 lg:py-20 flex-col bg-[#191919]"
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
+        <main className="flex min-h-screen items-center text-center px-8 py-12 lg:px-20 lg:py-20 flex-col bg-[#191919]">
             <div className="flex-1 text-[32px] lg:text-[32px] text-[#9A4EAE] font-bold mb-8">
                 <h1>Lista de hackathones</h1>
             </div>

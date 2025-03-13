@@ -1,5 +1,4 @@
 import { format } from 'date-fns';
-
 import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +7,7 @@ const { VITE_API_URL } = import.meta.env;
 const HackathonsPage = () => {
     const navigate = useNavigate();
     const handleClick = (id) => {
-        navigate(`/details/${id}`); // Redirige a la página de detalles ***
+        navigate(`/details/${id}`); // Redirige a la página de detalles
     };
     const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
     const [isFormVisible, setIsFormVisible] = useState(false); // Estado para controlar la visibilidad del formulario
@@ -22,6 +21,8 @@ const HackathonsPage = () => {
     });
 
     const [hackathons, setHackathons] = useState([]);
+    const [locations, setLocations] = useState([]); // Estado para almacenar las localizaciones
+    const [lenguajes, setLangs] = useState([]); // Estado para almacenar los lenguajes
 
     const hasFetched = useRef(false); // Usamos useRef para controlar si ya se ha hecho la primera carga
 
@@ -57,8 +58,47 @@ const HackathonsPage = () => {
         }
     };
 
+    const fetchLocations = async () => {
+        try {
+            const response = await fetch(
+                `${VITE_API_URL}/api/hackathon/hackathones/location`
+            );
+            const data = await response.json();
+
+            if (data) {
+                setLocations(data.data); // Almacenamos las localizaciones
+            } else {
+                console.error(data.message);
+                toast.error('Error al cargar las localizaciones.');
+            }
+        } catch (error) {
+            console.error('Error al obtener las localizaciones:', error);
+            toast.error('Error de red al cargar las localizaciones.');
+        }
+    };
+    const fetchLangs = async () => {
+        try {
+            const response = await fetch(
+                `${VITE_API_URL}/api/hackathon/hackathones/langs`
+            );
+            const data = await response.json();
+
+            if (data) {
+                setLangs(data.data); // Almacenamos los lenguajes
+            } else {
+                console.error(data.message);
+                toast.error('Error al cargar los lenguajes.');
+            }
+        } catch (error) {
+            console.error('Error al obtener los lenguajes.:', error);
+            toast.error('Error de red al cargar los lenguajes.');
+        }
+    };
+
     useEffect(() => {
         fetchHackathons();
+        fetchLocations(); // Cargamos las localizaciones al montar el componente
+        fetchLangs();
     }, []);
 
     const handleSubmit = (e) => {
@@ -132,14 +172,23 @@ const HackathonsPage = () => {
                             >
                                 Lenguaje de programación:
                             </label>
-                            <input
-                                type="text"
-                                id="programmingLang"
-                                name="programmingLang"
+                            <select
+                                id="lenguaje"
+                                name="lenguaje"
                                 value={filters.programmingLang}
                                 onChange={handleFilterChange}
-                                className="focus:placeholder-transparent bg-[#333] mb-4 border border-[#7A3E8F] focus:bg-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition  hover:ring-2 hover:ring-[#7A3E8F]"
-                            />
+                                className="focus:placeholder-transparent bg-[#333] mb-4 border border-[#7A3E8F] focus:bg-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
+                            >
+                                <option value="">Selecciona un lenguaje</option>
+                                {lenguajes.slice(1).map((item, index) => (
+                                    <option
+                                        key={index}
+                                        value={item.programmingLang}
+                                    >
+                                        {item.programmingLang}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         {/* Fecha de inicio */}
@@ -197,11 +246,11 @@ const HackathonsPage = () => {
                                 className="focus:placeholder-transparent bg-[#333] mb-4 border border-[#7A3E8F] focus:bg-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                             >
                                 <option value="">Selecciona una ciudad</option>
-                                <option value="Madrid">Madrid</option>
-                                <option value="Barcelona">Barcelona</option>
-                                <option value="Valencia">Valencia</option>
-                                <option value="Sevilla">Sevilla</option>
-                                <option value="A coruña">A coruña</option>
+                                {locations.slice(1).map((item, index) => (
+                                    <option key={index} value={item.location}>
+                                        {item.location}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>

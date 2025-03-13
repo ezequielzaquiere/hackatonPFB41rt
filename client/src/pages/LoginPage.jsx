@@ -17,7 +17,6 @@ const { VITE_API_URL } = import.meta.env;
 const LoginPage = () => {
     //Importamos el contexto de autorización.
     const { authUser, authLoginState } = useContext(AuthContext);
-    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
     //Creamos una variable en el State para cada elemento del formulario.
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -77,10 +76,7 @@ const LoginPage = () => {
     }
 
     return (
-        <main
-            className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6"
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
+        <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
             <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
                 ¡Inicia sesión!
             </h2>
