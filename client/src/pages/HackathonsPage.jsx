@@ -10,7 +10,7 @@ const HackathonsPage = () => {
     const handleClick = (id) => {
         navigate(`/details/${id}`); // Redirige a la página de detalles ***
     };
-    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
+
     const [isFormVisible, setIsFormVisible] = useState(false); // Estado para controlar la visibilidad del formulario
 
     const [filters, setFilters] = useState({
@@ -80,10 +80,7 @@ const HackathonsPage = () => {
     };
 
     return (
-        <div
-            className="bg-[#191919] text-white min-h-screen p-10"
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
+        <div className="bg-[#191919] text-white min-h-screen p-10">
             {/* Título */}
             <h1 className="text-3xl font-bold text-center mb-10">
                 Hackathones
@@ -201,7 +198,7 @@ const HackathonsPage = () => {
                                 <option value="Barcelona">Barcelona</option>
                                 <option value="Valencia">Valencia</option>
                                 <option value="Sevilla">Sevilla</option>
-                                <option value="Virtual">Galicia</option>
+                                <option value="A coruña">A Coruña</option>
                             </select>
                         </div>
                     </div>
@@ -267,7 +264,7 @@ const HackathonsPage = () => {
                             <img
                                 src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                                 alt={hackathon.title}
-                                className="w-42 h-32 rounded-2xl mt-2 md:mb-0 md:ml-4 py-1"
+                                className="w-42 h-32 object-cover rounded-2xl mt-2 md:mb-0 md:ml-4 py-1"
                             />
                         </div>
                     ))

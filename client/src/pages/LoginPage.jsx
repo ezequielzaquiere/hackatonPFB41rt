@@ -77,7 +77,7 @@ const LoginPage = () => {
     }
 
     return (
-        <main className="bg-[#191919] min-h-140 flex flex-col justify-center items-center p-6">
+        <main className="bg-[#191919] min-h-140 pt-10 flex flex-col justify-center items-center p-6">
             <h2 className="text-3xl text-center text-[#9A4EAE] mb-10">
                 ¡Inicia sesión!
             </h2>
