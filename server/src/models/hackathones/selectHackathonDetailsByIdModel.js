@@ -69,7 +69,7 @@ const selectHackathonDetailsByIdModel = async (hackathonId) => {
     }
 
     // Convertimos a tipo Number la media de ratings
-    hackathonList[0].avgRating = Number(hackathonList[0].avgRating);
+    hackathonList[0].avgRating = Math.floor(Number(hackathonList[0].avgRating));
 
     return hackathonList[0];
 };

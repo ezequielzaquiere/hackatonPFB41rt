@@ -198,7 +198,7 @@ const HackathonsPage = () => {
                                 <option value="Barcelona">Barcelona</option>
                                 <option value="Valencia">Valencia</option>
                                 <option value="Sevilla">Sevilla</option>
-                                <option value="A coruña">A Coruña</option>
+                                <option value="A coruña">A coruña</option>
                             </select>
                         </div>
                     </div>

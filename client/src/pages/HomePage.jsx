@@ -37,7 +37,7 @@ const HomePage = () => {
     const handleImageClick = (id) => {
         navigate(`/details/${id}`); // Redirige a la página de detalles ***
     };
-
+    const backgroundImageUrl = `${VITE_API_URL}/imgHack/backg2.jpg`;
     //Traer del backend los 3 mejores hackathones según rating
     const bestHackathones = useBestHackathonesList();
 
@@ -136,7 +136,10 @@ const HomePage = () => {
             </div>
 
             {/* Próximos Eventos */}
-            <section className="bg-[#191919] text-white p-20 relative">
+            <section
+                className="bg-[#191919] text-white p-20 relative"
+                style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+            >
                 <div className="mb-4">
                     <h2 className="text-2xl md:text-2xl">Próximos Eventos</h2>
 
@@ -209,7 +212,10 @@ const HomePage = () => {
 
             {/* Mejor valorados */}
 
-            <section className="max-w-screen p-20  bg-[#191919] text-white flex flex-col">
+            <section
+                className="max-w-screen p-20  bg-[#191919] text-white flex flex-col"
+                style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+            >
                 <h2 className="w-full text-2xl pb-2">Los mejores valorados</h2>
 
                 <img
@@ -264,7 +270,10 @@ const HomePage = () => {
             </section>
 
             {/* Preguntas Frecuentes */}
-            <section className="bg-[#191919] text-white px-20 py-10">
+            <section
+                className="bg-[#191919] text-white px-20 py-10"
+                style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+            >
                 <div>
                     <h2 className="text-2xl">Preguntas Frecuentes</h2>
                     <img
