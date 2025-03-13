@@ -11,7 +11,7 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="bg-[#191919] border-black border-b-1 text-ss px-20 py-5 flex justify-between items-center relative">
+        <header className="bg-[#191919] hover:bg-[#222222] transition-colors  border-black border-b-1 text-ss px-20 py-5 flex justify-between items-center relative">
             {/* Logo */}
             <Link to="/">
                 <img
@@ -113,14 +113,14 @@ const Header = () => {
                         </Link>
                         <Link
                             to="/register"
-                            className="hover:text-gray-300 transition"
+                            className="hover:scale-105 transition "
                             onClick={() => setIsOpen(false)}
                         >
                             Registro
                         </Link>
                         <Link
                             to="/login"
-                            className="hover:text-gray-300 transition"
+                            className="hover:scale-105 transition "
                             onClick={() => setIsOpen(false)}
                         >
                             Iniciar Sesión

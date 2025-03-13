@@ -82,7 +82,7 @@ const HomePage = () => {
     const text = '¡Bienvenido a las mejores competiciones de código!';
     return (
         <>
-            <div className="relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
+            <div className=" relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
                 {/* Video de fondo */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -121,7 +121,12 @@ const HomePage = () => {
                                 key={index}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: index * 0.05 }}
+                                transition={{
+                                    delay: index * 0.05,
+                                    duration: 0.8,
+                                    repeat: Infinity,
+                                    repeatType: 'reverse',
+                                }}
                             >
                                 {char}
                             </motion.span>
@@ -154,7 +159,7 @@ const HomePage = () => {
                                 (hackathon, index) => (
                                     <div
                                         key={index}
-                                        className="hover:scale-105 hover:rounded-2xl relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#242424] hover:bg-[#303030] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
+                                        className="hover:scale-110 hover:rounded-2xl relative flex flex-col justify-between min-w-[112px] min-h-[185px] bg-[#242424] hover:bg-[#303030] bg-center p-2 rounded-lg text-white text-center snap-start md:min-w-[200px] md:min-h-[250px] md:p-3"
                                     >
                                         {/* Capa negra sobre el fondo */}
                                         <div className="absolute bg-black/5 rounded-lg"></div>
@@ -245,7 +250,10 @@ const HomePage = () => {
 
                                     {/* Contenido en la derecha (50% de la tarjeta) */}
                                     <div className="w-1/2 h-full flex flex-col justify-center items-center gap-2">
-                                        <h2>{hackathon.title}</h2>
+                                        <h2 className="font-bold">
+                                            {hackathon.title}
+                                        </h2>
+
                                         <p className="text-xs md:text-base">
                                             Participantes:{' '}
                                             {hackathon.participantCount}

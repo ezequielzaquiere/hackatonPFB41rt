@@ -322,11 +322,11 @@ const DetailHackathonPage = () => {
             >
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Imagen */}
-                    <div className="flex flex-col items-center gap-6 order-1 md:order-none">
+                    <div className="flex flex-col items-center gap-6  order-1 md:order-none">
                         <img
                             src={`${VITE_API_URL}/imgHack/${hackathon.image}`}
                             alt={hackathon.title}
-                            className="w-42 h-32 rounded-2xl mt-2 md:mb-0 md:ml-4 py-1"
+                            className="w-42 h-32 object-cover rounded-2xl mt-2 md:mb-0 md:ml-4 py-1"
                         />
                     </div>
 
