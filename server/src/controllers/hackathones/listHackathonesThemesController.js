@@ -1,8 +1,8 @@
-//Importar función que genera errores
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
-
-//Importar modelo
+//Modelo que trae la lista de temas de los hackathones
 import listHackathonesThemesModel from '../../models/hackathones/listHackathonesThemesModel.js';
+
+//Función que genera errores
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //Función controladora que lista las temáticas de los Hackatones
 const listHackathonesThemesController = async (req, res) => {
@@ -10,6 +10,7 @@ const listHackathonesThemesController = async (req, res) => {
         //Obtener los temas de los hackathones
         const hackathonesThemes = await listHackathonesThemesModel();
 
+        //Respuesta
         res.send({
             status: 'ok',
             data: {

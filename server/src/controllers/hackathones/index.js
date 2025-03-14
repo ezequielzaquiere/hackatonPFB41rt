@@ -10,7 +10,7 @@ import ratingHackathonController from './ratingHackathonController.js';
 import filterHackathonesController from './filterHackathonesController.js';
 import registerHackathonPositionsAndPublishController from './registerHackathonPositionsAndPublishController.js';
 import listHackathonParticipantsController from './listHackathonParticipantsController.js';
-import bestHackathonesController from './bestHackathonesController.js';
+import listBestHackathonesController from './listBestHackathonesController.js';
 import listNextHackathonesController from './listNextHackathonesController.js';
 import selectRatingsByHackathonIdAndUserIdController from './listRatingsByHackathonIdAndUserIdController.js';
 import listHackathonesLocationsController from './listHackathonesLocationsController.js';
@@ -27,7 +27,7 @@ export {
     filterHackathonesController,
     registerHackathonPositionsAndPublishController,
     listHackathonParticipantsController,
-    bestHackathonesController,
+    listBestHackathonesController,
     selectRatingsByHackathonIdAndUserIdController,
     listHackathonesLocationsController,
 };
