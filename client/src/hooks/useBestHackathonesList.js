@@ -11,6 +11,7 @@ const useBestHackathonesList = () => {
                 const response = await fetch(
                     `${VITE_API_URL}/api/hackathon/hackathones/bestHackathones`
                 );
+
                 if (!response.ok) {
                     throw new Error(
                         'Network response was not ok ' + response.statusText

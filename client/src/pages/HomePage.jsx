@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 //Hooks
-import useBestHackathonesList from '../hooks/useBestHackathonesList';
-import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
+import useBestHackathonesList from '../hooks/useBestHackathonesList.js';
+import useHackathonesFromToday from '../hooks/useHackathonesFromToday.js';
 import formatDate from '../utils/formatedDate.js';
 const { VITE_API_URL } = import.meta.env;
 
@@ -208,7 +208,7 @@ const HomePage = () => {
                 />
 
                 <div className="flex flex-col lg:flex-row lg:min-w-full gap-15 mt-5">
-                    {bestHackathones.data?.bestHackathones?.map(
+                    {bestHackathones.data?.listBestHackathones?.map(
                         (hackathon, index) => (
                             <div
                                 key={index}
