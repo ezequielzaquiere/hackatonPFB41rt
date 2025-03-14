@@ -177,14 +177,14 @@ const HackathonsPage = () => {
                                 Lenguaje de programación
                             </label>
                             <select
-                                id="lenguaje"
-                                name="lenguaje"
-                                value={filters.programmingLang}
+                                id="programmingLang" // Cambia el id para que coincida con el name
+                                name="programmingLang" // Asegúrate de que el name coincida con la clave en el estado
+                                value={filters.programmingLang} // Usa la clave correcta del estado
                                 onChange={handleFilterChange}
                                 className="focus:placeholder-transparent bg-[#333] mb-4 border border-[#7A3E8F] focus:bg-[#7A3E8F] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7A3E8F] transition hover:ring-2 hover:ring-[#7A3E8F]"
                             >
                                 <option value="">Selecciona un lenguaje</option>
-                                {lenguajes.slice(1).map((item, index) => (
+                                {lenguajes.map((item, index) => (
                                     <option
                                         key={index}
                                         value={item.programmingLang}
