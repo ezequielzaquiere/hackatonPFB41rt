@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { Menu, X } from 'lucide-react'; // Iconos de menú hamburguesa
 import defaultAvatar from '/default-avatar.png';
-import { motion } from 'framer-motion';
 const { VITE_API_URL } = import.meta.env;
 
 // Inicializamos el componente
@@ -11,8 +10,9 @@ const Header = () => {
     const { authUser, authLogoutState } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
 
+    //Orden de clases Tailwind: colores-margenes-posicion-hover-focus-mediaQueries
     return (
-        <header className="bg-[#191919] hover:bg-[#222222] transition-colors  border-black border-b-1 text-ss px-20 py-5 flex justify-between items-center relative">
+        <header className="bg-[#191919] border-black border-b-1 px-20 py-5 text-ss relative flex justify-between items-center transition hover:bg-[#222222]">
             {/* Logo */}
             <Link to="/">
                 <img
@@ -23,24 +23,24 @@ const Header = () => {
             </Link>
 
             {/* NAV para Desktop */}
-            <nav className="relative ml-28 hidden lg:flex space-x-8">
+            <nav className="ml-28 space-x-8 relative hidden lg:flex">
                 {!authUser ? (
                     <>
                         <Link
                             to="/hackathones"
-                            className="hover:text-gray-300 text-white transition hover:scale-115"
+                            className=" text-white transition hover:scale-115 hover:text-gray-300"
                         >
                             Hackathones
                         </Link>
                         <Link
                             to="/register"
-                            className="hover:text-gray-300 text-white transition hover:scale-115"
+                            className=" text-white transition hover:scale-115 hover:text-gray-300"
                         >
                             Registro
                         </Link>
                         <Link
                             to="/login"
-                            className="hover:text-gray-300 text-white transition hover:scale-115"
+                            className=" text-white transition hover:scale-115 hover:text-gray-300"
                         >
                             Iniciar Sesión
                         </Link>
@@ -49,7 +49,7 @@ const Header = () => {
                     <>
                         <Link
                             to="/hackathones"
-                            className="hover:text-gray-300 text-white transition hover:scale-115"
+                            className=" text-white transition hover:scale-115 hover:text-gray-300"
                         >
                             Hackathones
                         </Link>
@@ -58,7 +58,7 @@ const Header = () => {
                             <div className="flex gap-5">
                                 <Link
                                     to="admin/myhackathons"
-                                    className="hover:text-gray-300 hover:scale-110 transition text-white "
+                                    className="text-white transition hover:scale-110 hover:text-gray-300"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     Mis hackathones
@@ -66,7 +66,7 @@ const Header = () => {
 
                                 <Link
                                     to="/hackathon/new"
-                                    className=" hover:scale-110  text-white hover:text-gray-300 transition"
+                                    className="text-white transition hover:scale-110 hover:text-gray-300"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     Crear Hackathon
@@ -76,7 +76,7 @@ const Header = () => {
 
                         <button
                             onClick={authLogoutState}
-                            className="hover:text-gray-300 text-white transition hover:scale-115"
+                            className=" text-white transition hover:scale-115 hover:text-gray-300"
                         >
                             Cerrar Sesión
                         </button>
@@ -94,7 +94,7 @@ const Header = () => {
 
             {/* Menú Hamburguesa */}
             <nav
-                className={`border-1 border-[#7A3E8F] absolute top-20 right-4 bg-[#222] text-white p-6 rounded-lg shadow-lg w-50 h-auto z-50 flex flex-col space-y-4 transition ${
+                className={`bg-[#222] border-1 border-[#7A3E8F] text-white w-50 h-auto p-6 flex flex-col absolute top-20 right-4 z-50 rounded-lg shadow-lg space-y-4 transition ${
                     isOpen ? 'block' : 'hidden'
                 } lg:hidden`}
             >
@@ -102,20 +102,20 @@ const Header = () => {
                     <>
                         <Link
                             to="/hackathones"
-                            className="hover:text-gray-300 text-white transition hover:scale-115"
+                            className=" text-white transition hover:scale-115 hover:text-gray-300"
                         >
                             Hackathones
                         </Link>
                         <Link
                             to="/register"
-                            className="hover:text-gray-300 hover:scale-105 transition "
+                            className="transition hover:scale-105 hover:text-gray-300"
                             onClick={() => setIsOpen(false)}
                         >
                             Registro
                         </Link>
                         <Link
                             to="/login"
-                            className="hover:text-gray-300 hover:scale-105 transition "
+                            className="transition hover:scale-105 hover:text-gray-300"
                             onClick={() => setIsOpen(false)}
                         >
                             Iniciar Sesión
@@ -125,7 +125,7 @@ const Header = () => {
                     <>
                         <Link
                             to="/hackathones"
-                            className="hover:text-gray-300 transition"
+                            className="transition hover:text-gray-300"
                         >
                             Hackathones
                         </Link>
@@ -134,7 +134,7 @@ const Header = () => {
                             <>
                                 <Link
                                     to="admin/myhackathons"
-                                    className="hover:text-gray-300 transition"
+                                    className="transition hover:text-gray-300"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     Mis hackathones
@@ -142,7 +142,7 @@ const Header = () => {
 
                                 <Link
                                     to="/hackathon/new"
-                                    className="hover:text-gray-300 transition"
+                                    className="transition hover:text-gray-300 "
                                     onClick={() => setIsOpen(false)}
                                 >
                                     Crear Hackathon
@@ -154,7 +154,7 @@ const Header = () => {
                                 authLogoutState();
                                 setIsOpen(false);
                             }}
-                            className="max-w-[200px] px-4 py-2 my-3 font-semibold rounded-lg shadow-[6px_6px_5px_#191919] text-white transition bg-[#7A3E8F]  hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50"
+                            className="bg-[#7A3E8F] text-white font-semibold max-w-[200px] px-4 py-2 my-3 rounded-lg shadow-[6px_6px_5px_#191919] transition hover:bg-[#9A4EAE] focus:outline-none focus:ring-2 focus:bg-[#9A4EAE] focus:ring-[#9A4EAE] focus:ring-opacity-50"
                         >
                             Cerrar Sesión
                         </button>
@@ -165,7 +165,7 @@ const Header = () => {
             {/* Usuario Autenticado - Avatar y Nombre */}
             {authUser && (
                 <Link to="/users/profile" className="hidden lg:block">
-                    <div className="hover:scale-115 transition hidden min-w-10 h-full lg:flex items-center">
+                    <div className="hidden min-w-10 h-full transition hover:scale-115 lg:flex lg:items-center">
                         <p className="text-white pr-4">@{authUser.username}</p>
                         <img
                             src={
@@ -174,7 +174,7 @@ const Header = () => {
                                     : defaultAvatar
                             }
                             alt={authUser.username}
-                            className="h-9 w-9 object-cover rounded-full border-2 border-white shadow-md"
+                            className="border-2 border-white h-9 w-9 object-cover rounded-full shadow-md"
                         />
                     </div>
                 </Link>

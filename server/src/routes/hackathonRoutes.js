@@ -22,7 +22,7 @@ import {
     filterHackathonesController,
     listHackathonParticipantsController,
     registerHackathonPositionsAndPublishController,
-    bestHackathonesController,
+    listBestHackathonesController,
     selectRatingsByHackathonIdAndUserIdController,
     listHackathonesLocationsController,
 } from '../controllers/hackathones/index.js';
@@ -56,17 +56,17 @@ router.delete(
     deleteHackathonController
 );
 
-//Endpoint lista hackatones
+//Endpoint que lista todos los hackatones
 router.get('/hackathones', listHackathonesController);
 
-//Endpoint lista temáticas hackatones
+//Endpoint que lista todas las temáticas de los hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
 
-//Endpoint devuelve hackathones a partir de la fecha de solicitud
+//Endpoint que devuelve todos los hackathones a partir de la fecha de solicitud
 router.get('/hackathones/fromToday', listNextHackathonesController);
 
-//Endpoint tres mejores hackathones por rating
-router.get('/hackathones/bestHackathones', bestHackathonesController);
+//Endpoint que devuelve los tres mejores hackathones por avgRating
+router.get('/hackathones/bestHackathones', listBestHackathonesController);
 
 // Ruta para obtener los detalles de un hackathon específico por ID
 router.get('/hackathones/details/:id', hackathonDetailController);

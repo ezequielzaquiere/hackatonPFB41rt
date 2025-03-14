@@ -3,11 +3,13 @@ import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 //Hooks
 import useBestHackathonesList from '../hooks/useBestHackathonesList';
 import useHackathonesFromToday from '../hooks/useHackathonesFromToday';
 import formatDate from '../utils/formatedDate.js';
 const { VITE_API_URL } = import.meta.env;
+
 //FAQ
 const faqs = [
     {
@@ -37,7 +39,8 @@ const HomePage = () => {
     const handleImageClick = (id) => {
         navigate(`/details/${id}`); // Redirige a la página de detalles ***
     };
-    //Traer del backend los 3 mejores hackathones según rating
+
+    //Traer del backend los 3 mejores hackathones según avgRating
     const bestHackathones = useBestHackathonesList();
 
     //Traer del backend los hackathones a partir de la fecha de solicitud
@@ -63,7 +66,7 @@ const HomePage = () => {
     // Funciones para desplazar el carrusel
     const handleScrollLeft = () => {
         scrollContainerRef.current?.scrollBy({
-            left: -350,
+            left: -350, //Cantidad de pixeles que se desplaza
             behavior: 'smooth',
         });
     };
@@ -75,10 +78,12 @@ const HomePage = () => {
         });
     };
 
-    // Para controlar la pregunta activa
+    //Controlar la pregunta activa
     const [activeIndex, setActiveIndex] = useState(null);
 
+    //H2
     const text = '¡Bienvenido a las mejores competiciones de código!';
+
     return (
         <>
             <div className=" relative w-full min-h-[450px] h-full bg-[#191919] flex flex-col justify-center items-center gap-3 overflow-hidden">
@@ -135,9 +140,7 @@ const HomePage = () => {
             </div>
 
             {/* Próximos Eventos */}
-
             <section className="bg-[#191919] text-white px-7 py-5 md:px-10 md:py-10 relative">
-
                 <div className="mb-4">
                     <h2 className="text-2xl">Próximos Eventos</h2>
 
@@ -195,10 +198,7 @@ const HomePage = () => {
             </section>
 
             {/* Mejor valorados */}
-
-
             <section className="max-w-screen px-10 py-5  bg-[#191919] text-white flex flex-col">
-
                 <h2 className="w-full text-2xl pb-2">Los mejores valorados</h2>
 
                 <img
@@ -253,9 +253,7 @@ const HomePage = () => {
             </section>
 
             {/* Preguntas Frecuentes */}
-
             <section className="bg-[#191919] text-white px-10 pt-15 md:pt-5 pb-10">
-
                 <div>
                     <h2 className="text-2xl">Preguntas Frecuentes</h2>
                     <img

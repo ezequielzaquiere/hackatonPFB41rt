@@ -1,43 +1,41 @@
-// Importar las dependencias.
+//Dependencias
 import crypto from 'crypto';
 
-// Importar los modelos.
+//Modelos
 import insertRecoverPassCodeModel from '../../models/users/insertRecoverPassCodeModel.js';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
-// Importamor la función que envía un mail.
+//Útil que envía un mail
 import sendEmailUtil from '../../utils/sendEmailUtil.js';
 
-// Importar la función generadora de errores.
+//Función generadora de errores
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Función controladora que envía un código de recuperación de contraseña al email indicado.
 const sendRecoveryPassEmailController = async (req, res, next) => {
     try {
-        // Obtenemos los datos necesarios.
         const { email } = req.body;
 
-        // Lanzamos un error si falta algún campo.
+        //Lanzar error si falta el dato
         if (!email) {
             generateErrorUtil(400, 'Faltan campos');
         }
 
-        // Obtenemos los datos del usuario con el email recibido.
+        //Obtener los datos del usuario según su email
         const user = await selectUserByEmailModel(email);
-        console.log(user); //Devuelve ID, password crypt, active, role
 
-        // Si el usuario existe le enviamos un código de recuperación de contraseña.
+        // Si el usuario existe, enviar código de recuperación de contraseña
         if (user) {
-            // Generamos un código de recuperación de 30 caracteres.
+            //Generar código de recuperación
             const recoverPassCode = crypto.randomBytes(15).toString('hex');
 
-            // Insertamos en la base de datos el código.
+            //Insertar en la base de datos el código de recuperación
             await insertRecoverPassCodeModel(recoverPassCode, email);
 
-            // Asunto del email de recuperación de contraseña.
+            //Asunto del email
             const emailSubject = 'Recuperar contraseña en HackVerse :)';
 
-            // Cuerpo del email de recuperación de contraseña.
+            //Cuerpo del email
             const emailBody = `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #191919; color: #ffffff; border-radius: 10px;">
                     <h2 style="text-align: center; color: #9A4EAE;">Recuperación de Contraseña</h2>
@@ -66,9 +64,7 @@ const sendRecoveryPassEmailController = async (req, res, next) => {
                     </p>
                  </div>
 `;
-
-            console.log(emailBody);
-            // Enviamos el email.
+            //Enviar el mail
             await sendEmailUtil(email, emailSubject, emailBody);
         }
 

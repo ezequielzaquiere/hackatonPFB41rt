@@ -25,7 +25,7 @@ import {
 //Crear router
 const router = express.Router();
 
-// Actualiza la contraseña de un usuario con un código de recuperación.
+//Endpoint que actualiza la contraseña de un usuario con un código de recuperación
 router.put(
     '/:userId/password/recover/:recoverPassCode',
     useRecoveryPassCodeController
@@ -46,7 +46,7 @@ router.get('', isUserAuthMiddleware, privateUserProfileController);
 //Endpoint para cambiar la contraseña dada la actual.
 router.put('/password/change', isUserAuthMiddleware, updateUserPassController);
 
-// Enviar código de recuperación de contraseña al email del usuario.
+//Endpoint para enviar un código de recuperación de contraseña al email del usuario
 router.put('/password/reset', sendRecoveryPassEmailController);
 
 //Endpoint que muestra los datos del usuario.
@@ -56,16 +56,28 @@ router.get('/profile/:id', showUserInfoController);
 router.get('/profile/:id/participations', listUserRegistrationsController);
 
 //Endpoint para enseñar hackathones en los que un usuario está registrado
-router.get('/profile/:username/futureParticipations', listFutureUserRegistrationsController);
+router.get(
+    '/profile/:username/futureParticipations',
+    listFutureUserRegistrationsController
+);
 
 //Endpoint para enseñar hackathones en los que un usuario está registrado
-router.get('/profile/:username/participationHistory', listUserRegistrationsHistoryController);
+router.get(
+    '/profile/:username/participationHistory',
+    listUserRegistrationsHistoryController
+);
 
 //Endpoint para enseñar hackathones en los que un usuario está registrado
-router.get('/profile/:username/creationHistory', listCreatedHackathonsHistoryController);
+router.get(
+    '/profile/:username/creationHistory',
+    listCreatedHackathonsHistoryController
+);
 
 //Endpoint para enseñar hackathones en los que un usuario está registrado
-router.get('/profile/:username/futureCreations', listFutureCreatedHackathonsController);
+router.get(
+    '/profile/:username/futureCreations',
+    listFutureCreatedHackathonsController
+);
 
 //Endpoint que edita los datos del usuario.
 router.put('/profile/edit', isUserAuthMiddleware, updateUserProfileController);

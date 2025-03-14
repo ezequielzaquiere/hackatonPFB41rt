@@ -9,32 +9,32 @@ const { VITE_API_URL } = import.meta.env;
 const UseRecoveryPassCode = () => {
     const navigate = useNavigate();
 
-    // Obtenemos el código de recuperación de los path params.
+    //Obtener código de recuperación de los query params
     const { userId, recoverPassCode } = useParams();
 
+    //Crear estado para cada campo
     const [newPassword, setNewPassword] = useState('');
     const [repeatedNewPass, setRepeatedNewPass] = useState('');
-
     const [showPassword, setShowPassword] = useState(false);
     const [showRepeatedPass, setShowRepeatedPass] = useState(false);
-    // Declaramos una variable en el State para indicar si estamos haciendo fetch.
+
+    //Variable en el state para indicar si se está haciendo fetch
     const [loading, setLoading] = useState(false);
 
     // Función que maneja el envío del formulario.
     const handleUseRecoveryPassCode = async (e) => {
         try {
-            // Prevenimos el comportamiento por defecto del formulario.
             e.preventDefault();
 
-            // Si las contraseñas no coinciden lanzamos un error.
+            // Si las contraseñas no coinciden, lanzar error
             if (newPassword !== repeatedNewPass) {
                 throw new Error('Las contraseñas no coinciden');
             }
 
-            // Indicamos que va a dar comienzo el fetch.
+            //Comienza el fetch...
             setLoading(true);
 
-            // Obtenemos el response.
+            //Fetch
             const res = await fetch(
                 `${VITE_API_URL}/api/users/${userId}/password/recover/${recoverPassCode}`,
                 {
@@ -49,27 +49,27 @@ const UseRecoveryPassCode = () => {
                 }
             );
 
-            // Obtenemos el body.
+            //Obtener el body
             const body = await res.json();
 
-            // Si hay algún error lo lanzamos.
+            //Si hay error, se lanza
             if (body.status === 'error') {
                 throw new Error(body.message);
             }
 
-            // Mostramos un mesaje al usuario indicando que todo ha ido bien.
+            //Mostrar toast de éxito
             toast.success(body.message, {
                 id: 'useRecoveryPass',
             });
 
-            // Regirigimos a login.
+            //Redirigir al login
             navigate('/login');
         } catch (err) {
             toast.error(err.message, {
                 id: 'useRecoveryPass',
             });
         } finally {
-            // Indicamos que el fetch ha finalizado.
+            //Actualizar el estado del fetch
             setLoading(false);
         }
     };

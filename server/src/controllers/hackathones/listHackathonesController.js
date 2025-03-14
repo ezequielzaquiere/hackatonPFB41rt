@@ -1,15 +1,16 @@
-//Importar modelos necesarios
+//Modelo que trae todos los hackathones creados
 import listHackathonesModel from '../../models/hackathones/listHackathonesModel.js';
 
-//Importar función que genera errores
+//Función que genera errores
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-//Función controladora que lista los hackatones
+//Función controladora que lista todos los hackatones creados
 const listHackathonesController = async (req, res, next) => {
     try {
         //Obtener los hackathones
         const hackathones = await listHackathonesModel();
 
+        //Respuesta
         res.send({
             status: 'ok',
             data: {

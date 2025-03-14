@@ -1,11 +1,11 @@
-//Importamos utils
+//Función generadora de errores
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-//Importamos la conexion a la base de datos
+//Conexión a la DB
 import getPool from '../../db/getPool.js';
 
-//Funcion que obtiene los detalles de un hackathon concreto por id
-const bestHackathonesModel = async () => {
+//Función que obtiene los detalles de un hackathon dado su id
+const listBestHackathonesModel = async () => {
     const pool = await getPool();
 
     const [hackathonList] = await pool.query(
@@ -46,4 +46,4 @@ const bestHackathonesModel = async () => {
     return [hackathonList];
 };
 
-export default bestHackathonesModel;
+export default listBestHackathonesModel;
