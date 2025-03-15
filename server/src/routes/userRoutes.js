@@ -13,8 +13,6 @@ import {
     sendRecoveryPassEmailController,
     updateUserProfileController,
     updateUserPassController,
-    showUserInfoController,
-    listUserRegistrationsController,
     useRecoveryPassCodeController,
     listCreatedHackathonsHistoryController,
     listFutureUserRegistrationsController,
@@ -48,12 +46,6 @@ router.put('/password/change', isUserAuthMiddleware, updateUserPassController);
 
 //Endpoint para enviar un código de recuperación de contraseña al email del usuario
 router.put('/password/reset', sendRecoveryPassEmailController);
-
-//Endpoint que muestra los datos del usuario.
-router.get('/profile/:id', showUserInfoController);
-
-//Endpoint para enseñar hackathones en los que un usuario está registrado
-router.get('/profile/:id/participations', listUserRegistrationsController);
 
 //Endpoint para enseñar hackathones en los que un usuario está registrado
 router.get(
