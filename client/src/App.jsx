@@ -41,7 +41,7 @@ const App = () => {
             <Toaster
                 position="bottom-right"
                 toastOptions={{
-                    duration: 3000, // Duración predeterminada del toast
+                    duration: 3500,
 
                     style: {
                         background: '#242424',
@@ -50,29 +50,34 @@ const App = () => {
                         borderRadius: '8px',
                         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
                         padding: '16px',
+                        fontWeight: 'bold',
                     },
 
                     success: {
+                        duration: 3500,
                         style: {
                             background: '#242424',
                             color: '#FFFFFF',
-                            border: '1px solid #9A4EAE',
+                            border: '1px solid #4A8F5F',
+                            fontWeight: 'bold',
                         },
-                        icon: <CheckCircle size={20} color="#9A4EAE" />,
+                        icon: <CheckCircle size={25} color="#4A8F5F " />,
                         iconTheme: {
-                            primary: '#9A4EAE',
+                            primary: '#4A8F5F',
                             secondary: '#FFFFFF',
                         },
                     },
                     error: {
+                        duration: 3500,
                         style: {
                             background: '#242424',
                             color: '#FFFFFF',
-                            border: '1px solid #9A4EAE',
+                            border: '1px solid #8F3E4A',
+                            fontWeight: 'bold',
                         },
-                        icon: <XCircle size={20} color="#9A4EAE" />,
+                        icon: <XCircle size={25} color="#8F3E4A" />,
                         iconTheme: {
-                            primary: '#9A4EAE',
+                            primary: '#8F3E4A',
                             secondary: '#FFFFFF',
                         },
                     },

@@ -22,7 +22,7 @@ const newHackathonSchema = joi
                 'El hackathon necesita tener una fecha de finalización.',
         }),
         type: joi.string().valid('online', 'presencial').required().messages({
-            'any.only': 'El campo "{#key}" debe ser "online" o "dual".',
+            'any.only': 'El campo "{#key}" debe ser "online" o "presencial".',
         }),
         location: joi.string().min(2).max(200),
         details: joi.string().allow(''),
@@ -30,6 +30,31 @@ const newHackathonSchema = joi
             'any.required': 'El hackathon necesita tener una temática.',
             'number.base': 'El hackathon necesita tener una temática.',
         }),
+        image: joi
+            .object({
+                // Validar la imagen
+                originalname: joi.string().required(),
+                mimetype: joi
+                    .string()
+                    .valid('image/jpeg', 'image/png', 'image/gif')
+                    .required(), // Solo permitir JPEG, PNG o GIF
+                size: joi
+                    .number()
+                    .max(5 * 1024 * 1024)
+                    .required(),
+            })
+            .optional(),
+        document: joi
+            .object({
+                // Validar el documento
+                originalname: joi.string().required(),
+                mimetype: joi.string().valid('application/pdf').required(),
+                size: joi
+                    .number()
+                    .max(10 * 1024 * 1024)
+                    .required(),
+            })
+            .optional(),
         programmingLangId: joi
             .array()
             .items(joi.number())

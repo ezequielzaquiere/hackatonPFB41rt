@@ -1,7 +1,5 @@
 //Import models
 import cancelRegistrationHackathonModel from '../../models/registrations/cancelRegistrationHackathonModel.js';
-//Import utils
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //Funcion que permite cancelar la participacion en un hackathon
 const cancelRegistrationController = async (req, res, next) => {

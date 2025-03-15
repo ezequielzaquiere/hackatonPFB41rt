@@ -21,7 +21,7 @@ const InputSummary = ({ formData, handleChangeGeneral }) => {
                 rows="4"
                 required
                 className="focus:placeholder-transparent
-focus:bg-[#7A3E8F] w-full bg-[#333] border border-[#7a3e8f] text-white p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
+                focus:bg-[#7A3E8F] w-full bg-[#333] border border-[#7a3e8f] text-white p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
             ></textarea>
         </div>
     );

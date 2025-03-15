@@ -1,6 +1,3 @@
-//TODO:QUEDA POR PROBAR CON MAS DETALLES PERO UN HACKATHON LO BORRA
-//TODO:QUEDA AÑADR REMOVEIMG Y REMOVEDOC
-
 //Import utils
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 import removeDocUtil from '../../utils/removeDocUtil.js';

@@ -34,9 +34,7 @@ const sendEmailUtil = async (destinatario, asunto, htmlContenido) => {
 
         //Enviamos el email
 
-        const info = await transporter.sendMail(mailOptions);
-
-        console.log(`📧 Correo enviado: ${JSON.stringify(info, null, 2)}`);
+        await transporter.sendMail(mailOptions);
     } catch (err) {
         console.error(err);
 

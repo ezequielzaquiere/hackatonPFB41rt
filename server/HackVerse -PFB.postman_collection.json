@@ -1,0 +1,1135 @@
+{
+	"info": {
+		"_postman_id": "9b46bac9-6f60-458b-ab9a-c5b294b1020f",
+		"name": "HackVerse -PFB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40373268"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ezequielzaquiere\",\r\n    \"firstName\":\"ezequiel\",\r\n    \"lastName\":\"zaquiere\",\r\n    \"email\":\"ezequiel.zaquiere@gmail.com\",\r\n    \"password\":\"Password1!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUser",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/validate/9ae2385fe3315970fdeea626a708ce",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"validate",
+								"9ae2385fe3315970fdeea626a708ce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"carlos.garcia@example.com\",\r\n    \"password\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "privateInfo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"ezequieloncho\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/profile/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"admin\",\r\n    \"newPassword\": \"admin1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/password/change",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"change"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recoverPass",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMDg4NCwiZXhwIjoxNzQwNTA1Njg0fQ.pgw8DV-WT956ownCmRDWufYYp2o67TpbJC0yxPUYhtk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ezequiel.zaquiere@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/password/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userRecoverPass",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwMjg5NywiZXhwIjoxNzQwNTA3Njk3fQ.hSUXFBuckxYJuCWBjqFYOCnAENbSn32IrX3xoBdEqd0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"12345\",\r\n    \"repeatedNewPassword\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/1/password/recover/:recoverPassCode",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"1",
+								"password",
+								"recover",
+								":recoverPassCode"
+							],
+							"variable": [
+								{
+									"key": "recoverPassCode",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listFutureUserParticipations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/profile/cgarcia/futureParticipations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"cgarcia",
+								"futureParticipations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listHistoryUserParticipations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/profile/cgarcia/participationHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"cgarcia",
+								"participationHistory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listAdminPastCreationHistory",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/profile/admin/creationHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"admin",
+								"creationHistory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listAdminFutureCreationHistory",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc0MzAwLCJleHAiOjE3NDI1NzkxMDB9.qrYCh7hfnr79rs8aW1BFdphqzNScIzjMJItMxNN1mmA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/profile/admin/futureCreations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"admin",
+								"futureCreations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hackathones",
+			"item": [
+				{
+					"name": "postHackathon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc1NDM5LCJleHAiOjE3NDI1ODAyMzl9.puRrPJqiRYBdQCT1gIfWtoTEkPapPb5zfKddw_RP7OQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/- Ezequiel -/Desktop/1686234978550.jpg"
+								},
+								{
+									"key": "document",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "\"Desarrollo de una aplicación de gestión de tareas\"",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "\"Crear una aplicación que permita a los usuarios gestionar sus tareas diarias de manera eficiente.\"",
+									"type": "text"
+								},
+								{
+									"key": "startingDate",
+									"value": "2026-10-25T00:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "deadline",
+									"value": "2027-10-25T00:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "presencial",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "\"Madrid\"",
+									"type": "text"
+								},
+								{
+									"key": "themeId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "programmingLangId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "programmingLangId",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "programmingLangId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "programmingLangId",
+									"value": "4",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "programmingLangId",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "\"La aplicación debe incluir funciones como la creación, edición y eliminación de tareas, así como la posibilidad de marcarlas como completadas.\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editHackathon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc1NDM5LCJleHAiOjE3NDI1ODAyMzl9.puRrPJqiRYBdQCT1gIfWtoTEkPapPb5zfKddw_RP7OQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/- Ezequiel -/Desktop/150.jpg"
+								},
+								{
+									"key": "document",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "\"Desarrollo de una aplicación de gestión de tareas 2\"",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "\"Crear una aplicación que permita a los usuarios gestionar sus tareas diarias de manera eficiente.\"",
+									"type": "text"
+								},
+								{
+									"key": "startingDate",
+									"value": "2027-10-25T00:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "deadline",
+									"value": "2028-10-25T00:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "themeId",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "presencial",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "\"Madrid\"",
+									"type": "text"
+								},
+								{
+									"key": "programmingLangId",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "programmingLangId",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "programmingLangId",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "programmingLangId",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "programmingLangId",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "\"La aplicación debe incluir funciones como la creación, edición y eliminación de tareas, así como la posibilidad de marcarlas como completadas.\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHackathon",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQxOTc1NDM5LCJleHAiOjE3NDI1ODAyMzl9.puRrPJqiRYBdQCT1gIfWtoTEkPapPb5zfKddw_RP7OQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detailsHackathon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/details/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"details",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listThemesHackathon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/themes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"themes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listLoacationHackathon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/location",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listLangHackathon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/langs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"langs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listHackathonsFromToday",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/fromToday",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"fromToday"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listTop3Hackathons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/bestHackathones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"bestHackathones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filterHackathons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/hackathones/filter?location=madrid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"hackathones",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "madrid"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "privateHackathonParticipants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/1/participants/private",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"1",
+								"participants",
+								"private"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publishHackathonParticipants",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMDcwNTIyLCJleHAiOjE3NDI2NzUzMjJ9.fbQQrAZT5Lx-BvlP5k5lU4w5OJXcq8ShKxAO3Ft18CQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first\": 14,\r\n    \"second\": 13,\r\n    \"third\": 15\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/12/publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"12",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registrations",
+			"item": [
+				{
+					"name": "registerHackathon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/register/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"register",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateRegisterHackathon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/register/3/deea8a71634090f1ad3b7d800d31f4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"register",
+								"3",
+								"deea8a71634090f1ad3b7d800d31f4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelRegistrationHackathon",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/register/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"register",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkRegisration",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTczOTkwNTI4OSwiZXhwIjoxNzQwNTEwMDg5fQ.U4s2uHYRvWfnAEwNsYB884ON228MOOh8dg6fHvLPD4E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/register/2/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"register",
+								"2",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ratings",
+			"item": [
+				{
+					"name": "postRatingHackathon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTc0MjA3MjE2OSwiZXhwIjoxNzQyNjc2OTY5fQ.F6J2G79QGz1UyBeV4RP2bHrIpymHKyN05i57HYsip70",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/4/ratings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"4",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listRatingHackathonByUserId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImRldiIsImlhdCI6MTc0MjA3MjE2OSwiZXhwIjoxNzQyNjc2OTY5fQ.F6J2G79QGz1UyBeV4RP2bHrIpymHKyN05i57HYsip70",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/hackathon/4/ratings/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hackathon",
+								"4",
+								"ratings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Authorization\n",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

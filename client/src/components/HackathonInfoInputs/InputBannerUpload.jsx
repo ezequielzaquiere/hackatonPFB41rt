@@ -3,13 +3,6 @@ import PropTypes from 'prop-types';
 
 //Input de subida de imagens del banner
 const InputBannerUpload = ({ formData, handleChangeFiles }) => {
-    console.log(
-        'Valor de formData.image:',
-        formData.image,
-        'Tipo:',
-        typeof formData.image
-    );
-
     return (
         <>
             {/* Título */}
