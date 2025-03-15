@@ -1,7 +1,3 @@
-//TODO:ELIMINAR LOS CONSOLE.LOG
-//TODO:AÑADIR LOS DE VACIAR CAMPOS
-//TODO:AÑADIR QUE SI NO ES ADMIN NO PUEDA ENTRAR
-//TODO EVITAR QUE PUEDA EDITAR EL HACKATHON SI YA HA PASADO LA FECHA?
 //Importamoslas dependencias
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 
@@ -75,16 +71,6 @@ const EditHackathonPage = () => {
             });
         }
     }, [hackathon]);
-
-    console.log(hackathon);
-
-    //TODO NO CONSIGO QUE FUNCIONE
-    /*useEffect(() => {
-        console.log('Valor de hackathon:', hackathon);
-        if (hackathon === null) {
-            
-        }
-    }, [hackathon, navigate]);*/
 
     //Comprobamos si el boton se va a desactivar
     const isDisabled = formData.type === 'presencial' ? false : true;

@@ -12,9 +12,7 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
                 Fechas del Hackathon *
             </legend>
 
-            {/****************************************************
-             ****** Input datepicker de la fecha de inicio  ******
-             ****************************************************/}
+            {/** Input datepicker de la fecha de inicio  **/}
             <div className="flex flex-col lg:flex-row lg:justify-center gap-4 w-full justify-between lg:items-center">
                 <DatePicker
                     selectsStart
@@ -32,16 +30,14 @@ const InputDateRange = ({ formData, handleChangeDate }) => {
                     required
                     withPortal
                     className="focus:placeholder-transparent
-focus:bg-[#7A3E8F] w-full bg-[#333] border border-[#7a3e8f] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
+                    focus:bg-[#7A3E8F] w-full bg-[#333] border border-[#7a3e8f] text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7a3e8f] transition hover:ring-2 hover:ring-[#7a3e8f]"
                     wrapperClassName="w-full"
                     popperClassName="w-full responsive-datepicker"
                     calendarClassName="bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     style={{ width: '100% !important' }} // Usamos !important
                 />
 
-                {/****************************************************
-                 *** Input datepicker de la fecha de fnalizacion  ****
-                 ****************************************************/}
+                {/*** Input datepicker de la fecha de fnalizacion  ****/}
 
                 <DatePicker
                     selectsEnd

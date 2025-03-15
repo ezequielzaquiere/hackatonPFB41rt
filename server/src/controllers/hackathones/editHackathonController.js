@@ -16,7 +16,7 @@ const editHackathonController = async (req, res, next) => {
     try {
         const { hackathonId } = req.params;
 
-        //Obtenemos los balores del body
+        //Obtenemos los valores del body
         const {
             title,
             summary,
@@ -28,6 +28,10 @@ const editHackathonController = async (req, res, next) => {
             programmingLangId,
             details,
         } = req.body;
+
+        if (!req.body) {
+            generateErrorUtil(401, 'Faltan campos a editar');
+        }
 
         const image = req.files?.image;
         const attachedFile = req.files?.document;
