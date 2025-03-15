@@ -135,7 +135,7 @@ const AdminHackathons = () => {
                                 <p className="text-white text-center">
                                     Media de valoración: {hackathon.avgRating}
                                 </p>
-                                {hackathon.resultsPublished === 0 && (
+                                {hackathon.resultsPublished === 0 && hackathon.participantCount >= 3 && (
                                     <button
                                         className="hover:scale-105 w-full py-2 mt-4 bg-[#1ABC9C] text-black font-semibold rounded-lg hover:bg-[#2ED9B3] transition-all"
                                         onClick={() =>

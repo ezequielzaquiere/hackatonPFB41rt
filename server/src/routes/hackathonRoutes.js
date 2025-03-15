@@ -12,7 +12,6 @@ import {
 //Importar funciones controladoras
 import {
     newHackathonController,
-    listHackathonesController,
     listHackathonesThemesController,
     listHackathonesLangsController,
     hackathonDetailController,
@@ -25,8 +24,8 @@ import {
     listBestHackathonesController,
     selectRatingsByHackathonIdAndUserIdController,
     listHackathonesLocationsController,
+    listNextHackathonesController,
 } from '../controllers/hackathones/index.js';
-import listNextHackathonesController from '../controllers/hackathones/listNextHackathonesController.js';
 
 //Crear router
 const router = express.Router();
@@ -55,9 +54,6 @@ router.delete(
     isAdminMiddleware,
     deleteHackathonController
 );
-
-//Endpoint que lista todos los hackatones
-router.get('/hackathones', listHackathonesController);
 
 //Endpoint que lista todas las temáticas de los hackatones
 router.get('/hackathones/themes', listHackathonesThemesController);
@@ -90,13 +86,6 @@ router.get(
     selectRatingsByHackathonIdAndUserIdController
 );
 
-//Endpoint para enseñar lista pública de usuarios registrados en un hackathon
-router.get(
-    '/:hackathonId/participants',
-    areHackathonResultsPublishedMiddleware,
-    listHackathonParticipantsController
-);
-
 //Endpoint para que admins puedan ver la lista de usuarios registrados en su hackathon
 router.get(
     '/:hackathonId/participants/private',
@@ -106,6 +95,8 @@ router.get(
 //Ruta para postear el podio y hacer pública la lista de participantes
 router.post(
     '/:hackathonId/publish',
+    isUserAuthMiddleware,
+    isAdminMiddleware,
     registerHackathonPositionsAndPublishController
 );
 
