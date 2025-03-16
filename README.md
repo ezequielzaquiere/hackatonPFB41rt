@@ -1,93 +1,81 @@
-# HackVerse - Plataforma de Hackathones
+![Logo HackVerse](./client/public/markdownLogo.png)
 
-HackVerse es una plataforma innovadora que permite la creación, organización y participación en hackathones. Esta aplicación fullstack está desarrollada con **React (Vite) en el frontend** y **Node.js con Express en el backend**.
+# 🚀 HackVerse - Revolucionando los Hackathones
 
-## 🚀 Tecnologías Utilizadas
+HackVerse es una plataforma diseñada para facilitar la organización, gestión y participación en hackathones.
 
-### 🖥️ **Frontend (Client)**
-  - React + Vite
-  - TailwindCSS (para estilos)
-  - React Router (para la navegación)
-  - ESLint & Prettier (para calidad de código)
+HackVerse conecta a desarrolladores, diseñadores y entusiastas de la programación y la tecnología en desafíos únicos.
 
-### 🛠 **Backend (Server)**
-  - Node.js + Express.js
-  - Base de Datos (MySQL o PostgreSQL)
-  - JWT (JSON Web Token) para autenticación
-  - Dotenv (para variables de entorno)
+Con una interfaz moderna, un backend robusto y una experiencia fluida, HackVerse permite a los participantes enfocarse en lo que realmente importa: **crear soluciones increíbles**.
+
+## 📸 Vista previa
+
+HackVerse se adapta en cualquier dispositivo.
+
+| Escritorio 🖥                                     | Móvil 📱                                          |
+| ------------------------------------------------ | ------------------------------------------------- |
+| ![Escritorio](./client/public/hackversedemo.gif) | ![Móvil](./client/public/hackVerseResponsive.gif) |
+
+---
+
+## ✨ Características
+
+### 🖥️ Frontend
+
+✅ Diseño moderno, atractivo y **totalmente responsive** con **TailwindCSS**  
+✅ Interfaz intuitiva y fácil de usar para una mejor experiencia de usuario  
+✅ Navegación dinámica con **React Router**  
+✅ Notificaciones amigables con **React Hot Toast**  
+✅ Estilos personalizables y coherentes con el tema del proyecto  
+✅ Animaciones sutiles para mejorar la interacción del usuario
+
+### 🔧 Backend
+
+✅ API RESTful desarrollada con **Express.js**  
+✅ Base de datos relacional con **MySQL**  
+✅ Autenticación segura con **JWT (JSON Web Tokens)**  
+✅ Gestión de archivos con **Express File Upload**  
+✅ Cifrado de contraseñas con **Bcrypt**  
+✅ Validaciones robustas con **Joi**  
+✅ Registro de actividad con **Morgan**  
+✅ Configuración flexible con **Dotenv**  
+✅ Soporte para CORS para conexión con el frontend  
+✅ Sistema de envío de correos con **Nodemailer**
+
+## 🛠️ Tecnologías Utilizadas
+
+🖥️ &nbsp;&nbsp;**Frontend (Client)** - React + Vite, TailwindCSS
+
+⚙️&nbsp;&nbsp;**Backend (Server)** - Node.js, Express, MySQL
+
+🌐&nbsp;&nbsp;**API REST** - Para la comunicación entre el frontend y el backend.
 
 ## 📂 Estructura del Proyecto
 
-  ```
-  PFB - HackABoss/
-  │── client/         # Frontend (React + Vite)
-  │   ├── src/        # Código fuente de React
-  │   ├── public/     # Archivos estáticos
-  │   ├── package.json
-  │   ├── vite.config.js
-  │   └── ...
-  │
-  │── server/         # Backend (Node.js + Express)
-  │   ├── src/        # Código fuente del servidor
-  │   ├── uploads/    # Archivos subidos
-  │   ├── app.js      # Punto de entrada del backend
-  │   ├── package.json
-  │   └── ...
-  │
-  │── .gitignore      # Archivos ignorados por Git
-  │── README.md       # Documentación del proyecto
-  ```
+```
+hackathonPFB41rt/
+|--- client/    # Frontend
+|--- server/    # Backend
+|--- README.md  # Este archivo
+```
 
-## 🛠 Instalación y Configuración
+## 💾 **Clonar el repositorio**
 
-### 1️⃣ **Clonar el repositorio**
-  ```bash
-  git clone https://github.com/tu_usuario/hackverse.git
-  cd hackverse
-  ```
+Para obtener una copia local del proyecto, ejecuta :
 
-### 2️⃣ **Instalar dependencias**
-#### 📌 **Frontend**
-  ```bash
-  cd client
-  npm install
-  ```
+```bash
+git clone https://github.com/ezequielzaquiere/hackatonPFB41rt.git
 
-#### 📌 **Backend**
-  ```bash
-  cd server
-  npm install
-  ```
+cd hackatonPFB41rt
+```
 
-### 3️⃣ **Configurar las variables de entorno**
-En ambos directorios (`client/` y `server/`), copia el archivo de variables de entorno de ejemplo y configúralo:
-  ```bash
-  cp .env.example .env
-  ```
+## 📜 **Detalles técnicos**
 
-### 4️⃣ **Ejecutar el proyecto**
-#### 🚀 **Frontend**
-  ```bash
-  cd client
-  npm run dev
-  ```
-#### 🛠 **Backend**
-  ```bash
-  cd server
-  npm start
-  ```
+Para detalles técnicos, consulta:
 
-## 🏗️ Endpoints de la API
-Para probar los endpoints, puedes usar **Postman** con la colección incluida:
-  - `server/HackVerse-PFB.postman_collection.json`
+-   🖥️ &nbsp;&nbsp;[Frontend](./client/README.md)
+-   ⚙️&nbsp;&nbsp; [Backend](./server/README.md)
 
-## 📸 Capturas de Pantalla
-*(Opcional: Agrega aquí algunas capturas de pantalla de la aplicación en funcionamiento.)*
+✉️ **Contáctanos:** [HackVerse](mailto:hackverse.hackathones@gmail.com)
 
-## 📄 Licencia
-Este proyecto está bajo la licencia MIT. Si deseas contribuir, siéntete libre de hacer un fork y enviar pull requests. 💜
-
----
-✉️ **Desarrollado por:** [HackVerse]  
 🌐 **Repositorio:** [GitHub](https://github.com/ezequielzaquiere/hackatonPFB41rt)
-
